@@ -100,9 +100,6 @@ class ExperienceController extends AdminController
      */
     public function update(ExperienceRequest $request, $id)
     {
-        // echo "<pre>";
-        //     var_dump( $request->all() ); die();
-        // echo "</pre>";
         $experience = Experience::findOrFail($id);
         $experience->name = $request->input('name');
         $experience->code = $request->input('code');
@@ -116,8 +113,8 @@ class ExperienceController extends AdminController
         $experience->price = $request->input('price');
         $experience->feature = $request->input('feature');
         $experience->user()->associate(User::find($request->input('user')));
-        $experience->save();
         $experience->amenities()->sync($request->input('amenities'));
+        $experience->save();
 
         return back();
     }
