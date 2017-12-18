@@ -4,7 +4,7 @@ namespace Experience\Requests;
 
 use Pluma\Requests\FormRequest;
 
-class ExperienceRequest extends FormRequest
+class AmenityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,19 +15,19 @@ class ExperienceRequest extends FormRequest
     {
         switch ($this->method()) {
             case 'POST':
-                if ($this->user()->can('store-experience')) {
+                if ($this->user()->can('store-amenity')) {
                     return true;
                 }
                 break;
 
             case 'PUT':
-                if ($this->user()->can('update-experience')) {
+                if ($this->user()->can('update-amenity')) {
                     return true;
                 }
                 break;
 
             case 'DELETE':
-                if ($this->user()->can('destroy-experience')) {
+                if ($this->user()->can('destroy-amenity')) {
                     return true;
                 }
                 break;
@@ -51,12 +51,7 @@ class ExperienceRequest extends FormRequest
 
         return [
             'name' => 'required|max:255',
-            'code' => 'required|regex:/^[\pL\s\-\*\#\(0-9)]+$/u|unique:experiences'.$isUpdating,
-            'reference_number' => 'required|unique:experiences'.$isUpdating,
-            'date_start' => 'required',
-            'date_end' => 'required',
-            'price' => 'required',
-            'user' => 'sometimes|required',
+            'icon' => 'required',
         ];
     }
 
@@ -68,8 +63,7 @@ class ExperienceRequest extends FormRequest
     public function messages()
     {
         return [
-            'code.regex' => 'Only letters, numbers, spaces, and hypens are allowed.',
-            'user.required' => 'The travel manager field is required',
+            //
         ];
     }
 }

@@ -13,6 +13,7 @@ class ExperienceServiceProvider extends ServiceProvider
      */
     protected $observables = [
         [\Experience\Models\Experience::class, '\Experience\Observers\ExperienceObserver'],
+        [\Experience\Models\Amenity::class, '\Experience\Observers\AmenityObserver'],
     ];
 
     /**

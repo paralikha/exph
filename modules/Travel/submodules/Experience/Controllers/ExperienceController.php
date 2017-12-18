@@ -4,6 +4,7 @@ namespace Experience\Controllers;
 
 use Catalogue\Models\Catalogue;
 use Category\Models\Category;
+use Experience\Models\Amenity;
 use Experience\Models\Experience;
 use Experience\Requests\ExperienceRequest;
 use Frontier\Controllers\AdminController;
@@ -27,12 +28,6 @@ class ExperienceController extends AdminController
             $resources = Experience::whereBetween('date_start', [$request->get('date_from'), $request->get('date_to')])->paginate();
         }
 
-        // echo "<pre>";
-        //     var_dump( (5*0 + 4*1 + 3*0 + 2*0 + 1*1) / (0+1+0+0+1) ); die();
-        // echo "</pre>";
-
-        // $categories = Categories::pluck('name', 'id');
-
         return view("Theme::experiences.index")->with(compact('resources'));
     }
 
@@ -45,9 +40,10 @@ class ExperienceController extends AdminController
     {
         $catalogues = Catalogue::mediabox();
         $categories = Category::type('experience')->pluck('name', 'id');
-        $managers = User::all()->toArray() ;
+        $managers = User::thatIs(['superadmin', 'travel-manager', 'manager'])->get();
+        $amenities = Amenity::all();
 
-        return view("Theme::experiences.create")->with(compact('catalogues', 'categories', 'managers'));
+        return view("Theme::experiences.create")->with(compact('catalogues', 'amenities', 'categories', 'managers'));
     }
 
     /**
@@ -58,9 +54,21 @@ class ExperienceController extends AdminController
      */
     public function store(ExperienceRequest $request)
     {
-        echo "<pre>";
-            var_dump( $request->all() ); die();
-        echo "</pre>";
+        $experience = new Experience();
+        $experience->name = $request->input('name');
+        $experience->code = $request->input('code');
+        $experience->reference_number = $request->input('reference_number');
+        $experience->date_start = date('Y-m-d H:i:s', strtotime($request->input('date_start')));
+        $experience->date_end = date('Y-m-d H:i:s', strtotime($request->input('date_end')));
+        $experience->body = $request->input('body');
+        $experience->delta = $request->input('delta');
+        $experience->map = $request->input('map');
+        $experience->map_instructions = $request->input('map_instructions');
+        $experience->price = $request->input('price');
+        $experience->feature = $request->input('feature');
+        $experience->user()->associate(User::find($request->input('user')));
+        $experience->save();
+        $experience->amenities()->attach($request->input('amenities'));
 
         return back();
     }
@@ -74,9 +82,13 @@ class ExperienceController extends AdminController
      */
     public function edit(Request $request, $id)
     {
-        //
+        $resource = Experience::findOrFail($id);
+        $catalogues = Catalogue::mediabox();
+        $categories = Category::type('experience')->pluck('name', 'id');
+        $managers = User::thatIs(['superadmin', 'travel-manager', 'manager'])->get();
+        $amenities = Amenity::all();
 
-        return view("Theme::experiences.edit");
+        return view("Theme::experiences.edit")->with(compact('resource', 'catalogues', 'categories', 'managers', 'amenities'));
     }
 
     /**
@@ -88,7 +100,24 @@ class ExperienceController extends AdminController
      */
     public function update(ExperienceRequest $request, $id)
     {
-        //
+        // echo "<pre>";
+        //     var_dump( $request->all() ); die();
+        // echo "</pre>";
+        $experience = Experience::findOrFail($id);
+        $experience->name = $request->input('name');
+        $experience->code = $request->input('code');
+        $experience->reference_number = $request->input('reference_number');
+        $experience->date_start = date('Y-m-d H:i:s', strtotime($request->input('date_start')));
+        $experience->date_end = date('Y-m-d H:i:s', strtotime($request->input('date_end')));
+        $experience->body = $request->input('body');
+        $experience->delta = $request->input('delta');
+        $experience->map = $request->input('map');
+        $experience->map_instructions = $request->input('map_instructions');
+        $experience->price = $request->input('price');
+        $experience->feature = $request->input('feature');
+        $experience->user()->associate(User::find($request->input('user')));
+        $experience->save();
+        $experience->amenities()->sync($request->input('amenities'));
 
         return back();
     }

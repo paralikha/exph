@@ -37,7 +37,7 @@ class CreateExperiencesTable extends Migration
             $table->text('cover')->nullable();
             $table->text('body')->nullable();
             $table->text('delta')->nullable();
-            $table->string('map')->nullable();
+            $table->text('map')->nullable();
             $table->text('map_instructions')->nullable();
             $table->string('rating', 11)->nullable();
             $table->integer('user_id')->unsigned();

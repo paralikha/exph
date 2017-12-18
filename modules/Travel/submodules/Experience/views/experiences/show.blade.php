@@ -121,32 +121,18 @@
 
                     <v-card flat class="pa-3">
                         <v-card-text class="grey--text text--darken-2 subheading">
-                            <p><strong>Package Inclusions</strong></p>
+                            <p><strong>{{ __('Package Inclusions') }}</strong></p>
                             <v-layout row wrap justify-space-between>
-                                <v-flex sm4 xs12 class="py-0">
-                                    <v-card-actions class="pa-0 pb-1">
-                                        <v-avatar size="40px">
-                                            <v-icon class="title mr-2">directions_car</v-icon>
-                                        </v-avatar>
-                                        <div> Transport</div>
-                                    </v-card-actions>
-                                </v-flex>
-                                <v-flex sm4 xs12 class="py-0">
-                                    <v-card-actions class="pa-0 pb-1">
-                                        <v-avatar size="40px">
-                                            <v-icon class="title mr-2">local_hotel</v-icon>
-                                        </v-avatar>
-                                        <div> Accomodation</div>
-                                    </v-card-actions>
-                                </v-flex>
-                                <v-flex sm4 xs12 class="py-0">
-                                    <v-card-actions class="pa-0 pb-1">
-                                        <v-avatar size="40px">
-                                            <v-icon class="title mr-2">restaurant</v-icon>
-                                        </v-avatar>
-                                        <div> Major Meals</div>
-                                    </v-card-actions>
-                                </v-flex>
+                                @foreach ($resource->amenities as $amenity)
+                                    <v-flex sm4 xs12 class="py-0">
+                                        <v-card-actions class="pa-0 pb-1">
+                                            <v-avatar size="40px">
+                                                <v-icon class="title mr-2">{{ $amenity->icon }}</v-icon>
+                                            </v-avatar>
+                                            <div>{{ __($amenity->name) }}</div>
+                                        </v-card-actions>
+                                    </v-flex>
+                                @endforeach
                             </v-layout>
                         </v-card-text>
 
@@ -218,7 +204,7 @@
                         </v-list-tile>
                     </v-list>
                 </v-card>
-                @include("Public::parts.review-exp") 
+                @include("Public::parts.review-exp")
             </v-flex>
 
             <v-flex md3 xs12 class="hidden-sm-and-down">

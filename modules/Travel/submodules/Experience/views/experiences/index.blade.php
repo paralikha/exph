@@ -91,11 +91,11 @@
                     dataset: {
                         test: 1,
                         urls: {
-                            edit: '{{ route('stories.edit', 'null') }}',
-                            show: '{{ route('stories.show', 'null') }}',
-                            destroy: '{{ route('stories.destroy', 'null') }}',
+                            edit: '{{ route('experiences.edit', 'null') }}',
+                            show: '{{ route('experiences.show', 'null') }}',
+                            destroy: '{{ route('experiences.destroy', 'null') }}',
                             api: {
-                                destroy: '{{ route('api.stories.destroy', 'null') }}',
+                                destroy: '{{ route('api.experiences.destroy', 'null') }}',
                             },
                         },
                         bulk: {
@@ -145,7 +145,7 @@
                             take: rowsPerPage,
                         };
 
-                        this.api().search('{{ route('api.stories.search') }}', query)
+                        this.api().search('{{ route('api.experiences.search') }}', query)
                             .then((data) => {
                                 this.dataset.items = data.items.data ? data.items.data : data.items;
                                 this.dataset.totalItems = data.items.total ? data.items.total : data.total;
@@ -164,7 +164,7 @@
                         sort: sortBy,
                         take: rowsPerPage,
                     };
-                    this.api().get('{{ route('api.stories.all') }}', query)
+                    this.api().get('{{ route('api.experiences.all') }}', query)
                         .then((data) => {
                             this.dataset.items = data.items.data ? data.items.data : data.items;
                             this.dataset.totalItems = data.items.total ? data.items.total : data.total;

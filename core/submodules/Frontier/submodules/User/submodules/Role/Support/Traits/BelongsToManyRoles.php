@@ -130,4 +130,12 @@ trait BelongsToManyRoles
 
         return false;
     }
+
+    public function scopeThatIs($builder, $params = [])
+    {
+        return $builder->with('roles')
+                       ->whereHas('roles', function ($query) use ($params) {
+                           $query->whereIn('code', $params);
+                       });
+    }
 }

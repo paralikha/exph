@@ -49,6 +49,36 @@ return [
                     'description' => __('View list of all experiences moved to trash'),
                 ],
             ],
+
+            'divider-experience' => [
+                'name' => 'divider-experience',
+                'is_header' => true,
+                'is_divider' => true,
+                'parent' => 'library',
+                'order' => 9,
+            ],
+
+            'view-amenities' => [
+                'name' => 'view-amenities',
+                'order' => 10,
+                'slug' => route('amenities.index'),
+                'always_viewable' => false,
+                'icon' => 'fa-paperclip',
+                'parent' => 'experience',
+                'routes' => [
+                    'name' => 'amenities.index',
+                    'children' => [
+                        'amenities.create',
+                        'amenities.edit',
+                        'amenities.show',
+                        'amenities.trash',
+                    ]
+                ],
+                'labels' => [
+                    'title' => __('Amenities'),
+                    'description' => __("Manage all Experience's amenities"),
+                ],
+            ],
         ],
     ],
 ];

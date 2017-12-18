@@ -6,6 +6,7 @@
     <v-card-text>
         <input type="hidden" name="user" :value="resource.item.user">
         <v-select
+            :error-messages="errors.user"
             :items="resource.managers.items"
             item-value="id"
             item-text="displayname"

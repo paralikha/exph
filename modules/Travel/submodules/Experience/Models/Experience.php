@@ -5,13 +5,14 @@ namespace Experience\Models;
 use Carbon\Carbon;
 use Category\Support\Traits\BelongsToCategory;
 use DateTime;
+use Experience\Support\Traits\BelongsToManyAmenities;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Pluma\Models\Model;
 use User\Support\Traits\BelongsToUser;
 
 class Experience extends Model
 {
-    use SoftDeletes, BelongsToCategory, BelongsToUser;
+    use SoftDeletes, BelongsToCategory, BelongsToUser, BelongsToManyAmenities;
 
     protected $with = [];
 

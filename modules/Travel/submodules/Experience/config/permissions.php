@@ -100,5 +100,85 @@ return [
         'group' => 'experience',
     ],
 
-    //
+    // Amenities
+    'view-amenity' => [
+        'name' =>  'amenities.index',
+        'code' => 'view-amenity',
+        'description' => 'Ability to view list of amenities',
+        'group' => 'amenity',
+    ],
+    'show-amenity' => [
+        'name' => 'amenities.show',
+        'code' => 'show-amenity',
+        'description' => 'Ability to show a single amenity',
+        'group' => 'amenity',
+    ],
+    'create-amenity' => [
+        'name' => 'amenities.create',
+        'code' => 'create-amenity',
+        'description' => 'Ability to show the form to create amenity',
+        'group' => 'amenity',
+    ],
+    'store-amenity' => [
+        'name' => 'amenities.store',
+        'code' => 'store-amenity',
+        'description' => 'Ability to save the amenity',
+        'group' => 'amenity',
+    ],
+    'edit-amenity' => [
+        'name' => 'amenities.edit',
+        'code' => 'edit-amenity',
+        'description' => 'Ability to show the form to edit amenity',
+        'group' => 'amenity',
+    ],
+    'update-amenity' => [
+        'name' => 'amenities.update',
+        'code' => 'update-amenity',
+        'description' => 'Ability to update the amenity',
+        'group' => 'amenity',
+    ],
+    'destroy-amenity' => [
+        'name' =>  'amenities.destroy',
+        'code' => 'destroy-amenity',
+        'description' => 'Ability to move the amenity to trash',
+        'group' => 'amenity',
+    ],
+    'delete-amenity' => [
+        'name' =>  'amenities.delete',
+        'code' => 'delete-amenity',
+        'description' => 'Ability to permanently delete the amenity',
+        'group' => 'amenity',
+    ],
+    'trash-amenity' => [
+        'name' =>  'amenities.trash',
+        'code' => 'trash-amenity',
+        'description' => 'Ability to view the list of all trashed amenity',
+        'group' => 'amenity',
+    ],
+    'restore-amenity' => [
+        'name' => 'amenities.restore',
+        'code' => 'restore-amenity',
+        'description' => 'Ability to restore the amenity',
+        'group' => 'amenity',
+    ],
+
+    // Many
+    'destroy-many-amenity' => [
+        'name' =>  'amenities.many.destroy',
+        'code' => 'destroy-many-amenity',
+        'description' => 'Ability to destroy many amenities',
+        'group' => 'amenity',
+    ],
+    'delete-many-amenity' => [
+        'name' =>  'amenities.many.delete',
+        'code' => 'delete-many-amenity',
+        'description' => 'Ability to permanently delete many amenities',
+        'group' => 'amenity',
+    ],
+    'restore-many-amenity' => [
+        'name' => 'amenities.many.restore',
+        'code' => 'restore-many-amenity',
+        'description' => 'Ability to restore many amenities',
+        'group' => 'amenity',
+    ],
 ];

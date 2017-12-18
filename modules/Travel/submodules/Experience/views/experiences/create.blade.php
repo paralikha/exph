@@ -47,54 +47,105 @@
                             ></v-text-field>
 
                             <v-menu
-                                lazy
-                                v-model="resource.menus.date_start"
-                                transition="scale-transition"
-                                offset-y
-                                full-width
+                                :close-on-content-click="false"
                                 :nudge-left="40"
+                                full-width
+                                lazy
                                 max-width="290px"
+                                offset-y
+                                transition="scale-transition"
+                                v-model="resource.menus.date_start"
                             >
                                 <v-text-field
                                     slot="activator"
                                     name="date_start"
                                     :error-messages="errors.date_start"
-                                    label="{{ __('Date Start') }}"
+                                    label="{{ __('Start Date') }}"
                                     v-model="resource.item.date_start"
                                 ></v-text-field>
                                 <div>
                                     <v-date-picker
                                         no-title
-                                        v-model="resource.item.date_start"
-                                    ></v-date-picker>
+                                        name="date_start"
+                                        v-model="resource.dates.date_start"
+                                        actions
+                                        v-if="resource.dates.date_start_model"
+                                    >
+                                        <template scope="{save, cancel}">
+                                            <v-card-actions>
+                                                <v-spacer></v-spacer>
+                                                <v-btn flat color="primary" @click="cancel">{{ __('Cancel') }}</v-btn>
+                                                <v-btn flat color="primary" @click="resource.dates.date_start_model = !resource.dates.date_start_model"><v-icon>access_time</v-icon></v-btn>
+                                            </v-card-actions>
+                                        </template>
+                                    </v-date-picker>
                                     <v-time-picker
-                                        no-title
-                                        v-model="resource.item.time_start"
-                                    ></v-time-picker>
+                                        v-else
+                                        v-model="resource.dates.time_start"
+                                        actions
+                                    >
+                                        <template scope="{save, cancel}">
+                                            <v-card-actions>
+                                                <v-spacer></v-spacer>
+                                                <v-btn flat color="primary" @click="cancel">{{ __('Cancel') }}</v-btn>
+                                                <v-btn flat color="primary" @click="save">{{ __('OK') }}</v-btn>
+                                            </v-card-actions>
+                                        </template>
+                                    </v-time-picker>
+                                    <input type="hidden" name="vue_date_start" :value="resource.date_start">
+                                    <input type="hidden" name="vue_time_start" :value="resource.time_start">
                                 </div>
                             </v-menu>
 
                             <v-menu
-                                lazy
-                                v-model="resource.menus.date_end"
-                                transition="scale-transition"
-                                offset-y
-                                full-width
+                                :close-on-content-click="false"
                                 :nudge-left="40"
+                                full-width
+                                lazy
                                 max-width="290px"
+                                offset-y
+                                transition="scale-transition"
+                                v-model="resource.menus.date_end"
                             >
                                 <v-text-field
                                     slot="activator"
                                     name="date_end"
                                     :error-messages="errors.date_end"
-                                    label="{{ __('Date Start') }}"
+                                    label="{{ __('End Date') }}"
                                     v-model="resource.item.date_end"
                                 ></v-text-field>
-                                <v-date-picker
-                                    no-title
-                                    name="date_end"
-                                    v-model="resource.item.date_end"
-                                ></v-date-picker>
+                                <div>
+                                    <v-date-picker
+                                        no-title
+                                        name="date_end"
+                                        v-model="resource.dates.date_end"
+                                        actions
+                                        v-if="resource.dates.date_end_model"
+                                    >
+                                        <template scope="{save, cancel}">
+                                            <v-card-actions>
+                                                <v-spacer></v-spacer>
+                                                <v-btn flat color="primary" @click="cancel">{{ __('Cancel') }}</v-btn>
+                                                <v-btn flat color="primary" @click="resource.dates.date_end_model = !resource.dates.date_end_model"><v-icon>access_time</v-icon></v-btn>
+                                            </v-card-actions>
+                                        </template>
+                                    </v-date-picker>
+                                    <v-time-picker
+                                        v-else
+                                        v-model="resource.dates.time_end"
+                                        actions
+                                    >
+                                        <template scope="{save, cancel}">
+                                            <v-card-actions>
+                                                <v-spacer></v-spacer>
+                                                <v-btn flat color="primary" @click="cancel">{{ __('Cancel') }}</v-btn>
+                                                <v-btn flat color="primary" @click="save">{{ __('OK') }}</v-btn>
+                                            </v-card-actions>
+                                        </template>
+                                    </v-time-picker>
+                                    <input type="hidden" name="vue_date_end" :value="resource.date_end">
+                                    <input type="hidden" name="vue_time_end" :value="resource.time_end">
+                                </div>
                             </v-menu>
                         </v-card-text>
 
@@ -103,6 +154,7 @@
                         {{-- Editor --}}
                         @include("Page::interactive.editor")
                         {{-- /Editor --}}
+                        @include("Experience::interactives.amenities")
                     </v-card>
 
                     @include("Experience::interactives.map")
@@ -110,6 +162,8 @@
 
                 <v-flex md3>
                     @include("Theme::cards.saving")
+
+                    @include("Experience::cards.price")
 
                     @include("Theme::interactives.featured-image")
 
@@ -138,10 +192,20 @@
                             map_instructions: {!! json_encode(old('map_instructions')) !!},
                             date_start: '{{ old('date_start') }}',
                             date_end: '{{ old('date_end') }}',
+                            price: '{{ old('price') }}',
+                            amenities: JSON.parse({!! json_encode(old('amenities_obj')) !!}) ? JSON.parse({!! json_encode(old('amenities_obj')) !!}) : [],
+                        },
+                        dates: {
+                            date_start_model: true,
+                            date_start: '{{ old('vue_date_start') }}',
+                            time_start: '{{ old('vue_time_start') }}',
+                            date_end_model: true,
+                            date_end: '{{ old('vue_date_end') }}',
+                            time_end: '{{ old('vue_time_end') }}',
                         },
                         quill: {
-                            html: '{{ old('body') }}',
-                            delta: {!! json_encode(old('delta')) !!},
+                            html: '{!! old('body') !!}',
+                            delta: JSON.parse({!! json_encode(old('delta')) !!}),
                         },
                         managers: {
                             items: {!! json_encode($managers->toArray()) !!},
@@ -154,8 +218,15 @@
                             date_end: false,
                         },
                         new: true,
+                        amenities: {
+                            items: {!! json_encode($amenities) !!},
+                            current: { icon: '', name: '', id: '' },
+                        },
                     },
                     errors: {!! json_encode($errors->getMessages()) !!},
+                    addform: {
+                        model: false,
+                    },
                 }
             },
             methods: {
@@ -168,7 +239,37 @@
                     let variable = c.join('');
                     return variable;
                 },
-            }
+                add (to, push) {
+                    if (! to) {
+                        to = [];
+                    }
+                    console.log(to)
+                },
+                remove (from, key) {
+                    from.splice(key, 1);
+                }
+            },
+            watch: {
+                // DATE_START
+                'resource.dates.date_start': function (val) {
+                    this.resource.item.date_start = val + ' ' + this.resource.dates.time_start;
+                },
+
+                // TIME_END
+                'resource.dates.time_start': function (val) {
+                    this.resource.item.date_start = this.resource.dates.date_start + ' ' + val;
+                },
+
+                // DATE_END
+                'resource.dates.date_end': function (val) {
+                    this.resource.item.date_end = val + ' ' + this.resource.dates.time_end;
+                },
+
+                // TIME_END
+                'resource.dates.time_end': function (val) {
+                    this.resource.item.date_end = this.resource.dates.date_end + ' ' + val;
+                },
+            },
         })
     </script>
 @endpush

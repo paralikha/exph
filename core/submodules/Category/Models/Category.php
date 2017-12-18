@@ -12,6 +12,8 @@ class Category extends Model
 
     protected $with = [];
 
+    protected $table = 'categories';
+
     protected $fillable = ['name', 'alias', 'code', 'description', 'icon', 'categorable_type'];
 
     protected $searchables = ['name', 'alias', 'type', 'code', 'description', 'icon', 'created_at', 'updated_at'];
