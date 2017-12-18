@@ -1,0 +1,7 @@
+{
+  "require": {
+    "paypal/merchant-sdk-php":"3.12.*",
+    "paypal/rest-api-sdk-php":"*",
+    "anam/phpcart": "^1.0"
+  }
+}
