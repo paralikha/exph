@@ -6,17 +6,18 @@ use Carbon\Carbon;
 use Category\Support\Traits\BelongsToCategory;
 use DateTime;
 use Experience\Support\Traits\BelongsToManyAmenities;
+use Experience\Support\Traits\MorphToManyRating;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Pluma\Models\Model;
 use User\Support\Traits\BelongsToUser;
 
 class Experience extends Model
 {
-    use SoftDeletes, BelongsToCategory, BelongsToUser, BelongsToManyAmenities;
+    use SoftDeletes, BelongsToCategory, BelongsToUser, BelongsToManyAmenities, MorphToManyRating;
 
     protected $with = [];
 
-    protected $appends = ['amount', 'date', 'categoryname', 'url'];
+    protected $appends = ['amount', 'date', 'categoryname', 'url', 'manager', 'created', 'modified'];
 
     protected $searchables = ['created_at', 'updated_at'];
 
@@ -85,5 +86,10 @@ class Experience extends Model
     public function getRefnumAttribute()
     {
         return isset($this->reference_number) ? $this->reference_number : date('Ymd', strtotime($this->created_at)).user()->id.'00'.date('His');
+    }
+
+    public function getManagerAttribute()
+    {
+        return $this->user;
     }
 }

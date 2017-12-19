@@ -103,6 +103,10 @@ trait AuthenticatesUsers
 
         $this->clearLoginAttempts($request);
 
+        if (! $this->authenticated($request, $this->guard()->user()) && $request->input('_back')) {
+            return back();
+        }
+
         return $this->authenticated($request, $this->guard()->user())
                 ?: redirect()->intended($this->redirectPath());
     }

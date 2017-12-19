@@ -3,6 +3,7 @@
 @section("page-title", __($application->page->title))
 
 @section("content")
+
     <v-card class="elevation-1 sticky">
         <v-toolbar class="elevation-0 white">
             @include("Theme::partials.navigation")
@@ -31,6 +32,7 @@
                                         <span class="grey--text subheading">{{ __('Please Login to proceed') }}</span>
                                         <form action="{{ route('login.login') }}" method="POST">
                                             {{ csrf_field() }}
+                                            <input type="hidden" name="_back" value="1">
                                             <v-text-field
                                                 :error-messages="resource.errors.username"
                                                 class="input-group"
@@ -54,7 +56,6 @@
                                             ></v-text-field>
 
                                             <v-card-actions>
-                                                <v-btn class="ma-0" role="button" secondary outline href="{{ route('register.show') }}">{{ __('Create Account') }}</v-btn>
                                                 <v-spacer></v-spacer>
                                                 <v-btn class="ma-0 elevation-1" primary type="submit">{{ __("Login") }}</v-btn>
                                             </v-card-actions>
@@ -77,7 +78,7 @@
 
                                         <v-list-tile avatar v-for="(guest, i) in guests" :key="i">
                                             <v-list-tile-avatar>
-                                                <span v-html="guest.icon"></span>
+                                                <span v-html="guest.icon ? guest.icon : guestInitial(guest.name)"></span>
                                             </v-list-tile-avatar>
                                             <v-list-tile-content>
                                                 <v-list-tile-title v-html="guest.name"></v-list-tile-title>
@@ -117,13 +118,17 @@
                                 @if (user())
                                 <form action="{{ route('experiences.add', $resource->code) }}" method="POST">
                                     {{ csrf_field() }}
-                                    <input type="hidden" :name="`items[guests][${i}]`" :key="i" v-for="(guest, i) in guests" :value="guest.name">
+                                    <input type="hidden" :name="`guests[${i}][name]`" :key="i" v-for="(guest, i) in guests" :value="guest.name">
+                                    <input type="hidden" :name="`items[guests][${i}][name]`" :key="i" v-for="(guest, i) in guests" :value="guest.name">
                                     <input type="hidden" name="items[name]" value="{{ $resource->name }}">
                                     <input type="hidden" name="items[id]" value="{{ $resource->id }}">
                                     <input type="hidden" name="items[price]" value="{{ $resource->price }}">
                                     <input type="hidden" name="items[quantity]" :value="(guests.length + 1)">
-                                    <input type="hidden" name="code" value="{{ $resource->code }}">
                                     <input type="hidden" name="items[currency]" value="{{ $resource->currency }}">
+                                    <input type="hidden" name="code" value="{{ $resource->code }}">
+                                    <input type="hidden" name="currency" value="{{ $resource->currency }}">
+                                    <input type="hidden" name="customer_id" value="{{ user()->id }}">
+                                    <input type="hidden" name="experience_id" value="{{ $resource->id }}">
 
                                     <v-btn type="submit" ref="submitbutton" primary large class="elevation-1">{{ __('Proceed to Payment') }}</v-btn>
                                 </form>
@@ -351,18 +356,24 @@
                     </v-card-text>
                     <v-spacer></v-spacer>
                     <v-card-text class="py-2 text-xs-right">
+                        @if (user())
                         <form action="{{ route('experiences.add', $resource->code) }}" method="POST">
                             {{ csrf_field() }}
-                            <input type="hidden" :name="`items[guests][${i}]`" :key="i" v-for="(guest, i) in guests" :value="guest.name">
+                            <input type="hidden" :name="`guests[${i}][name]`" :key="i" v-for="(guest, i) in guests" :value="guest.name">
+                            <input type="hidden" :name="`items[guests][${i}][name]`" :key="i" v-for="(guest, i) in guests" :value="guest.name">
                             <input type="hidden" name="items[name]" value="{{ $resource->name }}">
                             <input type="hidden" name="code" value="{{ $resource->code }}">
                             <input type="hidden" name="items[id]" value="{{ $resource->id }}">
                             <input type="hidden" name="items[price]" value="{{ $resource->price }}">
                             <input type="hidden" name="items[quantity]" :value="(guests.length + 1)">
                             <input type="hidden" name="items[currency]" value="{{ $resource->currency }}">
+                            <input type="hidden" name="currency" value="{{ $resource->currency }}">
+                            <input type="hidden" name="customer_id" value="{{ user()->id }}">
+                            <input type="hidden" name="experience_id" value="{{ $resource->id }}">
 
                             <v-btn type="submit" ref="submitbutton" primary large class="elevation-1">{{ __('Proceed') }}</v-btn>
                         </form>
+                        @endif
                     </v-card-text>
                 </v-card-actions>
             </v-flex>
@@ -406,7 +417,7 @@
                         email: '',
                         model: false,
                     },
-                    guests: [],
+                    guests: JSON.parse('{!! isset($guests) ? json_encode($guests) : json_encode([]) !!}') ? JSON.parse('{!! isset($guests) ? json_encode($guests) : json_encode([]) !!}') : [],
                     resource: {
                         errors: JSON.parse('{!! json_encode($errors->getMessages()) !!}'),
                         item: [],
@@ -418,6 +429,7 @@
             },
             methods: {
                 addGuest () {
+                    {{-- console.log(this.guests) --}}
                     if (this.guestform.name !== '') {
                         this.guests.push({
                             name: this.guestform.name,
@@ -433,17 +445,17 @@
                     this.guestform.email = '';
                     this.guestform.icon = '';
                     this.guestform.model = !this.guestform.model;
-                    this.$refs.guestformname.focus();
+                    this.$refs.guestformname && this.$refs.guestformname.focus();
                 },
-                guestInitial () {
-                    let words = this.guestform.name.split(' ');
+                guestInitial (c) {
+                    let words = c.split(' ');
                     let initial = [];
                     for (var i = 0; i < words.length; i++) {
                         if (i <= 1) {
                             initial.push(words[i].charAt(0));
                         }
                     }
-                    this.guestform.icon = initial.join('').toUpperCase();
+                    return initial.join('').toUpperCase();
                 },
                 removeGuest(i) {
                     this.guests.splice(i, 1);

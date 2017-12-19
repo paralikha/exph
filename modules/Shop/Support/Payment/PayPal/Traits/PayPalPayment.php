@@ -77,6 +77,7 @@ trait PayPalPayment
 
         session()->put('paypal_payment_id', $payment->getId());
         session()->put('experience_id', $request->input('experience_id'));
+        session()->put('order_id', $request->input('order_id'));
 
         if (isset($approvalUrl)) {
             return redirect()->away($approvalUrl);
@@ -94,7 +95,6 @@ trait PayPalPayment
     public function status(Request $request)
     {
         $paymentId = session()->get('paypal_payment_id');
-        $expId = session()->get('experience_id');
         session()->forget('paypal_payment_id');
 
         if (empty($request->get('PayerID')) || empty($request->get('token'))) {
@@ -117,17 +117,22 @@ trait PayPalPayment
         if ($result->getState() == 'approved') {
             /** it's all right **/
             /** Here Write your database logic like that insert record or value in database if you want **/
-            $order = new Order();
-            // $order->customer_id =
-            // $order->price =
-            // $order->experience_id = $expId;
+            $expId = session()->get('experience_id');
+
+            $order = Order::find(session()->get('order_id'));
             $order->payment_id = $payment->id;
             $order->payer_id = $request->get('PayerID');
             $order->token = $request->get('token');
+            $order->status = $result->getState();
+            $order->purchased_at = date('Y-m-d H:i:s');
             $order->save();
+            // echo "<pre>";
+            //     var_dump( $order ); die();
+            // echo "</pre>";
+            // $order->customer_id = user()->id;
+            // $order->experience_id = $expId;
 
-
-            return redirect()->route('payment.paypal.success', ['order' => $payment->id]);
+            return redirect()->route('payment.paypal.success', ['order_id' => $order->id, 'payment_id' => $payment->id, 'payer_id' => $request->get('PayerID')]);
         }
 
         return redirect()->route('payment.paypal.failed');

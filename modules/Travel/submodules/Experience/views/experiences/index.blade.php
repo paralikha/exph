@@ -31,9 +31,9 @@
                             <td v-show="dataset.bulk.destroy.model"><v-checkbox hide-details class="pa-0 primary--text" v-model="prop.selected"></v-checkbox></td>
                             <td v-html="prop.item.id"></td>
                             <td><img :src="prop.item.feature" height="30"></td>
-                            <td><a :href="route(dataset.urls.edit, prop.item.id)"><strong v-tooltip:bottom="{'html': prop.item.description ? prop.item.description : prop.item.title}" v-html="prop.item.title"></strong></a></td>
+                            <td><a :href="route(dataset.urls.edit, prop.item.id)"><strong v-tooltip:bottom="{'html': prop.item.description ? prop.item.description : prop.item.name}" v-html="prop.item.name"></strong></a></td>
                             <td v-html="prop.item.code"></td>
-                            <td v-html="prop.item.author"></td>
+                            <td v-html="prop.item.manager.displayname"></td>
                             <td v-html="prop.item.modified"></td>
                             <td class="text-xs-center">
                                 <v-menu bottom left>
@@ -104,9 +104,9 @@
                         headers: [
                             { text: '{{ __("ID") }}', align: 'left', value: 'id' },
                             { text: '{{ __("Featured Image") }}', align: 'left', value: 'feature' },
-                            { text: '{{ __("Title") }}', align: 'left', value: 'title' },
+                            { text: '{{ __("Name") }}', align: 'left', value: 'name' },
                             { text: '{{ __("Code") }}', align: 'left', value: 'code' },
-                            { text: '{{ __("Author") }}', align: 'left', value: 'user_id' },
+                            { text: '{{ __("Travel Manager") }}', align: 'left', value: 'user_id' },
                             { text: '{{ __("Last Modified") }}', align: 'left', value: 'updated_at' },
                             { text: '{{ __("Actions") }}', align: 'center', sortable: false },
                         ],

@@ -6,6 +6,7 @@ use Anam\Phpcart\Cart as CartModel;
 use Anam\Phpcart\Facades\Cart;
 use Experience\Models\Experience;
 use Illuminate\Http\Request;
+use Order\Models\Order;
 use Shop\Controllers\ShopController;
 
 class BillingController extends ShopController
@@ -19,8 +20,18 @@ class BillingController extends ShopController
     public function detail(Request $request, $code)
     {
         $resource = Experience::whereCode($code)->first();
+        $cart = Cart::items();
+        $guests = Cart::has($resource->id)
+            ? Cart::get($resource->id)->guests
+            : @(unserialize(Order::where('experience_id', $resource->id)
+                            ->where('customer_id', (is_null(user()) ?: user()->id))
+                            ->exists() ? Order::where('experience_id', $resource->id)
+                            ->where('customer_id', (is_null(user()) ?: user()->id))
+                            ->first()->metadata
+                            : [])
+            );
 
-        return view("Experience::experiences.detail")->with(compact('resource'));
+        return view("Experience::experiences.detail")->with(compact('resource', 'cart', 'guests'));
     }
 
     /**
@@ -35,7 +46,19 @@ class BillingController extends ShopController
         $cart = new CartModel();
         $cart->add($request->input('items'));
 
-        return redirect()->route('experiences.payment', $request->input('code'));
+        $order = Order::firstOrNew([
+            'customer_id' => $request->input('customer_id'),
+            'experience_id' => $request->input('experience_id'),
+        ]);
+        $order->customer_id = $request->input('customer_id');
+        $order->experience_id = $request->input('experience_id');
+        $order->total = Cart::getTotal();
+        $order->quantity = $cart->totalQuantity();
+        $order->metadata = serialize($request->input('guests'));
+        $order->status = 'pending';
+        $order->save();
+
+        return redirect()->route('experiences.payment', [$request->input('code'), $order->id]);
     }
 
     /**
@@ -44,12 +67,32 @@ class BillingController extends ShopController
      * @param  Request $request [description]
      * @return [type]           [description]
      */
-    public function payment(Request $request, $code)
+    public function payment(Request $request, $code, $order_id)
     {
         $items = Cart::items();
-        $total = Cart::getTotal();
         $resource = Experience::whereCode($code)->first();
+        $order = Order::find($order_id);
+        $total = $order->total;
 
-        return view("Experience::billing.payment")->with(compact('items', 'total', 'resource'));
+        if (is_null(user()) || (user() && user()->id !== $order->customer_id)) {
+            return abort(404);
+        }
+
+        return view("Experience::billing.payment")->with(compact('items', 'total', 'resource', 'order'));
+    }
+
+    public function success(Request $request)
+    {
+        $order = Order::where('payment_id', $request->get('payment_id'))
+                        ->where('payer_id', $request->get('payer_id'))
+                        ->where('customer_id', user()->id)
+                        ->first();
+
+        return view("Theme::shop.success")->with(compact('order'));
+    }
+
+    public function failed(Request $request)
+    {
+        # code...
     }
 }

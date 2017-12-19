@@ -2,9 +2,10 @@
 
 namespace Experience\API\Controllers;
 
+use Experience\Models\Experience;
+use Experience\Models\Rating;
 use Illuminate\Http\Request;
 use Pluma\API\Controllers\APIController;
-use Experience\Models\Experience;
 
 class ExperienceController extends APIController
 {
@@ -153,6 +154,21 @@ class ExperienceController extends APIController
     {
         $page = Experience::withTrashed()->findOrFail($id);
         $page->forceDelete();
+
+        return response()->json($this->successResponse);
+    }
+
+    /**
+     * Rate.
+     * @param  Request $request
+     * @return            [description]
+     */
+    public function rate(Request $request, $id)
+    {
+        $experience = Experience::find($id);
+        $experience->ratings()->save(Rating::updateOrCreate(['user_id' => $request->input('user_id')], $request->except(['_token'])));
+        $experience->rating = Rating::compute($experience->id, get_class(new Experience));
+        $experience->save();
 
         return response()->json($this->successResponse);
     }

@@ -11,5 +11,7 @@ class Order extends Model
 
     protected $with = [];
 
+    protected $fillable = ['customer_id', 'experience_id', 'price', 'payment_id', 'metadata'];
+
     protected $searchables = ['created_at', 'updated_at'];
 }

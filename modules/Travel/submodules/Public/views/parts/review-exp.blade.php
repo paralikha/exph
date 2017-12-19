@@ -64,7 +64,7 @@
     </v-card-text>
     <v-divider></v-divider>
     <v-card-text class="text-xs-right">
-        <v-pagination class="caption main-paginate" circle :length="15" v-model="page" :total-visible="7"></v-pagination>
+        {{-- <v-pagination class="caption main-paginate" circle :length="15" v-model="page" :total-visible="7"></v-pagination> --}}
     </v-card-text>
 </v-card>
 

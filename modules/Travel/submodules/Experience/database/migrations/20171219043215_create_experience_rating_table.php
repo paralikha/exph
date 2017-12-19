@@ -5,14 +5,14 @@ use Illuminate\Support\Facades\Schema;
 use Pluma\Support\Migration\Migration;
 use Phinx\Migration\AbstractMigration;
 
-class CreateOrdersTable extends Migration
+class CreateExperienceRatingTable extends Migration
 {
     /**
      * The table name.
      *
      * @var string
      */
-    protected $tablename = 'orders';
+    protected $tablename = 'experience_rating';
 
     /**
      * Run the migrations.
@@ -27,18 +27,12 @@ class CreateOrdersTable extends Migration
 
         $this->schema->create($this->tablename, function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('customer_id')->unsigned()->nullable();
-            $table->integer('experience_id')->unsigned()->nullable();
-            $table->string('total')->nullable();
-            $table->integer('quantity')->nullable();
-            $table->string('payment_id')->nullable();
-            $table->string('status')->default('pending')->nullable();
-            $table->text('payer_id')->nullable();
-            $table->text('token')->nullable();
-            $table->text('metadata')->nullable();
-            $table->timestamp('purchased_at');
+            $table->integer('user_id')->unsigned();
+            $table->integer('ratable_id')->unsigned();
+            $table->string('ratable_type');
+            $table->string('rate');
             $table->timestamps();
-            $table->softDeletes();
+            // $table->softDeletes();
         });
     }
 

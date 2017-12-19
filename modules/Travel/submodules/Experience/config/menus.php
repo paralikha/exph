@@ -58,6 +58,28 @@ return [
                 'order' => 9,
             ],
 
+            'view-experience-categories' => [
+                'name' => 'view-experience-categories',
+                'order' => 10,
+                'slug' => route('experiences.categories.index'),
+                'always_viewable' => false,
+                'icon' => 'fa-paperclip',
+                'parent' => 'experience',
+                'routes' => [
+                    'name' => 'categories.index',
+                    'children' => [
+                        'categories.create',
+                        'categories.edit',
+                        'categories.show',
+                        'categories.trash',
+                    ]
+                ],
+                'labels' => [
+                    'title' => __('Amenities'),
+                    'description' => __("Manage all Experience's categories"),
+                ],
+            ],
+
             'view-amenities' => [
                 'name' => 'view-amenities',
                 'order' => 10,

@@ -9,6 +9,9 @@ Route::group(['prefix' => 'shop'], function () {
     Route::get('products', 'Shop\Controllers\ShopController@products')->name('shop.products');
     Route::get('payment', 'Shop\Controllers\ShopController@payment')->name('shop.payment');
 
+    // Status
+    // Route::get('success', 'Shop\Controllers\ShopController@success')->name('shop.success');
+
     // Payment::PayPal
     Route::post('payment/paypal', '\Shop\Support\Payment\PayPal\Controllers\PayPalController@paypal')->name('shop.payment.paypal');
 

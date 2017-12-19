@@ -34,7 +34,7 @@
                             </div>
                             <span class="body-2 block pb-2">{{ $resource->user->fullname }}</span>
                             <div class="grey--text">
-                                {{ __('The Travel Manager is the guy or gal who will make sure your road trip will be full of adventures, excitement, tales to tell your grandchildren, epic memories and unforgettable experiences.') }}
+                                {{ __("The Travel Manager is the one who will make sure your road trip will be full of adventures, excitement, tales to tell your grandchildren, epic memories and unforgettable experiences.") }}
                             </div>
                         </v-card-text>
                     </v-card>
@@ -229,7 +229,11 @@
                                     <div class="display-2 white--text"><span class="fw-500">{{ $resource->amount }}</span></div>
                                     <div class="body-2 white--text mb-2">{{ __('per person') }}</span></div>
                                     <div>
-                                        <span class="star-rating-system" data-rating="{{ $resource->rating }}"></span>
+                                        @if (user())
+                                            <span class="star-rating-system" data-rating="{{ $resource->rating }}"></span>
+                                        @else
+                                            <span class="star-rating-system--readonly" data-rating="{{ $resource->rating }}"></span>
+                                        @endif
                                         <span class="caption">{{ $resource->rating }}</span>
                                     </div>
                                 </v-card>
@@ -336,8 +340,7 @@
                                         </v-list-tile-action>
                                         <v-list-tile-content>
                                             <v-list-tile-title>{{ $resource->date }}</v-list-tile-title>
-                                            <v-list-ti
-													   le-sub-title>{{ $resource->days }}</v-list-tile-sub-title>
+                                            <v-list-tile-sub-title>{{ $resource->days }}</v-list-tile-sub-title>
                                         </v-list-tile-content>
                                     </v-list-tile>
                                     <v-list-tile>
@@ -509,7 +512,8 @@
                 }
             },
             mounted () {
-                $('.star-rating-system').each(function (e) {
+                let self = this;
+                $('.star-rating-system--readonly').each(function (e) {
                     let rating = $(this).data('rating');
                     $(this).starRating({
                         starSize: 16,
@@ -520,6 +524,25 @@
                         activeColor: 'orange',
                         useGradient: false,
                         disableAfterRate: true,
+                    });
+                });
+                $('.star-rating-system').each(function (e) {
+                    let rating = $(this).data('rating');
+                    $(this).starRating({
+                        starSize: 16,
+                        totalStars: 5,
+                        initialRating: rating,
+                        readOnly: false,
+                        emptyColor: 'lightgray',
+                        activeColor: 'orange',
+                        useGradient: false,
+                        disableAfterRate: true,
+                        callback: function(currentRating, $el){
+                            console.log(currentRating);
+                            self.$http.post('{{ route('experiences.rate', $resource->id) }}', {'user_id': '{{ @user()->id }}', _token: '{{csrf_token()}}','rate':currentRating}).then(data => {
+                                console.log(data);
+                            })
+                        }
                     });
                 })
             }
