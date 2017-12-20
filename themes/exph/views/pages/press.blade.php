@@ -52,6 +52,15 @@
                             </v-card-actions>
                         </v-card>
                     </v-flex>
+
+                    <v-flex md4 sm6 xs12>
+                        <v-card class="elevation-1 mb-3">
+                            <v-card-media height="200px" src="{{ assets('frontier/images/public/h7.jpg') }}"></v-card-media>
+                            <v-card-text>
+                                <div class="subheading fw-500">Entrepreneur Philippines</div>
+                            </v-card-text>
+                        </v-card>
+                    </v-flex>
                 </v-layout>
             </v-flex>
         </v-layout>

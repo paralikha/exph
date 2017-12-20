@@ -27,14 +27,12 @@ class CreateReviewsTable extends Migration
 
         $this->schema->create($this->tablename, function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('parent_id')->unsigned()->nullable();
-            $table->text('review');
-            $table->boolean('approved')->nullable();
-            $table->integer('upvotes')->nullable();
-
-            $table->integer('reviewable_id')->nullable();
-            $table->string('reviewable_type')->nullable();
+            $table->string('name');
+            $table->string('alias')->nullable();
+            $table->string('code')->unique();
+            $table->text('description')->nullable();
+            $table->string('icon')->nullable();
+            $table->string('categorable_type')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

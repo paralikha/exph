@@ -13,31 +13,31 @@ class ReviewRequest extends FormRequest
      */
     public function authorize()
     {
-        switch ($this->method()) {
-            case 'POST':
-                if ($this->user()->can('store-review')) {
-                    return true;
-                }
-                break;
+        // switch ($this->method()) {
+        //     case 'POST':
+        //         if ($this->user()->can('store-review')) {
+        //             return true;
+        //         }
+        //         break;
 
-            case 'PUT':
-                if ($this->user()->can('update-review')) {
-                    return true;
-                }
-                break;
+        //     case 'PUT':
+        //         if ($this->user()->can('update-review')) {
+        //             return true;
+        //         }
+        //         break;
 
-            case 'DELETE':
-                if ($this->user()->can('destroy-review')) {
-                    return true;
-                }
-                break;
+        //     case 'DELETE':
+        //         if ($this->user()->can('destroy-review')) {
+        //             return true;
+        //         }
+        //         break;
 
-            default:
-                return false;
-                break;
-        }
+        //     default:
+        //         return false;
+        //         break;
+        // }
 
-        return false;
+        return true;
     }
 
     /**
