@@ -30,6 +30,7 @@ class CreateOrdersTable extends Migration
             $table->integer('customer_id')->unsigned()->nullable();
             $table->integer('experience_id')->unsigned()->nullable();
             $table->string('total')->nullable();
+            $table->string('price')->nullable();
             $table->integer('quantity')->nullable();
             $table->string('payment_id')->nullable();
             $table->string('status')->default('pending')->nullable();

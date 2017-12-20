@@ -1,5 +1,5 @@
 @extends("Theme::layouts.public")
-@section("head-title", __($application->page->title))
+@section("head-title", $resource->name)
 @section("page-title", __($application->page->title))
 
 @section("content")

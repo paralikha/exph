@@ -78,7 +78,7 @@
 
                                         <v-list-tile avatar v-for="(guest, i) in guests" :key="i">
                                             <v-list-tile-avatar>
-                                                <span v-html="guest.icon ? guest.icon : guestInitial(guest.name)"></span>
+                                                <v-btn icon disabled class="red"><span v-html="guest.icon ? guest.icon : guestInitial(guest.name)"></span></v-btn>
                                             </v-list-tile-avatar>
                                             <v-list-tile-content>
                                                 <v-list-tile-title v-html="guest.name"></v-list-tile-title>

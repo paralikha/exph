@@ -39,8 +39,8 @@ class Experience extends Model
         }
 
         $m = date('m-Y', strtotime($this->date_start)) == date('m-Y', strtotime($this->date_end))
-            ? date('M d', strtotime($this->date_start)) . date('-d, Y', strtotime($this->date_end))
-            : date('M d, Y', strtotime($this->date_start)) . date('M d, Y', strtotime($this->date_end));
+            ? date('M d', strtotime($this->date_start)) . " - " . date('d, Y', strtotime($this->date_end))
+            : date('M d, Y', strtotime($this->date_start)) . " - " . date('M d, Y', strtotime($this->date_end));
 
         return $m;
     }
@@ -91,5 +91,10 @@ class Experience extends Model
     public function getManagerAttribute()
     {
         return $this->user;
+    }
+
+    public function getTypeAttribute()
+    {
+        return is_null($this->payer_id) ? 'Bank' : 'PayPal';
     }
 }

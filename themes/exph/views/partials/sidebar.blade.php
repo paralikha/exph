@@ -5,7 +5,7 @@
     :light.sync="light"
     :mini-variant.sync="sidebar.mini"
     @click.native.stop="setStorage('sidebar.mini', sidebar.mini)"
-    class="navigation-drawer--is-booted elevation-1"
+    class="navigation-drawer--is-booted elevation-1 pb-5"
     enable-resize-watcher
     overflow
     persistent
@@ -96,7 +96,7 @@
         </template>
     </v-list>
 
-    <v-list ripple>{{-- <v-list dense> --}}
+    <v-list ripple class="pb-5">{{-- <v-list dense> --}}
 
         <template v-for="(menu, i) in navigation.sidebar">
             {{-- if is avatar --}}

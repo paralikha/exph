@@ -3,7 +3,6 @@
 Route::group(['prefix' => 'shop'], function () {
     // Products
 
-
     // Cart
     Route::get('cart', 'Shop\Controllers\ShopController@cart')->name('shop.cart');
     Route::get('products', 'Shop\Controllers\ShopController@products')->name('shop.products');

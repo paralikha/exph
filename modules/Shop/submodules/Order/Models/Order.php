@@ -2,12 +2,13 @@
 
 namespace Order\Models;
 
+use Experience\Support\Traits\BelongsToExperience;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Pluma\Models\Model;
 
 class Order extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, BelongsToExperience;
 
     protected $with = [];
 
