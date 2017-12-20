@@ -14,7 +14,7 @@
                         <v-toolbar-title class="accent--text">{{ __('New Category') }}</v-toolbar-title>
                     </v-toolbar>
 
-                    <form action="{{ route('categories.store') }}" method="POST">
+                    <form action="{{ route('experiences.categories.store') }}" method="POST">
                         {{ csrf_field() }}
                         <v-card-text>
                             <v-text-field
@@ -316,8 +316,8 @@
                     urls: {
                         categories: {
                             api: {
-                                clone: '{{ route('api.categories.clone', 'null') }}',
-                                destroy: '{{ route('api.categories.destroy', 'null') }}',
+                                clone: '{{ route('api.experiences.categories.clone', 'null') }}',
+                                destroy: '{{ route('api.experiences.categories.destroy', 'null') }}',
                             },
                             show: '{{ route('categories.show', 'null') }}',
                             edit: '{{ route('categories.edit', 'null') }}',
@@ -355,7 +355,7 @@
                             take: rowsPerPage,
                         };
 
-                        this.api().search('{{ route('api.categories.search') }}', query)
+                        this.api().search('{{ route('api.experiences.categories.search') }}', query)
                             .then((data) => {
                                 this.dataset.items = data.items.data ? data.items.data : data.items;
                                 this.dataset.totalItems = data.items.total ? data.items.total : data.total;
@@ -374,7 +374,7 @@
                         sort: sortBy,
                         take: rowsPerPage,
                     };
-                    this.api().get('{{ route('api.categories.all') }}', query)
+                    this.api().get('{{ route('api.experiences.categories.all') }}', query)
                         .then((data) => {
                             this.dataset.items = data.items.data ? data.items.data : data.items;
                             this.dataset.totalItems = data.items.total ? data.items.total : data.total;
@@ -386,7 +386,7 @@
                     var self = this;
                     this.api().post(url, query)
                         .then((data) => {
-                            self.get('{{ route('api.categories.all') }}');
+                            self.get('{{ route('api.experiences.categories.all') }}');
                             self.snackbar = Object.assign(self.snackbar, data.response.body);
                             self.snackbar.model = true;
                         });
@@ -396,7 +396,7 @@
                     var self = this;
                     this.api().delete(url, query)
                         .then((data) => {
-                            self.get('{{ route('api.categories.all') }}');
+                            self.get('{{ route('api.experiences.categories.all') }}');
                             self.snackbar = Object.assign(self.snackbar, data.response.body);
                             self.snackbar.model = true;
                         });

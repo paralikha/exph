@@ -63,7 +63,7 @@ return [
                 'order' => 10,
                 'slug' => route('experiences.categories.index'),
                 'always_viewable' => false,
-                'icon' => 'fa-paperclip',
+                'icon' => 'label',
                 'parent' => 'experience',
                 'routes' => [
                     'name' => 'categories.index',
@@ -75,7 +75,7 @@ return [
                     ]
                 ],
                 'labels' => [
-                    'title' => __('Amenities'),
+                    'title' => __('Categories'),
                     'description' => __("Manage all Experience's categories"),
                 ],
             ],

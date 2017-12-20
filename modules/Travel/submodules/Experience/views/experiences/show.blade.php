@@ -10,7 +10,7 @@
     </v-card>
 
     <v-card class="elevation-1 hidden-sm-and-down">
-        <v-card-media src="{{ $resource->feature }}" height="450px">
+        <v-card-media src="{{ @$resource->feature }}" height="450px">
             <v-toolbar dark class="elevation-0 transparent">
                 <v-btn flat href="\experiences"><v-icon left>keyboard_backspace</v-icon>{{ __('Back') }}</v-btn>
             </v-toolbar>
@@ -120,6 +120,14 @@
                     <v-divider></v-divider>
 
                     <v-card flat class="pa-3">
+
+                        {{-- BODY --}}
+                        <v-card-text class="grey--text text--darken-2 subheading page-text">
+                            {!! $resource->body !!}
+                        </v-card-text>
+                        {{-- BODY --}}
+
+                        {{-- PACKAGE INCLUSIONS --}}
                         <v-card-text class="grey--text text--darken-2 subheading">
                             <p><strong>{{ __('Package Inclusions') }}</strong></p>
                             <v-layout row wrap justify-space-between>
@@ -135,12 +143,7 @@
                                 @endforeach
                             </v-layout>
                         </v-card-text>
-
-                        {{-- BODY --}}
-                        <v-card-text class="grey--text text--darken-2 subheading page-text">
-                            {!! $resource->body !!}
-                        </v-card-text>
-                        {{-- BODY --}}
+                        {{-- PACKAGE INCLUSIONS --}}
 
                     </v-card>
 

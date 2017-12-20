@@ -18,3 +18,13 @@ Route::post('amenities/grants', 'Experience\API\Controllers\AmenityController@gr
 Route::post('amenities/{amenity}/clone', 'Experience\API\Controllers\AmenityController@clone')->name('amenities.clone');
 Route::post('amenities/{amenity}/restore', 'Experience\API\Controllers\AmenityController@restore')->name('amenities.restore');
 
+// Categories
+Route::delete('experiences/categories/destroy/{category}', 'Experience\API\Controllers\CategoryController@destroy')->name('experiences.categories.destroy');
+Route::delete('experiences/categories/delete/{category}', 'Experience\API\Controllers\CategoryController@delete')->name('experiences.categories.delete');
+Route::get('experiences/categories/all', 'Experience\API\Controllers\CategoryController@all')->name('experiences.categories.all');
+Route::get('experiences/categories/search', 'Experience\API\Controllers\CategoryController@search')->name('experiences.categories.search');
+Route::get('experiences/categories/trash/all', 'Experience\API\Controllers\CategoryController@getTrash')->name('experiences.categories.trash.all');
+Route::post('experiences/categories/grants', 'Experience\API\Controllers\CategoryController@grants')->name('experiences.categories.grants');
+Route::post('experiences/categories/{category}/clone', 'Experience\API\Controllers\CategoryController@clone')->name('experiences.categories.clone');
+Route::post('experiences/categories/{category}/restore', 'Experience\API\Controllers\CategoryController@restore')->name('experiences.categories.restore');
+
