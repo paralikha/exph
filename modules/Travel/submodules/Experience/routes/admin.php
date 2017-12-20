@@ -21,3 +21,4 @@ Route::resource('experiences', 'Experience\Controllers\ExperienceController')->e
 
 // Category
 Route::resource('experiences/amenities', 'Experience\Controllers\AmenityController');
+
