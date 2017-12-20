@@ -92,9 +92,4 @@ class Experience extends Model
     {
         return $this->user;
     }
-
-    public function getTypeAttribute()
-    {
-        return is_null($this->payer_id) ? 'Bank' : 'PayPal';
-    }
 }

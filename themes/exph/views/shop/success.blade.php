@@ -84,7 +84,7 @@
                                                 <div class="grey--text body-1"><strong>{{ __('Total Amount Paid') }}</strong></div>
                                             </v-flex>
                                             <v-flex xs8>
-                                                <div class="body-1">PHP 18,000</div>
+                                                <div class="body-1">{{ $order->amount }}</div>
                                             </v-flex>
                                         </v-layout>
                                     </v-card-text>

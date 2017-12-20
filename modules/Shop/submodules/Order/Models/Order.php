@@ -15,4 +15,14 @@ class Order extends Model
     protected $fillable = ['customer_id', 'experience_id', 'price', 'payment_id', 'metadata'];
 
     protected $searchables = ['created_at', 'updated_at'];
+
+    public function getTypeAttribute()
+    {
+        return is_null($this->payer_id) ? 'Bank' : 'PayPal';
+    }
+
+    public function getAmountAttribute()
+    {
+        return $this->total;
+    }
 }
