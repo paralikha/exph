@@ -172,6 +172,8 @@
 
                     @include("Experience::interactives.managers")
 
+                    @include("Category::cards.category")
+
                 </v-flex>
 
             </v-layout>
@@ -191,11 +193,12 @@
                             code: '{{ $resource->code }}',
                             reference_number: '{{ $resource->reference_number }}',
                             user: parseInt('{{ $resource->user->id }}'),
-                            map: '{{ $resource->map }}',
+                            map: '{!! $resource->map !!}',
                             map_instructions: {!! json_encode($resource->map_instructions) !!},
                             date_start: '{{ date('Y-m-d h:ia', strtotime($resource->date_start)) }}',
                             date_end: '{{ date('Y-m-d h:ia', strtotime($resource->date_end)) }}',
                             price: '{{ $resource->price }}',
+                            category: '{{ $resource->category_id }}',
                             amenities: {!! json_encode($resource->amenities()->select(['icon', 'id', 'name'])->get()->toArray()) !!},
                         },
                         dates: {

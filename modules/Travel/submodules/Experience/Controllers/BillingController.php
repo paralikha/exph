@@ -94,6 +94,6 @@ class BillingController extends ShopController
 
     public function failed(Request $request)
     {
-        # code...
+        return view("Theme::shop.failed");
     }
 }

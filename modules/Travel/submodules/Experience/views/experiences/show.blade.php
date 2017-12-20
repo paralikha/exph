@@ -155,41 +155,51 @@
                         </v-toolbar>
                         <v-card-text class="grey--text text--darken-2 subheading">
                             <p>BPI Account Number</p>
-                                <v-list two-line subheader>
-                                    <v-list-tile avatar>
-                                        <v-list-tile-avatar>
-                                            <v-icon>credit_card</v-icon>
-                                        </v-list-tile-avatar>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title>{{ settings('ad', '9641-0003-69') }}</v-list-tile-title>
-                                            <v-list-tile-sub-title>EXPH Travel Differently Inc.</v-list-tile-sub-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                </v-list>
-                                <p>For proof of payment</p>
-                                <v-list two-line subheader>
-                                    <v-list-tile avatar>
-                                        <v-list-tile-avatar>
-                                            <v-icon>contact_phone</v-icon>
-                                        </v-list-tile-avatar>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title>0917-563-9692</v-list-tile-title>
-                                            <v-list-tile-sub-title>Send a text message of your deposit</v-list-tile-sub-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                    <v-list-tile avatar>
-                                        <v-list-tile-avatar>
-                                            <v-icon>email</v-icon>
-                                        </v-list-tile-avatar>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title>adventures@experience.ph</v-list-tile-title>
-                                            <v-list-tile-sub-title>Send the scanned deposit slip</v-list-tile-sub-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                </v-list>
-                                <p>You can pay us through credit card via  Paypal's secured payment website</p>
+                            <v-list two-line subheader>
+                                <v-list-tile avatar>
+                                    <v-list-tile-avatar>
+                                        <v-icon>credit_card</v-icon>
+                                    </v-list-tile-avatar>
+                                    <v-list-tile-content>
+                                        <v-list-tile-title>{{ settings('ad', '9641-0003-69') }}</v-list-tile-title>
+                                        <v-list-tile-sub-title>EXPH Travel Differently Inc.</v-list-tile-sub-title>
+                                    </v-list-tile-content>
+                                </v-list-tile>
+                            </v-list>
+                            <p>For proof of payment</p>
+                            <v-list two-line subheader>
+                                <v-list-tile avatar>
+                                    <v-list-tile-avatar>
+                                        <v-icon>contact_phone</v-icon>
+                                    </v-list-tile-avatar>
+                                    <v-list-tile-content>
+                                        <v-list-tile-title>0917-563-9692</v-list-tile-title>
+                                        <v-list-tile-sub-title>Send a text message of your deposit</v-list-tile-sub-title>
+                                    </v-list-tile-content>
+                                </v-list-tile>
+                                <v-list-tile avatar>
+                                    <v-list-tile-avatar>
+                                        <v-icon>email</v-icon>
+                                    </v-list-tile-avatar>
+                                    <v-list-tile-content>
+                                        <v-list-tile-title>adventures@experience.ph</v-list-tile-title>
+                                        <v-list-tile-sub-title>Send the scanned deposit slip</v-list-tile-sub-title>
+                                    </v-list-tile-content>
+                                </v-list-tile>
+                            </v-list>
+                            <p>You can pay us through credit card via  Paypal's secured payment website</p>
                         </v-card-text>
                     </v-card-text>
+
+                    {{-- MAP --}}
+                    <v-divider></v-divider>
+                    <v-card-text>
+                        <p><strong>{{ __('Meetup Place') }}</strong></p>
+                        <div class="pb-4">{!! nl2br($resource->map_instructions) !!}</div>
+                        {!! $resource->map !!}
+                    </v-card-text>
+                    <v-divider></v-divider>
+                    {{-- MAP --}}
 
 
                     <v-divider class="hidden-md-and-up"></v-divider>
@@ -332,7 +342,7 @@
                                             </div>
                                         </v-card>
                                             <div class="text-xs-center">
-                                                <v-btn primary large round class="elevation-1 px-4" href="..\billings">Experience Now</v-btn>
+                                                <v-btn primary large round class="elevation-1 px-4" href="{{ route('experiences.details', $resource->code) }}">Experience Now</v-btn>
                                             </div>
                                     </v-card-text>
                                 </v-card-media>
@@ -409,7 +419,7 @@
                     </v-card-text>
                     <v-spacer></v-spacer>
                     <v-card-text class="px-0 py-2 text-xs-right">
-                        <v-btn large primary round class="elevation-1 px-2" href="..\billings">Experience Now</v-btn>
+                        <v-btn large primary round class="elevation-1 px-2" href="{{ route('experiences.details', $resource->code) }}">Experience Now</v-btn>
                     </v-card-text>
                 </v-card-actions>
             </v-flex>

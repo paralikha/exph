@@ -39,85 +39,68 @@
                                         </v-flex>
                                     </v-layout>
                                 </v-card-text>
-                                    <v-divider></v-divider>
+                                <v-divider></v-divider>
 
 
-                                    <v-toolbar class="elevation-0 transparent">
-                                        <v-toolbar-title>{{ __('Payment Details') }}</v-toolbar-title>
-                                    </v-toolbar>
+                                <v-toolbar class="elevation-0 transparent">
+                                    <v-toolbar-title>{{ __('Payment Details') }}</v-toolbar-title>
+                                </v-toolbar>
 
-                                    <v-card-text>
-                                        <v-layout row wrap>
-                                            <v-flex xs4>
-                                                <div class="grey--text body-1"><strong>{{ __('Experience Name') }}</strong></div>
-                                            </v-flex>
-                                            <v-flex xs8>
-                                                <div class="body-1">{{ $order->experience->name }}</div>
-                                            </v-flex>
-                                        </v-layout>
-                                        <v-layout row wrap>
-                                            <v-flex xs4>
-                                                <div class="grey--text body-1"><strong>{{ __('Booking Date') }}</strong></div>
-                                            </v-flex>
-                                            <v-flex xs8>
-                                                <div class="body-1">{{ $order->experience->date }}</div>
-                                            </v-flex>
-                                        </v-layout>
-                                        <v-layout row wrap>
-                                            <v-flex xs4>
-                                                <div class="grey--text body-1"><strong>{{ __('Payment Type') }}</strong></div>
-                                            </v-flex>
-                                            <v-flex xs8>
-                                                <div class="body-1">{{ $order->type }}</div>
-                                            </v-flex>
-                                        </v-layout>
-                                        <v-layout row wrap>
-                                            <v-flex xs4>
-                                                <div class="grey--text body-1"><strong>{{ __('Payer ID') }}</strong></div>
-                                            </v-flex>
-                                            <v-flex xs8>
-                                                <div class="body-1">{{ $order->payer_id }}</div>
-                                            </v-flex>
-                                        </v-layout>
-                                        <v-layout row wrap>
-                                            <v-flex xs4>
-                                                <div class="grey--text body-1"><strong>{{ __('Total Amount Paid') }}</strong></div>
-                                            </v-flex>
-                                            <v-flex xs8>
-                                                <div class="body-1">{{ $order->amount }}</div>
-                                            </v-flex>
-                                        </v-layout>
-                                    </v-card-text>
+                                <v-card-text>
+                                    <v-layout row wrap>
+                                        <v-flex xs4>
+                                            <div class="grey--text body-1"><strong>{{ __('Experience Name') }}</strong></div>
+                                        </v-flex>
+                                        <v-flex xs8>
+                                            <div class="body-1">{{ $order->experience->name }}</div>
+                                        </v-flex>
+                                    </v-layout>
+                                    <v-layout row wrap>
+                                        <v-flex xs4>
+                                            <div class="grey--text body-1"><strong>{{ __('Booking Date') }}</strong></div>
+                                        </v-flex>
+                                        <v-flex xs8>
+                                            <div class="body-1">{{ $order->experience->date }}</div>
+                                        </v-flex>
+                                    </v-layout>
+                                    <v-layout row wrap>
+                                        <v-flex xs4>
+                                            <div class="grey--text body-1"><strong>{{ __('Payment Type') }}</strong></div>
+                                        </v-flex>
+                                        <v-flex xs8>
+                                            <div class="body-1">{{ $order->type }}</div>
+                                        </v-flex>
+                                    </v-layout>
+                                    <v-layout row wrap>
+                                        <v-flex xs4>
+                                            <div class="grey--text body-1"><strong>{{ __('Payer ID') }}</strong></div>
+                                        </v-flex>
+                                        <v-flex xs8>
+                                            <div class="body-1">{{ $order->payer_id }}</div>
+                                        </v-flex>
+                                    </v-layout>
+                                    <v-layout row wrap>
+                                        <v-flex xs4>
+                                            <div class="grey--text body-1"><strong>{{ __('Total Amount Paid') }}</strong></div>
+                                        </v-flex>
+                                        <v-flex xs8>
+                                            <div class="body-1">{{ $order->amount }}</div>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-card-text>
 
-                                    <v-toolbar class="elevation-0 transparent">
-                                        <v-toolbar-title>Guest Details</v-toolbar-title>
-                                    </v-toolbar>
-                                    <v-card-text>
+                                <v-toolbar class="elevation-0 transparent">
+                                    <v-toolbar-title>{{ __('Guests Details') }}</v-toolbar-title>
+                                </v-toolbar>
+                                <v-card-text class="pb-5">
+                                    @foreach ($order->meta as $metadata)
                                         <v-layout row wrap>
                                             <v-flex xs4>
-                                                <div class="grey--text body-1">Guest 1</div>
-                                            </v-flex>
-                                            <v-flex xs8>
-                                                <div class="body-1">Jane Appleseed</div>
+                                                <div class="body-1">{{ $metadata['name'] }}</div>
                                             </v-flex>
                                         </v-layout>
-                                        <v-layout row wrap>
-                                            <v-flex xs4>
-                                                <div class="grey--text body-1">Guest 2</div>
-                                            </v-flex>
-                                            <v-flex xs8>
-                                                <div class="body-1">Anna Scott</div>
-                                            </v-flex>
-                                        </v-layout>
-                                        <v-layout row wrap>
-                                            <v-flex xs4>
-                                                <div class="grey--text body-1">Guest 3</div>
-                                            </v-flex>
-                                            <v-flex xs8>
-                                                <div class="body-1">Benedict Cumberbatch</div>
-                                            </v-flex>
-                                        </v-layout>
-                                    </v-card-text>
+                                    @endforeach
+                                </v-card-text>
 
                             </v-card>
                         </v-flex>

@@ -47,13 +47,13 @@ Version: 1.0
                     </v-card-text>
                     <v-divider></v-divider>
                     <v-card-actions>
-                        <v-btn flat class="grey--text" @click.stop="search.dateform.model = !search.dateform.model">Cancel</v-btn>
+                        <v-btn flat class="grey--text" @click.stop="search.dateform.model = !search.dateform.model">{{ __('Cancel') }}</v-btn>
                         <v-spacer></v-spacer>
-                        <form action="{{ route('experiences.index') }}" method="GET">
+                        <form action="{{ route('experiences.all') }}" method="GET">
                             <input type="hidden" name="date_from" :value="search.from">
                             <input type="hidden" name="date_to" :value="search.to">
                             <input v-if="search.category" type="hidden" name="category_id" :value="search.to">
-                            <v-btn type="submit" flat primary>Apply</v-btn>
+                            <v-btn type="submit" flat primary>{{ __('Apply') }}</v-btn>
                         </form>
                     </v-card-actions>
                 </v-card>

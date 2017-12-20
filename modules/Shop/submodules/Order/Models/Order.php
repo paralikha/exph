@@ -23,6 +23,11 @@ class Order extends Model
 
     public function getAmountAttribute()
     {
-        return $this->total;
+        return settings('site_currency.symbol', '₱') . " " . number_format($this->total, 2);
+    }
+
+    public function getMetaAttribute()
+    {
+        return unserialize($this->metadata);
     }
 }

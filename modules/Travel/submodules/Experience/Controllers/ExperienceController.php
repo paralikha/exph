@@ -84,7 +84,7 @@ class ExperienceController extends AdminController
     {
         $resource = Experience::findOrFail($id);
         $catalogues = Catalogue::mediabox();
-        $categories = Category::type('experience')->pluck('name', 'id');
+        $categories = Category::type('experience')->get(['name', 'id'])->toArray();
         $managers = User::thatIs(['superadmin', 'travel-manager', 'manager'])->get();
         $amenities = Amenity::all();
 
@@ -100,6 +100,9 @@ class ExperienceController extends AdminController
      */
     public function update(ExperienceRequest $request, $id)
     {
+        echo "<pre>";
+            var_dump( $request->all() ); die();
+        echo "</pre>";
         $experience = Experience::findOrFail($id);
         $experience->name = $request->input('name');
         $experience->code = $request->input('code');

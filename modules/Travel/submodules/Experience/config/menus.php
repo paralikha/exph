@@ -24,6 +24,13 @@ return [
                 'order' => 1,
                 'slug' => url(config('path.admin').'/experiences'),
                 'always_viewable' => false,
+                'routes' => [
+                    'name' => 'experiences.index',
+                    'children' => [
+                        'experiences.edit',
+                        'experiences.show',
+                    ]
+                ],
                 'labels' => [
                     'title' => __('All Experiences'),
                     'description' => __('View the list of all experiences'),

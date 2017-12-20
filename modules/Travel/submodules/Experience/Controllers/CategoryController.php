@@ -57,7 +57,14 @@ class CategoryController extends AdminController
      */
     public function store(CategoryRequest $request)
     {
-        //
+        $category = new Category();
+        $category->name = $request->input('name');
+        $category->alias = $request->input('alias');
+        $category->code = $request->input('code');
+        $category->description = $request->input('description');
+        $category->icon = $request->input('icon');
+        $category->categorable_type = $request->input('categorable_type');
+        $category->save();
 
         return back();
     }
