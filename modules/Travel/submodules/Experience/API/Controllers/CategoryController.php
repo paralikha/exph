@@ -1,14 +1,15 @@
 <?php
 
-namespace Category\API\Controllers;
+namespace Experience\API\Controllers;
 
 use Illuminate\Http\Request;
 use Pluma\API\Controllers\APIController;
-use Category\Models\Grant;
 use Category\Models\Category;
 
 class CategoryController extends APIController
 {
+    protected $keyword = 'experience';
+
     /**
      * Search the resource.
      *
@@ -23,7 +24,8 @@ class CategoryController extends APIController
         $sort = $request->get('sort') && $request->get('sort') !== 'null' ? $request->get('sort') : 'id';
         $take = $request->get('take') && $request->get('take') > 0 ? $request->get('take') : 0;
 
-        $resources = Category::search($search)->orderBy($sort, $order);
+        $resources = Category::type($this->keyword)->search($search)->orderBy($sort, $order);
+
         if ($onlyTrashed) {
             $resources->onlyTrashed();
         }
@@ -46,7 +48,8 @@ class CategoryController extends APIController
         $sort = $request->get('sort') && $request->get('sort') !== 'null' ? $request->get('sort') : 'id';
         $take = $request->get('take') && $request->get('take') > 0 ? $request->get('take') : 0;
 
-        $resources = Category::search($search)->orderBy($sort, $order);
+        $resources = Category::type($this->keyword)->search($search)->orderBy($sort, $order);
+
         if ($onlyTrashed) {
             $resources->onlyTrashed();
         }
@@ -68,7 +71,7 @@ class CategoryController extends APIController
         $sort = $request->get('sort') && $request->get('sort') !== 'null' ? $request->get('sort') : 'id';
         $order = $request->get('descending') === 'true' && $request->get('descending') !== 'null' ? 'DESC' : 'ASC';
 
-        $permissions = Category::search($search)->orderBy($sort, $order)->onlyTrashed()->paginate($take);
+        $permissions = Category::type($this->keyword)->search($search)->orderBy($sort, $order)->onlyTrashed()->paginate($take);
 
         return response()->json($permissions);
     }
