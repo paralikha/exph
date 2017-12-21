@@ -35,11 +35,11 @@ class ForgeAccountCommand extends Command
         try {
             // You're already on the terminal, so why this?
             // Because we can.
-            $token = $this->secret("Database password");
-            if ($token !== env('DB_PASSWORD')) {
-                $this->error("Incorrect. Exiting...");
-                exit();
-            }
+            // $token = $this->secret("Database password");
+            // if ($token !== env('DB_PASSWORD')) {
+            //     $this->error("Incorrect. Exiting...");
+            //     exit();
+            // }
 
             $role = $this->choice("Role", Role::pluck('name', 'code')->toArray());
             $firstname = $this->ask("First name");

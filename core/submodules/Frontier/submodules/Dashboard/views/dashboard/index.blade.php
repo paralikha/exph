@@ -9,7 +9,7 @@
         <v-layout row wrap>
             <v-flex xs12>
                 <v-layout row wrap>
-                    <v-flex md4 xs12>
+                    <v-flex md4 sm6 xs12>
                         <v-layout row wrap>
                             <v-flex xs12>
                                 <draggable
@@ -40,7 +40,7 @@
                         </v-layout>
                     </v-flex>
 
-                    <v-flex md4 xs12>
+                    <v-flex md4 sm6 xs12>
                         <draggable
                             class="sortable-container"
                             :options="{animation: 150, handle: '.sortable-handle', group: 'lessons', draggable: '.draggable-lesson', forceFallback: true}">
@@ -62,7 +62,7 @@
                        </draggable>
                     </v-flex>
 
-                    <v-flex md4 xs12>
+                    <v-flex md4 sm6 xs12>
                         <draggable
                             class="sortable-container"
                             :options="{animation: 150, handle: '.sortable-handle', group: 'lessons', draggable: '.draggable-lesson', forceFallback: true}">

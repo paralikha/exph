@@ -22,5 +22,6 @@ Route::resource('experiences', 'Experience\Controllers\ExperienceController')->e
 // Category
 Route::resource('experiences/amenities', 'Experience\Controllers\AmenityController');
 
+
 Route::get('experiences/categories', 'Experience\Controllers\CategoryController@index')->name('experiences.categories.index');
 Route::post('experiences/categories', 'Experience\Controllers\CategoryController@store')->name('experiences.categories.store');
