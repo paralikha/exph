@@ -49,13 +49,31 @@ Version: 1.0
                                 <div class="subheading fw-500">Window Seat Philippines</div>
                                 <div class="caption grey--text text--darken-1"><v-icon class="body-1 mb-1">schedule</v-icon> March 25, 2017</div>
                             </v-card-text>
-                            <v-card-text>
+                            <v-card-text class="grey--text text--darken-2">
                                 <p>What does <span class="primary--text">www.windowseat.ph</span> have to say?</p>
                                 <p>Experience.ph is a travel website that pioneered touring people around on random road trips. They won’t take you on planned trips to a known place.</p>
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-btn flat primary href="http://windowseat.ph/experience-philippines-random-roadtrips">Read More</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-flex>
+
+                    <v-flex md4 sm6 xs12>
+                        <v-card class="elevation-1 mb-3">
+                            <v-card-media height="200px" src="{{ assets('frontier/images/public/car.jpg') }}">
+                            </v-card-media>
+                            <v-card-text>
+                                <div class="subheading fw-500">Entrepreneur Philippines</div>
+                                <div class="caption grey--text text--darken-1"><v-icon class="body-1 mb-1">schedule</v-icon> April 17, 2017</div>
+                            </v-card-text>
+                            <v-card-text class="grey--text text--darken-2">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas praesentium, ullam, sunt eligendi voluptates, reiciendis quaerat laborum necessitatibus impedit temporibus nihil architecto asperiores accusamus earum dicta totam dolor. Quia, omnis.</p>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn flat primary href="">Read More</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-flex>

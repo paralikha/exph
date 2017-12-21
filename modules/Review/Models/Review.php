@@ -11,5 +11,5 @@ class Review extends Model
 
     protected $with = [];
 
-    protected $searchables = ['name', 'alias', 'code', 'description', 'icon', 'created_at', 'updated_at'];
+    protected $searchables = ['user_id', 'parent_id', 'body', 'delta', 'approved', 'upvotes', 'reviewable_id', 'reviewable_type', 'created_at', 'updated_at'];
 }

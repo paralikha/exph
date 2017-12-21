@@ -18,10 +18,10 @@ class ReviewController extends AdminController
     public function index(Request $request)
     {
         // dd($resources);
-        $resources = Review::paginate();
+        // $resources = Review::paginate();
         $trashed = Review::onlyTrashed()->count();
 
-        return view("Theme::reviews.index")->with(compact('resources', 'trashed'));
+        return view("Theme::reviews.index")->with(compact('trashed'));
     }
 
     /**
@@ -60,13 +60,13 @@ class ReviewController extends AdminController
     public function store(ReviewRequest $request)
     {
         $review = new Review();
-        $review->name = $request->input('name');
-        $review->alias = $request->input('alias');
-        $review->code = $request->input('code');
-        $review->description = $request->input('description');
-        if (null !== $request->input('schedule')) {
-            $review->schedule = date('Y-m-d H:i:s', strtotime($request->input('schedule')));
-        }
+        $review->name = $request->input('user_id');
+        $review->name = $request->input('parent_id');
+        $review->body = $request->input('body');
+
+        $review->reviewable_id = $request->input('reviewable_id');
+        $review->reviewable_type = $request->input('reviewable_type');
+
         $review->save();
 
         return back();
@@ -96,13 +96,13 @@ class ReviewController extends AdminController
     public function update(ReviewRequest $request, $id)
     {
         $review = Review::findOrFail($id);
-        $review->name = $request->input('name');
-        $review->alias = $request->input('alias');
-        $review->code = $request->input('code');
-        $review->description = $request->input('description');
-        if (null !== $request->input('schedule')) {
-            $review->schedule = date('Y-m-d H:i:s', strtotime($request->input('schedule')));
-        }
+        $review->name = $request->input('user_id');
+        $review->name = $request->input('parent_id');
+        $review->body = $request->input('body');
+
+        $review->reviewable_id = $request->input('reviewable_id');
+        $review->reviewable_type = $request->input('reviewable_type');
+
         $review->save();
 
         return back();

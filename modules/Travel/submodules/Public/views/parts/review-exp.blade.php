@@ -74,9 +74,6 @@
     {{-- <link rel="stylesheet" href="{{ assets('frontier/vuetify-mediabox/dist/vuetify-mediabox.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ assets('frontier/vuetify-quill/dist/vuetify-quill.min.css') }}">
     <style>
-    .text-decor-none {
-            text-decoration: none;
-        }
         .pl-7 {
             padding-left: 70px;
         }
@@ -90,7 +87,6 @@
         .quill-editor .ql-editor {
             min-height: auto !important;
         }
-
         .main-paginate .pagination__item,
         .main-paginate .pagination__navigation {
             box-shadow: none !important;

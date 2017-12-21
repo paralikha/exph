@@ -58,6 +58,7 @@
                             <v-card-media height="200px" src="{{ assets('frontier/images/public/h7.jpg') }}"></v-card-media>
                             <v-card-text>
                                 <div class="subheading fw-500">Entrepreneur Philippines</div>
+                                <div class="caption grey--text text--darken-1"><v-icon class="body-1 mb-1">schedule</v-icon> April 17, 2017</div>
                             </v-card-text>
                         </v-card>
                     </v-flex>
