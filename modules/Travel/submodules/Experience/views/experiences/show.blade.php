@@ -495,6 +495,9 @@
                 top: 80px;
             }
         }
+        iframe {
+            width: 100%;
+        }
     </style>
 @endpush
 

@@ -8,32 +8,47 @@
     <v-card-text class="pa-0 pb-3">
         <v-card-text class="pa-0">
             <v-card class="elevation-0">
-                    <v-quill class="elevation-0" source :upload-params="{_token: '{{ csrf_token() }}', 'return': 1}" :options="{uploadUrl: '{{ route('api.library.upload') }}', placeholder: '{{ __('Write something...') }}'}" v-model="resource.quill" class="mb-3 card--flat white elevation-1" :fonts="mediabox.fonts" @toggle-mediabox="() => { mediabox.model = ! mediabox.model }" :mediabox.sync="mediabox.url">
-                    <template>
-                        <input type="hidden" name="body" :value="resource.quill.html">
-                        <input type="hidden" name="delta" :value="JSON.stringify(resource.quill.delta)">
-                    </template>
-                </v-quill>
+                <form action="{{ route('reviews.store') }}" method="POST">
+                    {{ csrf_field() }}
+                    <v-card-text>
+                        <v-layout row wrap>
+                            <v-flex xs4>
+                                <v-subheader>{{ __('Message') }}</v-subheader>
+                            </v-flex>
+                            <v-flex xs8>
+                                <v-text-field
+                                    :error-messages="resource.errors.body"
+                                    label="{{ _('Type a Message') }}"
+                                    name="body"
+                                    value="{{ old('body') }}"
+                                ></v-text-field>
+                            </v-flex>
+                        </v-layout>
+                    </v-card-text>
+                    <v-divider></v-divider>
+                    <v-card-text class="text-xs-right pa-0">
+                        <v-btn  type="submit" flat class="primary--text">Post a comment</v-btn>
+                    </v-card-text>
+                </form>
                 <v-divider></v-divider>
-                <v-card-text class="text-xs-right pa-0">
-                    <v-btn flat class="primary--text">Post a comment</v-btn>
-                </v-card-text>
             </v-card>
         </v-card-text>
-        <v-divider></v-divider>
-        <v-list two-line>
+
+        <v-list two-line v-for="item in dataset.items" v-bind:key="item.id">
             <v-list-tile avatar>
                 <v-list-tile-avatar>
-                    <img src="{{ assets('frontier/images/public/mark.jpg') }}" />
+                    <img src="{{ auth()->user()->avatar }}" alt="">
                 </v-list-tile-avatar>
                 <v-list-tile-content>
-                    <v-list-tile-title><a href="#!" class="td-n fw-500 primary--text body-2">Mark Zuckerberg</a></v-list-tile-title>
-                    <v-list-tile-sub-title>November 12, 2017</v-list-tile-sub-title>
+                    <v-list-tile-title>
+                        <a href="#!" class="td-n primary--text text--darken-4 body-2">{{ auth()->user()->fullname }}</a>
+                    </v-list-tile-title>
+                    <v-list-tile-sub-title class="body-1">@{{ item.created }}</v-list-tile-sub-title>
                 </v-list-tile-content>
 
                 <v-list-tile-action>
                     <v-menu bottom left>
-                        <v-btn icon flat slot="activator" v-tooltip:left="{ html: 'More Actions' }"><v-icon>more_horiz</v-icon></v-btn>
+                        <v-btn icon flat slot="activator" v-tooltip:left="{ html: 'More Actions' }"><v-icon>more_vert</v-icon></v-btn>
                         <v-list>
                             <v-list-tile ripple @click="">
                                 <v-list-tile-action>
@@ -45,7 +60,11 @@
                                     </v-list-tile-title>
                                 </v-list-tile-content>
                             </v-list-tile>
-                            <v-list-tile ripple @click="">
+                            <v-list-tile ripple
+                                @click="destroy(route(urls.reviews.api.destroy, item.id),
+                                {
+                                    '_token': '{{ csrf_token() }}'
+                                })">
                                 <v-list-tile-action>
                                     <v-icon error>delete</v-icon>
                                 </v-list-tile-action>
@@ -59,13 +78,25 @@
                     </v-menu>
                 </v-list-tile-action>
             </v-list-tile>
-            <div class="pl-7 pr-4 grey--text text--darken-2">Definitely value for money! Very beautiful view in amazing location. Paul Appleseed was also very helpful. Very recommended!</div>
+            <div class="pl-7 pr-4 grey--text text--darken-2">@{{ item.body }}</div>
         </v-list>
     </v-card-text>
     <v-divider></v-divider>
+
+    {{-- to remove --}}
+    <v-card class="mb-3 elevation-1" style="display: none;">
+        <v-data-table
+            v-bind:pagination.sync="dataset.pagination"
+            >
+        </v-data-table>
+    </v-card>
+    {{-- to remove --}}
+
+    {{-- paginate --}}
     <v-card-text class="text-xs-right">
-        {{-- <v-pagination class="caption main-paginate" circle :length="15" v-model="page" :total-visible="7"></v-pagination> --}}
+        <v-pagination class="caption main-paginate" circle :length="15" v-model="page" :total-visible="7"></v-pagination>
     </v-card-text>
+    {{-- paginate --}}
 </v-card>
 
 {{-- /Editor --}}
@@ -120,7 +151,73 @@
                             thumbnail: '',
                         },
                     },
+                    //
+                    hidden: true,
+                    dataset: {
+                        items: [],
+                        loading: true,
+                        urls: {
+                            reviews: {
+                                api: {
+                                    destroy: '{{ route('api.reviews.destroy', 'null') }}',
+                                },
+                                show: '{{ route('reviews.show', 'null') }}',
+                                edit: '{{ route('reviews.edit', 'null') }}',
+                                destroy: '{{ route('reviews.destroy', 'null') }}',
+                            },
+                        },
+                    },
+                    resource: {
+                        item: {
+                            name: '',
+                            code: '',
+                            description: '',
+                            grants: '',
+                        },
+                        errors: JSON.parse('{!! json_encode($errors->getMessages()) !!}'),
+                    },
                 }
+            },
+            methods: {
+                get () {
+                    const { sortBy, descending, page, rowsPerPage } = this.dataset.pagination;
+                    let query = {
+                        descending: descending,
+                        page: page,
+                        sort: sortBy,
+                        take: rowsPerPage,
+                    };
+                    this.api().get('{{ route('api.reviews.all') }}', query)
+                        .then((data) => {
+                            this.dataset.items = data.items.data ? data.items.data : data.items;
+                            // this.dataset.totalItems = data.items.total ? data.items.total : data.total;
+                            this.dataset.loading = false;
+                        });
+                },
+
+                post (url, query) {
+                    var self = this;
+                    this.api().post(url, query)
+                        .then((data) => {
+                            self.snackbar = Object.assign(self.snackbar, data.response.body);
+                            self.snackbar.model = true;
+                        });
+                },
+
+                destroy (url, query) {
+                    var self = this;
+                    this.api().delete(url, query)
+                        .then((data) => {
+                            self.get('{{ route('api.reviews.all') }}');
+                            self.snackbar = Object.assign(self.snackbar, data.response.body);
+                            self.snackbar.model = true;
+                        });
+                },
+            },
+
+            mounted () {
+                this.get();
+                // console.log("dataset.pagination", this.dataset.pagination);
             },
         })
     </script>
