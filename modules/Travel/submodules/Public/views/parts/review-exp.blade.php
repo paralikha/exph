@@ -5,30 +5,13 @@
         <v-toolbar-title>{{ __("Reviews") }}</v-toolbar-title>
     </v-toolbar>
     <v-divider></v-divider>
+    @if (user())
     <v-card-text class="pa-0 pb-3">
         <v-card-text class="pa-0">
             <v-card class="elevation-0">
-                <form action="{{ route('reviews.store') }}" method="POST">
+                <form action="{{ route('experiences.review', $resource->id) }}" method="POST">
                     {{ csrf_field() }}
-                    {{-- <v-card-text>
-                        <v-layout row wrap>
-                            <v-flex xs4>
-                                <v-subheader>{{ __('Message') }}</v-subheader>
-                            </v-flex>
-                            <v-flex xs8>
-                                <v-text-field
-                                    :error-messages="resource.errors.body"
-                                    label="{{ _('Type a Message') }}"
-                                    name="body"
-                                    value="{{ old('body') }}"
-                                ></v-text-field>
-                            </v-flex>
-                        </v-layout>
-                    </v-card-text>
-                    <v-divider></v-divider>
-                    <v-card-text class="text-xs-right pa-0">
-                        <v-btn  type="submit" flat class="primary--text">Post a comment</v-btn>
-                    </v-card-text> --}}
+                    <input type="hidden" name="user_id" value="{{ user()->id }}">
 
                     {{-- editor --}}
                     @include("Review::interactive.editor")
@@ -89,15 +72,11 @@
             <div class="pl-7 pr-4 grey--text text--darken-2" v-html="item.body"></div>
         </v-list>
     </v-card-text>
+    @endif
     {{-- <v-divider></v-divider> --}}
 
     {{-- to remove --}}
-    <v-card class="mb-3 elevation-1" style="display: none;">
-        <v-data-table
-            v-bind:pagination.sync="dataset.pagination"
-            >
-        </v-data-table>
-    </v-card>
+
     {{-- to remove --}}
 
     {{-- paginate --}}
@@ -162,7 +141,7 @@
                     //
                     hidden: true,
                     dataset: {
-                        items: [],
+                        items: {!! json_encode($resource->reviews) !!},
                         loading: true,
                         urls: {
                             reviews: {
@@ -221,29 +200,10 @@
                             self.snackbar.model = true;
                         });
                 },
-
-                codify (source) {
-                    let s = source.split(' ');
-                    let c = [];
-                    for (var i = 0; i < s.length; i++) {
-                        c.push(s[i].charAt(0).toUpperCase());
-                    }
-                    let variable = c.join('');
-                    return variable;
-                },
-                add (to, push) {
-                    if (! to) {
-                        to = [];
-                    }
-                    console.log(to)
-                },
-                remove (from, key) {
-                    from.splice(key, 1);
-                }
             },
 
             mounted () {
-                this.get();
+                // this.get();
                 // console.log("dataset.pagination", this.dataset.pagination);
             },
         })

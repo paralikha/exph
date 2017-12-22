@@ -92,4 +92,15 @@ class Experience extends Model
     {
         return $this->user;
     }
+
+    //
+    public function experience()
+    {
+        return $this->morphMany('Review', 'reviewable');
+    }
+
+    public function reviews()
+    {
+        return $this->morphMany(\Review\Models\Review::class, 'reviewable');
+    }
 }

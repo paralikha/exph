@@ -194,9 +194,13 @@
                     {{-- MAP --}}
                     <v-divider></v-divider>
                     <v-card-text>
-                        <p><strong>{{ __('Meetup Place') }}</strong></p>
-                        <div class="pb-4">{!! nl2br($resource->map_instructions) !!}</div>
-                        {!! $resource->map !!}
+                        <v-toolbar class="elevation-0 transparent">
+                            <v-toolbar-title>Meetup Place</v-toolbar-title>
+                        </v-toolbar>
+                        <v-card-text>
+                            <div class="pb-4">{!! nl2br($resource->map_instructions) !!}</div>
+                                {!! $resource->map !!}
+                        </v-card-text>
                     </v-card-text>
                     <v-divider></v-divider>
                     {{-- MAP --}}

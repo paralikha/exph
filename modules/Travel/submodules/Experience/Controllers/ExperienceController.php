@@ -11,6 +11,7 @@ use Frontier\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use User\Models\User;
+use Review\Models\Review;
 
 class ExperienceController extends AdminController
 {
@@ -174,5 +175,20 @@ class ExperienceController extends AdminController
         //
 
         return redirect()->route('experiences.trash');
+    }
+
+    public function review(Request $request, $id)
+    {
+        $review = New Review();
+        $review->user()->associate(User::find($request->input('user_id')));
+        $review->approved = true;
+        $review->body = $request->input('body');
+        $review->delta = $request->input('delta');
+
+        $experience = Experience::findOrFail($id);
+        $experience->reviews()->save($review);
+        $experience->save();
+
+        return back();
     }
 }

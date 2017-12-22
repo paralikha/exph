@@ -4,12 +4,11 @@ namespace Review\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Pluma\Models\Model;
-use Frontier\Support\Traits\Ownable;
 use User\Support\Traits\BelongsToUser;
 
 class Review extends Model
 {
-    use SoftDeletes, BelongsToUser, Ownable;
+    use SoftDeletes, BelongsToUser;
 
     protected $with = [];
 

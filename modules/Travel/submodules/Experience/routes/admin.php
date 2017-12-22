@@ -16,6 +16,9 @@ Route::post('amenities/restore/many', 'Catalogue\Controllers\CatalogueManyContro
 // Rate
 Route::post('experiences/{experience}/rate', 'Experience\API\Controllers\ExperienceController@rate')->name('experiences.rate');
 
+//Review
+Route::post('experiences/{experience}/review', 'Experience\Controllers\ExperienceController@review')->name('experiences.review');
+
 // Normal
 Route::resource('experiences', 'Experience\Controllers\ExperienceController')->except(['show']);
 
