@@ -37,7 +37,7 @@
                     <v-card-actions>
                         <v-btn flat class="grey--text" @click.stop="search.dateform.model = !search.dateform.model">Cancel</v-btn>
                         <v-spacer></v-spacer>
-                        <form action="{{ route('experiences.index') }}" method="GET">
+                        <form action="{{ route('experiences.all') }}" method="GET">
                             <input type="hidden" name="date_from" :value="search.from">
                             <input type="hidden" name="date_to" :value="search.to">
                             <input v-if="search.category" type="hidden" name="category_id" :value="search.to">
@@ -111,71 +111,76 @@
 
     <section id="experiences" class="py-5">
         <v-container fluid grid-list-lg>
-            <v-layout v-if="experiences.length == 0" row wrap align-center justify-center>
-                <v-flex xs12>
-                    <v-card-text class="text-xs-center my-3">
-                        <h2 class="subheading grey--text text--darken-1">
-                            {{ __("No experiences by that category nor date.") }}
-                        </h2>
-                        <a href="{{ route('experiences.index') }}" class="caption">{{ __('See All') }}</a>
-                    </v-card-text>
-                </v-flex>
-            </v-layout>
-            <v-layout v-else row wrap align-center justify-center>
-                <v-flex lg10 xs12>
-                    <v-card-text class="text-xs-center my-3">
-                        <h2 class="display-1">{{ __("CHOOSE AN EXPERIENCE") }}</h2>
-                        <h2 class="subheading grey--text text--darken-1">
-                            {{ __("Discover more about yourself, about others and about the beautiful country called the Philippines. Book your Experience with us now.") }}
-                        </h2>
-                    </v-card-text>
-                    <v-layout row wrap align-center>
-                        <v-flex xs12 sm4 md3 v-for="(card, key) in experiences.data" :key="key">
-                            <a :href="card.url" ripple class="td-n">
-                                <v-card class="elevation-1 c-lift">
-                                    <v-card-media
-                                        height="180px"
-                                        :src="card.feature"
-                                        class="grey lighten-4">
-                                        <div class="text-xs-right" style="width: 100%;">
-                                            <v-btn large v-tooltip:left="{ html: '{{ __('Add to wishlist') }}' }" icon class="mr-3">
-                                                @include("Experience::components.wishlist")
-                                            </v-btn>
-                                            <v-chip label class="ma-0 white--text green lighten-1" style="position: absolute; bottom: 15px; right: 0;"><span v-html="card.amount"></span></v-chip>
-                                        </div>
-                                    </v-card-media>
-                                    <v-divider class="grey lighten-3"></v-divider>
-                                    <v-toolbar card dense class="transparent pt-2">
-                                        <v-toolbar-title class="mr-3 subheading">
-                                            <span class="body-2">@{{ card.name }}</span><br>
-                                            <span class="caption">@{{ card.date }}</span><br>
-                                        </v-toolbar-title>
-                                    </v-toolbar>
-                                    <v-card-text class="grey--text pt-4">
-                                        <v-icon v-if="card.categoryname" class="subheading grey--text text--lighten-1 pb-1">whatshot</v-icon>
-                                        <span v-if="card.categoryname" class="caption">@{{ card.categoryname }}</span>
-                                        <div>
-                                            <span class="star-rating-system" :data-rating="card.rating">
-                                                {{-- <v-icon v-for="i in 5" class="subheading primary--text pb-1">
-                                                    <template v-if="i <= Math.round(card.rating)">star</template>
-                                                    <template v-else>star_border</template>
-                                                </v-icon> --}}
-                                            </span>
-                                            <span class="caption" v-html="card.rating"></span>
-                                        </div>
-                                    </v-card-text>
-                                </v-card>
-                            </a>
-                        </v-flex>
-                    </v-layout>
-                    <v-card-text>
-                        <div class="text-xs-center">
-                            @include("Theme::partials.pagination")
-                            {{-- <v-pagination circle :length="experiences.length" v-model="page" :total-visible="8" class="caption main-paginate"></v-pagination> --}}
-                        </div>
-                    </v-card-text>
-                </v-flex>
-            </v-layout>
+            @if (! $resources->count())
+                <v-layout row wrap>
+                    <v-flex xs12 sm6 offset-sm3>
+                        <v-card class="elevation-1">
+                            <v-card-text class="text-xs-center my-3">
+                                <h2 class="subheading primary--text text--darken-1">
+                                    {{ __("No Experiences found with those parameters.") }}
+                                </h2>
+                                <v-btn href="{{ route('experiences.all') }}" class="primary subheading">{{ __('See All') }}</v-btn>
+                            </v-card-text>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+            @else
+                <v-layout row wrap align-center justify-center>
+                    <v-flex lg10 xs12>
+                        <v-card-text class="text-xs-center my-3">
+                            <h2 class="display-1">{{ __("CHOOSE AN EXPERIENCE") }}</h2>
+                            <h2 class="subheading grey--text text--darken-1">
+                                {{ __("Discover more about yourself, about others and about the beautiful country called the Philippines. Book your Experience with us now.") }}
+                            </h2>
+                        </v-card-text>
+                        <v-layout row wrap align-center>
+                            <v-flex xs12 sm4 md3 v-for="(card, key) in experiences.data" :key="key">
+                                <a :href="card.url" ripple class="td-n">
+                                    <v-card class="elevation-1 c-lift">
+                                        <v-card-media
+                                            height="180px"
+                                            :src="card.feature"
+                                            class="grey lighten-4">
+                                            <div class="text-xs-right" style="width: 100%;">
+                                                <v-btn large v-tooltip:left="{ html: '{{ __('Add to wishlist') }}' }" icon class="mr-3">
+                                                    @include("Experience::components.wishlist")
+                                                </v-btn>
+                                                <v-chip label class="ma-0 white--text green lighten-1" style="position: absolute; bottom: 15px; right: 0;"><span v-html="card.amount"></span></v-chip>
+                                            </div>
+                                        </v-card-media>
+                                        <v-divider class="grey lighten-3"></v-divider>
+                                        <v-toolbar card dense class="transparent pt-2">
+                                            <v-toolbar-title class="mr-3 subheading">
+                                                <span class="body-2">@{{ card.name }}</span><br>
+                                                <span class="caption">@{{ card.date }}</span><br>
+                                            </v-toolbar-title>
+                                        </v-toolbar>
+                                        <v-card-text class="grey--text pt-4">
+                                            <v-icon v-if="card.categoryname" class="subheading grey--text text--lighten-1 pb-1">whatshot</v-icon>
+                                            <span v-if="card.categoryname" class="caption">@{{ card.categoryname }}</span>
+                                            <div>
+                                                <span class="star-rating-system" :data-rating="card.rating">
+                                                    {{-- <v-icon v-for="i in 5" class="subheading primary--text pb-1">
+                                                        <template v-if="i <= Math.round(card.rating)">star</template>
+                                                        <template v-else>star_border</template>
+                                                    </v-icon> --}}
+                                                </span>
+                                                <span class="caption" v-html="card.rating"></span>
+                                            </div>
+                                        </v-card-text>
+                                    </v-card>
+                                </a>
+                            </v-flex>
+                        </v-layout>
+                        <v-card-text>
+                            <div class="text-xs-center">
+                                @include("Theme::partials.pagination")
+                                {{-- <v-pagination circle :length="experiences.length" v-model="page" :total-visible="8" class="caption main-paginate"></v-pagination> --}}
+                            </div>
+                        </v-card-text>
+                    </v-flex>
+                </v-layout>
+            @endif
         </v-container>
     </section>
 

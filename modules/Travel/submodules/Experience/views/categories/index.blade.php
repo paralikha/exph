@@ -17,6 +17,7 @@
                     <form action="{{ route('experiences.categories.store') }}" method="POST">
                         {{ csrf_field() }}
                         <v-card-text>
+                            <input type="hidden" name="categorable_type" value="experience">
                             <v-text-field
                                 :error-messages="resource.errors.name"
                                 label="{{ _('Name') }}"

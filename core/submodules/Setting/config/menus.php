@@ -29,6 +29,7 @@ return [
                 'name' => 'general-settings',
                 'slug' => route('settings.general'),
                 'always_viewable' => false,
+                'order' => 1,
                 'labels' => [
                     'title' => __('General'),
                     'description' => __('Manage General site settings'),

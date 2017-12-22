@@ -169,6 +169,8 @@
 
                     @include("Experience::interactives.managers")
 
+                    @include("Category::cards.category")
+
                 </v-flex>
 
             </v-layout>
@@ -188,7 +190,7 @@
                             code: '{{ old('code') }}',
                             reference_number: '{{ old('reference_number') }}',
                             user: '{{ old('user') }}',
-                            map: '{{ old('map') }}',
+                            map: '{!! old('map') !!}',
                             map_instructions: {!! json_encode(old('map_instructions')) !!},
                             date_start: '{{ old('date_start') }}',
                             date_end: '{{ old('date_end') }}',

@@ -39,8 +39,8 @@ class Experience extends Model
         }
 
         $m = date('m-Y', strtotime($this->date_start)) == date('m-Y', strtotime($this->date_end))
-            ? date('M d', strtotime($this->date_start)) . date('-d, Y', strtotime($this->date_end))
-            : date('M d, Y', strtotime($this->date_start)) . date('M d, Y', strtotime($this->date_end));
+            ? date('M d', strtotime($this->date_start)) . " - " . date('d, Y', strtotime($this->date_end))
+            : date('M d, Y', strtotime($this->date_start)) . " - " . date('M d, Y', strtotime($this->date_end));
 
         return $m;
     }

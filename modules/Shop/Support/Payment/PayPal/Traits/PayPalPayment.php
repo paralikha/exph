@@ -66,10 +66,10 @@ trait PayPalPayment
         try {
             $payment->create($this->apiContext);
         } catch (\PayPal\Exception\PayPalConnectionException $e) {
-            dd($e->getData());
-            return back()->with('errors', $e->getMessage());
+            // dd($e->getData());
+            return redirect()->route('payment.paypal.failed');
         } catch (\Exception $e) {
-            dd('asd', $e->getMessage());
+            // dd('asd', $e->getMessage());
             return view("Theme::errors.{$e->getCode()}");
         }
 
@@ -78,12 +78,13 @@ trait PayPalPayment
         session()->put('paypal_payment_id', $payment->getId());
         session()->put('experience_id', $request->input('experience_id'));
         session()->put('order_id', $request->input('order_id'));
+        session()->put('session_request', $request->all());
 
         if (isset($approvalUrl)) {
             return redirect()->away($approvalUrl);
         }
 
-        return back();
+        return redirect()->route('payment.paypal.failed');
     }
 
     /**
@@ -95,14 +96,16 @@ trait PayPalPayment
     public function status(Request $request)
     {
         $paymentId = session()->get('paypal_payment_id');
-        session()->forget('paypal_payment_id');
+        $sessionRequest = session()->get('session_request');
+        // echo "<pre>";
+        //     var_dump( $request->get('PayerID') ); die();
+        // echo "</pre>";
 
         if (empty($request->get('PayerID')) || empty($request->get('token'))) {
             return redirect()->route('shop.cart');
         }
 
-        $payment = Payment::get($paymentId, $this->apiContext);
-
+        $payment = Payment::get($paymentId, $this->getApiContext());
         /** PaymentExecution object includes information necessary **/
         /** to execute a PayPal account payment. **/
         /** The payer_id is added to the request query parameters **/
@@ -110,29 +113,42 @@ trait PayPalPayment
         $execution = new PaymentExecution();
         $execution->setPayerId($request->get('PayerID'));
 
-        /**Execute the payment **/
-        $result = $payment->execute($execution, $this->apiContext);
+        /** Execute the payment **/
+        sleep(3);
+        $result = null;
+        try {
+            $result = $payment->execute($execution, $this->apiContext);
+        } catch (\PayPal\Exception\PayPalConnectionException $e) {
+            echo "<pre>";
+                var_dump( $e->getMessage() ); die();
+            echo "</pre>";
+        }
+
 
         /** dd($result);exit; /** DEBUG RESULT, remove it later **/
-        if ($result->getState() == 'approved') {
+        if ($result && $result->getState() == 'approved') {
             /** it's all right **/
             /** Here Write your database logic like that insert record or value in database if you want **/
-            $expId = session()->get('experience_id');
 
-            $order = Order::find(session()->get('order_id'));
+            $order = new \Order\Models\Order();
+            $order->customer_id = $sessionRequest['customer_id'];
+            $order->experience_id = $sessionRequest['experience_id'];
+            $order->total = $sessionRequest['total'];
+            $order->price = $sessionRequest['price'];
+            $order->quantity = $sessionRequest['quantity'];
+            $order->purchased_at = date('Y-m-d H:i:s');
+            $order->metadata = $sessionRequest['metadata'];
+
             $order->payment_id = $payment->id;
             $order->payer_id = $request->get('PayerID');
             $order->token = $request->get('token');
             $order->status = $result->getState();
-            $order->purchased_at = date('Y-m-d H:i:s');
+
             $order->save();
-            // echo "<pre>";
-            //     var_dump( $order ); die();
-            // echo "</pre>";
-            // $order->customer_id = user()->id;
-            // $order->experience_id = $expId;
 
             return redirect()->route('payment.paypal.success', ['order_id' => $order->id, 'payment_id' => $payment->id, 'payer_id' => $request->get('PayerID')]);
+
+            // return redirect()->route('payment.paypal.success', ['payment_id' => $payment->id, 'payer_id' => $request->get('PayerID')]);
         }
 
         return redirect()->route('payment.paypal.failed');

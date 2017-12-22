@@ -34,19 +34,21 @@ trait PayPalCredentials
      */
     public function setupApiCredentials()
     {
-        // $this->setApiContext(
-        //     settings('shop.payment.paypal.client_id', env('PAYPAL_CLIENT_ID', 'AVLY5sOQutPQXnif-aZGq0JlFzUY_GYyH0gPtEetQ92mFQOl2GbJmF_PtAzeKci7L2tYOWFbnFUaRS12')),
-        //     settings('shop.payment.paypal.secret', env('PAYPAL_SECRET', 'EEH6GkWdkpo5tpD5EdTsJzyAyVf9v28evq93tQNNIHnZHbzw7zH_MT74ZoZN3WCPTLEYde0_IbTjkmLH')),
-        //     settings('shop.payment.paypal.config', [])
-        // );
-
-        $this->setApiContext(
-            'AVLY5sOQutPQXnif-aZGq0JlFzUY_GYyH0gPtEetQ92mFQOl2GbJmF_PtAzeKci7L2tYOWFbnFUaRS12',
-            'EEH6GkWdkpo5tpD5EdTsJzyAyVf9v28evq93tQNNIHnZHbzw7zH_MT74ZoZN3WCPTLEYde0_IbTjkmLH',
-            [
-                'mode' => 'sandbox'
-            ]
-        );
+        if (settings('shop_payment_paypal_sandboxmode')) {
+            $this->setApiContext(
+                settings('shop_payment_paypal_sandbox_client_id', 'AVLY5sOQutPQXnif-aZGq0JlFzUY_GYyH0gPtEetQ92mFQOl2GbJmF_PtAzeKci7L2tYOWFbnFUaRS12'),
+                settings('shop_payment_paypal_sandbox_secret', 'EEH6GkWdkpo5tpD5EdTsJzyAyVf9v28evq93tQNNIHnZHbzw7zH_MT74ZoZN3WCPTLEYde0_IbTjkmLH'),
+                [
+                    'mode' => 'sandbox'
+                ]
+            );
+        } else {
+            $this->setApiContext(
+                settings('shop_payment_paypal_client_id', env('PAYPAL_CLIENT_ID', '')),
+                settings('shop_payment_paypal_secret', env('PAYPAL_SECRET', '')),
+                settings('shop_payment_paypal_config', [])
+            );
+        }
     }
 
     /**

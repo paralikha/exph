@@ -47,26 +47,11 @@
                                     ></v-text-field>
 
                                     <v-card-actions>
-                                        <v-btn class="ma-0" role="button" secondary outline href="{{ route('register.show') }}">{{ __('Create Account') }}</v-btn>
+                                        {{-- <v-btn class="ma-0" role="button" secondary outline href="{{ route('register.show') }}">{{ __('Create Account') }}</v-btn> --}}
                                         <v-spacer></v-spacer>
                                         <v-btn class="ma-0 elevation-1" primary type="submit">{{ __("Login") }}</v-btn>
                                     </v-card-actions>
                                 </form>
-                            </v-card-text>
-                        </v-card>
-                        @endif
-
-                        @if (user())
-                        <v-card class="elevation-1 mb-3">
-                            <v-toolbar class="elevation-0 transparent">
-                            <v-toolbar-side-icon><v-icon warning>fa-bell</v-icon></v-toolbar-side-icon>
-                                <v-toolbar-title>{{ __('Reminder') }}</v-toolbar-title>
-                            </v-toolbar>
-                            <v-divider></v-divider>
-                            <v-card-text>
-                                <div class="subheading grey--text text--darken-2">
-                                    You have been booked. You have 42 hours to pay from the time of booking to pay for this reservation through PayPal/BPI. You will receive a confirmation email <strong>({{ user()->email }})</strong> once payment is made.
-                                </div>
                             </v-card-text>
                         </v-card>
                         @endif
@@ -81,20 +66,23 @@
                                 {{ __('Choose your payment method below') }}
                             </v-card-text>
                             <v-card-text class="text-xs-center py-">
-                                {{-- <pre>{{ dd($) }}</pre> --}}
+                                {{-- <pre>{{ dd(serialize($item->guests)) }}</pre> --}}
                                 <img src="{{ assets('frontier/images/public/paypal.png') }}">
                                 <div class=" mt-4">
                                     <form action="{{ route('shop.payment.paypal') }}" method="POST">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="items[0][amount]" value="{{ $resource->price }}"><br>
-                                        <input type="hidden" name="items[0][quantity]" value="{{ $order->quantity }}"><br>
+                                        <input type="hidden" name="items[0][quantity]" value="{{ $item->quantity }}"><br>
                                         <input type="hidden" name="items[0][name]" value="{{ $resource->name }}"><br>
 
                                         <input type="hidden" name="total" value="{{ $total }}">
-                                        <input type="hidden" name="quantity" value="{{ $order->quantity }}">
-                                        <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                        <input type="hidden" name="name" value="{{ $item->name }}">
+                                        <input type="hidden" name="price" value="{{ $item->price }}">
+                                        <input type="hidden" name="customer_id" value="{{ user()->id }}">
+                                        <input type="hidden" name="quantity" value="{{ $item->quantity }}">
                                         <input type="hidden" name="experience_id" value="{{ $resource->id }}">
                                         <input type="hidden" name="currency" value="{{ settings('site_currency.code', 'PHP') }}">
+                                        <input type="hidden" name="metadata" value="{{ serialize($item->guests) }}">
 
                                         <v-btn type="submit" round info ref="uop"  class="elevation-1 px-4"><v-icon left>fa-paypal</v-icon>{{ __('Checkout') }}</v-btn>
                                     </form>
@@ -128,6 +116,21 @@
                                     <v-btn primary>{{ __('I will pay through BPI') }}</v-btn>
                                     <v-spacer></v-spacer>
                                 </v-card-actions> --}}
+                            </v-card-text>
+                        </v-card>
+                        @endif
+
+                        @if (user())
+                        <v-card class="elevation-1 mb-3">
+                            <v-toolbar class="elevation-0 transparent">
+                            <v-toolbar-side-icon><v-icon warning>fa-bell</v-icon></v-toolbar-side-icon>
+                                <v-toolbar-title>{{ __('Reminder') }}</v-toolbar-title>
+                            </v-toolbar>
+                            <v-divider></v-divider>
+                            <v-card-text>
+                                <div class="subheading grey--text text--darken-2">
+                                    You have been booked. You have 42 hours to pay from the time of booking to pay for this reservation through PayPal/BPI. You will receive a confirmation email <strong>({{ user()->email }})</strong> once payment is made.
+                                </div>
                             </v-card-text>
                         </v-card>
                         @endif
