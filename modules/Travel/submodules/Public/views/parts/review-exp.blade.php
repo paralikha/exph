@@ -2,7 +2,7 @@
 {{-- reply --}}
 <v-card class="elevation-1">
     <v-toolbar class="transparent elevation-0">
-        <v-toolbar-title>{{ __("1 Review") }}</v-toolbar-title>
+        <v-toolbar-title>{{ __("Reviews") }}</v-toolbar-title>
     </v-toolbar>
     <v-divider></v-divider>
     <v-card-text class="pa-0 pb-3">
@@ -31,9 +31,9 @@
                     </v-card-text> --}}
 
                     {{-- editor --}}
-                    @include("Page::interactive.editor")
+                    @include("Review::interactive.editor")
                     {{-- editor --}}
-
+                    <v-divider></v-divider>
                     <v-card-text class="text-xs-right pa-0">
                         <v-btn  type="submit" flat class="primary--text">Post a comment</v-btn>
                     </v-card-text>
@@ -86,10 +86,10 @@
                     </v-menu>
                 </v-list-tile-action>
             </v-list-tile>
-            <div class="pl-7 pr-4 grey--text text--darken-2">@{{ item.body }}</div>
+            <div class="pl-7 pr-4 grey--text text--darken-2" v-html="item.body"></div>
         </v-list>
     </v-card-text>
-    <v-divider></v-divider>
+    {{-- <v-divider></v-divider> --}}
 
     {{-- to remove --}}
     <v-card class="mb-3 elevation-1" style="display: none;">
@@ -101,9 +101,9 @@
     {{-- to remove --}}
 
     {{-- paginate --}}
-    <v-card-text class="text-xs-right">
+    {{-- <v-card-text class="text-xs-right">
         <v-pagination class="caption main-paginate" circle :length="15" v-model="page" :total-visible="7"></v-pagination>
-    </v-card-text>
+    </v-card-text> --}}
     {{-- paginate --}}
 </v-card>
 
@@ -221,6 +221,25 @@
                             self.snackbar.model = true;
                         });
                 },
+
+                codify (source) {
+                    let s = source.split(' ');
+                    let c = [];
+                    for (var i = 0; i < s.length; i++) {
+                        c.push(s[i].charAt(0).toUpperCase());
+                    }
+                    let variable = c.join('');
+                    return variable;
+                },
+                add (to, push) {
+                    if (! to) {
+                        to = [];
+                    }
+                    console.log(to)
+                },
+                remove (from, key) {
+                    from.splice(key, 1);
+                }
             },
 
             mounted () {

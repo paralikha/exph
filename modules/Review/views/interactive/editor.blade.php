@@ -59,7 +59,6 @@
                         }
                     },
                     mediabox: {
-                        {{-- catalogues: {!! json_encode($catalogues) !!}, --}}
                         model: false,
                         fonts: {!! json_encode(config('editor.fonts.enabled', [])) !!},
                         url: '',
