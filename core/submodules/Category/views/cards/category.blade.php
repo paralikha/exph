@@ -1,8 +1,8 @@
 <v-category @search="" class="mb-3" v-model="resource.item.category" :multiple="false" label="{{ __('Category') }}" icon="fa-tag" :list="{{ json_encode($categories) }}">
     <template scope="prop">
-        <span v-html="prop.item?prop.item.id:''"></span>
+        {{-- <span v-html="prop.item?prop.item.id:''"></span> --}}
         <input type="hidden" name="category" :value="JSON.stringify(prop.item)">
-        <input type="hidden" name="category_id" :value="JSON.parse(prop.item ? prop.item : '[]').id">
+        <input type="hidden" name="category_id" :value="prop.item ? prop.item.id : 'id'">
     </template>
 </v-category>
 

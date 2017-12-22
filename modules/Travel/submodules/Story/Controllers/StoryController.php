@@ -125,7 +125,8 @@ class StoryController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        //
+        $story = Story::findOrFail($id);
+        $story->delete();
 
         return redirect()->route('stories.index');
     }
