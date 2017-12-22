@@ -138,8 +138,73 @@
                         },
                         errors: JSON.parse('{!! json_encode($errors->getMessages()) !!}'),
                     },
+                    // suppliments: {
+                    //     grants: {
+                    //         headers: [
+                    //             { text: '{{ __("Name") }}', align: 'left', value: 'name' },
+                    //         ],
+                    //         pagination: {
+                    //             rowsPerPage: 10,
+                    //             totalItems: 0,
+                    //         },
+                    //         items: [],
+                    //         selected: [],
+                    //         searchform: {
+                    //             query: '',
+                    //             model: true,
+                    //         }
+                    //     }
+                    // },
+                    // urls: {
+                    //     review: {
+                    //         api: {
+                    //             destroy: '{{ route('api.reviews.destroy', 'null') }}',
+                    //         },
+                    //         show: '{{ route('reviews.show', 'null') }}',
+                    //         edit: '{{ route('reviews.edit', 'null') }}',
+                    //         destroy: '{{ route('reviews.destroy', 'null') }}',
+                    //     },
+                    // },
+
+                    // snackbar: {
+                    //     model: false,
+                    //     text: '',
+                    //     context: '',
+                    //     timeout: 2000,
+                    //     y: 'bottom',
+                    //     x: 'right'
+                    // },
                 };
             },
+            // watch: {
+            //     'dataset.pagination': {
+            //         handler () {
+            //             this.get();
+            //         },
+            //         deep: true
+            //     },
+
+            //     'dataset.searchform.query': function (filter) {
+            //         setTimeout(() => {
+            //             const { sortBy, descending, page, rowsPerPage } = this.dataset.pagination;
+
+            //             let query = {
+            //                 descending: descending,
+            //                 page: page,
+            //                 q: filter,
+            //                 sort: sortBy,
+            //                 take: rowsPerPage,
+            //             };
+
+            //             this.api().search('{{ route('api.reviews.search') }}', query)
+            //                 .then((data) => {
+            //                     this.dataset.items = data.items.data ? data.items.data : data.items;
+            //                     this.dataset.totalItems = data.items.total ? data.items.total : data.total;
+            //                     this.dataset.loading = false;
+            //                 });
+            //         }, 1000);
+            //     },
+            // },
 
             methods: {
                 get () {

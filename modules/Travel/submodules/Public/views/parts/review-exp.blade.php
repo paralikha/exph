@@ -10,7 +10,7 @@
             <v-card class="elevation-0">
                 <form action="{{ route('reviews.store') }}" method="POST">
                     {{ csrf_field() }}
-                    <v-card-text>
+                    {{-- <v-card-text>
                         <v-layout row wrap>
                             <v-flex xs4>
                                 <v-subheader>{{ __('Message') }}</v-subheader>
@@ -26,6 +26,14 @@
                         </v-layout>
                     </v-card-text>
                     <v-divider></v-divider>
+                    <v-card-text class="text-xs-right pa-0">
+                        <v-btn  type="submit" flat class="primary--text">Post a comment</v-btn>
+                    </v-card-text> --}}
+
+                    {{-- editor --}}
+                    @include("Page::interactive.editor")
+                    {{-- editor --}}
+
                     <v-card-text class="text-xs-right pa-0">
                         <v-btn  type="submit" flat class="primary--text">Post a comment</v-btn>
                     </v-card-text>
@@ -141,7 +149,7 @@
                         quill: {
                             html: '{!! old('body') !!}',
                             delta: JSON.parse({!! json_encode(old('delta')) !!}),
-                        }
+                        },
                     },
                     mediabox: {
                         model: false,
