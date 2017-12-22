@@ -1,5 +1,3 @@
-{{-- Editor --}}
-{{-- reply --}}
 <v-card class="elevation-1">
     <v-toolbar class="transparent elevation-0">
         <v-toolbar-title>{{ __("Reviews") }}</v-toolbar-title>
@@ -70,18 +68,12 @@
                 </v-list-tile-action>
             </v-list-tile>
             <div class="pl-7 pr-4 grey--text text--darken-2" v-html="item.body"></div>
+            <v-divider></v-divider>
         </v-list>
+        @include("Theme::partials.pagination", ['resources' => $resource->reviews()->paginate(3)])
     </v-card-text>
     @endif
-
-    {{-- paginate --}}
-    {{-- <v-card-text class="text-xs-right">
-        <v-pagination class="caption main-paginate" circle :length="15" v-model="page" :total-visible="7"></v-pagination>
-    </v-card-text> --}}
-    {{-- paginate --}}
 </v-card>
-
-{{-- /Editor --}}
 
 @push('css')
     {{-- <link rel="stylesheet" href="{{ assets('frontier/vuetify-mediabox/dist/vuetify-mediabox.min.css') }}"> --}}
@@ -136,7 +128,7 @@
                     //
                     hidden: true,
                     dataset: {
-                        items: {!! json_encode($resource->reviews) !!},
+                        items: {!! json_encode($resource->reviews()->paginate(5)->items()) !!},
                         loading: true,
                         urls: {
                             reviews: {

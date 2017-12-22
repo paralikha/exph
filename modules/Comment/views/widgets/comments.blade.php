@@ -1,5 +1,3 @@
-{{-- Editor --}}
-{{-- reply --}}
 <v-card class="elevation-1">
     <v-toolbar class="transparent elevation-0">
         <v-toolbar-title>{{ __("Comments") }}</v-toolbar-title>
@@ -52,7 +50,7 @@
                                 </v-list-tile-content>
                             </v-list-tile>
                             <v-list-tile ripple
-                                @click="destroy(route(urls.reviews.api.destroy, item.id),
+                                @click="destroy(route(urls.comments.api.destroy, item.id),
                                 {
                                     '_token': '{{ csrf_token() }}'
                                 })">
@@ -70,18 +68,12 @@
                 </v-list-tile-action>
             </v-list-tile>
             <div class="pl-7 pr-4 grey--text text--darken-2" v-html="item.body"></div>
+            <v-divider></v-divider>
         </v-list>
+        @include("Theme::partials.pagination", ['resources' => $resource->comments()->paginate(3)])
     </v-card-text>
     @endif
-
-    {{-- paginate --}}
-    {{-- <v-card-text class="text-xs-right">
-        <v-pagination class="caption main-paginate" circle :length="15" v-model="page" :total-visible="7"></v-pagination>
-    </v-card-text> --}}
-    {{-- paginate --}}
 </v-card>
-
-{{-- /Editor --}}
 
 @push('css')
     {{-- <link rel="stylesheet" href="{{ assets('frontier/vuetify-mediabox/dist/vuetify-mediabox.min.css') }}"> --}}
@@ -136,16 +128,16 @@
                     //
                     hidden: true,
                     dataset: {
-                        items: {!! json_encode($resource->comments) !!},
+                        items: {!! json_encode($resource->comments()->paginate(5)->items()) !!},
                         loading: true,
                         urls: {
-                            reviews: {
+                            comments: {
                                 api: {
-                                    destroy: '{{ route('api.reviews.destroy', 'null') }}',
+                                    destroy: '{{ route('api.comments.destroy', 'null') }}',
                                 },
-                                show: '{{ route('reviews.show', 'null') }}',
-                                edit: '{{ route('reviews.edit', 'null') }}',
-                                destroy: '{{ route('reviews.destroy', 'null') }}',
+                                show: '{{ route('comments.show', 'null') }}',
+                                edit: '{{ route('comments.edit', 'null') }}',
+                                destroy: '{{ route('comments.destroy', 'null') }}',
                             },
                         },
                     },
@@ -169,7 +161,7 @@
                         sort: sortBy,
                         take: rowsPerPage,
                     };
-                    this.api().get('{{ route('api.reviews.all') }}', query)
+                    this.api().get('{{ route('api.comments.all') }}', query)
                         .then((data) => {
                             this.dataset.items = data.items.data ? data.items.data : data.items;
                             // this.dataset.totalItems = data.items.total ? data.items.total : data.total;
@@ -190,7 +182,7 @@
                     var self = this;
                     this.api().delete(url, query)
                         .then((data) => {
-                            self.get('{{ route('api.reviews.all') }}');
+                            self.get('{{ route('api.comments.all') }}');
                             self.snackbar = Object.assign(self.snackbar, data.response.body);
                             self.snackbar.model = true;
                         });

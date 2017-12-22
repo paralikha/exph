@@ -15,6 +15,8 @@ Version: 1.0
     @include("Public::parts.hero")
     {{-- @include("Public::parts.top-light") --}}
 
+    {{-- {{ settings('site_title', 'DS') }} --}}
+
     <div class="py-5">
         @include("Public::parts.categories")
         @include("Public::parts.hotlist")

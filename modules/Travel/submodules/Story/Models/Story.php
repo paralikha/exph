@@ -5,6 +5,7 @@ namespace Story\Models;
 use Category\Support\Traits\BelongsToCategory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Pluma\Models\Model;
+use Comment\Models\Comment;
 use User\Support\Traits\BelongsToUser;
 
 class Story extends Model
