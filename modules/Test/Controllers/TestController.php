@@ -2,12 +2,8 @@
 
 namespace Test\Controllers;
 
-use Catalogue\Models\Catalogue;
-use Category\Models\Category;
 use Frontier\Controllers\AdminController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Library\Models\Library;
 use Test\Models\Test;
 use Test\Requests\TestRequest;
 
@@ -21,10 +17,11 @@ class TestController extends AdminController
      */
     public function index(Request $request)
     {
-        $catalogues = Catalogue::select('name', 'id')->get();
-        $cataloguesObj = Catalogue::mediabox();
+        // dd($resources);
+        $resources = Test::paginate();
+        // $trashed = Test::onlyTrashed()->count();
 
-        return view("Theme::tests.index")->with(compact('catalogues', 'cataloguesObj'));
+        return view("Theme::tests.index")->with(compact('resources'));
     }
 
     /**
@@ -36,9 +33,10 @@ class TestController extends AdminController
      */
     public function show(Request $request, $id)
     {
-        //
+        $resource = Test::findOrFail($id);
+        $trashed = Test::onlyTrashed()->count();
 
-        return view("Theme::tests.show");
+        return view("Theme::tests.show")->with(compact('resource', 'trashed'));
     }
 
     /**
@@ -48,9 +46,9 @@ class TestController extends AdminController
      */
     public function create()
     {
-        $resources = Library::ofCatalogue('package')->paginate();
+        //
 
-        return view("Theme::tests.create")->with(compact('resources'));
+        return view("Theme::tests.create");
     }
 
     /**
@@ -61,7 +59,14 @@ class TestController extends AdminController
      */
     public function store(TestRequest $request)
     {
-        //
+        $test = new Test();
+        // $test->user()->associate(User::find($request->input('user')));
+        $test->body = $request->input('body');
+        $test->delta = $request->input('delta');
+        $test->approved = $request->input('approved');
+        $test->upvotes = $request->input('upvotes');
+
+        $test->save();
 
         return back();
     }
@@ -75,9 +80,9 @@ class TestController extends AdminController
      */
     public function edit(Request $request, $id)
     {
-        //
+        $resource = Test::findOrFail($id);
 
-        return view("Theme::tests.edit");
+        return view("Theme::tests.edit")->with(compact('resource'));
     }
 
     /**
@@ -89,7 +94,12 @@ class TestController extends AdminController
      */
     public function update(TestRequest $request, $id)
     {
-        //
+        $test = Test::findOrFail($id);
+        $test->body = $request->input('body');
+        $test->delta = $request->input('delta')->nullable();
+        $test->approved = $request->input('approved');
+        $test->upvotes = $request->input('upvotes');
+        $test->save();
 
         return back();
     }
@@ -103,7 +113,8 @@ class TestController extends AdminController
      */
     public function destroy(Request $request, $id)
     {
-        //
+        $test = Test::findOrFail($id);
+        $test->delete();
 
         return redirect()->route('tests.index');
     }
@@ -115,9 +126,9 @@ class TestController extends AdminController
      */
     public function trash()
     {
-        //
+        $resources = Test::onlyTrashed()->paginate();
 
-        return view("Theme::tests.trash");
+        return view("Theme::tests.trash")->with(compact('resources'));
     }
 
     /**
@@ -127,9 +138,10 @@ class TestController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function restore(TestRequest $request, $id)
+    public function restore(Request $request, $id)
     {
-        //
+        $test = Test::onlyTrashed()->findOrFail($id);
+        $test->restore();
 
         return back();
     }
@@ -141,9 +153,10 @@ class TestController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(TestRequest $request, $id)
+    public function delete(Request $request, $id)
     {
-        //
+        $test = Test::withTrashed()->findOrFail($id);
+        $test->forceDelete();
 
         return redirect()->route('tests.trash');
     }

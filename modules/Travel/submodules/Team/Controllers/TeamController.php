@@ -1,14 +1,13 @@
 <?php
 
-namespace Review\Controllers;
+namespace Team\Controllers;
 
 use Frontier\Controllers\AdminController;
 use Illuminate\Http\Request;
-use Review\Models\Review;
-use Review\Requests\ReviewRequest;
-use User\Models\User;
+use Team\Models\Team;
+use Team\Requests\TeamRequest;
 
-class ReviewController extends AdminController
+class TeamController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +17,9 @@ class ReviewController extends AdminController
      */
     public function index(Request $request)
     {
-        $resources = Review::paginate();
+        //
 
-        return view("Theme::reviews.index")->with(compact('resources'));
+        return view("Theme::teams.index");
     }
 
     /**
@@ -34,7 +33,7 @@ class ReviewController extends AdminController
     {
         //
 
-        return view("Theme::reviews.show");
+        return view("Theme::teams.show");
     }
 
     /**
@@ -46,24 +45,18 @@ class ReviewController extends AdminController
     {
         //
 
-        return view("Theme::reviews.create");
+        return view("Theme::teams.create");
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Review\Requests\ReviewRequest  $request
+     * @param  \Team\Requests\TeamRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ReviewRequest $request)
+    public function store(TeamRequest $request)
     {
-        $review = new Review();
-        $review->body = $request->input('body');
-        $review->delta = $request->input('delta');
-        $review->approved = $request->input('approved');
-        $review->upvotes = $request->input('upvotes');
-        $review->user()->associate(User::find(user()->id));
-        $review->save();
+        //
 
         return back();
     }
@@ -77,26 +70,21 @@ class ReviewController extends AdminController
      */
     public function edit(Request $request, $id)
     {
+        //
 
-        return view("Theme::reviews.edit");
+        return view("Theme::teams.edit");
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Review\Requests\ReviewRequest  $request
+     * @param  \Team\Requests\TeamRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ReviewRequest $request, $id)
+    public function update(TeamRequest $request, $id)
     {
-        $review = Review::findOrFail($id);
-        $review->body = $request->input('body');
-        $review->delta = $request->input('delta');
-        $review->approved = $request->input('approved');
-        $review->upvotes = $request->input('upvotes');
-        $review->user()->associate(User::find(user()->id));
-        $review->save();
+        //
 
         return back();
     }
@@ -110,10 +98,9 @@ class ReviewController extends AdminController
      */
     public function destroy(Request $request, $id)
     {
-        $review = Review::findOrFail($id);
-        $review->delete();
+        //
 
-        return redirect()->route('reviews.index');
+        return redirect()->route('teams.index');
     }
 
     /**
@@ -123,22 +110,21 @@ class ReviewController extends AdminController
      */
     public function trash()
     {
-        $resources = Review::onlyTrashed()->paginate();
+        //
 
-        return view("Theme::reviews.trash")->with(compact('trashed'));
+        return view("Theme::teams.trash");
     }
 
     /**
      * Restore the specified resource from storage.
      *
-     * @param  \Review\Requests\ReviewRequest  $request
+     * @param  \Team\Requests\TeamRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function restore(ReviewRequest $request, $id)
+    public function restore(TeamRequest $request, $id)
     {
-        $review = Review::onlyTrashed()->findOrFail($id);
-        $review->restore();
+        //
 
         return back();
     }
@@ -146,15 +132,14 @@ class ReviewController extends AdminController
     /**
      * Delete the specified resource from storage permanently.
      *
-     * @param  \Review\Requests\ReviewRequest  $request
+     * @param  \Team\Requests\TeamRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(ReviewRequest $request, $id)
+    public function delete(TeamRequest $request, $id)
     {
-        $review = Review::withTrashed()->findOrFail($id);
-        $review->forceDelete();
+        //
 
-        return redirect()->route('reviews.trash');
+        return redirect()->route('teams.trash');
     }
 }

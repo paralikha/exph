@@ -4,8 +4,8 @@
     <v-container fluid class="pa-0">
         <v-flex sm12 class="pa-4">
             <p class="grey--text">Lorem ipsum dolor sit.</p>
-            <p class="subheading">Test for Project-in-Project (PiP) approach</p>
-            <p>Page starts after horizontal line.</p>
+            <p class="subheading">Test for Projeoject (PiP) approach</p>
+            <p>Page starts after horizontal line.</p>ct-in-Pr
         </v-flex>
         <v-divider class="mb-4"></v-divider>
 
@@ -18,7 +18,8 @@
                 {text: '{{ __("File Type") }}', value: 'mimetype', align: 'left'},
                 {text: '{{ __("File Size") }}', value: 'size', align: 'left'},
                 {text: '{{ __("Uploaded") }}', value: 'created_at', align: 'left'},
-                {text: '{{ __("Modified") }}', value: 'updated_at', align: 'left'},
+                {text: '{{ __("Modified") }}', value: 'updated_at', align: 'left'}
+                {text: '{{ __("Old file") }}', value: 'updated_at', align: 'left'},
             ]"
             :url="{
                 GET: '{{ route('api.packages.paginated') }}',

@@ -1,283 +1,263 @@
 @extends("Theme::layouts.admin")
 
+@section("head-title", __('Test Review'))
+
 @section("content")
+    @include("Theme::partials.banner")
     <v-container fluid grid-list-lg>
-        @include("Theme::partials.banner")
-
         <v-layout row wrap>
-            <v-flex sm12>
-
-                <canvas id="myChart" width="400" height="400"></canvas>
-
-                <v-switch v-model="dataset.toggle" label="toggle view"></v-switch>
-                {{-- <span v-html="dataset.items"></span> --}}
-
-                <v-dataset
-                    {{-- infinite --}}
-                    :table="dataset.toggle"
-                    :card="!dataset.toggle"
-                    :headers="dataset.headers"
-                    v-bind:pagination.sync="dataset.pagination"
-                    :items="dataset.items"
-                    :total-items="dataset.pagination.totalItems"
-                    v-model="dataset.selected"
-                    select-all="primary"
-                    {{-- @infinite="listen" --}}
-                    @pagination="pagination"
-                >
-                    <template slot="items" scope="{prop}">
-                        <tr role="button" :active="prop.selected" @click="prop.selected = !prop.selected">
-                            <td>
-                                <v-checkbox
-                                    color="primary"
-                                    hide-details
-                                    :input-value="prop.selected"
-                                ></v-checkbox>
-                            </td>
-                            <td v-html="prop.item.id"></td>
-                            <td class="text-xs-center">
-                                <v-avatar tile size="35px">
-                                    <img :src="prop.item.thumbnail">
-                                </v-avatar>
-                            </td>
-                            <td v-html="prop.item.name"></td>
-                        </tr>
-                    </template>
-
-                    <template slot="card" scope="{prop}">
-                        <v-card-media v-if="prop.thumbnail" :src="prop.thumbnail" height="250"></v-card-media>
-                        <v-card-text v-html="prop.name"></v-card-text>
-                        <v-card-actions class="grey--text">
-                            <span v-html="prop.mimetype"></span>
+            <v-flex xs12>
+                <v-card class="elevation-1 mb-3">
+                    <form action="{{ route('tests.store') }}" method="POST">
+                        {{ csrf_field() }}
+                        <v-card-text>
+                            <v-layout row wrap>
+                                <v-flex xs4>
+                                    <v-subheader>{{ __('Message') }}</v-subheader>
+                                </v-flex>
+                                <v-flex xs8>
+                                    <v-text-field
+                                        :error-messages="resource.errors.body"
+                                        label="{{ _('Type a Message') }}"
+                                        name="body"
+                                        value="{{ old('body') }}"
+                                    ></v-text-field>
+                                </v-flex>
+                            </v-layout>
+                        </v-card-text>
+                        <v-divider></v-divider>
+                        <v-card-actions>
                             <v-spacer></v-spacer>
-                            <span v-html="prop.filesize"></span>
+                            <v-btn type="submit" primary class="elevation-1">{{ __('Save') }}</v-btn>
                         </v-card-actions>
-                    </template>
-                    {{-- <template slot="pagination">
-                        <div class="subheading grey--text">asdas</div>
-                    </template> --}}
+                    </form>
+                </v-card>
 
-                </v-dataset>
+                <v-card class="elevation-1 mb-3">
+                    <v-list two-line v-bind:pagination.sync="dataset.pagination" v-for="item in dataset.items" v-bind:key="item.id" @click="">
+                        <v-list-tile avatar>
+                            <v-list-tile-avatar>
+                                <img src="{{ auth()->user()->avatar }}" alt="">
+                            </v-list-tile-avatar>
+                            <v-list-tile-content>
+                                <v-list-tile-title>
+                                    <a href="#!" class="td-n primary--text text--darken-4 body-2">{{ auth()->user()->fullname }}</a>
+                                </v-list-tile-title>
+                                <v-list-tile-sub-title>@{{ item.created }}</v-list-tile-sub-title>
+                            </v-list-tile-content>
 
-                {{-- <v-card tile>
-                    <v-card-actions><v-icon left class="subheading">fa-flask</v-icon>Mediabox Test</v-card-actions>
-                    <v-card-media height="250" :src="mediabox.selected?mediabox.selected.thumbnail:''"></v-card-media>
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn primary ripple @click="mediabox.model = !mediabox.model">Open Mediabox</v-btn>
-                        <v-mediabox
-                            toolbar-icon="perm_media"
-                            toolbar-label="Mediabox"
-                            :url="mediabox.url"
-                            :categories="mediabox.categories"
-                            close-on-click
-                            auto-remove-files
-                            v-model="mediabox.model"
-                            :multiple="false"
-                            dropzone
-                            :dropzone-options="{url:'{{ route('api.library.upload') }}', parallelUploads: mediabox.options.parrallelUploads, autoProcessQueue: true}"
-                            :dropzone-params="{'_token': '{{ csrf_token() }}', 'catalogue_id': mediabox.category.id, name: mediabox.name}"
-                            @upload-completed="val => mediabox.categories = []"
-                            @selected="val => { mediabox.selected = val[0] }"
-                            @category-change="val => mediabox.category = val"
-                            @sending="({file, params}) => params.name = file.upload.filename"
+                            <v-list-tile-action>
+                                <v-menu bottom left>
+                                    <v-btn icon flat slot="activator" v-tooltip:left="{ html: 'More Actions' }"><v-icon>more_vert</v-icon></v-btn>
+                                    <v-list>
+                                        <v-list-tile ripple @click="">
+                                            <v-list-tile-action>
+                                                <v-icon accent>report</v-icon>
+                                            </v-list-tile-action>
+                                            <v-list-tile-content>
+                                                <v-list-tile-title>
+                                                    {{ __('Report') }}
+                                                </v-list-tile-title>
+                                            </v-list-tile-content>
+                                        </v-list-tile>
+                                        <v-list-tile ripple @click="">
+                                            <v-list-tile-action>
+                                                <v-icon error>delete</v-icon>
+                                            </v-list-tile-action>
+                                            <v-list-tile-content>
+                                                <v-list-tile-title>
+                                                    {{ __('Delete') }}
+                                                </v-list-tile-title>
+                                            </v-list-tile-content>
+                                        </v-list-tile>
+                                    </v-list>
+                                </v-menu>
+                            </v-list-tile-action>
+                        </v-list-tile>
+                        <div class="pl-7 pr-4 grey--text text--darken-2">@{{ item.body }}</div>
+                    </v-list>
+                </v-card>
+
+                {{-- to remove --}}
+                <v-card class="mb-3 elevation-1" style="display: none;">
+                    <v-data-table
+                        v-bind:pagination.sync="dataset.pagination"
                         >
-                            <template slot="dropzone">
-                                <span class="caption" v-if="mediabox.category">{{ __('Uploads will be catalogued as') }}<em>@{{ mediabox.category.id ? mediabox.category.name : 'Uncategorized' }}</em></span>
-                                <v-card-text>
-                                    <span v-if="mediabox.name" v-html="`Currently uploading ${mediabox.name}`"></span>
-                                </v-card-text>
-                            </template>
-                        </v-mediabox>
-                    </v-card-actions>
-                </v-card> --}}
-
-
+                    </v-data-table>
+                </v-card>
+                {{-- to remove --}}
             </v-flex>
         </v-layout>
     </v-container>
-
 @endsection
 
-@push('post-css')
-    {{-- <link rel="stylesheet" href="{{ assets('frontier/vuetify-mediabox/dist/vuetify-mediabox.min.css') }}"> --}}
-    <link rel="stylesheet" href="{{ assets('frontier/vuetify-dataset/dist/vuetify-dataset.min.css') }}">
-@endpush
-
-@push('js')
-    <script>
-        alert('ad')
-    </script>
+@push('css')
+    <style>
+        .no-decoration {
+            text-decoration: none !important;
+        }
+        .pl-7 {
+            padding-left: 70px;
+        }
+    </style>
 @endpush
 
 @push('pre-scripts')
-    <script src="{{ assets('frontier/vue-resource/dist/vue-resource.min.js') }}"></script>
-    <script src="{{ assets('frontier/vuetify-dataset/dist/vuetify-dataset.min.js') }}"></script>
-    {{-- <script src="{{ assets('frontier/vuetify-mediabox/dist/vuetify-mediabox.min.js') }}"></script> --}}
+    <script src="{{ assets('frontier/vendors/vue/resource/vue-resource.min.js') }}"></script>
     <script>
         Vue.use(VueResource);
 
         mixins.push({
             data () {
                 return {
-                    mediabox: {
-                        model: false,
-                        url: '{{ route('api.library.all') }}',
-                        categories: {!! json_encode($cataloguesObj) !!},
-                        category: {},
-                        selected: null,
-                        name: '',
-                        options: {
-                            parrallelUploads: 1,
-                        }
+                    bulk: {
+                        destroy: {
+                            model: false,
+                        },
+                        searchform: {
+                            model: false,
+                        },
                     },
-
+                    hidden: true,
                     dataset: {
-                        toggle: false,
                         headers: [
-                            {text: 'ID', value: 'id', align: 'left'},
-                            {text: 'Thumbnail', value: 'thumbnail', align: 'center'},
-                            {text: 'Name', value: 'name', align: 'left'},
+                            { text: '{{ __("ID") }}', align: 'left', value: 'id' },
+                            { text: '{{ __("Name") }}', align: 'left', value: 'name' },
+                            { text: '{{ __("Alias") }}', align: 'left', value: 'alias' },
+                            { text: '{{ __("Code") }}', align: 'left', value: 'code' },
+                            { text: '{{ __("Last Modified") }}', align: 'left', value: 'updated_at' },
+                            { text: '{{ __("Actions") }}', align: 'center', sortable: false, value: 'updated_at' },
                         ],
-                        counter: 2,
                         items: [],
+                        loading: true,
+                        pagination: {
+                            rowsPerPage: 10,
+                            totalItems: 0,
+                        },
+                        searchform: {
+                            model: false,
+                            query: '',
+                        },
                         selected: [],
                         totalItems: 0,
-                        pagination: {
-                            totalItems: 0,
-                            rowsPerPage: 5,
+                    },
+                    resource: {
+                        item: {
+                            name: '',
+                            code: '',
+                            description: '',
+                            grants: '',
+                        },
+                        errors: JSON.parse('{!! json_encode($errors->getMessages()) !!}'),
+                    },
+                    suppliments: {
+                        grants: {
+                            headers: [
+                                { text: '{{ __("Name") }}', align: 'left', value: 'name' },
+                            ],
+                            pagination: {
+                                rowsPerPage: 10,
+                                totalItems: 0,
+                            },
+                            items: [],
+                            selected: [],
+                            searchform: {
+                                query: '',
+                                model: true,
+                            }
                         }
-                    }
-                }
+                    },
+                    urls: {
+                        test: {
+                            api: {
+                                destroy: '{{ route('api.tests.destroy', 'null') }}',
+                            },
+                            show: '{{ route('tests.show', 'null') }}',
+                            edit: '{{ route('tests.edit', 'null') }}',
+                            destroy: '{{ route('tests.destroy', 'null') }}',
+                        },
+                    },
+
+                    snackbar: {
+                        model: false,
+                        text: '',
+                        context: '',
+                        timeout: 2000,
+                        y: 'bottom',
+                        x: 'right'
+                    },
+                };
             },
-            methods: {
-                get (url, query) {
-                    let self = this;
-
-                    return new Promise((resolve, reject) => {
-                        self.api().get(url, query).then(response => {
-                            let items = response.items.data;
-                            let total = response.items.total;
-                            resolve({items, total})
-                        });
-                    });
-
-                },
-                listen ($state) {
-                    let self = this;
-                    // console.log('listening...')
-
-                    if (! self.dataset.toggle) {
-                        setTimeout(function () {
-                            const { sortBy, descending, page, rowsPerPage } = self.dataset.pagination;
-                            let query = {
-                                descending: descending?descending:false,
-                                page: self.dataset.counter,
-                                sort: sortBy?sortBy:'id',
-                                take: rowsPerPage?rowsPerPage:5,
-                            };
-
-
-                            self.get('{{ route('api.library.all') }}', query).then(response => {
-                                if (self.dataset.items.length == response.total) {
-                                    $state.complete();
-                                    self.dataset.counter = 1;
-                                } else {
-                                    self.dataset.items = self.dataset.items.concat(response.items);
-                                    self.dataset.pagination.totalItems = response.total;
-                                    $state.loaded();
-                                    self.dataset.counter++;
-                                }
-                            });
-                        }, 1000);
-                    }
-                },
-                getOutput (value) {
-                    this.mediabox.output = value;
-                },
-
-                pagination (pagination) {
-                    let self = this;
-                    const { sortBy, descending, page, rowsPerPage } = pagination;
-                    console.log('pagination', self.dataset.pagination);
-                    let query = {
-                        descending: descending?descending:false,
-                        page: page,
-                        sort: sortBy?sortBy:'id',
-                        take: rowsPerPage,
-                    };
-
-                    self.get('{{ route('api.library.all') }}', query).then(response => {
-                        self.dataset.items = response.items;
-                        self.dataset.pagination.totalItems = response.total;
-                        console.log('xxcad', self.dataset.pagination);
-                    });
-                }
-            },
-
             watch: {
                 'dataset.pagination': {
                     handler () {
-                        let self = this;
-                        const { sortBy, descending, page, rowsPerPage } = self.dataset.pagination;
-                        console.log('pagination', self.dataset.pagination);
-                        let query = {
-                            descending: descending?descending:false,
-                            page: page,
-                            sort: sortBy?sortBy:'id',
-                            take: rowsPerPage,
-                        };
-
-                        self.get('{{ route('api.library.all') }}', query).then(response => {
-                            self.dataset.items = response.items;
-                            self.dataset.pagination.totalItems = response.total;
-                            console.log('xxcad', self.dataset.pagination);
-                            // self.dataset.counter = page;
-                        });
-
+                        this.get();
                     },
                     deep: true
                 },
 
-                'dataset.toggle': function (value) {
-                    let self = this;
+                'dataset.searchform.query': function (filter) {
+                    setTimeout(() => {
+                        const { sortBy, descending, page, rowsPerPage } = this.dataset.pagination;
 
-                    // if (value) {
-                    //     // table
-                    //     const { sortBy, descending, page, rowsPerPage } = self.dataset.pagination;
-                    //     let query = {
-                    //         descending: descending?descending:false,
-                    //         page: page,
-                    //         sort: sortBy?sortBy:'id',
-                    //         take: rowsPerPage?rowsPerPage:5,
-                    //     };
+                        let query = {
+                            descending: descending,
+                            page: page,
+                            q: filter,
+                            sort: sortBy,
+                            take: rowsPerPage,
+                        };
 
-                    //     self.get('{{ route('api.library.all') }}', query).then(response => {
-                    //         self.dataset.items = response.items;
-                    //         self.dataset.pagination.totalItems = response.total;
-                    //     });
-                    // } else {
-                    //     self.dataset.pagination.page = self.dataset.counter;
-                    // }
-                }
+                        this.api().search('{{ route('api.tests.search') }}', query)
+                            .then((data) => {
+                                this.dataset.items = data.items.data ? data.items.data : data.items;
+                                this.dataset.totalItems = data.items.total ? data.items.total : data.total;
+                                this.dataset.loading = false;
+                            });
+                    }, 1000);
+                },
+            },
+
+            methods: {
+                get () {
+                    const { sortBy, descending, page, rowsPerPage } = this.dataset.pagination;
+                    let query = {
+                        descending: descending,
+                        page: page,
+                        sort: sortBy,
+                        take: rowsPerPage,
+                    };
+                    this.api().get('{{ route('api.tests.all') }}', query)
+                        .then((data) => {
+                            this.dataset.items = data.items.data ? data.items.data : data.items;
+                            this.dataset.totalItems = data.items.total ? data.items.total : data.total;
+                            this.dataset.loading = false;
+                        });
+                },
+
+                post (url, query) {
+                    var self = this;
+                    this.api().post(url, query)
+                        .then((data) => {
+                            self.snackbar = Object.assign(self.snackbar, data.response.body);
+                            self.snackbar.model = true;
+                        });
+                },
+
+                destroy (url, query) {
+                    var self = this;
+                    this.api().delete(url, query)
+                        .then((data) => {
+                            self.snackbar = Object.assign(self.snackbar, data.response.body);
+                            self.snackbar.model = true;
+                        });
+                },
             },
 
             mounted () {
-                let self = this;
-                self.catalogues = JSON.parse(JSON.stringify({!! json_encode($catalogues) !!}));
-
-                const { sortBy, descending, page, rowsPerPage } = self.dataset.pagination;
-                let query = {
-                    descending: descending?descending:false,
-                    page: page,
-                    sort: sortBy?sortBy:'id',
-                    take: rowsPerPage?rowsPerPage:5,
-                };
-                self.get('{{ route('api.library.all') }}').then(response => {
-                    self.dataset.items = response.items;
-                    self.dataset.pagination.totalItems = response.total;
-                });
+                this.get();
+                // console.log("dataset.pagination", this.dataset.pagination);
             },
-        })
+        });
     </script>
 @endpush

@@ -1,12 +1,12 @@
 <?php
 
-namespace Review\API\Controllers;
+namespace Test\API\Controllers;
 
 use Illuminate\Http\Request;
 use Pluma\API\Controllers\APIController;
-use Review\Models\Review;
+use Test\Models\Test;
 
-class ReviewController extends APIController
+class TestController extends APIController
 {
     /**
      * Search the resource.
@@ -22,7 +22,7 @@ class ReviewController extends APIController
         $sort = $request->get('sort') && $request->get('sort') !== 'null' ? $request->get('sort') : 'id';
         $take = $request->get('take') && $request->get('take') > 0 ? $request->get('take') : 0;
 
-        $resources = Review::search($search)->orderBy($sort, $order);
+        $resources = Test::search($search)->orderBy($sort, $order);
         if ($onlyTrashed) {
             $resources->onlyTrashed();
         }
@@ -45,7 +45,7 @@ class ReviewController extends APIController
         $sort = $request->get('sort') && $request->get('sort') !== 'null' ? $request->get('sort') : 'id';
         $take = $request->get('take') && $request->get('take') > 0 ? $request->get('take') : 0;
 
-        $resources = Review::search($search)->orderBy($sort, $order);
+        $resources = Test::search($search)->orderBy($sort, $order);
         if ($onlyTrashed) {
             $resources->onlyTrashed();
         }
@@ -67,7 +67,7 @@ class ReviewController extends APIController
         $sort = $request->get('sort') && $request->get('sort') !== 'null' ? $request->get('sort') : 'id';
         $order = $request->get('descending') === 'true' && $request->get('descending') !== 'null' ? 'DESC' : 'ASC';
 
-        $permissions = Review::search($search)->orderBy($sort, $order)->onlyTrashed()->paginate($take);
+        $permissions = Test::search($search)->orderBy($sort, $order)->onlyTrashed()->paginate($take);
 
         return response()->json($permissions);
     }
@@ -94,19 +94,19 @@ class ReviewController extends APIController
      */
     public function destroy(Request $request, $id)
     {
-        $review = Review::findOrFail($id);
+        $test = Test::findOrFail($id);
 
-        if (in_array($review->code, config('auth.rootreviews', []))) {
-            $this->errorResponse['text'] = "Deleting Root Reviews is not permitted";
+        if (in_array($test->code, config('auth.roottests', []))) {
+            $this->errorResponse['text'] = "Deleting Root Tests is not permitted";
 
             return response()->json($this->errorResponse);
         }
 
-        $this->successResponse['text'] = "{$review->name} moved to trash.";
-        $review->delete();
+        $this->successResponse['text'] = "{$test->name} moved to trash.";
+        $test->delete();
 
         return response()->json($this->successResponse);
-        // return redirect()->route('reviews.index');
+        // return redirect()->route('tests.index');
     }
 
     /**
@@ -118,8 +118,8 @@ class ReviewController extends APIController
      */
     public function restore(Request $request, $id)
     {
-        $review = Review::onlyTrashed()->findOrFail($id);
-        $review->restore();
+        $test = Test::onlyTrashed()->findOrFail($id);
+        $test->restore();
 
         return response()->json($this->successResponse);
     }
@@ -132,8 +132,8 @@ class ReviewController extends APIController
      */
     public function delete(Request $request, $id)
     {
-        $review = Review::withTrashed()->findOrFail($id);
-        $review->forceDelete();
+        $test = Test::withTrashed()->findOrFail($id);
+        $test->forceDelete();
 
         return response()->json($this->successResponse);
     }

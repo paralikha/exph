@@ -29,14 +29,14 @@ class CreateReviewsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('parent_id')->unsigned()->nullable();
-            $table->text('avatar')->nullable();
             $table->text('body');
-            $table->text('delta');
+            $table->text('delta')->nullable();
             $table->boolean('approved')->nullable();
             $table->integer('upvotes')->nullable();
 
             $table->integer('reviewable_id')->nullable();
             $table->string('reviewable_type')->nullable();
+
 
             $table->timestamps();
             $table->softDeletes();

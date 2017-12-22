@@ -24,10 +24,10 @@
         <v-list two-line>
             <v-list-tile avatar>
                 <v-list-tile-avatar>
-                    <img src="https://placeimg.com/640/480/any" />
+                    <img src="{{ assets('frontier/images/public/mark.jpg') }}" />
                 </v-list-tile-avatar>
                 <v-list-tile-content>
-                    <v-list-tile-title><a href="#!" class="td-n fw-500 grey--text text--darken-3">Mark Zuckerberg</a></v-list-tile-title>
+                    <v-list-tile-title><a href="#!" class="td-n fw-500 primary--text body-2">Mark Zuckerberg</a></v-list-tile-title>
                     <v-list-tile-sub-title>November 12, 2017</v-list-tile-sub-title>
                 </v-list-tile-content>
 

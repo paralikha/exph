@@ -55,11 +55,8 @@ User Interface per Page:
             ✔ Summary
             ✔ Payment Options
             ✔ Check Out
-                ☐ If Paypal/Coins.PH: SUCCESS/DECLINED
-                    ☐ Success Page
-                    ☐ Failed Page
                 ✔ Bank Transfer: Acct Details EXPH
-                    ☐ Success Page
+                    ✔ Success Page
     ✔ Who We Are
     ☐ Meet the Team
     ✔ Press

@@ -1,10 +1,10 @@
 <?php
 
-namespace Test\Requests;
+namespace Team\Requests;
 
 use Pluma\Requests\FormRequest;
 
-class TestRequest extends FormRequest
+class TeamRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,19 +15,19 @@ class TestRequest extends FormRequest
     {
         switch ($this->method()) {
             case 'POST':
-                if ($this->user()->can('store-test')) {
+                if ($this->user()->can('store-team')) {
                     return true;
                 }
                 break;
 
             case 'PUT':
-                if ($this->user()->can('update-test')) {
+                if ($this->user()->can('update-team')) {
                     return true;
                 }
                 break;
 
             case 'DELETE':
-                if ($this->user()->can('destroy-test')) {
+                if ($this->user()->can('destroy-team')) {
                     return true;
                 }
                 break;
@@ -50,9 +50,8 @@ class TestRequest extends FormRequest
         $isUpdating = $this->method() == "PUT" ? ",id,$this->id" : "";
 
         return [
-            // 'user' => 'sometimes|required',
-            'body' => 'required|max:255',
-            // 'delta' => 'required|max:255',
+            'name' => 'required|max:255',
+            'code' => 'required|regex:/^[\pL\s\-\*\#\(0-9)]+$/u|unique:teams'.$isUpdating,
         ];
     }
 
@@ -64,7 +63,7 @@ class TestRequest extends FormRequest
     public function messages()
     {
         return [
-            // 'code.regex' => 'Only letters, numbers, spaces, and hypens are allowed.',
+            'code.regex' => 'Only letters, numbers, spaces, and hypens are allowed.',
         ];
     }
 }
