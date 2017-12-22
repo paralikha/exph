@@ -157,8 +157,7 @@ class UserController extends AdminController
      */
     public function destroy(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
+        User::destroy(is_array($id) ? $id : [$id]);
 
         return redirect()->route('users.index');
     }

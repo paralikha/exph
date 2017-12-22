@@ -1,9 +1,11 @@
 @extends("Theme::layouts.auth")
 
 @section("head-title", __($application->page->title))
+
 @section("page-title", __($application->page->title))
 
 @section("content")
+
     @include("Public::sections.header")
 
     @include("Public::parts.hero")
@@ -21,7 +23,9 @@
     {{-- @include("Public::parts.bottom-light") --}}
 
     @include("Public::parts.cta")
+
     @include("Public::sections.footer")
+
 @endsection
 
 @push('css')
