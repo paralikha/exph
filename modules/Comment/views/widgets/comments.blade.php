@@ -2,19 +2,19 @@
 {{-- reply --}}
 <v-card class="elevation-1">
     <v-toolbar class="transparent elevation-0">
-        <v-toolbar-title>{{ __("Reviews") }}</v-toolbar-title>
+        <v-toolbar-title>{{ __("Comments") }}</v-toolbar-title>
     </v-toolbar>
     <v-divider></v-divider>
     @if (user())
     <v-card-text class="pa-0 pb-3">
         <v-card-text class="pa-0">
             <v-card class="elevation-0">
-                <form action="{{ route('experiences.review', $resource->id) }}" method="POST">
+                <form action="{{ route('stories.comment', $resource->id) }}" method="POST">
                     {{ csrf_field() }}
                     <input type="hidden" name="user_id" value="{{ user()->id }}">
 
                     {{-- editor --}}
-                    @include("Review::interactive.editor")
+                    @include("Comment::widgets.editor")
                     {{-- editor --}}
                     <v-divider></v-divider>
                     <v-card-text class="text-xs-right pa-0">
@@ -32,7 +32,7 @@
                 </v-list-tile-avatar>
                 <v-list-tile-content>
                     <v-list-tile-title>
-                        <a href="#!" class="td-n primary--text text--darken-4 body-2">{{ auth()->user()->fullname }}</a>
+                        <a href="#!" class="td-n grey--text text--darken-4 body-2">{{ auth()->user()->fullname }}</a>
                     </v-list-tile-title>
                     <v-list-tile-sub-title class="body-1">@{{ item.created }}</v-list-tile-sub-title>
                 </v-list-tile-content>
@@ -73,11 +73,6 @@
         </v-list>
     </v-card-text>
     @endif
-    {{-- <v-divider></v-divider> --}}
-
-    {{-- to remove --}}
-
-    {{-- to remove --}}
 
     {{-- paginate --}}
     {{-- <v-card-text class="text-xs-right">
@@ -141,7 +136,7 @@
                     //
                     hidden: true,
                     dataset: {
-                        items: {!! json_encode($resource->reviews) !!},
+                        items: {!! json_encode($resource->comments) !!},
                         loading: true,
                         urls: {
                             reviews: {

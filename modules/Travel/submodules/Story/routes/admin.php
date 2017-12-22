@@ -9,3 +9,6 @@ Route::delete('stories/delete/{story}', 'Story\Controllers\StoryController@delet
 Route::get('stories/trash', 'Story\Controllers\StoryController@trash')->name('stories.trash');
 Route::post('stories/refresh', 'Story\Controllers\StoryRefreshController@refresh')->name('stories.refresh.refresh');
 Route::resource('stories', 'Story\Controllers\StoryController')->except(['show']);
+
+//Comment
+Route::post('stories/{experience}/comment', 'Story\Controllers\StoryController@comment')->name('stories.comment');

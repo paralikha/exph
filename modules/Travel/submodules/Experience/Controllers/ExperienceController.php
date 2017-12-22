@@ -177,6 +177,13 @@ class ExperienceController extends AdminController
         return redirect()->route('experiences.trash');
     }
 
+    /**
+     * Review the specified resource from storage permanently.
+     *
+     * @param  \Experience\Requests\ExperienceRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function review(Request $request, $id)
     {
         $review = New Review();

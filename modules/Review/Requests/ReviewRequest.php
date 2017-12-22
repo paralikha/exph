@@ -62,7 +62,7 @@ class ReviewRequest extends FormRequest
     public function messages()
     {
         return [
-            'body.regex' => 'Please type a message.',
+            'body.regex' => 'Please type a review.',
         ];
     }
 }

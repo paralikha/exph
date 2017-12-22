@@ -50,8 +50,7 @@ class CommentRequest extends FormRequest
         $isUpdating = $this->method() == "PUT" ? ",id,$this->id" : "";
 
         return [
-            'name' => 'required|max:255',
-            'code' => 'required|regex:/^[\pL\s\-\*\#\(0-9)]+$/u|unique:comments'.$isUpdating,
+            'body' => 'required|max:255',
         ];
     }
 
@@ -63,7 +62,7 @@ class CommentRequest extends FormRequest
     public function messages()
     {
         return [
-            'code.regex' => 'Only letters, numbers, spaces, and hypens are allowed.',
+            'body.regex' => 'Please type a comment.',
         ];
     }
 }

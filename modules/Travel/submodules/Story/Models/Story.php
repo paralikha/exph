@@ -21,4 +21,15 @@ class Story extends Model
     {
         return $this->user->displayname;
     }
+
+    //
+    public function story()
+    {
+        return $this->morphMany('Comment', 'commentable');
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(\Comment\Models\Comment::class, 'commentable');
+    }
 }

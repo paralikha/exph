@@ -221,7 +221,7 @@
                         </v-list-tile>
                     </v-list>
                 </v-card>
-                @include("Public::parts.review-exp")
+                @include("Review::widgets.reviews")
             </v-flex>
 
             <v-flex md3 xs12 class="hidden-sm-and-down">

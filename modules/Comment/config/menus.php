@@ -13,7 +13,7 @@ return [
         'order' => 51,
         'slug' => route('comments.index'),
         'always_viewable' => false,
-        'icon' => '',
+        'icon' => 'chat_bubble_outline',
         'labels' => [
             'title' => __('Comments'),
             'description' => __('Manage comments'),
