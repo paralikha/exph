@@ -8,7 +8,7 @@
         <v-btn icon slot="activator" v-tooltip:bottom="{html:'Menu'}"><v-icon>keyboard_arrow_down</v-icon></v-btn>
         <v-list>
             <v-list-tile ripple href="\experiences">
-                <v-list-tile-title>Experience</v-list-tile-title>
+                <v-list-tile-title>Experiences</v-list-tile-title>
             </v-list-tile>
             <v-list-tile ripple href="\roadtrips">
                 <v-list-tile-title>Road Trips</v-list-tile-title>
@@ -64,8 +64,8 @@
 </div>
 
 <div class="hidden-md-and-down main-nav">
-    <v-btn href="\experiences" flat>{{ __('Experience') }}</v-btn>
-    <v-btn href="\roadtrips" flat>{{ __('Roadtrip') }}</v-btn>
+    <v-btn href="\experiences" flat>{{ __('Experiences') }}</v-btn>
+    <v-btn href="\roadtrips" flat>{{ __('Roadtrips') }}</v-btn>
     <v-btn href="\pack-and-go" flat>{{ __('Pack &amp; Go') }}</v-btn>
     <v-btn href="\stories" flat>{{ __('Stories') }}</v-btn>
     <v-btn href="\host" flat success class="success--text">{{ __('Become a Host') }}</v-btn>

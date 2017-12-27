@@ -11,9 +11,9 @@
             >
             <v-btn icon slot="activator" v-tooltip:bottom="{html:'Menu'}"><v-icon>keyboard_arrow_down</v-icon></v-btn>
             {{-- @include("Template::recursives.main-menu", ['items' => get_navmenus('main-menu')]) --}}
-            {{-- <v-list>
+            <v-list>
                 <v-list-tile ripple href="\experiences">
-                    <v-list-tile-title>Experience</v-list-tile-title>
+                    <v-list-tile-title>Experiences</v-list-tile-title>
                 </v-list-tile>
                 <v-list-tile ripple href="\roadtrips">
                     <v-list-tile-title>Road Trips</v-list-tile-title>
@@ -46,7 +46,7 @@
                     </v-list-tile-action>
                     <v-list-tile-title>Log out</v-list-tile-title>
                 </v-list-tile>
-            </v-list> --}}
+            </v-list>
         </v-menu>
     </div>
 

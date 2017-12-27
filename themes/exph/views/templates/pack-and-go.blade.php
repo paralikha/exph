@@ -11,7 +11,8 @@ Version: 1.0
 @section("content")
     <v-card class="elevation-1 sticky">
         <v-toolbar class="elevation-0 white">
-            @include("Public::sections.nav")
+            {{-- @include("Public::sections.nav") --}}
+            @include("Theme::partials.navigation")
         </v-toolbar>
         <v-divider></v-divider>
     </v-card>
