@@ -79,16 +79,16 @@ Version: 1.0
 
 TODO:
 ☐ Dynamic Navigation page
-☐ Experiences Footer
+✔ Experiences Footer
 ☐ Page Templates (About Us, etc)
 ☐ Pack and Go
 ☐ Become a Host
 ☐ CSS: page desc
+☐ Delete btn review and comments
+☐ display categories
 
-Note:
+Note (before end of the year):
 HomeController
 Categories
-Riadtrips
-(before end of the year)
-
-
+Roadtrips
+Pack-and-Go

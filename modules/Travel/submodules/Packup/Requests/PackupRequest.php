@@ -1,10 +1,10 @@
 <?php
 
-namespace Team\Requests;
+namespace Packup\Requests;
 
 use Pluma\Requests\FormRequest;
 
-class TeamRequest extends FormRequest
+class PackupRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,19 +15,19 @@ class TeamRequest extends FormRequest
     {
         switch ($this->method()) {
             case 'POST':
-                if ($this->user()->can('store-team')) {
+                if ($this->user()->can('store-packup')) {
                     return true;
                 }
                 break;
 
             case 'PUT':
-                if ($this->user()->can('update-team')) {
+                if ($this->user()->can('update-packup')) {
                     return true;
                 }
                 break;
 
             case 'DELETE':
-                if ($this->user()->can('destroy-team')) {
+                if ($this->user()->can('destroy-packup')) {
                     return true;
                 }
                 break;
@@ -51,7 +51,7 @@ class TeamRequest extends FormRequest
 
         return [
             'name' => 'required|max:255',
-            'code' => 'required|regex:/^[\pL\s\-\*\#\(0-9)]+$/u|unique:teams'.$isUpdating,
+            'code' => 'required|regex:/^[\pL\s\-\*\#\(0-9)]+$/u|unique:packups'.$isUpdating,
         ];
     }
 

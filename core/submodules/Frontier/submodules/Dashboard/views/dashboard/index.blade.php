@@ -8,7 +8,7 @@
     <v-container fluid grid-list-lg>
         <v-layout row wrap>
             <v-flex xs12>
-                <v-layout row wrap>
+                {{-- <v-layout row wrap>
                     <v-flex md4 sm6 xs12>
                         <v-layout row wrap>
                             <v-flex xs12>
@@ -29,11 +29,11 @@
                                     </v-card>
 
                                     <v-card class="draggable-lesson elevation-0 transparent" v-for="(draggable, key) in draggables.items">
-                                       {{-- @include("Assignment::widgets.assignment") --}}
+                                       @include("Assignment::widgets.assignment")
                                     </v-card>
 
                                    <v-card class="draggable-lesson elevation-0 transparent" v-for="(draggable, key) in draggables.items">
-                                       {{-- @include("Dashboard::widgets.todo-list") --}}
+                                       @include("Dashboard::widgets.todo-list")
                                    </v-card>
                                 </draggable>
                             </v-flex>
@@ -53,7 +53,7 @@
                                 </v-card>
 
                                 <v-card class="draggable-lesson elevation-0 transparent" v-for="(draggable, key) in draggables.items">
-                                   {{-- @include("Dashboard::widgets.bar_t") --}}
+                                   @include("Dashboard::widgets.bar_t")
                                 </v-card>
 
                                 <v-card class="draggable-lesson elevation-0 transparent" v-for="(draggable, key) in draggables.items">
@@ -75,7 +75,7 @@
                                 </v-card>
 
                                 <v-card class="draggable-lesson elevation-0 transparent" v-for="(draggable, key) in draggables.items">
-                                   {{-- @include("Dashboard::widgets.area_t") --}}
+                                   @include("Dashboard::widgets.area_t")
                                 </v-card>
 
                                 <v-card class="draggable-lesson elevation-0 transparent" v-for="(draggable, key) in draggables.items">
@@ -83,7 +83,7 @@
                                 </v-card>
                        </draggable>
                     </v-flex>
-                </v-layout>
+                </v-layout> --}}
             </v-flex>
         </v-layout>
     </v-container>

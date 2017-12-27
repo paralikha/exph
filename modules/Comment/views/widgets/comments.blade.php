@@ -4,7 +4,7 @@
     </v-toolbar>
     <v-divider></v-divider>
     @if (user())
-    <v-card-text class="pa-0 pb-3">
+    <v-card-text class="pa-0">
         <v-card-text class="pa-0">
             <v-card class="elevation-0">
                 <form action="{{ route('stories.comment', $resource->id) }}" method="POST">
@@ -23,7 +23,7 @@
             </v-card>
         </v-card-text>
 
-        <v-list two-line v-for="item in dataset.items" v-bind:key="item.id">
+        <v-list two-line class="py-0" v-for="item in dataset.items" v-bind:key="item.id">
             <v-list-tile avatar>
                 <v-list-tile-avatar>
                     <img src="{{ auth()->user()->avatar }}" alt="">

@@ -4,7 +4,7 @@
     </v-toolbar>
     <v-divider></v-divider>
     @if (user())
-    <v-card-text class="pa-0 pb-3">
+    <v-card-text class="pa-0">
         <v-card-text class="pa-0">
             <v-card class="elevation-0">
                 <form action="{{ route('experiences.review', $resource->id) }}" method="POST">
@@ -23,7 +23,7 @@
             </v-card>
         </v-card-text>
 
-        <v-list two-line v-for="item in dataset.items" v-bind:key="item.id">
+        <v-list two-line class="py-0" v-for="item in dataset.items" v-bind:key="item.id">
             <v-list-tile avatar>
                 <v-list-tile-avatar>
                     <img src="{{ auth()->user()->avatar }}" alt="">
@@ -50,7 +50,7 @@
                                 </v-list-tile-content>
                             </v-list-tile>
                             <v-list-tile ripple
-                                @click="destroy(route(urls.reviews.api.destroy, item.id),
+                               @click="destroy(route(urls.reviews.api.destroy, item.id),
                                 {
                                     '_token': '{{ csrf_token() }}'
                                 })">
@@ -131,15 +131,15 @@
                         items: {!! json_encode($resource->reviews()->paginate(5)->items()) !!},
                         loading: true,
                         urls: {
-                            reviews: {
-                                api: {
-                                    destroy: '{{ route('api.reviews.destroy', 'null') }}',
-                                },
-                                show: '{{ route('reviews.show', 'null') }}',
-                                edit: '{{ route('reviews.edit', 'null') }}',
-                                destroy: '{{ route('reviews.destroy', 'null') }}',
+                        reviews: {
+                            api: {
+                                destroy: '{{ route('api.reviews.destroy', 'null') }}',
                             },
+                            show: '{{ route('reviews.show', 'null') }}',
+                            edit: '{{ route('reviews.edit', 'null') }}',
+                            destroy: '{{ route('reviews.destroy', 'null') }}',
                         },
+                    },
                     },
                     resource: {
                         item: {

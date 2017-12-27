@@ -1,11 +1,11 @@
 <?php
 
-namespace Team\Models;
+namespace Packup\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Pluma\Models\Model;
 
-class Team extends Model
+class Packup extends Model
 {
     use SoftDeletes;
 

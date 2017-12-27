@@ -64,11 +64,20 @@
 </div>
 
 <div class="hidden-md-and-down main-nav">
-    <v-btn href="\experiences" flat>{{ __('Experiences') }}</v-btn>
+    {{-- <v-btn href="\experiences" flat>{{ __('Experiences') }}</v-btn>
     <v-btn href="\roadtrips" flat>{{ __('Roadtrips') }}</v-btn>
     <v-btn href="\pack-and-go" flat>{{ __('Pack &amp; Go') }}</v-btn>
     <v-btn href="\stories" flat>{{ __('Stories') }}</v-btn>
-    <v-btn href="\host" flat success class="success--text">{{ __('Become a Host') }}</v-btn>
+    <v-btn href="\host" flat success class="success--text">{{ __('Become a Host') }}</v-btn> --}}
+     @include("Theme::recursives.main-menu", ['items' => get_navmenus('main-menu')])
+    <v-btn link flat class="success--text text--accent-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Signup as a Host') }}'}">
+        <span>{{ __('Become a Host') }}</span>
+    </v-btn>
+    <v-btn link flat class="red--text text--darken-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Go to a random Experience') }}'}">
+        <v-icon left>fa-magic</v-icon>
+        <span>{{ __('YOLO!') }}</span>
+    </v-btn>
+
     <v-menu open-on-hover offset-y>
         <v-avatar size="35px" slot="activator" class="mr-4 ml-4 elevation-1">
             <img src="{{ assets('frontier/images/placeholder/woman.jpg') }}" alt="">

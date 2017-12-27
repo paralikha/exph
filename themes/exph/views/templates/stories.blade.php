@@ -36,7 +36,7 @@ Version: 1.0
 
                             @foreach ($resources as $resource)
                             <v-card class="elevation-1 mb-3">
-                                <v-card-media src="{{ $resource->feature }}" height="280px">
+                                <v-card-media src="{{ $resource->feature }}" height="280px" width="100%">
                                     <div class="text-xs-right" style="width: 100%;">
                                         <v-avatar size="120px" style="position: absolute; bottom: 15px; left: 15px;">
                                             <img src="{{ $resource->user->avatar }}" alt="" style="border: 2px solid #fff;">
@@ -153,7 +153,7 @@ Version: 1.0
                                         <v-btn block primary flat class="elevation-1">View on Instagram</v-btn>
                                     </v-card-text>
                                 <v-divider></v-divider>
-                                </v-card> 
+                                </v-card>
 
 
                                 @if (isset($popular) && $popular)

@@ -42,7 +42,7 @@ return [
             'trashed-story' => [
                 'name' => 'trashed-story',
                 'order' => 3,
-                'slug' => url(config('path.admin').'/stories/trashed'),
+                'slug' => url(config('path.admin').'/stories/trash'),
                 'always_viewable' => false,
                 'labels' => [
                     'title' => __('Trashed Stories'),

@@ -65,8 +65,8 @@
             <a href="">
                 <img class="pt-3" src="{{ assets('frontier/images/public/exph_logo.png') }}" alt="" width="200">
             </a>
-            {{-- @include("Public::parts.hero-nav") --}}
-            @include("Theme::partials.navigation")
+            @include("Public::parts.hero-nav")
+            {{-- @include("Theme::partials.navigation") --}}
         </v-toolbar>
 
         <v-layout column align-center justify-center class="white--text">

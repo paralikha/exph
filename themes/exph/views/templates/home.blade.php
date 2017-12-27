@@ -11,6 +11,7 @@ Version: 1.0
 
 @section("content")
     @include("Public::sections.header")
+    {{-- @include("Theme::partials.navigation") --}}
 
     @include("Public::parts.hero")
     {{-- @include("Public::parts.top-light") --}}

@@ -430,7 +430,7 @@
         </v-layout>
     </v-card>
 
-    @include("Theme::partials.footer")
+    @include("Theme::public.footer")
 @endsection
 
 @push('css')

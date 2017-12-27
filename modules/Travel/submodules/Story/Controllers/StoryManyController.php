@@ -16,9 +16,9 @@ class StoryManyController extends AdminController
      */
     public function restore(Request $request)
     {
-        foreach ($request->input('roles') as $id) {
-            $role = Story::onlyTrashed()->findOrFail($id);
-            $role->restore();
+        foreach ($request->input('stories') as $id) {
+            $story = Story::onlyTrashed()->findOrFail($id);
+            $story->restore();
         }
 
         return back();
@@ -32,12 +32,12 @@ class StoryManyController extends AdminController
      */
     public function destroy(Request $request)
     {
-        foreach ($request->input('roles') as $id) {
-            $role = Story::findOrFail($id);
-            $role->delete();
+        foreach ($request->input('stories') as $id) {
+            $story = Story::findOrFail($id);
+            $story->delete();
         }
 
-        return redirect()->route('roles.index');
+        return redirect()->route('stories.index');
     }
 
     /**
@@ -48,9 +48,9 @@ class StoryManyController extends AdminController
      */
     public function delete(Request $request)
     {
-        foreach ($request->input('roles') as $id) {
-            $role = Story::withTrashed()->findOrFail($id);
-            $role->forceDelete();
+        foreach ($request->input('stories') as $id) {
+            $story = Story::withTrashed()->findOrFail($id);
+            $story->forceDelete();
         }
 
         return back();
