@@ -14,7 +14,7 @@
                                     <div class="my-2 ssl-3" v-for="card in exp">
                                         <div class="ssl-4">
                                             <div class="ssl-5">
-                                                <a href="experiences/show" ripple class="td-n">
+                                                <a :href="route(dataset.urls.show, card.id)" ripple class="td-n">
                                                     <v-card class="elevation-1">
                                                         <v-card-media
                                                             height="180px"
@@ -67,6 +67,17 @@
         mixins.push({
             data () {
                 return {
+                    dataset: {
+                        test: 1,
+                        urls: {
+                            edit: '{{ route('experiences.edit', 'null') }}',
+                            show: '{{ route('experiences.show', 'null') }}',
+                            destroy: '{{ route('experiences.destroy', 'null') }}',
+                            api: {
+                                destroy: '{{ route('api.experiences.destroy', 'null') }}',
+                            },
+                        },
+                    },
                     exp: [
                         {
                             title: 'FULL MOON PARTY Luna Sea: A Random Full Moon Party #4',

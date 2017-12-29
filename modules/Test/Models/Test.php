@@ -11,5 +11,5 @@ class Test extends Model
 
     protected $with = [];
 
-    protected $searchables = ['created_at', 'updated_at'];
+    protected $searchables = ['body', 'delta', 'created_at', 'updated_at'];
 }

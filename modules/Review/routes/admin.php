@@ -9,4 +9,3 @@ Route::post('reviews/refresh', 'Review\Controllers\ReviewRefreshController@refre
 Route::post('reviews/restore/many', 'Review\Controllers\ReviewManyController@restore')->name('reviews.many.restore');
 Route::post('reviews/{review}/restore', 'Review\Controllers\ReviewController@restore')->name('reviews.restore');
 Route::resource('reviews', 'Review\Controllers\ReviewController');
-Route::resource('reviews', 'Review\Controllers\ReviewController');

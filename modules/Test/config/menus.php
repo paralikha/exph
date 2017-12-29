@@ -10,20 +10,27 @@ return [
      */
     'test' => [
         'name' => 'test',
-        'order' => 500,
+        'order' => 51,
         'slug' => url(config('path.admin').'/tests'),
         'always_viewable' => false,
-        'icon' => 'fa-flask',
+        'icon' => 'mood',
         'labels' => [
             'title' => __('Tests'),
             'description' => __('Manage tests'),
         ],
         'children' => [
-            'view-test' => [
-                'name' => 'view-test',
+            'view-tests' => [
+                'name' => 'view-tests',
                 'order' => 1,
                 'slug' => url(config('path.admin').'/tests'),
                 'always_viewable' => false,
+                'routes' => [
+                    'name' => 'tests.index',
+                    'children' => [
+                        'tests.edit',
+                        'tests.show',
+                    ]
+                ],
                 'labels' => [
                     'title' => __('All Tests'),
                     'description' => __('View the list of all tests'),
@@ -35,17 +42,18 @@ return [
                 'slug' => url(config('path.admin').'/tests/create'),
                 'always_viewable' => false,
                 'labels' => [
-                    'title' => __('Create Test'),
+                    'title' => __('Create'),
                     'description' => __('Create a Test'),
                 ],
             ],
-            'trashed-test' => [
-                'name' => 'trashed-test',
+            'trashed-tests' => [
+                'name' => 'trashed-tests',
                 'order' => 3,
-                'slug' => url(config('path.admin').'/tests/trashed'),
+                'slug' => url(config('path.admin').'/tests/trash'),
                 'always_viewable' => false,
+                'icon' => 'delete',
                 'labels' => [
-                    'title' => __('Trashed Tests'),
+                    'title' => __('Trashed'),
                     'description' => __('View list of all tests moved to trash'),
                 ],
             ],

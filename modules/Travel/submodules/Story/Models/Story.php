@@ -5,6 +5,7 @@ namespace Story\Models;
 use Category\Support\Traits\BelongsToCategory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Pluma\Models\Model;
+use Comment\Models\Comment;
 use User\Support\Traits\BelongsToUser;
 
 class Story extends Model
@@ -20,5 +21,16 @@ class Story extends Model
     public function getAuthorAttribute()
     {
         return $this->user->displayname;
+    }
+
+    //
+    public function story()
+    {
+        return $this->morphMany('Comment', 'commentable');
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(\Comment\Models\Comment::class, 'commentable');
     }
 }

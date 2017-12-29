@@ -73,6 +73,19 @@ class ReviewController extends APIController
     }
 
     /**
+     * Gets the grants.
+     *
+     * @param  array $modules
+     * @return void
+     */
+    public function grants($modules = null)
+    {
+        $grants = Grant::pluck('name', 'id');
+
+        return response()->json($grants);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -81,18 +94,19 @@ class ReviewController extends APIController
      */
     public function destroy(Request $request, $id)
     {
-        $reviews = Review::findOrFail($id);
+        $review = Review::findOrFail($id);
 
-        if (in_array($reviews->code, config('auth.rootreviews', []))) {
-            $this->errorResponse['text'] = "Deleting Root Categories is not permitted";
+        if (in_array($review->code, config('auth.rootreviews', []))) {
+            $this->errorResponse['text'] = "Deleting Root Reviews is not permitted";
 
             return response()->json($this->errorResponse);
         }
 
-        $this->successResponse['text'] = "{$reviews->name} moved to trash.";
-        $reviews->delete();
+        $this->successResponse['text'] = "{$review->name} moved to trash.";
+        $review->delete();
 
         return response()->json($this->successResponse);
+        // return redirect()->route('reviews.index');
     }
 
     /**
@@ -104,8 +118,8 @@ class ReviewController extends APIController
      */
     public function restore(Request $request, $id)
     {
-        $reviews = Review::onlyTrashed()->findOrFail($id);
-        $reviews->restore();
+        $review = Review::onlyTrashed()->findOrFail($id);
+        $review->restore();
 
         return response()->json($this->successResponse);
     }
@@ -118,8 +132,8 @@ class ReviewController extends APIController
      */
     public function delete(Request $request, $id)
     {
-        $reviews = Review::withTrashed()->findOrFail($id);
-        $reviews->forceDelete();
+        $review = Review::withTrashed()->findOrFail($id);
+        $review->forceDelete();
 
         return response()->json($this->successResponse);
     }

@@ -31,7 +31,7 @@
                             <td v-show="dataset.bulk.destroy.model"><v-checkbox hide-details class="pa-0 primary--text" v-model="prop.selected"></v-checkbox></td>
                             <td v-html="prop.item.id"></td>
                             <td><img :src="prop.item.feature" height="30"></td>
-                            <td><a :href="route(dataset.urls.edit, prop.item.id)"><strong v-tooltip:bottom="{'html': prop.item.description ? prop.item.description : prop.item.name}" v-html="prop.item.name"></strong></a></td>
+                            <td><a :href="route(dataset.urls.show, (prop.item.code))"><strong v-tooltip:bottom="{'html': prop.item.description ? prop.item.description : prop.item.name}" v-html="prop.item.name"></strong></a></td>
                             <td v-html="prop.item.code"></td>
                             <td v-html="prop.item.manager.displayname"></td>
                             <td v-html="prop.item.modified"></td>

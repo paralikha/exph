@@ -11,9 +11,12 @@ Version: 1.0
 
 @section("content")
     @include("Public::sections.header")
+    {{-- @include("Theme::partials.navigation") --}}
 
     @include("Public::parts.hero")
     {{-- @include("Public::parts.top-light") --}}
+
+    {{-- {{ settings('site_title', 'DS') }} --}}
 
     <div class="py-5">
         @include("Public::parts.categories")

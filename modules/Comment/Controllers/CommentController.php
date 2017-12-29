@@ -6,6 +6,7 @@ use Frontier\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Comment\Models\Comment;
 use Comment\Requests\CommentRequest;
+use User\Models\User;
 
 class CommentController extends AdminController
 {
@@ -17,9 +18,9 @@ class CommentController extends AdminController
      */
     public function index(Request $request)
     {
-        //
+        $resources = Comment::paginate();
 
-        return view("Theme::comments.index");
+        return view("Theme::comments.index")->with(compact('resources'));
     }
 
     /**
@@ -56,7 +57,13 @@ class CommentController extends AdminController
      */
     public function store(CommentRequest $request)
     {
-        //
+        $comment = new Comment();
+        $comment->body = $request->input('body');
+        $comment->delta = $request->input('delta');
+        $comment->approved = $request->input('approved');
+        $comment->upvotes = $request->input('upvotes');
+        $comment->user()->associate(User::find(user()->id));
+        $comment->save();
 
         return back();
     }
@@ -70,7 +77,6 @@ class CommentController extends AdminController
      */
     public function edit(Request $request, $id)
     {
-        //
 
         return view("Theme::comments.edit");
     }
@@ -84,7 +90,13 @@ class CommentController extends AdminController
      */
     public function update(CommentRequest $request, $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        $comment->body = $request->input('body');
+        $comment->delta = $request->input('delta');
+        $comment->approved = $request->input('approved');
+        $comment->upvotes = $request->input('upvotes');
+        $comment->user()->associate(User::find(user()->id));
+        $comment->save();
 
         return back();
     }
@@ -98,7 +110,8 @@ class CommentController extends AdminController
      */
     public function destroy(Request $request, $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
 
         return redirect()->route('comments.index');
     }
@@ -110,9 +123,9 @@ class CommentController extends AdminController
      */
     public function trash()
     {
-        //
+        $resources = Comment::onlyTrashed()->paginate();
 
-        return view("Theme::comments.trash");
+        return view("Theme::comments.trash")->with(compact('trashed'));
     }
 
     /**
@@ -124,7 +137,8 @@ class CommentController extends AdminController
      */
     public function restore(CommentRequest $request, $id)
     {
-        //
+        $comment = Comment::onlyTrashed()->findOrFail($id);
+        $comment->restore();
 
         return back();
     }
@@ -138,7 +152,8 @@ class CommentController extends AdminController
      */
     public function delete(CommentRequest $request, $id)
     {
-        //
+        $comment = Comment::withTrashed()->findOrFail($id);
+        $comment->forceDelete();
 
         return redirect()->route('comments.trash');
     }

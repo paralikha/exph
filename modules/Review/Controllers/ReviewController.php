@@ -6,6 +6,7 @@ use Frontier\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Review\Models\Review;
 use Review\Requests\ReviewRequest;
+use User\Models\User;
 
 class ReviewController extends AdminController
 {
@@ -17,11 +18,9 @@ class ReviewController extends AdminController
      */
     public function index(Request $request)
     {
-        // dd($resources);
         $resources = Review::paginate();
-        $trashed = Review::onlyTrashed()->count();
 
-        return view("Theme::reviews.index")->with(compact('resources', 'trashed'));
+        return view("Theme::reviews.index")->with(compact('resources'));
     }
 
     /**
@@ -33,10 +32,9 @@ class ReviewController extends AdminController
      */
     public function show(Request $request, $id)
     {
-        $resource = Review::findOrFail($id);
-        $trashed = Review::onlyTrashed()->count();
+        //
 
-        return view("Theme::reviews.show")->with(compact('resource', 'trashed'));
+        return view("Theme::reviews.show");
     }
 
     /**
@@ -60,13 +58,11 @@ class ReviewController extends AdminController
     public function store(ReviewRequest $request)
     {
         $review = new Review();
-        $review->name = $request->input('name');
-        $review->alias = $request->input('alias');
-        $review->code = $request->input('code');
-        $review->description = $request->input('description');
-        if (null !== $request->input('schedule')) {
-            $review->schedule = date('Y-m-d H:i:s', strtotime($request->input('schedule')));
-        }
+        $review->body = $request->input('body');
+        $review->delta = $request->input('delta');
+        $review->approved = $request->input('approved');
+        $review->upvotes = $request->input('upvotes');
+        $review->user()->associate(User::find(user()->id));
         $review->save();
 
         return back();
@@ -81,9 +77,8 @@ class ReviewController extends AdminController
      */
     public function edit(Request $request, $id)
     {
-        $resource = Review::findOrFail($id);
 
-        return view("Theme::reviews.edit")->with(compact('resource'));
+        return view("Theme::reviews.edit");
     }
 
     /**
@@ -96,13 +91,11 @@ class ReviewController extends AdminController
     public function update(ReviewRequest $request, $id)
     {
         $review = Review::findOrFail($id);
-        $review->name = $request->input('name');
-        $review->alias = $request->input('alias');
-        $review->code = $request->input('code');
-        $review->description = $request->input('description');
-        if (null !== $request->input('schedule')) {
-            $review->schedule = date('Y-m-d H:i:s', strtotime($request->input('schedule')));
-        }
+        $review->body = $request->input('body');
+        $review->delta = $request->input('delta');
+        $review->approved = $request->input('approved');
+        $review->upvotes = $request->input('upvotes');
+        $review->user()->associate(User::find(user()->id));
         $review->save();
 
         return back();
@@ -132,7 +125,7 @@ class ReviewController extends AdminController
     {
         $resources = Review::onlyTrashed()->paginate();
 
-        return view("Theme::reviews.trash")->with(compact('resources'));
+        return view("Theme::reviews.trash")->with(compact('trashed'));
     }
 
     /**
@@ -142,7 +135,7 @@ class ReviewController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function restore(Request $request, $id)
+    public function restore(ReviewRequest $request, $id)
     {
         $review = Review::onlyTrashed()->findOrFail($id);
         $review->restore();
@@ -157,7 +150,7 @@ class ReviewController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request, $id)
+    public function delete(ReviewRequest $request, $id)
     {
         $review = Review::withTrashed()->findOrFail($id);
         $review->forceDelete();

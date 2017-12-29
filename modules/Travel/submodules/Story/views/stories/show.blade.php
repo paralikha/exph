@@ -131,7 +131,7 @@
                         </v-layout>
 
                     </v-card>
-                    @include("Public::parts.comments")
+                    @include("Comment::widgets.comments")
                 </v-flex>
             </v-layout>
         </v-container>

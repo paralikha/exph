@@ -114,12 +114,13 @@
             @if (! $resources->count())
                 <v-layout row wrap>
                     <v-flex xs12 sm6 offset-sm3>
-                        <v-card class="elevation-1">
+                        <v-card class="elevation-0 transparent" height="400px">
                             <v-card-text class="text-xs-center my-3">
-                                <h2 class="subheading primary--text text--darken-1">
+                                <img src="{{ assets('frontier/images/public/sad.png') }}" alt="" height="80" class="mb-3">
+                                <h2 class="subheading grey--text">
                                     {{ __("No Experiences found with those parameters.") }}
                                 </h2>
-                                <v-btn href="{{ route('experiences.all') }}" class="primary subheading">{{ __('See All') }}</v-btn>
+                                <v-btn large href="{{ route('experiences.create') }}" class="primary subheading">{{ __('Create New Experience') }}</v-btn>
                             </v-card-text>
                         </v-card>
                     </v-flex>
@@ -156,7 +157,8 @@
                                             </v-toolbar-title>
                                         </v-toolbar>
                                         <v-card-text class="grey--text pt-4">
-                                            <v-icon v-if="card.categoryname" class="subheading grey--text text--lighten-1 pb-1">whatshot</v-icon>
+                                            {{-- <v-icon v-if="card.categoryname" class="subheading grey--text text--lighten-1 pb-1">whatshot</v-icon> --}}
+                                            <v-icon class="subheading">whatshot</v-icon> fgfgf
                                             <span v-if="card.categoryname" class="caption">@{{ card.categoryname }}</span>
                                             <div>
                                                 <span class="star-rating-system" :data-rating="card.rating">

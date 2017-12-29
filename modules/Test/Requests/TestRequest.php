@@ -50,8 +50,9 @@ class TestRequest extends FormRequest
         $isUpdating = $this->method() == "PUT" ? ",id,$this->id" : "";
 
         return [
-            'name' => 'required|max:255',
-            'code' => 'required|regex:/^[\pL\s\-\*\#\(0-9)]+$/u|unique:tests'.$isUpdating,
+            // 'user' => 'sometimes|required',
+            'body' => 'required|max:255',
+            // 'delta' => 'required|max:255',
         ];
     }
 
@@ -63,7 +64,7 @@ class TestRequest extends FormRequest
     public function messages()
     {
         return [
-            'code.regex' => 'Only letters, numbers, spaces, and hypens are allowed.',
+            // 'code.regex' => 'Only letters, numbers, spaces, and hypens are allowed.',
         ];
     }
 }

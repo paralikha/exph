@@ -47,6 +47,13 @@ Version: 1.0
                     </v-card-text>
                     <v-divider></v-divider>
                     <v-card-actions>
+                        <v-btn flat class="grey--text" @click.stop="search.dateform.model = !search.dateform.model">Cancel</v-btn>
+                        <v-spacer></v-spacer>
+                        <form action="{{ route('experiences.index') }}" method="GET">
+                            <input type="hidden" name="date_from" :value="search.from">
+                            <input type="hidden" name="date_to" :value="search.to">
+                            <input v-if="search.category" type="hidden" name="category_id" :value="search.to">
+                            <v-btn type="submit" flat primary>Apply</v-btn>
                         <v-btn flat class="grey--text" @click.stop="search.dateform.model = !search.dateform.model">{{ __('Cancel') }}</v-btn>
                         <v-spacer></v-spacer>
                         <form action="{{ route('experiences.all') }}" method="GET">
@@ -159,6 +166,7 @@ Version: 1.0
                                     <v-divider class="grey lighten-3"></v-divider>
                                     <v-toolbar card dense class="transparent pt-2">
                                         <v-toolbar-title class="mr-3 subheading">
+                                            <span class="body-2">@{{ card.amount }}</span><br>
                                             <span class="body-2">@{{ card.name }}</span><br>
                                             <span class="caption">@{{ card.date }}</span><br>
                                         </v-toolbar-title>

@@ -11,6 +11,7 @@ use Story\Models\Story;
 use Story\Requests\StoryRequest;
 use Template\Models\Template;
 use User\Models\User;
+use Comment\Models\Comment;
 
 class StoryController extends Controller
 {
@@ -168,5 +169,27 @@ class StoryController extends Controller
         //
 
         return redirect()->route('stories.trash');
+    }
+
+    /**
+     * Comment the specified resource from storage permanently.
+     *
+     * @param  \Story\Requests\StoryRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function comment(Request $request, $id)
+    {
+        $comment = New Comment();
+        $comment->user()->associate(User::find($request->input('user_id')));
+        $comment->approved = true;
+        $comment->body = $request->input('body');
+        $comment->delta = $request->input('delta');
+
+        $story = Story::findOrFail($id);
+        $story->comments()->save($comment);
+        $story->save();
+
+        return back();
     }
 }
