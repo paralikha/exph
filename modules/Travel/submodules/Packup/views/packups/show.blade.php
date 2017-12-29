@@ -254,8 +254,8 @@
                                     </div>
                                 </v-card>
                                     <div class="text-xs-center">
-                                        <v-menu
-                                            :close-on-content-click="false"
+                                       {{--   <v-menu
+                                           :close-on-content-click="false"
                                             v-model="menu"
                                             transition="scale-transition"
                                             right
@@ -271,7 +271,7 @@
                                                 label="Select"
                                                 light solo hide-details single-line
                                             ></v-select>
-                                        </v-menu>
+                                        </v-menu> --}}
                                         <v-btn primary large round class="elevation-1 px-4" href="">{{ __('Get Going') }}</v-btn>
                                     </div>
                             </v-card-text>
