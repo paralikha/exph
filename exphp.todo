@@ -16,6 +16,7 @@ Create Module:
 Create Table:
     blacksmith/blacksmith phinx:migrate:create (add table name, enable schema)
     blacksmith/blacksmith db:migrate
+    blacksmith/blacksmith db:drop table_name
 
 Clone Project:
     git clone
@@ -92,3 +93,7 @@ HomeController
 Categories
 Roadtrips
 Pack-and-Go
+
+Revisions:
+    Navigations
+    Hover texts on browser tab

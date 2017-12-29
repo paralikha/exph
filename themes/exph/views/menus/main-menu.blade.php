@@ -12,19 +12,19 @@
             <v-btn icon slot="activator" v-tooltip:bottom="{html:'Menu'}"><v-icon>keyboard_arrow_down</v-icon></v-btn>
             <v-list>
                 <v-list-tile ripple href="\experiences">
-                    <v-list-tile-title>Experience</v-list-tile-title>
+                    <v-list-tile-title>Try An Experience</v-list-tile-title>
                 </v-list-tile>
                 <v-list-tile ripple href="\roadtrips">
-                    <v-list-tile-title>Road Trips</v-list-tile-title>
+                    <v-list-tile-title>Join A Road Trip</v-list-tile-title>
                 </v-list-tile>
                 <v-list-tile ripple href="\budgets">
-                    <v-list-tile-title>Pack &amp; Go</v-list-tile-title>
+                    <v-list-tile-title>Book A Surprise</v-list-tile-title>
                 </v-list-tile>
                 <v-list-tile ripple href="\stories">
                     <v-list-tile-title>Stories</v-list-tile-title>
                 </v-list-tile>
                 <v-list-tile ripple href="\host">
-                    <v-list-tile-title class="success--text fw-500">Become a Host</v-list-tile-title>
+                    <v-list-tile-title class="success--text fw-500">Host an Experience</v-list-tile-title>
                 </v-list-tile>
                 <v-divider></v-divider>
                 <v-list-tile ripple href="\myprofile">

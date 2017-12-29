@@ -4,7 +4,6 @@ namespace Packup\Controllers;
 
 use Catalogue\Models\Catalogue;
 use Category\Models\Category;
-use Packup\Models\Amenity;
 use Packup\Models\Packup;
 use Packup\Requests\PackupRequest;
 use Frontier\Controllers\AdminController;
@@ -42,9 +41,8 @@ class PackupController extends AdminController
         $catalogues = Catalogue::mediabox();
         $categories = Category::type('packup')->pluck('name', 'id');
         $managers = User::thatIs(['superadmin', 'travel-manager', 'manager'])->get();
-        $amenities = Amenity::all();
 
-        return view("Theme::packups.create")->with(compact('catalogues', 'amenities', 'categories', 'managers'));
+        return view("Theme::packups.create")->with(compact('catalogues', 'categories', 'managers'));
     }
 
     /**
@@ -58,18 +56,14 @@ class PackupController extends AdminController
         $packup = new Packup();
         $packup->name = $request->input('name');
         $packup->code = $request->input('code');
-        $packup->reference_number = $request->input('reference_number');
-        $packup->date_start = date('Y-m-d H:i:s', strtotime($request->input('date_start')));
-        $packup->date_end = date('Y-m-d H:i:s', strtotime($request->input('date_end')));
         $packup->body = $request->input('body');
+        $packup->price = $request->input('price');
         $packup->delta = $request->input('delta');
         $packup->map = $request->input('map');
         $packup->map_instructions = $request->input('map_instructions');
-        $packup->price = $request->input('price');
         $packup->feature = $request->input('feature');
         $packup->user()->associate(User::find($request->input('user')));
         $packup->save();
-        $packup->amenities()->attach($request->input('amenities'));
 
         return back();
     }
@@ -87,9 +81,8 @@ class PackupController extends AdminController
         $catalogues = Catalogue::mediabox();
         $categories = Category::type('packup')->get(['name', 'id'])->toArray();
         $managers = User::thatIs(['superadmin', 'travel-manager', 'manager'])->get();
-        $amenities = Amenity::all();
 
-        return view("Theme::packups.edit")->with(compact('resource', 'catalogues', 'categories', 'managers', 'amenities'));
+        return view("Theme::packups.edit")->with(compact('resource', 'catalogues', 'categories', 'managers'));
     }
 
     /**
@@ -107,17 +100,13 @@ class PackupController extends AdminController
         $packup = Packup::findOrFail($id);
         $packup->name = $request->input('name');
         $packup->code = $request->input('code');
-        $packup->reference_number = $request->input('reference_number');
-        $packup->date_start = date('Y-m-d H:i:s', strtotime($request->input('date_start')));
-        $packup->date_end = date('Y-m-d H:i:s', strtotime($request->input('date_end')));
         $packup->body = $request->input('body');
+        $packup->price = $request->input('price');
         $packup->delta = $request->input('delta');
         $packup->map = $request->input('map');
         $packup->map_instructions = $request->input('map_instructions');
-        $packup->price = $request->input('price');
         $packup->feature = $request->input('feature');
         $packup->user()->associate(User::find($request->input('user')));
-        $packup->amenities()->sync($request->input('amenities'));
         $packup->save();
 
         return back();

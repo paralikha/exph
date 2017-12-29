@@ -142,11 +142,11 @@
                         <v-card-actions>
                             <div class="caption grey--text">© 2017 EXPERIENCE PHILIPPINES</div>
                             <v-spacer></v-spacer>
-                            <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
-                            <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
-                            <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-youtube</v-icon></v-btn>
-                            <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-instagram</v-icon></v-btn>
-                            <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-pinterest</v-icon></v-btn>
+                            <v-btn href="https://www.facebook.com/experiencePH" icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
+                            <v-btn href="https://twitter.com/Experience_ph" icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
+                            <v-btn href="http://youtube.com/channel/UCbfAyDlVDG84jpQ_MdIAiNw" icon class="social"><v-icon class="subheading grey--text">fa fa-youtube</v-icon></v-btn>
+                            <v-btn href="https://www.instagram.com/experiencephilippines/" icon class="social"><v-icon class="subheading grey--text">fa fa-instagram</v-icon></v-btn>
+                            <v-btn href="https://www.pinterest.com/experiencephilippines/" icon class="social"><v-icon class="subheading grey--text">fa fa-pinterest</v-icon></v-btn>
                         </v-card-actions>
                     </v-flex>
                 </v-layout>
@@ -163,7 +163,7 @@
     right
     primary
     dark
-    class="elevation-1"
+    class="elevation-1 mr-4 mb-4"
     id="back-to-top"
     >
     <v-icon>keyboard_arrow_up</v-icon>

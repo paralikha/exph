@@ -5,14 +5,14 @@ use Illuminate\Support\Facades\Schema;
 use Pluma\Support\Migration\Migration;
 use Phinx\Migration\AbstractMigration;
 
-class CreatePackupsTable extends Migration
+class CreatePackupRatingTable extends Migration
 {
     /**
      * The table name.
      *
      * @var string
      */
-    protected $tablename = 'packups';
+    protected $tablename = 'packup_rating';
 
     /**
      * Run the migrations.
@@ -27,24 +27,11 @@ class CreatePackupsTable extends Migration
 
         $this->schema->create($this->tablename, function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('code');
-            $table->string('price');
-            $table->text('feature')->nullable();
-            $table->text('cover')->nullable();
-            $table->text('body')->nullable();
-            $table->text('delta')->nullable();
-            $table->text('map')->nullable();
-            $table->text('map_instructions')->nullable();
-            $table->string('rating', 11)->nullable();
             $table->integer('user_id')->unsigned();
-            $table->integer('budget_id')->unsigned()->nullable();
-
+            $table->integer('ratable_id')->unsigned();
+            $table->string('ratable_type');
+            $table->string('rate');
             $table->timestamps();
-            $table->softDeletes();
-
-            $table->foreign('user_id')->references('id')->on('users');
-            // $table->foreign('budget_id')->references('id')->on('budgets');
         });
     }
 

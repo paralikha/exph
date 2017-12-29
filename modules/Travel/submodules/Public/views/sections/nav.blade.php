@@ -11,7 +11,7 @@
         <v-btn icon slot="activator" v-tooltip:bottom="{html:'Menu'}"><v-icon>keyboard_arrow_down</v-icon></v-btn>
         <v-list>
             <v-list-tile ripple href="\experiences">
-                <v-list-tile-title>Experiences</v-list-tile-title>
+                <v-list-tile-title>Join An Experience</v-list-tile-title>
             </v-list-tile>
             <v-list-tile ripple href="\roadtrips">
                 <v-list-tile-title>Road Trips</v-list-tile-title>
