@@ -146,6 +146,9 @@ trait PayPalPayment
 
             $order->save();
 
+            // Email
+            // \Illuminate\Support\Facades\Mail::to()
+
             return redirect()->route('payment.paypal.success', ['order_id' => $order->id, 'payment_id' => $payment->id, 'payer_id' => $request->get('PayerID')]);
 
             // return redirect()->route('payment.paypal.success', ['payment_id' => $payment->id, 'payer_id' => $request->get('PayerID')]);

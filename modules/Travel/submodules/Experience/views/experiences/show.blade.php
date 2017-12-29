@@ -210,7 +210,7 @@
 
                     <v-list subheader class="py-0 hidden-md-and-up">
                         <v-subheader>Frequently Asked Questions</v-subheader>
-                        <v-list-tile avatar ripple href="\faq">
+                        <v-list-tile avatar ripple href="{{ url('faq') }}">
                             <v-list-tile-avatar tile>
                                 <img src="{{ assets('frontier/images/public/question.png') }}"/>
                             </v-list-tile-avatar>
@@ -246,11 +246,11 @@
                                     <div class="display-2 white--text"><span class="fw-500">{{ $resource->amount }}</span></div>
                                     <div class="body-2 white--text mb-2">{{ __('per person') }}</span></div>
                                     <div>
-                                        @if (user())
-                                            <span class="star-rating-system" data-rating="{{ $resource->rating }}"></span>
-                                        @else
+                                        {{-- @if (user()) --}}
+                                            {{-- <span class="star-rating-system" data-rating="{{ $resource->rating }}"></span> --}}
+                                        {{-- @else --}}
                                             <span class="star-rating-system--readonly" data-rating="{{ $resource->rating }}"></span>
-                                        @endif
+                                        {{-- @endif --}}
                                         <span class="caption">{{ $resource->rating }}</span>
                                     </div>
                                 </v-card>
@@ -523,6 +523,11 @@
                     dialog: {
                         book: false
                     },
+                    resource: {
+                        rating: {
+                            value: '{{ old('rating') }}',
+                        },
+                    },
                     dates: [
                         { title: 'Click Me' },
                         { title: 'Click Me' },
@@ -549,19 +554,16 @@
                 $('.star-rating-system').each(function (e) {
                     let rating = $(this).data('rating');
                     $(this).starRating({
-                        starSize: 16,
+                        starSize: 18,
                         totalStars: 5,
                         initialRating: rating,
                         readOnly: false,
                         emptyColor: 'lightgray',
                         activeColor: 'orange',
                         useGradient: false,
-                        disableAfterRate: true,
+                        disableAfterRate: false,
                         callback: function(currentRating, $el){
-                            console.log(currentRating);
-                            self.$http.post('{{ route('experiences.rate', $resource->id) }}', {'user_id': '{{ @user()->id }}', _token: '{{csrf_token()}}','rate':currentRating}).then(data => {
-                                console.log(data);
-                            })
+                            self.resource.rating.value = currentRating;
                         }
                     });
                 })

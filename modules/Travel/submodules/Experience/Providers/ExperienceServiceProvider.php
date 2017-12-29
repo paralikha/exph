@@ -27,6 +27,15 @@ class ExperienceServiceProvider extends ServiceProvider
     ];
 
     /**
+     * Array of view composers to register.
+     *
+     * @var array
+     */
+    protected $composers = [
+        ['appears' => ['*'], 'class' => \Experience\Composers\ExperiencesViewComposer::class],
+    ];
+
+    /**
      * Bootstrap any application services.
      *
      * @return void
@@ -34,6 +43,8 @@ class ExperienceServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->bootObservables();
+
+        parent::boot();
     }
 
     /**
@@ -43,6 +54,20 @@ class ExperienceServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        parent::register();
     }
+
+    // /**
+    //  * Boots the view composers.
+    //  *
+    //  * @return void
+    //  */
+    // public function bootViewComposers()
+    // {
+    //     $composers = require get_module('Experience') . "/config/composers.php";
+
+    //     foreach ($composers as $composer) {
+    //         view()->composer($composer['appears'], $composer['class']);
+    //     }
+    // }
 }
