@@ -12,7 +12,7 @@
             <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.4); position: absolute; width: 100%; height: 100%;"></div>
             <v-layout column align-center justify-center class="white--text">
                 <v-card dark class="elevation-0 transparent">
-                    <h2 class="mb-2 text-xs-center"><strong>{{ __("PACK UP AND GO") }}</strong></h2>
+                    <h2 class="mb-2 text-xs-center"><strong>{{ __("BOOK A SURPRISE") }}</strong></h2>
                     <h5 class="mb-3 text-xs-center fw-500">{{__("A Road Trip For The Adventure Seekers")}}</h5>
             </v-layout>
         </v-parallax>

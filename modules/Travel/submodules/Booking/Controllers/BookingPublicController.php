@@ -17,10 +17,7 @@ class BookingPublicController extends Controller
      */
     public function all(Request $request)
     {
-        $resources = Booking::paginate();
-        if (null !== $request->get('date_from') && null !== $request->get('date_to')) {
-            $resources = Booking::whereBetween('date_start', [$request->get('date_from'), $request->get('date_to')])->paginate();
-        }
+        $resources = Booking::orderBy('created_at', 'DESC')->paginate();
 
         return view("Theme::bookings.all")->with(compact('resources'));
     }

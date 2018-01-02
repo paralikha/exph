@@ -107,13 +107,13 @@
         <v-container fluid grid-list-lg>
             <v-layout row wrap align-center justify-center>
                 <v-flex lg10 xs12>
-                    <v-card-text class="text-xs-center my-3">
+                    {{-- <v-card-text class="text-xs-center my-3">
                         <h2 class="display-1">{{ __("CHOOSE A ROADTRIP") }}</h2>
                         <h2 class="subheading grey--text text--darken-1">
                             {{ __("Discover more about yourself, about others and about the beautiful country called the Philippines. Book your Experience with us now.") }}
                         </h2>
-                    </v-card-text>
-                    <v-layout row wrap align-center>
+                    </v-card-text> --}}
+                    {{-- <v-layout row wrap align-center>
                         <v-flex xs12 sm4 md3 v-for="card in experiences">
                             <a href="roadtrips/show" ripple class="td-n">
                                 <v-card class="elevation-1 c-lift">
@@ -155,7 +155,21 @@
                         <div class="text-xs-center">
                             <v-pagination circle :length="15" v-model="page" :total-visible="7" class="caption main-paginate"></v-pagination>
                         </div>
-                    </v-card-text>
+                    </v-card-text> --}}
+
+
+                    <v-layout row wrap>
+                        <v-flex xs12 sm6 offset-sm3>
+                            <v-card class="elevation-0 transparent" height="400px">
+                                <v-card-text class="text-xs-center my-3">
+                                    <img src="{{ assets('frontier/images/public/sad.png') }}" alt="" height="80" class="mb-3">
+                                    <h2 class="subheading grey--text">
+                                        {{ __("No Roadtrips found with those parameters.") }}
+                                    </h2>
+                                </v-card-text>
+                            </v-card>
+                        </v-flex>
+                    </v-layout>
                 </v-flex>
             </v-layout>
         </v-container>
