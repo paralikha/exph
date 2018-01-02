@@ -10,8 +10,8 @@
                             <v-flex lg6 md8 sm10>
                                 <v-card dark class="elevation-0 transparent">
                                     <v-card-text class="text-xs-center">
-                                        <h4><strong>Lorem ipsum dolor</strong></h4>
-                                        <div class="subheading">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</div>
+                                        <h4><strong>CHOOSE A DATE</strong></h4>
+                                        <div class="subheading">Can't decide on what to experience? Choose a date and it will all the possible road trips and experiences for you that you can join or try.</div>
                                     </v-card-text>
                                 </v-card>
                                 <v-layout row wrap>

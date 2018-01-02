@@ -11,7 +11,7 @@
         <v-layout column align-center justify-center class="white--text">
             <v-card dark class="elevation-0 transparent">
                 <h2 class="mb-2 text-xs-center"><strong>{{ __("LET'S GO TRAVEL DIFFERENTLY") }}</strong></h2>
-                <h5 class="mb-3 text-xs-center fw-500">Experience a different kind of adventure</h5>
+                <h5 class="mb-3 text-xs-center fw-500">We are an experienced based company that lets you choose your own <br> bucketlist adventure in the Philippines.</h5>
                 <div class="hidden-sm-and-down">
                     <v-menu
                         offset-y
@@ -72,7 +72,7 @@
         <v-layout column align-center justify-center class="white--text">
             <v-card dark class="elevation-0 transparent">
                 <h2 class="mb-2 text-xs-center"><strong>{{ __("LET'S GO TRAVEL DIFFERENTLY") }}</strong></h2>
-                <h5 class="mb-3 text-xs-center fw-500">Experience a different kind of adventure</h5>
+                <h5 class="mb-3 text-xs-center fw-500">We are an experienced based company that lets you choose your own <br> bucketlist adventure in the Philippines.</h5>
                 <div class="hidden-sm-and-down">
                     <v-menu
                         offset-y
@@ -127,11 +127,11 @@
                         <v-list two-line subheader>
                             <v-list-tile avatar>
                                 <v-list-tile-avatar tile>
-                                    <img src="{{ assets('frontier/images/public/sun.png') }}" alt="">
+                                    <img src="{{ $application->site->logo }}" alt="">
                                 </v-list-tile-avatar>
                                 <v-list-tile-content>
-                                    <v-list-tile-title>Discover a less touristy place</v-list-tile-title>
-                                    <v-list-tile-sub-title>Lorem ipsum dolor cit amet</v-list-tile-sub-title>
+                                    <v-list-tile-title>Try An Experience</v-list-tile-title>
+                                    <v-list-tile-sub-title>Discover over 150 new and exciting experiences around the 81 provinces in the Philippines.</v-list-tile-sub-title>
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list>
@@ -140,11 +140,11 @@
                         <v-list two-line subheader>
                             <v-list-tile avatar>
                                 <v-list-tile-avatar tile>
-                                    <img src="{{ assets('frontier/images/public/backpack.png') }}" alt="">
+                                    <img src="{{ assets('frontier/images/public/faq.png') }}" alt="">
                                 </v-list-tile-avatar>
                                 <v-list-tile-content>
-                                    <v-list-tile-title>Travel with people you do not know</v-list-tile-title>
-                                    <v-list-tile-sub-title>Lorem ipsum dolor cit amet</v-list-tile-sub-title>
+                                    <v-list-tile-title>Join A  Random Road Trip</v-list-tile-title>
+                                    <v-list-tile-sub-title>Experience a different way of travel where the destination is a secret and the activities a surprise.</v-list-tile-sub-title>
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list>
@@ -153,11 +153,11 @@
                         <v-list two-line subheader>
                             <v-list-tile avatar>
                                 <v-list-tile-avatar tile>
-                                    <img src="{{ assets('frontier/images/public/map.png') }}" alt="">
+                                    <img src="{{ assets('frontier/images/public/giftbox.png') }}" alt="">
                                 </v-list-tile-avatar>
                                 <v-list-tile-content>
-                                    <v-list-tile-title>Seamless & Safe Experience</v-list-tile-title>
-                                    <v-list-tile-sub-title>Lorem ipsum dolor cit amet</v-list-tile-sub-title>
+                                    <v-list-tile-title>Book A Surprise</v-list-tile-title>
+                                    <v-list-tile-sub-title>We plan your trip. The catch? We won't tell you where you are going. Receive a mystery package from us.</v-list-tile-sub-title>
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list>

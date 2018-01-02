@@ -13,19 +13,19 @@
             {{-- @include("Template::recursives.main-menu", ['items' => get_navmenus('main-menu')]) --}}
             <v-list>
                 <v-list-tile ripple href="\experiences">
-                    <v-list-tile-title>Experiences</v-list-tile-title>
+                    <v-list-tile-title>Try An Experience</v-list-tile-title>
                 </v-list-tile>
                 <v-list-tile ripple href="\roadtrips">
-                    <v-list-tile-title>Road Trips</v-list-tile-title>
+                    <v-list-tile-title>Join A Road Trip</v-list-tile-title>
                 </v-list-tile>
                 <v-list-tile ripple href="\pack-and-go">
-                    <v-list-tile-title>Pack &amp; Go</v-list-tile-title>
+                    <v-list-tile-title>Book A Surprise</v-list-tile-title>
                 </v-list-tile>
                 <v-list-tile ripple href="\stories">
                     <v-list-tile-title>Stories</v-list-tile-title>
                 </v-list-tile>
                 <v-list-tile ripple href="\host">
-                    <v-list-tile-title class="success--text fw-500">Become a Host</v-list-tile-title>
+                    <v-list-tile-title class="success--text fw-500">Host an Experience</v-list-tile-title>
                 </v-list-tile>
                 <v-divider></v-divider>
                 <v-list-tile ripple href="\myprofile">
@@ -130,7 +130,7 @@
     <div class="hidden-md-and-down main-nav">
         @include("Theme::recursives.main-menu", ['items' => get_navmenus('main-menu')])
         <v-btn link flat class="success--text text--accent-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Signup as a Host') }}'}">
-            <span>{{ __('Become a Host') }}</span>
+            <span>{{ __('Host An Experience') }}</span>
         </v-btn>
         <v-btn link flat class="red--text text--darken-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Go to a random Experience') }}'}">
             <v-icon left>fa-magic</v-icon>

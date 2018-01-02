@@ -15,7 +15,7 @@
                                 <v-card-text>
                                     <h3><strong>{{ __("EXPERIENCE PHILIPPINES ROAD TRIPS") }}</strong></h3>
                                     <h6 class="fw-400">Random Road Trips where the destination is a SECRET <br> and the activities are always a SURPRISE</h6>
-                                    <a class="td-n" href="">
+                                    <a class="td-n" target="_blank" href="https://www.youtube.com/watch?time_continue=1&v=6P15_uGoAcI">
                                         <v-avatar v-tooltip:bottom="{ html: 'Click to watch the video' }">
                                             <v-icon class="display-3 white--text">play_circle_filled</v-icon>
                                         </v-avatar>

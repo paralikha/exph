@@ -16,8 +16,8 @@
                 <v-flex lg10 sm12 xs12>
                     <v-layout row wrap align-top justify-top>
                         <v-flex md3 xs12>
-                            <h4><strong>Happy Traveller</strong></h4>
-                            <h2 class="subheading">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</h2>
+                            <h4><strong>Road Tripper Reviews</strong></h4>
+                            <h2 class="subheading">Some of the feedback of those who joined and experienced our road trips.</h2>
                         </v-flex>
                         <v-flex md9 xs12>
                             <v-layout row wrap>

@@ -123,7 +123,7 @@
                             <v-divider class="hidden-sm-and-down"></v-divider>
                             <v-card-text class="text-xs-right hidden-sm-and-down">
                                 @if (user())
-                                <form action="{{ route('experiences.add', $resource->code) }}" method="POST">
+                                <form action="{{ route('packups.add', $resource->code) }}" method="POST">
                                     {{ csrf_field() }}
                                     <input type="hidden" :name="`guests[${i}][name]`" :key="i" v-for="(guest, i) in guests" :value="guest.name">
                                     <input type="hidden" :name="`items[guests][${i}][name]`" :key="i" v-for="(guest, i) in guests" :value="guest.name">
@@ -135,7 +135,7 @@
                                     <input type="hidden" name="code" value="{{ $resource->code }}">
                                     <input type="hidden" name="currency" value="{{ $resource->currency }}">
                                     <input type="hidden" name="customer_id" value="{{ user()->id }}">
-                                    <input type="hidden" name="experience_id" value="{{ $resource->id }}">
+                                    <input type="hidden" name="packup_id" value="{{ $resource->id }}">
 
                                     <v-btn type="submit" ref="submitbutton" primary large class="elevation-1">{{ __('Proceed to Payment') }}</v-btn>
                                 </form>
@@ -364,7 +364,7 @@
                     <v-spacer></v-spacer>
                     <v-card-text class="py-2 text-xs-right">
                         @if (user())
-                        <form action="{{ route('experiences.add', $resource->code) }}" method="POST">
+                        <form action="{{ route('packups.add', $resource->code) }}" method="POST">
                             {{ csrf_field() }}
                             <input type="hidden" :name="`guests[${i}][name]`" :key="i" v-for="(guest, i) in guests" :value="guest.name">
                             <input type="hidden" :name="`items[guests][${i}][name]`" :key="i" v-for="(guest, i) in guests" :value="guest.name">
@@ -376,7 +376,7 @@
                             <input type="hidden" name="items[currency]" value="{{ $resource->currency }}">
                             <input type="hidden" name="currency" value="{{ $resource->currency }}">
                             <input type="hidden" name="customer_id" value="{{ user()->id }}">
-                            <input type="hidden" name="experience_id" value="{{ $resource->id }}">
+                            <input type="hidden" name="packup_id" value="{{ $resource->id }}">
 
                             <v-btn type="submit" ref="submitbutton" primary large class="elevation-1">{{ __('Proceed') }}</v-btn>
                         </form>

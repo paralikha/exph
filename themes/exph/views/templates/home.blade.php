@@ -20,7 +20,7 @@ Version: 1.0
 
     <div class="py-5">
         @include("Public::parts.categories")
-        @include("Public::parts.hotlist")
+        {{-- @include("Public::parts.hotlist") --}}
         @include("Public::parts.video")
         @include("Public::parts.stories")
         @include("Public::parts.review")

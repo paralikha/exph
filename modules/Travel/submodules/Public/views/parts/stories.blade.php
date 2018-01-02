@@ -4,7 +4,7 @@
             <v-flex lg10 md12 sm12 xs12>
                 <v-card-text class="text-xs-center my-3">
                     <h2 class="display-1">{{ __("STORIES FROM THE ROAD") }}</h2>
-                    <h2 class="subheading grey--text text--darken-1">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</h2>
+                    <h2 class="subheading grey--text text--darken-1">A compilation of inspiring stories, adventures and news from the Experience Philippines community.</h2>
                 </v-card-text>
                 <v-layout row wrap>
                     <v-flex sm6 xs12>

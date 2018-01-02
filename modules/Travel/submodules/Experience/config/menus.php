@@ -57,7 +57,7 @@ return [
                 ],
             ],
 
-            'divider-experience' => [
+            'divider-expereince' => [
                 'name' => 'divider-experience',
                 'is_header' => true,
                 'is_divider' => true,
