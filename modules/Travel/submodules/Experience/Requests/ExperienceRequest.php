@@ -53,8 +53,9 @@ class ExperienceRequest extends FormRequest
             'name' => 'required|max:255',
             'code' => 'required|regex:/^[\pL\s\-\*\#\(0-9)]+$/u|unique:experiences'.$isUpdating,
             'reference_number' => 'required|unique:experiences'.$isUpdating,
-            'date_start' => 'required',
-            'date_end' => 'required',
+            'availabilities' => 'required',
+            'availabilities.*.date_start' => 'required',
+            'availabilities.*.date_end' => 'required',
             'price' => 'required',
             'user' => 'sometimes|required',
         ];
@@ -70,6 +71,8 @@ class ExperienceRequest extends FormRequest
         return [
             'code.regex' => 'Only letters, numbers, spaces, and hypens are allowed.',
             'user.required' => 'The travel manager field is required',
+            'availabilities.*.date_start.required' => 'The start date is required',
+            'availabilities.*.date_end.required' => 'The end date is required',
         ];
     }
 }

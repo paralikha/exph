@@ -3,6 +3,7 @@
 @section("head-title", __("Edit $resource->name"))
 
 @section("content")
+
     <v-container fluid grid-list-lg>
 
         @include("Theme::partials.banner")
@@ -49,107 +50,6 @@
                                 hint="{{ __("Will be generated randomly if blank.") }}"
                             ></v-text-field>
 
-                            <v-menu
-                                :close-on-content-click="false"
-                                :nudge-left="40"
-                                full-width
-                                lazy
-                                max-width="290px"
-                                offset-y
-                                transition="scale-transition"
-                                v-model="resource.menus.date_start"
-                            >
-                                <v-text-field
-                                    slot="activator"
-                                    name="date_start"
-                                    :error-messages="errors.date_start"
-                                    label="{{ __('Start Date') }}"
-                                    v-model="resource.item.date_start"
-                                ></v-text-field>
-                                <div>
-                                    <v-date-picker
-                                        no-title
-                                        name="date_start"
-                                        v-model="resource.dates.date_start"
-                                        actions
-                                        v-if="resource.dates.date_start_model"
-                                    >
-                                        <template scope="{save, cancel}">
-                                            <v-card-actions>
-                                                <v-spacer></v-spacer>
-                                                <v-btn flat color="primary" @click="cancel">{{ __('Cancel') }}</v-btn>
-                                                <v-btn flat color="primary" @click="resource.dates.date_start_model = !resource.dates.date_start_model"><v-icon>access_time</v-icon></v-btn>
-                                            </v-card-actions>
-                                        </template>
-                                    </v-date-picker>
-                                    <v-time-picker
-                                        v-else
-                                        v-model="resource.dates.time_start"
-                                        actions
-                                    >
-                                        <template scope="{save, cancel}">
-                                            <v-card-actions>
-                                                <v-spacer></v-spacer>
-                                                <v-btn flat color="primary" @click="cancel">{{ __('Cancel') }}</v-btn>
-                                                <v-btn flat color="primary" @click="save">{{ __('OK') }}</v-btn>
-                                            </v-card-actions>
-                                        </template>
-                                    </v-time-picker>
-                                    <input type="hidden" name="vue_date_start" :value="resource.date_start">
-                                    <input type="hidden" name="vue_time_start" :value="resource.time_start">
-                                </div>
-                            </v-menu>
-
-                            <v-menu
-                                :close-on-content-click="false"
-                                :nudge-left="40"
-                                full-width
-                                lazy
-                                max-width="290px"
-                                offset-y
-                                transition="scale-transition"
-                                v-model="resource.menus.date_end"
-                            >
-                                <v-text-field
-                                    slot="activator"
-                                    name="date_end"
-                                    :error-messages="errors.date_end"
-                                    label="{{ __('End Date') }}"
-                                    v-model="resource.item.date_end"
-                                ></v-text-field>
-                                <div>
-                                    <v-date-picker
-                                        no-title
-                                        name="date_end"
-                                        v-model="resource.dates.date_end"
-                                        actions
-                                        v-if="resource.dates.date_end_model"
-                                    >
-                                        <template scope="{save, cancel}">
-                                            <v-card-actions>
-                                                <v-spacer></v-spacer>
-                                                <v-btn flat color="primary" @click="cancel">{{ __('Cancel') }}</v-btn>
-                                                <v-btn flat color="primary" @click="resource.dates.date_end_model = !resource.dates.date_end_model"><v-icon>access_time</v-icon></v-btn>
-                                            </v-card-actions>
-                                        </template>
-                                    </v-date-picker>
-                                    <v-time-picker
-                                        v-else
-                                        v-model="resource.dates.time_end"
-                                        actions
-                                    >
-                                        <template scope="{save, cancel}">
-                                            <v-card-actions>
-                                                <v-spacer></v-spacer>
-                                                <v-btn flat color="primary" @click="cancel">{{ __('Cancel') }}</v-btn>
-                                                <v-btn flat color="primary" @click="save">{{ __('OK') }}</v-btn>
-                                            </v-card-actions>
-                                        </template>
-                                    </v-time-picker>
-                                    <input type="hidden" name="vue_date_end" :value="resource.date_end">
-                                    <input type="hidden" name="vue_time_end" :value="resource.time_end">
-                                </div>
-                            </v-menu>
                         </v-card-text>
 
                         <v-divider></v-divider>
@@ -166,13 +66,15 @@
                 <v-flex md3>
                     @include("Theme::cards.saving")
 
+                    @include("Experience::cards.availabilities")
+
                     @include("Experience::cards.price")
 
                     @include("Theme::interactives.featured-image")
 
                     @include("Experience::interactives.managers")
 
-                    @include("Category::cards.category")
+                    {{-- @include("Category::cards.category") --}}
 
                 </v-flex>
 
@@ -183,6 +85,7 @@
 
 
 @push('pre-scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
     <script>
         mixins.push({
             data () {
@@ -202,6 +105,7 @@
                             amenities: {!! json_encode($resource->amenities()->select(['icon', 'id', 'name'])->get()->toArray()) !!},
                         },
                         dates: {
+                            items: [],
                             date_start_model: true,
                             date_start: '{{ date('Y-m-d', strtotime($resource->date_start)) }}',
                             time_start: '{{ date('h:ia', strtotime($resource->date_start)) }}',
@@ -249,7 +153,7 @@
                     if (! to) {
                         to = [];
                     }
-                    console.log(to)
+                    to.push(push);
                 },
                 remove (from, key) {
                     from.splice(key, 1);
@@ -277,6 +181,33 @@
                 },
             },
             mounted () {
+                var items = {!! json_encode($resource->availabilities->toArray()) !!};
+                for (var i = 0; i < items.length; i++) {
+                    let current = items[i];
+                    this.resource.dates.items.push({
+                        id: current.id,
+                        start: {
+                            model: false,
+                            obj_date: null,
+                            date_model: true,
+                            date: moment(current.date_start).format('YYYY-MM-DD'),
+                            datetime: moment(current.date_start),
+                            time: moment(current.date_start).format('HH:mma'),
+                            time_model: false,
+                            obj_time: null,
+                        },
+                        end: {
+                            model: false,
+                            obj_date: null,
+                            date_model: true,
+                            date: moment(current.date_end).format('YYYY-MM-DD'),
+                            datetime: moment(current.date_end),
+                            time: moment(current.date_end).format('HH:mma'),
+                            time_model: false,
+                            obj_time: null,
+                        },
+                    });
+                }
                 {{-- alert('{{ $resource->user->id }}') --}}
             }
         })

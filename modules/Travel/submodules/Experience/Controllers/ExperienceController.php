@@ -5,13 +5,16 @@ namespace Experience\Controllers;
 use Catalogue\Models\Catalogue;
 use Category\Models\Category;
 use Experience\Models\Amenity;
+use Experience\Models\Availability;
 use Experience\Models\Experience;
+use Experience\Models\Rating;
 use Experience\Requests\ExperienceRequest;
 use Frontier\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use User\Models\User;
 use Review\Models\Review;
+use Review\Requests\ReviewRequest;
+use User\Models\User;
 
 class ExperienceController extends AdminController
 {
@@ -71,6 +74,17 @@ class ExperienceController extends AdminController
         $experience->save();
         $experience->amenities()->attach($request->input('amenities'));
 
+        foreach ($request->input('availabilities') as $availabilities) {
+            $availability = new Availability();
+            $availability->name = $request->input('name');
+            $availability->description = @$availabilities['description'];
+            $availability->date_start = $availabilities['date_start'];
+            $availability->date_end = $availabilities['date_end'];
+            // $availability->days = $availabilities['days'];
+            $availability->save();
+            $experience->availabilities()->save($availability);
+        }
+
         return back();
     }
 
@@ -101,9 +115,6 @@ class ExperienceController extends AdminController
      */
     public function update(ExperienceRequest $request, $id)
     {
-        // echo "<pre>";
-        //     var_dump( $request->all() ); die();
-        // echo "</pre>";
         $experience = Experience::findOrFail($id);
         $experience->name = $request->input('name');
         $experience->code = $request->input('code');
@@ -119,6 +130,20 @@ class ExperienceController extends AdminController
         $experience->user()->associate(User::find($request->input('user')));
         $experience->amenities()->sync($request->input('amenities'));
         $experience->save();
+
+        $availableIds = [];
+        foreach ($request->input('availabilities') as $availabilities) {
+            $availability = Availability::findOrNew($availabilities['id']);
+            $availability->name = $request->input('name');
+            $availability->description = @$availabilities['description'];
+            $availability->date_start = $availabilities['date_start'];
+            $availability->date_end = $availabilities['date_end'];
+            // $availability->days = $availabilities['days'];
+            $availability->save();
+            $experience->availabilities()->save($availability);
+            $availableIds[] = $availability->id;
+        }
+        $experience->availabilities()->whereNotIn('id', $availableIds)->delete();
 
         return back();
     }
@@ -184,16 +209,21 @@ class ExperienceController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function review(Request $request, $id)
+    public function review(ReviewRequest $request, $id)
     {
+        // echo "<pre>";
+        //     var_dump( $request->all() ); die();
+        // echo "</pre>";
         $review = New Review();
         $review->user()->associate(User::find($request->input('user_id')));
-        $review->approved = true;
         $review->body = $request->input('body');
         $review->delta = $request->input('delta');
+        $review->rating = $request->input('rating');
+        $review->approved = true;
 
         $experience = Experience::findOrFail($id);
         $experience->reviews()->save($review);
+        $experience->rating = Review::compute($id, get_class(new Experience));
         $experience->save();
 
         return back();

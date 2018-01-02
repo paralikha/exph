@@ -10,14 +10,23 @@
                 <form action="{{ route('experiences.review', $resource->id) }}" method="POST">
                     {{ csrf_field() }}
                     <input type="hidden" name="user_id" value="{{ user()->id }}">
+                    <input type="hidden" name="rating" :value="resource.rating.value">
 
                     {{-- editor --}}
                     @include("Review::widgets.editor")
+                    <v-card-text v-if="resource.errors.body">
+                        <span class="error--text caption" v-html="resource.errors.body.join(',')"></span>
+                    </v-card-text>
                     {{-- editor --}}
                     <v-divider></v-divider>
-                    <v-card-text class="text-xs-right pa-0">
-                        <v-btn  type="submit" flat class="primary--text">Post a review</v-btn>
-                    </v-card-text>
+                    <v-card-actions class="text-xs-right">
+                        @if(user())
+                        <span class="star-rating-system" :data-rating="resource.rating.value"></span>
+                        <span class="grey--text subheading" v-html="resource.rating.value"></span>
+                        @endif
+                        <v-spacer></v-spacer>
+                        <v-btn  type="submit" flat class="primary--text">{{ __('Post review') }}</v-btn>
+                    </v-card-actions>
                 </form>
                 <v-divider></v-divider>
             </v-card>
@@ -32,7 +41,10 @@
                     <v-list-tile-title>
                         <a href="#!" class="td-n grey--text text--darken-4 body-2">{{ auth()->user()->fullname }}</a>
                     </v-list-tile-title>
-                    <v-list-tile-sub-title class="body-1">@{{ item.created }}</v-list-tile-sub-title>
+                    <v-list-tile-sub-title class="body-1">
+                        <span class="star-rating-system--readonly" :data-rating="item.rating"></span>
+                        @{{ item.created }}
+                    </v-list-tile-sub-title>
                 </v-list-tile-content>
 
                 <v-list-tile-action>

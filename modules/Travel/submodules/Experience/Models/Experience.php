@@ -5,6 +5,7 @@ namespace Experience\Models;
 use Carbon\Carbon;
 use Category\Support\Traits\BelongsToCategory;
 use DateTime;
+use Experience\Models\Availability;
 use Experience\Support\Traits\BelongsToManyAmenities;
 use Experience\Support\Traits\MorphToManyRating;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,6 +21,11 @@ class Experience extends Model
     protected $appends = ['amount', 'date', 'categoryname', 'url', 'manager', 'created', 'modified'];
 
     protected $searchables = ['created_at', 'updated_at'];
+
+    public function availabilities()
+    {
+        return $this->morphMany(Availability::class, 'available');
+    }
 
     public function getUrlAttribute()
     {
