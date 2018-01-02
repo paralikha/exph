@@ -3,7 +3,7 @@
         <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.3); position: absolute; width: 100%; height: 100%;"></div>
         <v-toolbar class="elevation-0 transparent" dark>
             <a href="">
-                <img class="pt-5" src="{{ assets('frontier/images/public/exph_logo.png') }}" alt="" width="320">
+                <img class="pt-5" src="{{ assets('frontier/images/public/exph_logo.png') }}" alt="" width="280">
             </a>
             @include("Public::parts.hero-nav")
         </v-toolbar>
@@ -127,7 +127,7 @@
                         <v-list two-line subheader>
                             <v-list-tile avatar>
                                 <v-list-tile-avatar tile>
-                                    <img src="{{ $application->site->logo }}" alt="">
+                                    <img class="td-n" src="{{ assets('frontier/images/public/hero-icon.png') }}" alt="">
                                 </v-list-tile-avatar>
                                 <v-list-tile-content>
                                     <v-list-tile-title>Try An Experience</v-list-tile-title>

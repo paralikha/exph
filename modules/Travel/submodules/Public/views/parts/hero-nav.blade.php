@@ -70,10 +70,10 @@
     <v-btn href="\stories" flat>{{ __('Stories') }}</v-btn>
     <v-btn href="\host" flat success class="success--text">{{ __('Become a Host') }}</v-btn> --}}
      @include("Theme::recursives.main-menu", ['items' => get_navmenus('main-menu')])
-    <v-btn link flat class="success--text text--accent-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Signup as a Host') }}'}">
+    <v-btn link flat class="ma-0 success--text text--accent-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Signup as a Host') }}'}">
         <span>{{ __('Host An Experience') }}</span>
     </v-btn>
-    <v-btn link flat class="red--text text--darken-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Go to a random Experience') }}'}">
+    <v-btn link flat class="ma-0 red--text text--darken-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Go to a random Experience') }}'}">
         <v-icon left>fa-magic</v-icon>
         <span>{{ __('YOLO!') }}</span>
     </v-btn>
