@@ -156,7 +156,7 @@
                                     <img src="{{ assets('frontier/images/public/giftbox.png') }}" alt="">
                                 </v-list-tile-avatar>
                                 <v-list-tile-content>
-                                    <v-list-tile-title>Book A Surprise</v-list-tile-title>
+                                    <v-list-tile-title>Book A Suprise</v-list-tile-title>
                                     <v-list-tile-sub-title>We plan your trip. The catch? We won't tell you where you are going. Receive a mystery package from us.</v-list-tile-sub-title>
                                 </v-list-tile-content>
                             </v-list-tile>
