@@ -1,6 +1,6 @@
 <?php
 
-namespace Experience\API\Controllers;
+namespace Booking\Controllers;
 
 use Illuminate\Http\Request;
 use Pluma\API\Controllers\APIController;

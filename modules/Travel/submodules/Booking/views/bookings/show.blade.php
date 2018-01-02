@@ -12,7 +12,7 @@
     <v-card class="elevation-1 hidden-sm-and-down">
         <v-card-media src="{{ @$resource->feature }}" height="450px">
             <v-toolbar dark class="elevation-0 transparent">
-                <v-btn flat href="\packups"><v-icon left>keyboard_backspace</v-icon>{{ __('Back') }}</v-btn>
+                <v-btn flat href="\bookings"><v-icon left>keyboard_backspace</v-icon>{{ __('Back') }}</v-btn>
             </v-toolbar>
         </v-card-media>
     </v-card>
@@ -34,7 +34,7 @@
                             </div>
                             <span class="body-2 block pb-2">{{ $resource->user->fullname }}</span>
                             <div class="grey--text">
-                                {{ __("The Travel Manager is the one who will make sure your road trip will be full of adventures, excitement, tales to tell your grandchildren, epic memories and unforgettable packups.") }}
+                                {{ __("The Travel Manager is the one who will make sure your road trip will be full of adventures, excitement, tales to tell your grandchildren, epic memories and unforgettable bookings.") }}
                             </div>
                         </v-card-text>
                     </v-card>
@@ -94,7 +94,7 @@
                     <div class="hidden-md-and-up">
                         <v-card-media class="elevation-1" src="{{ $resource->feature }}" height="200px">
                             <v-toolbar dark class="elevation-0 transparent">
-                                <v-btn flat href="\packups"><v-icon left>keyboard_backspace</v-icon>{{ __('Back') }}</v-btn>
+                                <v-btn flat href="\bookings"><v-icon left>keyboard_backspace</v-icon>{{ __('Back') }}</v-btn>
                             </v-toolbar>
                         </v-card-media>
                     </div>
@@ -113,7 +113,7 @@
                                     </v-avatar>
                                 </p>
                                 <p class="text-xs-center"><strong>{{ $resource->user->displayname }}</strong></p>
-                                <p class="text-xs-center">{{ __('The Travel Manager is the guy who will make sure your road trip will be full of adventures, excitement, tales to tell your grandchildren, epic memories and unforgettable packups.') }}</p>
+                                <p class="text-xs-center">{{ __('The Travel Manager is the guy who will make sure your road trip will be full of adventures, excitement, tales to tell your grandchildren, epic memories and unforgettable bookings.') }}</p>
                             </v-card-text>
                         </v-card-text>
                     </div>
@@ -182,7 +182,7 @@
                                         <v-icon>email</v-icon>
                                     </v-list-tile-avatar>
                                     <v-list-tile-content>
-                                        <v-list-tile-title>adventures@packup.ph</v-list-tile-title>
+                                        <v-list-tile-title>adventures@experience.ph</v-list-tile-title>
                                         <v-list-tile-sub-title>Send the scanned deposit slip</v-list-tile-sub-title>
                                     </v-list-tile-content>
                                 </v-list-tile>
@@ -221,17 +221,17 @@
                         </v-list-tile>
                     </v-list>
                 </v-card>
-                @include("Review::widgets.reviews")
+                @include("Review::widgets.reviews-booking")
             </v-flex>
 
             <v-flex md3 xs12 class="hidden-sm-and-down">
                 <div class="stickybar">
                     <v-card class="elevation-1 mb-3">
-                        @can('edit-packup')
+                        @can('edit-booking')
                         <v-card-actions>
                             <span class="grey--text caption">{{ __("Logged in as:") }} <em>{{ user()->displayrole }}</em></span>
                             <v-spacer></v-spacer>
-                            <v-btn icon v-tooltip:left="{ 'html': 'Edit Booking' }" href="{{ route('packups.edit', $resource->id) }}">
+                            <v-btn icon v-tooltip:left="{ 'html': 'Edit Booking' }" href="{{ route('bookings.edit', $resource->id) }}">
                                 <v-icon>edit</v-icon>
                             </v-btn>
                         </v-card-actions>
@@ -253,29 +253,38 @@
                                         <span class="caption">{{ $resource->rating }}</span>
                                     </div>
                                 </v-card>
-                                    <div class="text-xs-center">
-                                       {{--   <v-menu
-                                           :close-on-content-click="false"
-                                            v-model="menu"
-                                            transition="scale-transition"
-                                            right
-                                            bottom
-                                            full-width
-                                            max-width="290px"
-                                            min-width="290px"
-                                            >
-                                            <v-select
-                                                v-slot="activator"
-                                                v-bind:items="items"
-                                                v-model="e2"
-                                                label="Select"
-                                                light solo hide-details single-line
-                                            ></v-select>
-                                        </v-menu> --}}
-                                        <v-btn primary large round class="elevation-1 px-4" href="">{{ __('Get Going') }}</v-btn>
-                                    </div>
                             </v-card-text>
                         </v-card-media>
+                        <v-card-text>
+                            <v-card class="elevation-1 mb-3">
+                                <v-select
+                                    v-bind:items="items"
+                                    v-model="budgets"
+                                    autocomplete
+                                    label="Select a budget.."
+                                    append-icon="keyboard_arrow_down"
+                                    prepend-icon=""
+                                    clearable
+                                    search-input
+                                    solo>
+                                </v-select>
+                            </v-card>
+                            <v-card class="elevation-1 mb-3">
+                                <v-text-field
+                                    autocomplete
+                                    label="Number of Travelers"
+                                    prepend-icon=""
+                                    clearable
+                                    search-input
+                                    type="number"
+                                    solo>
+                                </v-text-field>
+                            </v-card>
+                            <div class="text-xs-center">
+                                <v-btn primary large round class="elevation-1 px-4" href="">{{ __('Get Going') }}</v-btn>
+                            </div>
+                        </v-card-text>
+                        <v-divider></v-divider>
                         <v-list two-line>
                             <v-card-text class="text-xs-center pa-1">
                                 <!-- @include("Theme::recursives.main-menu", ['items' => get_navmenus('social-menu')]) -->
@@ -344,7 +353,7 @@
                                             </div>
                                         </v-card>
                                         {{-- <div class="text-xs-center">
-                                            <v-btn primary large round class="elevation-1 px-4" href="{{ route('packups.details', $resource->code) }}">Booking Now</v-btn>
+                                            <v-btn primary large round class="elevation-1 px-4" href="{{ route('bookings.details', $resource->code) }}">Booking Now</v-btn>
                                         </div> --}}
                                     </v-card-text>
                                 </v-card-media>
@@ -421,7 +430,7 @@
                     </v-card-text>
                     <v-spacer></v-spacer>
                    {{--  <v-card-text class="px-0 py-2 text-xs-right">
-                        <v-btn large primary round class="elevation-1 px-2" href="{{ route('packups.details', $resource->code) }}">Booking Now</v-btn>
+                        <v-btn large primary round class="elevation-1 px-2" href="{{ route('bookings.details', $resource->code) }}">Booking Now</v-btn>
                     </v-card-text> --}}
                 </v-card-actions>
             </v-flex>
@@ -432,7 +441,7 @@
 @endsection
 
 @push('css')
-    <link rel="stylesheet" href="{{ assets('packup/js/jquery.star-rating-svg.min.css') }}">
+    <link rel="stylesheet" href="{{ assets('booking/js/jquery.star-rating-svg.min.css') }}">
     <style>
         .page-text h3 {
             font-size: 20px;
@@ -505,7 +514,7 @@
 
 @push('pre-scripts')
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="{{ assets('packup/js/jquery.star-rating-svg.min.js') }}"></script>
+    <script src="{{ assets('booking/js/jquery.star-rating-svg.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script>
     <script src="{{ assets('frontier/vendors/vue/resource/vue-resource.min.js') }}"></script>
     <script>
@@ -516,6 +525,7 @@
                 return {
                     e1: 'recent',
                     e2: null,
+                    budgets: null,
                     items: [
                         { text: 'State 1' },
                         { text: 'State 2' },
@@ -565,7 +575,7 @@
                         disableAfterRate: true,
                         callback: function(currentRating, $el){
                             console.log(currentRating);
-                            self.$http.post('{{ route('packups.rate', $resource->id) }}', {'user_id': '{{ @user()->id }}', _token: '{{csrf_token()}}','rate':currentRating}).then(data => {
+                            self.$http.post('{{ route('bookings.rate', $resource->id) }}', {'user_id': '{{ @user()->id }}', _token: '{{csrf_token()}}','rate':currentRating}).then(data => {
                                 console.log(data);
                             })
                         }

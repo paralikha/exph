@@ -6,11 +6,13 @@ use Catalogue\Models\Catalogue;
 use Category\Models\Category;
 use Booking\Models\Booking;
 use Booking\Requests\BookingRequest;
+use Experience\Models\Rating;
 use Frontier\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use User\Models\User;
 use Review\Models\Review;
+use Review\Requests\ReviewRequest;
+use User\Models\User;
 
 class BookingController extends AdminController
 {
@@ -173,16 +175,18 @@ class BookingController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function review(Request $request, $id)
+    public function review(ReviewRequest $request, $id)
     {
         $review = New Review();
         $review->user()->associate(User::find($request->input('user_id')));
-        $review->approved = true;
         $review->body = $request->input('body');
         $review->delta = $request->input('delta');
+        $review->rating = $request->input('rating');
+        $review->approved = true;
 
         $booking = Booking::findOrFail($id);
         $booking->reviews()->save($review);
+        $booking->rating = Review::compute($id, get_class(new Booking));
         $booking->save();
 
         return back();

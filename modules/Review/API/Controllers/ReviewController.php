@@ -137,4 +137,19 @@ class ReviewController extends APIController
 
         return response()->json($this->successResponse);
     }
+
+    /**
+     * Rate.
+     * @param  Request $request
+     * @return            [description]
+     */
+    public function rate(Request $request, $id)
+    {
+        $booking = Booking::find($id);
+        $booking->ratings()->save(Rating::updateOrCreate(['user_id' => $request->input('user_id')], $request->except(['_token'])));
+        $booking->rating = Rating::compute($booking->id, get_class(new Booking));
+        $booking->save();
+
+        return response()->json($this->successResponse);
+    }
 }

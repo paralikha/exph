@@ -30,7 +30,7 @@ Version: 1.0
                                     prepend-icon="search"
                                     clearable
                                     search-input
-                                     solo tags>
+                                    solo tags>
                                 </v-select>
                             </v-card>
 
