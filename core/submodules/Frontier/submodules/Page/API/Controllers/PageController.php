@@ -106,6 +106,7 @@ class PageController extends APIController
         $page->delete();
 
         return response()->json($this->successResponse);
+        // return redirect()->route('pages.index');
     }
 
     /**

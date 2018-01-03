@@ -92,11 +92,8 @@ Note (before end of the year):
 HomeController
 Categories
 Roadtrips
-Pack-and-Go
+Bookings - forms
 
-Revisions:
-    ✔ Navigations
-    ✔ Hover texts on browser tab
-    ✔ review for booking
-    ✔ rename packups to bookings
-    ☐ logos on jumbotron
+pluma (login and register form)
+template registration successful
+

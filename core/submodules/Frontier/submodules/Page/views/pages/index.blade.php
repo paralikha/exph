@@ -118,8 +118,8 @@
                                                 </v-list-tile-title>
                                             </v-list-tile-content>
                                         </v-list-tile>
-                                        <v-list-tile
-                                            @click.native.stop="destroy(route(urls.pages.api.destroy, prop.item.id),
+                                        <v-list-tile ripple
+                                            @click="destroy(route(urls.pages.api.destroy, prop.item.id),
                                             {
                                                 '_token': '{{ csrf_token() }}'
                                             })">
@@ -158,9 +158,12 @@
                     },
                     urls: {
                         pages: {
+                            api: {
+                                destroy: '{{ route('api.pages.destroy', 'null') }}',
+                            },
                             edit: '{{ route('pages.edit', 'null') }}',
                             show: '{{ route('pages.show', 'null') }}',
-                            delete: '{{ route('pages.destroy', 'null') }}',
+                            destroy: '{{ route('pages.destroy', 'null') }}',
                         }
                     },
                     dataset: {
@@ -231,6 +234,16 @@
                             this.dataset.items = data.items.data ? data.items.data : data.items;
                             this.dataset.totalItems = data.items.total ? data.items.total : data.total;
                             this.dataset.loading = false;
+                        });
+                },
+
+                destroy (url, query) {
+                    var self = this;
+                    this.api().delete(url, query)
+                        .then((data) => {
+                            self.get('{{ route('api.pages.all') }}');
+                            self.snackbar = Object.assign(self.snackbar, data.response.body);
+                            self.snackbar.model = true;
                         });
                 },
             },
