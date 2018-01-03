@@ -6,7 +6,7 @@
     {{-- @include("Dashboard::widgets.stat") --}}
 
     <v-container fluid grid-list-lg>
-        <v-layout row wrap>
+        {{-- <v-layout row wrap>
             <v-flex xs12>
                 <v-layout row wrap>
                     <v-flex md4 sm6 xs12>
@@ -85,7 +85,7 @@
                     </v-flex>
                 </v-layout>
             </v-flex>
-        </v-layout>
+        </v-layout> --}}
     </v-container>
 @endsection
 
