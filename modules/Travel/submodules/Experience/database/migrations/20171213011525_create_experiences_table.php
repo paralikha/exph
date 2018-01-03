@@ -31,8 +31,8 @@ class CreateExperiencesTable extends Migration
             $table->string('code');
             $table->text('reference_number');
             $table->string('price');
-            $table->timestamp('date_start');
-            $table->timestamp('date_end');
+            $table->datetime('date_start')->nullable();
+            $table->datetime('date_end')->nullable();
             $table->text('feature')->nullable();
             $table->text('cover')->nullable();
             $table->text('body')->nullable();
@@ -40,6 +40,7 @@ class CreateExperiencesTable extends Migration
             $table->text('map')->nullable();
             $table->text('map_instructions')->nullable();
             $table->string('rating', 11)->nullable();
+            $table->string('type')->nullable();
             $table->integer('user_id')->unsigned();
             $table->integer('category_id')->unsigned()->nullable();
 

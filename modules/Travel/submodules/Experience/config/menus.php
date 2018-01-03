@@ -49,7 +49,8 @@ return [
             'trashed-experience' => [
                 'name' => 'trashed-experience',
                 'order' => 3,
-                'slug' => url(config('path.admin').'/experiences/trashed'),
+                'icon' => 'delete',
+                'slug' => route('experiences.trashed'),
                 'always_viewable' => false,
                 'labels' => [
                     'title' => __('Trashed Experiences'),

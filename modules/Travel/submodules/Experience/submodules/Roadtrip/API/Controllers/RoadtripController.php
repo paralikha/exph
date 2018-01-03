@@ -1,13 +1,13 @@
 <?php
 
-namespace Experience\API\Controllers;
+namespace Roadtrip\API\Controllers;
 
-use Experience\Models\Experience;
-use Experience\Models\Rating;
+use Roadtrip\Models\Roadtrip;
+use Roadtrip\Models\Rating;
 use Illuminate\Http\Request;
 use Pluma\API\Controllers\APIController;
 
-class ExperienceController extends APIController
+class RoadtripController extends APIController
 {
     /**
      * Search the resource.
@@ -23,7 +23,7 @@ class ExperienceController extends APIController
         $sort = $request->get('sort') && $request->get('sort') !== 'null' ? $request->get('sort') : 'id';
         $take = $request->get('take') && $request->get('take') > 0 ? $request->get('take') : 0;
 
-        $resources = Experience::search($search)->orderBy($sort, $order);
+        $resources = Roadtrip::search($search)->orderBy($sort, $order);
         if ($onlyTrashed) {
             $resources->onlyTrashed();
         }
@@ -46,7 +46,7 @@ class ExperienceController extends APIController
         $sort = $request->get('sort') && $request->get('sort') !== 'null' ? $request->get('sort') : 'id';
         $take = $request->get('take') && $request->get('take') > 0 ? $request->get('take') : 0;
 
-        $resources = Experience::search($search)->orderBy($sort, $order);
+        $resources = Roadtrip::search($search)->orderBy($sort, $order);
         if ($onlyTrashed) {
             $resources->onlyTrashed();
         }
@@ -68,7 +68,7 @@ class ExperienceController extends APIController
         $sort = $request->get('sort') && $request->get('sort') !== 'null' ? $request->get('sort') : 'id';
         $order = $request->get('descending') === 'true' && $request->get('descending') !== 'null' ? 'DESC' : 'ASC';
 
-        $permissions = Experience::search($search)->orderBy($sort, $order)->onlyTrashed()->paginate($take);
+        $permissions = Roadtrip::search($search)->orderBy($sort, $order)->onlyTrashed()->paginate($take);
 
         return response()->json($permissions);
     }
@@ -95,10 +95,10 @@ class ExperienceController extends APIController
      */
     public function destroy(Request $request, $id)
     {
-        $page = Experience::findOrFail($id);
+        $page = Roadtrip::findOrFail($id);
 
         if (in_array($page->code, config('auth.rootpages', []))) {
-            $this->errorResponse['text'] = "Deleting Root Experiences is not permitted";
+            $this->errorResponse['text'] = "Deleting Root Roadtrips is not permitted";
 
             return response()->json($this->errorResponse);
         }
@@ -117,9 +117,9 @@ class ExperienceController extends APIController
      */
     public function clone(Request $request, $id)
     {
-        $page = Experience::findOrFail($id);
+        $page = Roadtrip::findOrFail($id);
 
-        $clone = new Experience();
+        $clone = new Roadtrip();
         $clone->name = $page->name;
         $clone->code = "{$page->code}-clone-".rand((int) $id, (int) date('Y'));
         $clone->description = $page->description;
@@ -138,7 +138,7 @@ class ExperienceController extends APIController
      */
     public function restore(Request $request, $id)
     {
-        $page = Experience::onlyTrashed()->findOrFail($id);
+        $page = Roadtrip::onlyTrashed()->findOrFail($id);
         $page->restore();
 
         return response()->json($this->successResponse);
@@ -152,7 +152,7 @@ class ExperienceController extends APIController
      */
     public function delete(Request $request, $id)
     {
-        $page = Experience::withTrashed()->findOrFail($id);
+        $page = Roadtrip::withTrashed()->findOrFail($id);
         $page->forceDelete();
 
         return response()->json($this->successResponse);
@@ -165,9 +165,9 @@ class ExperienceController extends APIController
      */
     public function rate(Request $request, $id)
     {
-        $experience = Experience::find($id);
+        $experience = Roadtrip::find($id);
         $experience->ratings()->save(Rating::updateOrCreate(['user_id' => $request->input('user_id')], $request->except(['_token'])));
-        $experience->rating = Rating::compute($experience->id, get_class(new Experience));
+        $experience->rating = Rating::compute($experience->id, get_class(new Roadtrip));
         $experience->save();
 
         return response()->json($this->successResponse);

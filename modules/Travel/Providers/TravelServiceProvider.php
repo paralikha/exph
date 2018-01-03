@@ -21,7 +21,7 @@ class TravelServiceProvider extends ServiceProvider
      * @var array
      */
     protected $observables = [
-        //
+        // \Travel\Models\Travel::class => \Travel\Observers\TravelObserver::class,
     ];
 
     /**
@@ -44,6 +44,8 @@ class TravelServiceProvider extends ServiceProvider
         $this->bootObservables();
 
         $this->registerProviders();
+
+        parent::boot();
     }
 
     /**
@@ -53,6 +55,6 @@ class TravelServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        parent::register();
     }
 }

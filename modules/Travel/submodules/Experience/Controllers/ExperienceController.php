@@ -62,19 +62,27 @@ class ExperienceController extends AdminController
         $experience->name = $request->input('name');
         $experience->code = $request->input('code');
         $experience->reference_number = $request->input('reference_number');
-        $experience->date_start = date('Y-m-d H:i:s', strtotime($request->input('date_start')));
-        $experience->date_end = date('Y-m-d H:i:s', strtotime($request->input('date_end')));
         $experience->body = $request->input('body');
         $experience->delta = $request->input('delta');
         $experience->map = $request->input('map');
         $experience->map_instructions = $request->input('map_instructions');
         $experience->price = $request->input('price');
         $experience->feature = $request->input('feature');
+        $experience->type = 'experience';
         $experience->user()->associate(User::find($request->input('user')));
+
+        $start_date = date('Y-m-d H:i:s', strtotime($request->input('availabilities')[0]['date_start']));
+        $end = end($request->input('availabilities'));
+        reset($request->input('availabilities'));
+        $end_date = date('Y-m-d H:i:s', strtotime($end['date_end']));
+        $experience->date_start = $start_date;
+        $experience->date_end = $end_date;
+
         $experience->save();
         $experience->amenities()->attach($request->input('amenities'));
 
-        foreach ($request->input('availabilities') as $availabilities) {
+        foreach ($request->input('availabilities') as $i => $availabilities) {
+
             $availability = new Availability();
             $availability->name = $request->input('name');
             $availability->description = @$availabilities['description'];
@@ -119,8 +127,14 @@ class ExperienceController extends AdminController
         $experience->name = $request->input('name');
         $experience->code = $request->input('code');
         $experience->reference_number = $request->input('reference_number');
-        $experience->date_start = date('Y-m-d H:i:s', strtotime($request->input('date_start')));
-        $experience->date_end = date('Y-m-d H:i:s', strtotime($request->input('date_end')));
+
+        $start_date = date('Y-m-d H:i:s', strtotime($request->input('availabilities')[0]['date_start']));
+        $end = end($request->input('availabilities'));
+        reset($request->input('availabilities'));
+        $end_date = date('Y-m-d H:i:s', strtotime($end['date_end']));
+        $experience->date_start = $start_date;
+        $experience->date_end = $end_date;
+
         $experience->body = $request->input('body');
         $experience->delta = $request->input('delta');
         $experience->map = $request->input('map');
@@ -155,23 +169,25 @@ class ExperienceController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, $id = null)
     {
-        //
+        Experience::destroy($request->has('id') ? $request->input('id') : $id);
 
-        return redirect()->route('experiences.index');
+        return back();
     }
 
     /**
      * Display a listing of the trashed resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Illuminate\Http\Response
      */
-    public function trash()
+    public function trashed(Request $request)
     {
-        //
+        $resources = Experience::onlyTrashed()
+                         ->search($request->all())
+                         ->paginate();
 
-        return view("Theme::experiences.trash");
+        return view("Experience::experiences.trashed")->with(compact('resources'));
     }
 
     /**
@@ -181,9 +197,15 @@ class ExperienceController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function restore(ExperienceRequest $request, $id)
+    public function restore(Request $request, $id = null)
     {
-        //
+        $experiences = Experience::onlyTrashed()
+                     ->whereIn('id', $request->has('id') ? $request->input('id') : [$id])
+                     ->get();
+
+        foreach ($experiences as $experience) {
+            $experience->restore();
+        }
 
         return back();
     }
@@ -195,11 +217,17 @@ class ExperienceController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(ExperienceRequest $request, $id)
+    public function delete(Request $request, $id)
     {
-        //
+        $experiences = Experience::onlyTrashed()
+                     ->whereIn('id', $request->has('id') ? $request->input('id') : [$id])
+                     ->get();
 
-        return redirect()->route('experiences.trash');
+        foreach ($experiences as $experience) {
+            $experience->forceDelete();
+        }
+
+        return back();
     }
 
     /**
@@ -211,9 +239,6 @@ class ExperienceController extends AdminController
      */
     public function review(ReviewRequest $request, $id)
     {
-        // echo "<pre>";
-        //     var_dump( $request->all() ); die();
-        // echo "</pre>";
         $review = New Review();
         $review->user()->associate(User::find($request->input('user_id')));
         $review->body = $request->input('body');
