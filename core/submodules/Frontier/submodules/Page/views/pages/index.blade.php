@@ -6,7 +6,7 @@
             <v-flex>
                 <v-card class="mb-3 elevation-1">
                     <v-toolbar class="transparent elevation-0">
-                        <v-toolbar-title class="accent--text">{{ __('Pages') }}</v-toolbar-title>
+                        <v-toolbar-title>{{ __('Pages') }}</v-toolbar-title>
                         <v-spacer></v-spacer>
 
                         {{-- Batch Commands --}}
@@ -65,7 +65,6 @@
                         ><v-icon class="primary--after" v-badge:{{ $trashed }}.overlap>archive</v-icon></v-btn>
                         {{-- /Trashed --}}
                     </v-toolbar>
-
                     <v-data-table
                         :loading="dataset.loading"
                         :total-items="dataset.totalItems"
