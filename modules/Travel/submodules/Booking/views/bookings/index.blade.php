@@ -26,7 +26,7 @@
                         v-bind:items="dataset.items"
                         v-bind:pagination.sync="dataset.pagination"
                         v-model="dataset.selected"
-                    >
+                        >
                         <template slot="items" scope="prop">
                             <td v-show="dataset.bulk.destroy.model"><v-checkbox hide-details class="pa-0 primary--text" v-model="prop.selected"></v-checkbox></td>
                             <td v-html="prop.item.id"></td>

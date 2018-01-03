@@ -39,16 +39,16 @@ return [
                     'description' => __('Create a Booking'),
                 ],
             ],
-            // 'trash-booking' => [
-            //     'name' => 'trash-booking',
-            //     'order' => 3,
-            //     'slug' => route('bookings.trash'),
-            //     'always_viewable' => false,
-            //     'labels' => [
-            //         'title' => __('Trashed Bookings'),
-            //         'description' => __('View list of all bookings moved to trash'),
-            //     ],
-            // ],
+            'trash-booking' => [
+                'name' => 'trash-booking',
+                'order' => 3,
+                'slug' => route('bookings.trash'),
+                'always_viewable' => false,
+                'labels' => [
+                    'title' => __('Trashed Bookings'),
+                    'description' => __('View list of all bookings moved to trash'),
+                ],
+            ],
         ],
     ],
 ];

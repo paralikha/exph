@@ -95,16 +95,16 @@ class BookingController extends APIController
      */
     public function destroy(Request $request, $id)
     {
-        $page = Booking::findOrFail($id);
+        $booking = Booking::findOrFail($id);
 
-        if (in_array($page->code, config('auth.rootpages', []))) {
+        if (in_array($booking->code, config('auth.rootbookings', []))) {
             $this->errorResponse['text'] = "Deleting Root Bookings is not permitted";
 
             return response()->json($this->errorResponse);
         }
 
-        $this->successResponse['text'] = "{$page->name} moved to trash.";
-        $page->delete();
+        $this->successResponse['text'] = "{$booking->name} moved to trash.";
+        $booking->delete();
 
         return response()->json($this->successResponse);
     }
@@ -117,14 +117,14 @@ class BookingController extends APIController
      */
     public function clone(Request $request, $id)
     {
-        $page = Booking::findOrFail($id);
+        $booking = Booking::findOrFail($id);
 
         $clone = new Booking();
-        $clone->name = $page->name;
-        $clone->code = "{$page->code}-clone-".rand((int) $id, (int) date('Y'));
-        $clone->description = $page->description;
+        $clone->name = $booking->name;
+        $clone->code = "{$booking->code}-clone-".rand((int) $id, (int) date('Y'));
+        $clone->description = $booking->description;
         $clone->save();
-        $clone->grants()->attach($page->grants->pluck('id')->toArray());
+        $clone->grants()->attach($booking->grants->pluck('id')->toArray());
 
         return response()->json($this->successResponse);
     }
@@ -138,8 +138,8 @@ class BookingController extends APIController
      */
     public function restore(Request $request, $id)
     {
-        $page = Booking::onlyTrashed()->findOrFail($id);
-        $page->restore();
+        $booking = Booking::onlyTrashed()->findOrFail($id);
+        $booking->restore();
 
         return response()->json($this->successResponse);
     }
@@ -152,8 +152,8 @@ class BookingController extends APIController
      */
     public function delete(Request $request, $id)
     {
-        $page = Booking::withTrashed()->findOrFail($id);
-        $page->forceDelete();
+        $booking = Booking::withTrashed()->findOrFail($id);
+        $booking->forceDelete();
 
         return response()->json($this->successResponse);
     }

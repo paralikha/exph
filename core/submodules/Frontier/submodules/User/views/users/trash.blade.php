@@ -1,7 +1,7 @@
 @extends("Theme::layouts.admin")
 
-@section("head-title", __('Trashed Bookings'))
-@section("page-title", __('Trashed Bookings'))
+@section("head-title", __('Trashed Users'))
+@section("page-title", __('Trashed Users'))
 
 @push("utilitybar")
     {{--  --}}
@@ -14,7 +14,7 @@
             <v-flex xs12>
                 <v-card class="mb-3">
                     <v-toolbar class="transparent elevation-0">
-                        <v-toolbar-title>{{ __('Trashed Bookings') }}</v-toolbar-title>
+                        <v-toolbar-title>{{ __('Trashed Users') }}</v-toolbar-title>
                         <v-spacer></v-spacer>
 
                         <template>
@@ -45,10 +45,10 @@
                             <template v-if="dataset.selected.length > 1">
                                 <div>
                                     {{-- Bulk Restore --}}
-                                    <form action="{{ route('bookings.many.restore') }}" method="POST" class="inline">
+                                    <form action="{{ route('users.many.restore') }}" method="POST" class="inline">
                                         {{ csrf_field() }}
                                         <template v-for="item in dataset.selected">
-                                            <input type="hidden" name="bookings[]" :value="item.id">
+                                            <input type="hidden" name="users[]" :value="item.id">
                                         </template>
                                         <button type="submit" v-tooltip:left="{'html': `Restore ${dataset.selected.length} selected items`}" class="btn btn--flat btn--icon"><span class="btn__content"><v-icon info>restore</v-icon></span></button>
                                     </form>
@@ -71,11 +71,11 @@
                                             <v-card-actions>
                                                 <v-btn class="grey--text darken-1" flat @click.native.stop="dataset.dialog.model=false">{{ __('Cancel') }}</v-btn>
                                                 <v-spacer></v-spacer>
-                                                <form action="{{ route('bookings.many.delete') }}" method="POST" class="inline">
+                                                <form action="{{ route('users.many.delete') }}" method="POST" class="inline">
                                                     {{ csrf_field() }}
                                                     {{ method_field('DELETE') }}
                                                     <template v-for="item in dataset.selected">
-                                                        <input type="hidden" name="bookings[]" :value="item.id">
+                                                        <input type="hidden" name="users[]" :value="item.id">
                                                     </template>
                                                     <button type="submit" class="btn btn--flat error--text"><span class="btn__content">{{ __('Delete All Selected Forever') }}</span></button>
                                                 </form>
@@ -116,14 +116,15 @@
                                 ></v-checkbox>
                             </td>
                             <td>@{{ prop.item.id }}</td>
-                            <td width="20%"><strong>@{{ prop.item.title }}</strong></td>
+                            <td width="20%"><strong>@{{ prop.item.fullname }}</strong></td>
                             <td width="20%"><strong>@{{ prop.item.code }}</strong></td>
                             <td>@{{ prop.item.created }}</td>
+                            <td>@{{ prop.item.modified }}</td>
                             <td class="text-xs-center">
                                 <v-menu bottom left>
                                     <v-btn icon flat slot="activator" v-tooltip:bottom="{ html: 'More Actions' }"><v-icon>more_vert</v-icon></v-btn>
                                     <v-list>
-                                        <v-list-tile ripple @click="post(route(urls.bookings.api.restore, (prop.item.id)))">
+                                        <v-list-tile ripple @click="post(route(urls.users.api.restore, (prop.item.id)))">
                                             <v-list-tile-action>
                                                 <v-icon info>restore</v-icon>
                                             </v-list-tile-action>
@@ -165,7 +166,7 @@
             <v-card-actions>
                 <v-btn class="green--text darken-1" flat @click.native="resource.dialog.model=false">{{ __('Cancel') }}</v-btn>
                 <v-spacer></v-spacer>
-                <form :action="route(urls.bookings.delete, (resource.dialog.data.id))" method="POST" class="inline">
+                <form :action="route(urls.users.delete, (resource.dialog.data.id))" method="POST" class="inline">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <v-btn type="submit" flat class="error error--text">{{ __('Delete Forever') }}</v-btn>
@@ -207,13 +208,14 @@
                             { text: '{{ __("ID") }}', align: 'left', value: 'id' },
                             { text: '{{ __("Name") }}', align: 'left', value: 'name' },
                             { text: '{{ __("Code") }}', align: 'left', value: 'code' },
+                            { text: '{{ __("Created") }}', align: 'left', value: 'created_at' },
                             { text: '{{ __("Last Modified") }}', align: 'left', value: 'updated_at' },
                             { text: '{{ __("Actions") }}', align: 'center', sortable: false, value: 'updated_at' },
                         ],
                         items: [],
                         loading: true,
                         pagination: {
-                            rowsPerBooking: 5,
+                            rowsPerUser: 5,
                             totalItems: 0,
                             trashedOnly: true,
                         },
@@ -237,13 +239,13 @@
                         }
                     },
                     urls: {
-                        bookings: {
+                        users: {
                             api: {
-                                restore: '{{ route('api.bookings.restore', 'null') }}',
-                                delete: '{{ route('api.bookings.delete', 'null') }}',
+                                restore: '{{ route('api.users.restore', 'null') }}',
+                                delete: '{{ route('api.users.delete', 'null') }}',
                             },
-                            restore: '{{ route('bookings.restore', 'null') }}',
-                            delete: '{{ route('bookings.delete', 'null') }}',
+                            restore: '{{ route('users.restore', 'null') }}',
+                            delete: '{{ route('users.delete', 'null') }}',
                         },
                     },
 
@@ -267,18 +269,18 @@
 
                 'dataset.searchform.query': function (filter) {
                     setTimeout(() => {
-                        const { sortBy, descending, booking, rowsPerBooking, totalItems } = this.dataset.pagination;
+                        const { sortBy, descending, user, rowsPerUser, totalItems } = this.dataset.pagination;
 
                         let query = {
                             descending: descending,
-                            booking: booking,
+                            user: user,
                             q: filter,
                             sort: sortBy,
-                            take: rowsPerBooking,
+                            take: rowsPerUser,
                             trashedOnly: this.dataset.pagination.trashedOnly,
                         };
 
-                        this.api().search('{{ route('api.bookings.search') }}', query)
+                        this.api().search('{{ route('api.users.search') }}', query)
                             .then((data) => {
                                 this.dataset.items = data.items.data ? data.items.data : data.items;
                                 this.dataset.totalItems = data.items.total ? data.items.total : data.total;
@@ -290,7 +292,7 @@
 
             methods: {
                 get () {
-                    this.api().get('{{ route('api.bookings.all') }}', this.dataset.pagination)
+                    this.api().get('{{ route('api.users.all') }}', this.dataset.pagination)
                         .then((data) => {
                             this.dataset.items = data.items.data ? data.items.data : data.items;
                             this.dataset.totalItems = data.items.total ? data.items.total : data.total;
@@ -303,7 +305,7 @@
                     this.api().post(url, query)
                         .then((data) => {
                             console.log(data);
-                            self.get('{{ route('api.bookings.all') }}');
+                            self.get('{{ route('api.users.all') }}');
                             self.snackbar = Object.assign(self.snackbar, data.items);
                             self.snackbar.model = true;
                         });
@@ -313,7 +315,7 @@
                     var self = this;
                     this.api().delete(url, query)
                         .then((data) => {
-                            self.get('{{ route('api.bookings.all') }}');
+                            self.get('{{ route('api.users.all') }}');
                             self.snackbar = Object.assign(self.snackbar, data);
                             self.snackbar.model = true;
                         });

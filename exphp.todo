@@ -69,7 +69,6 @@ align-top justify-center
 ☐ partnership
 ☐ meet the team
 
-
 Template:
 {{--
 Template Name: TemplateName Template
@@ -79,22 +78,18 @@ Version: 1.0
 --}}
 
 TODO:
-☐ Dynamic Navigation page
+✔ Dynamic Navigation page
 ✔ Experiences Footer
 ☐ Page Templates (About Us, etc)
-☐ Pack and Go
-☐ Become a Host
-☐ CSS: page desc
+☐ Booking
+☐ Host An Experience
+☐ CSS: Page Desc
 ☐ Delete btn review and comments
-☐ display categories
+☐ Display categories
+☐ Bookings - forms
 
-Note (before end of the year):
-HomeController
-Categories
-Roadtrips
-Bookings - forms
 
+Pluma:
 pluma (login and register form)
 template registration successful
-hero 3 images
 

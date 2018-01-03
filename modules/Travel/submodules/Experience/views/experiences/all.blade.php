@@ -83,7 +83,7 @@
                 :nudge-width="150"
                 >
                 <v-btn class="grey--text text--darken-1" flat slot="activator">Categories <v-icon>keyboard_arrow_down</v-icon></v-btn>
-                    <v-list>
+                <v-list>
                     <v-list-tile ripple avatar v-for="item in types" v-bind:key="item.title" @click="">
                         <v-list-tile-action>
                             <v-icon color="pink">check_box_outline_blank</v-icon>
@@ -93,7 +93,6 @@
                         </v-list-tile-content>
                     </v-list-tile>
                 </v-list>
-
             </v-menu>
         </v-card-text>
     </v-card>
@@ -158,7 +157,7 @@
                                         </v-toolbar>
                                         <v-card-text class="grey--text pt-4">
                                             {{-- <v-icon v-if="card.categoryname" class="subheading grey--text text--lighten-1 pb-1">whatshot</v-icon> --}}
-                                            <v-icon class="subheading">whatshot</v-icon> fgfgf
+                                            <v-icon class="subheading">whatshot</v-icon>
                                             <span v-if="card.categoryname" class="caption">@{{ card.categoryname }}</span>
                                             <div>
                                                 <span class="star-rating-system" :data-rating="card.rating">
