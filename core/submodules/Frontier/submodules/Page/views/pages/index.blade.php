@@ -62,7 +62,7 @@
                             href="{{ route('pages.trash') }}"
                             light
                             v-tooltip:left="{'html': `View trashed items`}"
-                        ><v-icon class="grey--after" v-badge:{{ $trashed }}.overlap>archive</v-icon></v-btn>
+                        ><v-icon class="primary--after" v-badge:{{ $trashed }}.overlap>archive</v-icon></v-btn>
                         {{-- /Trashed --}}
                     </v-toolbar>
 
