@@ -408,7 +408,24 @@
                                         </v-text-field>
                                     </v-card>
                                     <div class="text-xs-center">
-                                        <v-btn primary large round class="elevation-1 px-4" href="">{{ __('Get Going') }}</v-btn>
+                                        <v-dialog v-model="dialog.getgoing" fullscreen transition="dialog-bottom-transition" :overlay=false>
+                                            <v-btn primary large round class="elevation-1 px-4" slot="activator">{{ __('Get Going') }}</v-btn>
+                                            <v-card>
+                                                <v-toolbar dark class="elevation-1 blue">
+                                                  <v-btn icon @click.native="dialog = false" dark>
+                                                    <v-icon>close</v-icon>
+                                                  </v-btn>
+                                                  <v-toolbar-title>[Title of Surprise Trip]</v-toolbar-title>
+                                                  <v-spacer></v-spacer>
+                                                  <v-toolbar-items>
+                                                    <v-btn dark flat @click.native="dialog = false">Submit</v-btn>
+                                                  </v-toolbar-items>
+                                                </v-toolbar>
+                                                <v-card-text>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt earum unde adipisci quidem assumenda reiciendis ab in delectus totam laboriosam, consectetur! Fuga expedita, voluptates laboriosam ipsa doloremque praesentium necessitatibus assumenda.
+                                                </v-card-text>
+                                            </v-card>
+                                        </v-dialog>
                                     </div>
                                 </v-card-text>
                                 <v-divider></v-divider>

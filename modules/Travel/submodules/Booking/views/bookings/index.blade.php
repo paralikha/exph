@@ -171,6 +171,16 @@
                             this.dataset.loading = false;
                         });
                 },
+
+                destroy (url, query) {
+                    var self = this;
+                    this.api().delete(url, query)
+                        .then((data) => {
+                            self.get('{{ route('api.bookings.all') }}');
+                            self.snackbar = Object.assign(self.snackbar, data.response.body);
+                            self.snackbar.model = true;
+                        });
+                },
             },
 
             mounted () {
