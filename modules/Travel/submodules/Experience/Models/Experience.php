@@ -8,6 +8,7 @@ use DateTime;
 use Experience\Models\Availability;
 use Experience\Support\Traits\BelongsToManyAmenities;
 use Experience\Support\Traits\MorphToManyRating;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Pluma\Models\Model;
 use User\Support\Traits\BelongsToUser;
@@ -18,9 +19,20 @@ class Experience extends Model
 
     protected $with = [];
 
-    protected $appends = ['amount', 'date', 'categoryname', 'url', 'manager', 'created', 'modified'];
+    protected $fillable = ['id', 'name'];
 
-    protected $searchables = ['created_at', 'updated_at'];
+    protected $appends = ['amount', 'date', 'categoryname', 'url', 'manager', 'created', 'removed', 'modified'];
+
+    protected $searchables = ['name', 'price', 'created_at', 'updated_at'];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('type', function (Builder $builder) {
+            $builder->where('type', 'experience');
+        });
+    }
 
     public function availabilities()
     {

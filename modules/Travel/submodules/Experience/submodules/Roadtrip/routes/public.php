@@ -1,3 +1,3 @@
 <?php
 
-Route::resource('roadtrips', 'Roadtrip\Controllers\RoadtripController');
+Route::get('roadtrips', '\Roadtrip\Controllers\RoadtripController@all')->name('roadtrips.all');

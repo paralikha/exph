@@ -1,13 +1,12 @@
 <?php
 
-namespace Experience\API\Controllers;
+namespace Roadtrip\API\Controllers;
 
-use Experience\Models\Experience;
-use Experience\Models\Rating;
 use Illuminate\Http\Request;
 use Pluma\API\Controllers\APIController;
+use Experience\Models\Amenity;
 
-class ExperienceController extends APIController
+class AmenityController extends APIController
 {
     /**
      * Search the resource.
@@ -17,13 +16,13 @@ class ExperienceController extends APIController
      */
     public function search(Request $request)
     {
-        $onlyTrashed = $request->get('only_trashed') !== 'null' && $request->get('only_trashed') ? $request->get('only_trashed'): false;
+        $onlyTrashed = $request->get('trashedOnly') !== 'null' && $request->get('trashedOnly') ? $request->get('trashedOnly'): false;
         $order = $request->get('descending') === 'true' && $request->get('descending') !== 'null' ? 'DESC' : 'ASC';
         $search = $request->get('q') !== 'null' && $request->get('q') ? $request->get('q'): '';
         $sort = $request->get('sort') && $request->get('sort') !== 'null' ? $request->get('sort') : 'id';
         $take = $request->get('take') && $request->get('take') > 0 ? $request->get('take') : 0;
 
-        $resources = Experience::search($search)->orderBy($sort, $order);
+        $resources = Amenity::search($search)->orderBy($sort, $order);
         if ($onlyTrashed) {
             $resources->onlyTrashed();
         }
@@ -40,13 +39,13 @@ class ExperienceController extends APIController
      */
     public function all(Request $request)
     {
-        $onlyTrashed = $request->get('only_trashed') !== 'null' && $request->get('only_trashed') ? $request->get('only_trashed'): false;
+        $onlyTrashed = $request->get('trashedOnly') !== 'null' && $request->get('trashedOnly') ? $request->get('trashedOnly'): false;
         $order = $request->get('descending') === 'true' && $request->get('descending') !== 'null' ? 'DESC' : 'ASC';
         $search = $request->get('q') !== 'null' && $request->get('q') ? $request->get('q'): '';
         $sort = $request->get('sort') && $request->get('sort') !== 'null' ? $request->get('sort') : 'id';
         $take = $request->get('take') && $request->get('take') > 0 ? $request->get('take') : 0;
 
-        $resources = Experience::search($search)->orderBy($sort, $order);
+        $resources = Amenity::search($search)->orderBy($sort, $order);
         if ($onlyTrashed) {
             $resources->onlyTrashed();
         }
@@ -68,22 +67,9 @@ class ExperienceController extends APIController
         $sort = $request->get('sort') && $request->get('sort') !== 'null' ? $request->get('sort') : 'id';
         $order = $request->get('descending') === 'true' && $request->get('descending') !== 'null' ? 'DESC' : 'ASC';
 
-        $permissions = Experience::search($search)->orderBy($sort, $order)->onlyTrashed()->paginate($take);
+        $permissions = Amenity::search($search)->orderBy($sort, $order)->onlyTrashed()->paginate($take);
 
         return response()->json($permissions);
-    }
-
-    /**
-     * Gets the grants.
-     *
-     * @param  array $modules
-     * @return void
-     */
-    public function grants($modules = null)
-    {
-        $grants = Grant::pluck('name', 'id');
-
-        return response()->json($grants);
     }
 
     /**
@@ -95,16 +81,16 @@ class ExperienceController extends APIController
      */
     public function destroy(Request $request, $id)
     {
-        $page = Experience::findOrFail($id);
+        $catalogue = Amenity::findOrFail($id);
 
-        if (in_array($page->code, config('auth.rootpages', []))) {
-            $this->errorResponse['text'] = "Deleting Root Experiences is not permitted";
+        if (in_array($catalogue->code, config('auth.rootcatalogues', []))) {
+            $this->errorResponse['text'] = "Deleting Root Amenities is not permitted";
 
             return response()->json($this->errorResponse);
         }
 
-        $this->successResponse['text'] = "{$page->name} moved to trash.";
-        $page->delete();
+        $this->successResponse['text'] = "{$catalogue->name} moved to trash.";
+        $catalogue->delete();
 
         return response()->json($this->successResponse);
     }
@@ -117,14 +103,15 @@ class ExperienceController extends APIController
      */
     public function clone(Request $request, $id)
     {
-        $page = Experience::findOrFail($id);
+        $catalogue = Amenity::findOrFail($id);
 
-        $clone = new Experience();
-        $clone->name = $page->name;
-        $clone->code = "{$page->code}-clone-".rand((int) $id, (int) date('Y'));
-        $clone->description = $page->description;
+        $clone = new Amenity();
+        $clone->name = $catalogue->name;
+        $clone->icon = $catalogue->icon;
+        $clone->alias = $catalogue->alias;
+        $clone->code = "{$catalogue->code}-clone-".rand((int) $id, (int) date('Y'));
+        $clone->description = $catalogue->description;
         $clone->save();
-        $clone->grants()->attach($page->grants->pluck('id')->toArray());
 
         return response()->json($this->successResponse);
     }
@@ -138,8 +125,8 @@ class ExperienceController extends APIController
      */
     public function restore(Request $request, $id)
     {
-        $page = Experience::onlyTrashed()->findOrFail($id);
-        $page->restore();
+        $catalogue = Amenity::onlyTrashed()->findOrFail($id);
+        $catalogue->restore();
 
         return response()->json($this->successResponse);
     }
@@ -152,23 +139,8 @@ class ExperienceController extends APIController
      */
     public function delete(Request $request, $id)
     {
-        $page = Experience::withTrashed()->findOrFail($id);
-        $page->forceDelete();
-
-        return response()->json($this->successResponse);
-    }
-
-    /**
-     * Rate.
-     * @param  Request $request
-     * @return            [description]
-     */
-    public function rate(Request $request, $id)
-    {
-        $experience = Experience::find($id);
-        $experience->ratings()->save(Rating::updateOrCreate(['user_id' => $request->input('user_id')], $request->except(['_token'])));
-        $experience->rating = Rating::compute($experience->id, get_class(new Experience));
-        $experience->save();
+        $catalogue = Amenity::withTrashed()->findOrFail($id);
+        $catalogue->forceDelete();
 
         return response()->json($this->successResponse);
     }

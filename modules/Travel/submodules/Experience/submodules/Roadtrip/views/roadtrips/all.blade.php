@@ -35,7 +35,7 @@
                     <v-card-actions>
                         <v-btn flat class="grey--text" @click.stop="search.dateform.model = !search.dateform.model">Cancel</v-btn>
                         <v-spacer></v-spacer>
-                        <form action="{{ route('experiences.all') }}" method="GET">
+                        <form action="{{ route('roadtrips.all') }}" method="GET">
                             <input type="hidden" name="date_from" :value="search.from">
                             <input type="hidden" name="date_to" :value="search.to">
                             <input v-if="search.category" type="hidden" name="category_id" :value="search.to">
@@ -81,7 +81,7 @@
                 :nudge-width="150"
                 >
                 <v-btn class="grey--text text--darken-1" flat slot="activator">Categories <v-icon>keyboard_arrow_down</v-icon></v-btn>
-                <v-list>
+                    <v-list>
                     <v-list-tile ripple avatar v-for="item in types" v-bind:key="item.title" @click="">
                         <v-list-tile-action>
                             <v-icon color="pink">check_box_outline_blank</v-icon>
@@ -91,6 +91,7 @@
                         </v-list-tile-content>
                     </v-list-tile>
                 </v-list>
+
             </v-menu>
         </v-card-text>
     </v-card>
@@ -100,13 +101,13 @@
             <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.4); position: absolute; width: 100%; height: 100%;"></div>
             <v-layout column align-center justify-center class="white--text">
                 <v-card dark class="elevation-0 transparent">
-                    <h2 class="mb-2 text-xs-center"><strong>{{ __("EXPERIENCES") }}</strong></h2>
+                    <h2 class="mb-2 text-xs-center"><strong>{{ __("ROADTRIPS") }}</strong></h2>
                     <h5 class="mb-3 text-xs-center fw-500">{{__("A Road Trip For The Adventure Seekers")}}</h5>
             </v-layout>
         </v-parallax>
     </v-card>
 
-    <section id="experiences" class="py-5">
+    <section id="roadtrips" class="py-5">
         <v-container fluid grid-list-lg>
             @if (! $resources->count())
                 <v-layout row wrap>
@@ -115,9 +116,11 @@
                             <v-card-text class="text-xs-center my-3">
                                 <img src="{{ assets('frontier/images/public/sad.png') }}" alt="" height="80" class="mb-3">
                                 <h2 class="subheading grey--text">
-                                    {{ __("No Experiences found with those parameters.") }}
+                                    {{ __("No Roadtrips found with those parameters.") }}
                                 </h2>
-                                <v-btn large href="{{ route('experiences.create') }}" class="primary subheading">{{ __('Create New Experience') }}</v-btn>
+                                @if (user())
+                                    <v-btn large href="{{ route('roadtrips.create') }}" class="primary subheading">{{ __('Create New Roadtrip') }}</v-btn>
+                                @endif
                             </v-card-text>
                         </v-card>
                     </v-flex>
@@ -126,13 +129,13 @@
                 <v-layout row wrap align-center justify-center>
                     <v-flex lg10 xs12>
                         <v-card-text class="text-xs-center my-3">
-                            <h2 class="display-1">{{ __("CHOOSE AN EXPERIENCE") }}</h2>
+                            <h2 class="display-1">{{ __("CHOOSE AN ROADTRIP") }}</h2>
                             <h2 class="subheading grey--text text--darken-1">
-                                {{ __("Discover more about yourself, about others and about the beautiful country called the Philippines. Book your Experience with us now.") }}
+                                {{ __("Discover more about yourself, about others and about the beautiful country called the Philippines. Book your Roadtrip with us now.") }}
                             </h2>
                         </v-card-text>
                         <v-layout row wrap align-center>
-                            <v-flex xs12 sm4 md3 v-for="(card, key) in experiences.data" :key="key">
+                            <v-flex xs12 sm4 md3 v-for="(card, key) in roadtrips.data" :key="key">
                                 <a :href="card.url" ripple class="td-n">
                                     <v-card class="elevation-1 c-lift">
                                         <v-card-media
@@ -155,7 +158,7 @@
                                         </v-toolbar>
                                         <v-card-text class="grey--text pt-4">
                                             {{-- <v-icon v-if="card.categoryname" class="subheading grey--text text--lighten-1 pb-1">whatshot</v-icon> --}}
-                                            <v-icon class="subheading">whatshot</v-icon>
+                                            <v-icon class="subheading">whatshot</v-icon> fgfgf
                                             <span v-if="card.categoryname" class="caption">@{{ card.categoryname }}</span>
                                             <div>
                                                 <span class="star-rating-system" :data-rating="card.rating">
@@ -174,7 +177,7 @@
                         <v-card-text>
                             <div class="text-xs-center">
                                 @include("Theme::partials.pagination")
-                                {{-- <v-pagination circle :length="experiences.length" v-model="page" :total-visible="8" class="caption main-paginate"></v-pagination> --}}
+                                {{-- <v-pagination circle :length="roadtrips.length" v-model="page" :total-visible="8" class="caption main-paginate"></v-pagination> --}}
                             </div>
                         </v-card-text>
                     </v-flex>
@@ -352,7 +355,7 @@
                     },
                     menu: false,
                     page: 1,
-                    experiences: {!! json_encode($resources->toArray()) !!},
+                    roadtrips: {!! json_encode($resources->toArray()) !!},
                 }
             },
             mounted () {

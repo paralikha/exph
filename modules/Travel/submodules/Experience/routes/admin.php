@@ -19,12 +19,18 @@ Route::post('experiences/{experience}/rate', 'Experience\API\Controllers\Experie
 //Review
 Route::post('experiences/{experience}/review', 'Experience\Controllers\ExperienceController@review')->name('experiences.review');
 
-// Normal
-Route::resource('experiences', 'Experience\Controllers\ExperienceController')->except(['show']);
+// SoftDeletes
+Route::delete('experiences/{experience}/delete', '\Experience\Controllers\ExperienceController@delete')->name('experiences.delete');
+Route::get('experiences/trashed', '\Experience\Controllers\ExperienceController@trashed')->name('experiences.trashed');
 
-// Category
+Route::patch('experiences/{experience}/restore', '\Experience\Controllers\ExperienceController@restore')->name('experiences.restore');
+
+// Normal
+Route::resource('experiences', '\Experience\Controllers\ExperienceController')->except(['show']);
+
+// Amenities
 Route::resource('experiences/amenities', 'Experience\Controllers\AmenityController');
 
-
+// Category
 Route::get('experiences/categories', 'Experience\Controllers\CategoryController@index')->name('experiences.categories.index');
 Route::post('experiences/categories', 'Experience\Controllers\CategoryController@store')->name('experiences.categories.store');

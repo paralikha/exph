@@ -24,6 +24,13 @@ return [
                 'order' => 1,
                 'slug' => url(config('path.admin').'/roadtrips'),
                 'always_viewable' => false,
+                'routes' => [
+                    'name' => 'roadtrips.index',
+                    'children' => [
+                        'roadtrips.edit',
+                        'roadtrips.show',
+                    ]
+                ],
                 'labels' => [
                     'title' => __('All Roadtrips'),
                     'description' => __('View the list of all roadtrips'),
@@ -42,7 +49,8 @@ return [
             'trashed-roadtrip' => [
                 'name' => 'trashed-roadtrip',
                 'order' => 3,
-                'slug' => url(config('path.admin').'/roadtrips/trashed'),
+                'icon' => 'delete',
+                'slug' => route('roadtrips.trashed'),
                 'always_viewable' => false,
                 'labels' => [
                     'title' => __('Trashed Roadtrips'),
