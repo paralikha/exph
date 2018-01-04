@@ -256,40 +256,79 @@
                                 </v-card>
                             </v-card-text>
                         </v-card-media>
-                        <v-list two-line>
-                            <v-list-tile>
-                                <v-list-tile-action>
-                                    <v-icon color="indigo">date_range</v-icon>
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title>{{ $resource->date }}</v-list-tile-title>
-                                    <v-list-tile-sub-title>{{ $resource->days }}</v-list-tile-sub-title>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                            <v-list-tile>
-                                <v-list-tile-action>
-                                    <v-icon color="indigo">schedule</v-icon>
-                                </v-list-tile-action>
-                                <v-list-tile-content>
-                                    <v-list-tile-title>{{ "$resource->time" }}</v-list-tile-title>
-                                    <v-list-tile-sub-title>{{ __($resource->day) }}</v-list-tile-sub-title>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                            <v-divider></v-divider>
-                            <v-card-text class="text-xs-center pa-1">
-                                <!-- @include("Theme::recursives.main-menu", ['items' => get_navmenus('social-menu')]) -->
-                                <v-card-text class="text-xs-center pa-1">
-                                        <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
-                                        <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
-                                        <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-google</v-icon></v-btn>
-                                    </v-card-text>
-                            </v-card-text>
-                        </v-list>
-                        <div class="text-xs-center">
-                            <v-btn primary large round class="elevation-1 px-4" href="{{ route('experiences.details', $resource->code) }}">{{ __('Experience Now') }}</v-btn>
-                        </div>
-                    </v-card>
 
+                        <v-card-text>
+                            {{-- selection of dates --}}
+                            {{-- <v-select
+                                label="Select"
+                                v-bind:items="people"
+                                v-model="e11"
+                                item-text="name"
+                                item-value="name"
+                                multiple
+                                chips
+                                max-height="auto"
+                                autocomplete
+                                >
+                                <template slot="selection" slot-scope="data">
+                                    <v-chip
+                                        close
+                                        @input="data.parent.selectItem(data.item)"
+                                        :selected="data.selected"
+                                        class="chip--select-multi"
+                                        :key="JSON.stringify(data.item)"
+                                        >
+                                        <v-avatar>
+                                            <img :src="data.item.avatar">
+                                        </v-avatar>
+                                        @{{ data.item.name }}
+                                    </v-chip>
+                                </template>
+                                <template slot="item" slot-scope="data">
+                                    <template v-if="typeof data.item !== 'object'">
+                                        <v-list-tile-content v-text="data.item"></v-list-tile-content>
+                                    </template>
+                                    <template v-else>
+                                        <v-list-tile-avatar>
+                                            <img v-bind:src="data.item.avatar"/>
+                                        </v-list-tile-avatar>
+                                        <v-list-tile-content>
+                                            <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
+                                            <v-list-tile-sub-title v-html="data.item.group"></v-list-tile-sub-title>
+                                        </v-list-tile-content>
+                                    </template>
+                                </template>
+                            </v-select> --}}
+
+                            <v-card class="elevation-1 mb-3">
+                                <v-select
+                                    v-bind:items="budget"
+                                    v-model="budgets"
+                                    autocomplete
+                                    label="Select a budget.."
+                                    append-icon="keyboard_arrow_down"
+                                    prepend-icon=""
+                                    clearable
+                                    search-input
+                                    solo>
+                                </v-select>
+                            </v-card>
+                            {{-- /selection of dates --}}
+
+                            <div class="text-xs-center">
+                                <v-btn primary large round class="elevation-1 px-4" href="{{ route('experiences.details', $resource->code) }}">{{ __('Experience Now') }}</v-btn>
+                            </div>
+                        </v-card-text>
+                        <v-divider></v-divider>
+                        <v-card-text class="text-xs-center pa-1">
+                            <!-- @include("Theme::recursives.main-menu", ['items' => get_navmenus('social-menu')]) -->
+                            <v-card-text class="text-xs-center pa-1">
+                                    <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
+                                    <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
+                                    <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-google</v-icon></v-btn>
+                                </v-card-text>
+                        </v-card-text>
+                    </v-card>
                     <v-card class="elevation-1 mb-3">
                         <v-list subheader class="py-0">
                             <v-subheader>Frequently Asked Questions</v-subheader>
@@ -515,7 +554,38 @@
 
         mixins.push({
             data () {
+                let srcs = {
+                  1: '{{ assets('frontier/images/placeholder/red2.jpg') }}',
+                  2: '{{ assets('frontier/images/placeholder/red2.jpg') }}',
+                  3: '{{ assets('frontier/images/placeholder/red2.jpg') }}',
+                  4: '{{ assets('frontier/images/placeholder/red2.jpg') }}',
+                  5: '{{ assets('frontier/images/placeholder/red2.jpg') }}'
+                }
                 return {
+                    e11: [],
+                    people: [
+                        { header: 'Group 1'},
+                        { name: 'Sandra Adams', group: 'Group 1', avatar: srcs[1] },
+                        { name: 'Ali Connors', group: 'Group 1', avatar: srcs[2] },
+                        { name: 'Trevor Hansen', group: 'Group 1', avatar: srcs[3] },
+                        { name: 'Tucker Smith', group: 'Group 1', avatar: srcs[2] },
+                        { divider: true },
+                        { header: 'Group 2'},
+                        { name: 'Britta Holt', group: 'Group 2', avatar: srcs[4] },
+                        { name: 'Jane Smith ', group: 'Group 2', avatar: srcs[5] },
+                        { name: 'John Smith', group: 'Group 2', avatar: srcs[1] },
+                        { name: 'Sandra Williams', group: 'Group 2', avatar: srcs[3] }
+                    ],
+                    budgets: null,
+                    budget: [
+                        { text: '₱ 1,000' },
+                        { text: '₱ 1,500' },
+                        { text: '₱ 2,000' },
+                        { text: '₱ 2,500' },
+                        { text: '₱ 3,000' },
+                        { text: '₱ 3,500' },
+                        { text: '₱ 4,000' }
+                    ],
                     e1: 'recent',
                     from: null,
                     to: null,
