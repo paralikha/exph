@@ -246,14 +246,17 @@
                                     <div class="display-2 white--text"><span class="fw-500">{{ $resource->amount }}</span></div>
                                     <div class="body-2 white--text mb-2">{{ __('per person') }}</span></div>
                                     <div>
-                                        @if (user())
-                                            <span class="star-rating-system" data-rating="{{ $resource->rating }}"></span>
-                                        @else
+                                        {{-- @if (user()) --}}
+                                            {{-- <span class="star-rating-system" data-rating="{{ $resource->rating }}"></span> --}}
+                                        {{-- @else --}}
                                             <span class="star-rating-system--readonly" data-rating="{{ $resource->rating }}"></span>
-                                        @endif
+                                        {{-- @endif --}}
                                         <span class="caption">{{ $resource->rating }}</span>
                                     </div>
                                 </v-card>
+                                    <div class="text-xs-center">
+                                        <v-btn primary large round class="elevation-1 px-4" href="{{ route('experiences.details', $resource->code) }}">{{ __('Experience Now') }}</v-btn>
+                                    </div>
                             </v-card-text>
                         </v-card-media>
                         <v-list two-line>
@@ -285,9 +288,6 @@
                                     </v-card-text>
                             </v-card-text>
                         </v-list>
-                        <div class="text-xs-center">
-                            <v-btn primary large round class="elevation-1 px-4" href="{{ route('experiences.details', $resource->code) }}">{{ __('Experience Now') }}</v-btn>
-                        </div>
                     </v-card>
 
                     <v-card class="elevation-1 mb-3">
