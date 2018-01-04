@@ -12,7 +12,7 @@
                         <v-toolbar-title primary-title class="subheading accent--text">{{ __($application->page->title) }}</v-toolbar-title>
                         <v-spacer></v-spacer>
 
-                        @include("Experience::toolbar.batch")
+                        @include("Travel::toolbar.batch")
 
                     </v-toolbar>
 
@@ -59,18 +59,13 @@
                                                 </v-list-tile-title>
                                             </v-list-tile-content>
                                         </v-list-tile>
-                                        <v-list-tile ripple @click="$refs.destroy.submit()">
+                                        <v-list-tile ripple @click="destroy(route(dataset.urls.api.destroy, prop.item.id), {'_token': '{{ csrf_token() }}'})">
                                             <v-list-tile-action>
                                                 <v-icon warning>delete</v-icon>
                                             </v-list-tile-action>
                                             <v-list-tile-content>
                                                 <v-list-tile-title>
-                                                    <form ref="destroy" :action="route(dataset.urls.destroy, prop.item.id)" method="POST">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('DELETE') }}
-                                                        {{ __('Move to Trash') }}
-                                                        {{-- <v-btn type="submit">{{ __('Move to Trash') }}</v-btn> --}}
-                                                    </form>
+                                                    {{ __('Move to Trash') }}
                                                 </v-list-tile-title>
                                             </v-list-tile-content>
                                         </v-list-tile>

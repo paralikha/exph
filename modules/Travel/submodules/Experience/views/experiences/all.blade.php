@@ -15,7 +15,9 @@
                 :close-on-content-click="false"
                 v-model="search.dateform.model"
             >
-                <v-btn flat class="grey--text text--darken-1" slot="activator">{{ __('Dates') }}</v-btn>
+                <v-btn flat class="grey--text text--darken-1" slot="activator">
+                    {{ __('Dates') }}
+                </v-btn>
                 <v-card class="elevation-0 hidden-sm-and-down">
                     <v-card-text class="hidden-sm-and-down">
                         <v-layout row wrap grid-list-lg>

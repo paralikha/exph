@@ -19,7 +19,7 @@ class BillingController extends ShopController
      */
     public function detail(Request $request, $code)
     {
-        $resource = Experience::withoutGlobalScopes()->whereCode($code)->first();
+        $resource = Experience::whereCode($code)->first();
         $cart = Cart::items();
         $guests = Cart::has($resource->id)
             ? Cart::get($resource->id)->guests
