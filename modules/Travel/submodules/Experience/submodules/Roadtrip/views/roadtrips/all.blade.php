@@ -158,7 +158,7 @@
                                         </v-toolbar>
                                         <v-card-text class="grey--text pt-4">
                                             {{-- <v-icon v-if="card.categoryname" class="subheading grey--text text--lighten-1 pb-1">whatshot</v-icon> --}}
-                                            <v-icon class="subheading">whatshot</v-icon> fgfgf
+                                            <v-icon class="subheading">whatshot</v-icon>
                                             <span v-if="card.categoryname" class="caption">@{{ card.categoryname }}</span>
                                             <div>
                                                 <span class="star-rating-system" :data-rating="card.rating">
