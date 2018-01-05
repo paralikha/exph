@@ -2,9 +2,11 @@
 
 namespace Order\Models;
 
+use Carbon\Carbon;
 use Experience\Support\Traits\BelongsToExperience;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Pluma\Models\Model;
+use User\Models\User;
 
 class Order extends Model
 {
@@ -29,5 +31,15 @@ class Order extends Model
     public function getMetaAttribute()
     {
         return unserialize($this->metadata);
+    }
+
+    public function getCustomerAttribute()
+    {
+        return User::find($this->customer_id);
+    }
+
+    public function getPurchasedAttribute()
+    {
+        return Carbon::createFromTimeStamp(strtotime($this->purchased_at))->diffForHumans();
     }
 }

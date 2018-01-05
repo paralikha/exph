@@ -72,8 +72,8 @@ class ExperienceController extends AdminController
         $experience->user()->associate(User::find($request->input('user')));
 
         $start_date = date('Y-m-d H:i:s', strtotime($request->input('availabilities')[0]['date_start']));
-        $end = end($request->input('availabilities'));
-        reset($request->input('availabilities'));
+        $end = $request->input('availabilities');
+        $end = end($end);
         $end_date = date('Y-m-d H:i:s', strtotime($end['date_end']));
         $experience->date_start = $start_date;
         $experience->date_end = $end_date;
@@ -129,8 +129,8 @@ class ExperienceController extends AdminController
         $experience->reference_number = $request->input('reference_number');
 
         $start_date = date('Y-m-d H:i:s', strtotime($request->input('availabilities')[0]['date_start']));
-        $end = end($request->input('availabilities'));
-        reset($request->input('availabilities'));
+        $end = $request->input('availabilities');
+        $end = end($end);
         $end_date = date('Y-m-d H:i:s', strtotime($end['date_end']));
         $experience->date_start = $start_date;
         $experience->date_end = $end_date;
@@ -246,7 +246,7 @@ class ExperienceController extends AdminController
         $review->rating = $request->input('rating');
         $review->approved = true;
 
-        $experience = Experience::findOrFail($id);
+        $experience = Experience::withoutGlobalScopes()->findOrFail($id);
         $experience->reviews()->save($review);
         $experience->rating = Review::compute($id, get_class(new Experience));
         $experience->save();

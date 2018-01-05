@@ -221,7 +221,8 @@
                         </v-list-tile>
                     </v-list>
                 </v-card>
-                @include("Review::widgets.reviews")
+
+                @include("Review::widgets.reviews", ['url' => route('roadtrips.review', $resource->id)])
             </v-flex>
 
             <v-flex md3 xs12 class="hidden-sm-and-down">
@@ -247,11 +248,11 @@
                                     <div class="body-2 white--text mb-2">{{ __('per person') }}</span></div>
                                     <div>
                                         {{-- @if (user()) --}}
-                                            {{-- <span class="star-rating-system" data-rating="{{ $resource->rating }}"></span> --}}
+                                            {{-- <span class="star-rating-system" data-rating="{{ $resource->rate }}"></span> --}}
                                         {{-- @else --}}
-                                            <span class="star-rating-system--readonly" data-rating="{{ $resource->rating }}"></span>
+                                            <span class="star-rating-system--readonly" data-rating="{{ $resource->rate }}"></span>
                                         {{-- @endif --}}
-                                        <span class="caption">{{ $resource->rating }}</span>
+                                        <span class="caption">{{ $resource->rate }}</span>
                                     </div>
                                 </v-card>
                                     <div class="text-xs-center">
@@ -341,8 +342,8 @@
                                             <div class="body-2 white--text mb-2">per person</span></div>
 
                                             <div>
-                                                <span class="star-rating-system" data-rating="{{ $resource->rating }}"></span>
-                                                <span class="caption">{{ $resource->rating }}</span>
+                                                <span class="star-rating-system" data-rating="{{ $resource->rate }}"></span>
+                                                <span class="caption">{{ $resource->rate }}</span>
                                             </div>
                                         </v-card>
                                             <div class="text-xs-center">

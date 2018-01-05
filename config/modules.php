@@ -26,7 +26,7 @@ return [
      */
     'disabled' => [
         // 'Test',
-        'Shop',
+        // 'Shop',
         'Cart',
         'Billing',
         'Comment',

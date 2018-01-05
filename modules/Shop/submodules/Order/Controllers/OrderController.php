@@ -2,6 +2,7 @@
 
 namespace Order\Controllers;
 
+use Experience\Models\Order as ExperienceOrders;
 use Frontier\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Order\Models\Order;
@@ -17,9 +18,9 @@ class OrderController extends AdminController
      */
     public function index(Request $request)
     {
-        //
+        $resources = ExperienceOrders::paginate();
 
-        return view("Theme::orders.index");
+        return view("Theme::orders.index")->with(compact('resources'));
     }
 
     /**

@@ -121,4 +121,9 @@ class Experience extends Model
     {
         return $this->morphMany(\Review\Models\Review::class, 'reviewable');
     }
+
+    public function getRateAttribute()
+    {
+        return round($this->rating, 2);
+    }
 }
