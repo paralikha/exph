@@ -321,6 +321,7 @@
                             </v-card-text>
                         </v-card-text>
                     </v-card>
+
                     <v-card class="elevation-1 mb-3">
                         <v-list subheader class="py-0">
                             <v-subheader>Frequently Asked Questions</v-subheader>
@@ -365,48 +366,87 @@
                                 </v-toolbar>
                                 <v-card-media src="{{ assets('frontier/images/placeholder/red2.jpg') }}">
                                     <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.3); position: absolute; width: 100%; height: 100%;"></div>
+
                                     <v-card-text class="text-xs-center">
                                         <v-card dark class="elevation-0 transparent py-5">
                                             <div class="title pb-3 white--text"><strong>{{ $resource->name }}</strong></div>
-                                            <div class="display-2 white--text">{{ $resource->amount }}</span></div>
-                                            <div class="body-2 white--text mb-2">per person</span></div>
-
+                                            <div class="display-2 white--text"><span class="fw-500">{{ $resource->amount }}</span></div>
+                                            <div class="body-2 white--text mb-2">{{ __('per person') }}</span></div>
                                             <div>
-                                                <span class="star-rating-system" data-rating="{{ $resource->rating }}"></span>
+                                                @if (user())
+                                                    <span class="star-rating-system" data-rating="{{ $resource->rating }}"></span>
+                                                @else
+                                                    <span class="star-rating-system--readonly" data-rating="{{ $resource->rating }}"></span>
+                                                @endif
                                                 <span class="caption">{{ $resource->rating }}</span>
                                             </div>
                                         </v-card>
-                                            <div class="text-xs-center">
-                                                <v-btn primary large round class="elevation-1 px-4" href="{{ route('experiences.details', $resource->code) }}">Experience Now</v-btn>
-                                            </div>
                                     </v-card-text>
                                 </v-card-media>
-                                <v-list two-line>
-                                    <v-list-tile>
-                                        <v-list-tile-action>
-                                            <v-icon color="indigo">date_range</v-icon>
-                                        </v-list-tile-action>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title>{{ $resource->date }}</v-list-tile-title>
-                                            <v-list-tile-sub-title>{{ $resource->days }}</v-list-tile-sub-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                    <v-list-tile>
-                                        <v-list-tile-action>
-                                            <v-icon color="indigo">schedule</v-icon>
-                                        </v-list-tile-action>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title>{{ "$resource->time" }}</v-list-tile-title>
-                                            <v-list-tile-sub-title>3{{ __($resource->day) }}</v-list-tile-sub-title>
-                                        </v-list-tile-content>
-                                    </v-list-tile>
-                                    <v-divider></v-divider>
+
+                                <v-card-text>
+                                    {{-- selection of dates --}}
+                                    <v-card class="elevation-1 mb-3 pick-sched">
+                                        <v-select
+                                            label="Pick a schedule"
+                                            v-bind:items="people"
+                                            v-model="e11"
+                                            item-text="name"
+                                            append-icon="keyboard_arrow_down"
+                                            prepend-icon=""
+                                            item-value="name"
+                                            max-height="auto"
+                                            autocomplete
+                                            search-input
+                                            clearable
+                                            solo
+                                            >
+                                            <template slot="selection" scope="data">
+                                                <v-chip
+                                                    close
+                                                    @input="data.parent.selectItem(data.item)"
+                                                    :selected="data.selected"
+                                                    class="chip--select-multi"
+                                                    :key="JSON.stringify(data.item)"
+                                                    >
+                                                    {{-- <v-avatar>
+                                                        <img :src="data.item.avatar">
+                                                    </v-avatar> --}}
+                                                    @{{ data.item.name }}
+                                                    @{{ data.item.time }}
+                                                </v-chip>
+                                            </template>
+                                            <template slot="item" scope="data">
+                                                <template v-if="typeof data.item !== 'object'">
+                                                    <v-list-tile-content v-text="data.item"></v-list-tile-content>
+                                                </template>
+                                                <template v-else>
+                                                    {{-- <v-list-tile-avatar>
+                                                        <img v-bind:src="data.item.avatar"/>
+                                                    </v-list-tile-avatar> --}}
+                                                    <v-list-tile-content>
+                                                        <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
+                                                        <v-list-tile-sub-title v-html="data.item.time"></v-list-tile-sub-title>
+                                                    </v-list-tile-content>
+                                                </template>
+                                            </template>
+                                        </v-select>
+                                    </v-card>
+                                    {{-- /selection of dates --}}
+
+                                    <div class="text-xs-center">
+                                        <v-btn primary large round class="elevation-1 px-4" href="{{ route('experiences.details', $resource->code) }}">{{ __('Experience Now') }}</v-btn>
+                                    </div>
+                                </v-card-text>
+                                <v-divider></v-divider>
+                                <v-card-text class="text-xs-center pa-1">
+                                    <!-- @include("Theme::recursives.main-menu", ['items' => get_navmenus('social-menu')]) -->
                                     <v-card-text class="text-xs-center pa-1">
                                         <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
                                         <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
                                         <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-google</v-icon></v-btn>
                                     </v-card-text>
-                                </v-list>
+                                </v-card-text>
                                 <v-divider></v-divider>
                                 <v-list subheader class="py-3">
                                     <v-list-tile avatar>
@@ -567,10 +607,10 @@
                         { name: 'Jan 13 - Jan 16', time: '2:00pm - 5:00pm' },
                         { divider: true },
                         { header: 'February 2018'},
-                        { name: 'Jan 01 2:00pm - Jan 04 5:00pm', time: '2:00pm - 5:00pm' },
-                        { name: 'Jan 05 2:00pm - Jan 08 5:00pm', time: '2:00pm - 5:00pm' },
-                        { name: 'Jan 09 2:00pm - Jan 12 5:00pm', time: '2:00pm - 5:00pm' },
-                        { name: 'Jan 13 2:00pm - Jan 16 5:00pm', time: '2:00pm - 5:00pm' },
+                        { name: 'Feb 01 - Feb 04', time: '2:00pm - 5:00pm' },
+                        { name: 'Feb 05 - Feb 08', time: '2:00pm - 5:00pm' },
+                        { name: 'Feb 09 - Feb 12', time: '2:00pm - 5:00pm' },
+                        { name: 'Feb 13 - Feb 16', time: '2:00pm - 5:00pm' },
                     ],
                     budgets: null,
                     budget: [

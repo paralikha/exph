@@ -25,7 +25,7 @@ return [
      * will only look here if no module entry was found there.
      */
     'disabled' => [
-        // 'Test',
+        'Test',
         'Shop',
         'Cart',
         'Billing',
