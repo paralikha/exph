@@ -305,7 +305,7 @@
                                     v-bind:items="budget"
                                     v-model="budgets"
                                     autocomplete
-                                    label="Select a budget.."
+                                    label="Pick a date"
                                     append-icon="keyboard_arrow_down"
                                     prepend-icon=""
                                     clearable
@@ -578,13 +578,13 @@
                     ],
                     budgets: null,
                     budget: [
-                        { text: '₱ 1,000' },
-                        { text: '₱ 1,500' },
-                        { text: '₱ 2,000' },
-                        { text: '₱ 2,500' },
-                        { text: '₱ 3,000' },
-                        { text: '₱ 3,500' },
-                        { text: '₱ 4,000' }
+                        { text: 'Jan 01, 2018 2:00pm - Jan 04, 2018 5:00pm' },
+                        { text: 'Jan 05, 2018 2:00pm - Jan 08, 2018 5:00pm' },
+                        { text: 'Jan 09, 2018 2:00pm - Jan 11, 2018 5:00pm' },
+                        { text: 'Feb 01, 2018 2:00pm - Feb 04, 2018 5:00pm' },
+                        { text: 'Feb 05, 2018 2:00pm - Feb 08, 2018 5:00pm' },
+                        { text: 'Mar 01, 2018 2:00pm - Mar 04, 2018 5:00pm' },
+                        { text: 'Mar 09, 2018 2:00pm - Mar 11, 2018 5:00pm' }
                     ],
                     e1: 'recent',
                     from: null,

@@ -2,6 +2,7 @@ Clone:
     git clone
     composer update
     composer self-update
+    composer self-update
     set up .env file from old pluma
 
     create database
@@ -90,6 +91,10 @@ TODO:
 
 experiences show with multiple dates
 categories display for experiences and roadtrips
+
+
+error on roadtrip controller public
+experiences - add guests page
 
 Pluma:
 pluma (login and register form)
