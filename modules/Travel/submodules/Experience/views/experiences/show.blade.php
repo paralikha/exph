@@ -259,58 +259,50 @@
 
                         <v-card-text>
                             {{-- selection of dates --}}
-                            {{-- <v-select
-                                label="Select"
-                                v-bind:items="people"
-                                v-model="e11"
-                                item-text="name"
-                                item-value="name"
-                                multiple
-                                chips
-                                max-height="auto"
-                                autocomplete
-                                >
-                                <template slot="selection" slot-scope="data">
-                                    <v-chip
-                                        close
-                                        @input="data.parent.selectItem(data.item)"
-                                        :selected="data.selected"
-                                        class="chip--select-multi"
-                                        :key="JSON.stringify(data.item)"
-                                        >
-                                        <v-avatar>
-                                            <img :src="data.item.avatar">
-                                        </v-avatar>
-                                        @{{ data.item.name }}
-                                    </v-chip>
-                                </template>
-                                <template slot="item" slot-scope="data">
-                                    <template v-if="typeof data.item !== 'object'">
-                                        <v-list-tile-content v-text="data.item"></v-list-tile-content>
-                                    </template>
-                                    <template v-else>
-                                        <v-list-tile-avatar>
-                                            <img v-bind:src="data.item.avatar"/>
-                                        </v-list-tile-avatar>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
-                                            <v-list-tile-sub-title v-html="data.item.group"></v-list-tile-sub-title>
-                                        </v-list-tile-content>
-                                    </template>
-                                </template>
-                            </v-select> --}}
-
-                            <v-card class="elevation-1 mb-3">
+                            <v-card class="elevation-1 mb-3 pick-sched">
                                 <v-select
-                                    v-bind:items="budget"
-                                    v-model="budgets"
-                                    autocomplete
-                                    label="Pick a date"
+                                    label="Pick a schedule"
+                                    v-bind:items="people"
+                                    v-model="e11"
+                                    item-text="name"
                                     append-icon="keyboard_arrow_down"
                                     prepend-icon=""
-                                    clearable
+                                    item-value="name"
+                                    max-height="auto"
+                                    autocomplete
                                     search-input
-                                    solo>
+                                    clearable
+                                    solo
+                                    >
+                                    <template slot="selection" scope="data">
+                                        <v-chip
+                                            close
+                                            @input="data.parent.selectItem(data.item)"
+                                            :selected="data.selected"
+                                            class="chip--select-multi"
+                                            :key="JSON.stringify(data.item)"
+                                            >
+                                            {{-- <v-avatar>
+                                                <img :src="data.item.avatar">
+                                            </v-avatar> --}}
+                                            @{{ data.item.name }}
+                                            @{{ data.item.time }}
+                                        </v-chip>
+                                    </template>
+                                    <template slot="item" scope="data">
+                                        <template v-if="typeof data.item !== 'object'">
+                                            <v-list-tile-content v-text="data.item"></v-list-tile-content>
+                                        </template>
+                                        <template v-else>
+                                            {{-- <v-list-tile-avatar>
+                                                <img v-bind:src="data.item.avatar"/>
+                                            </v-list-tile-avatar> --}}
+                                            <v-list-tile-content>
+                                                <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
+                                                <v-list-tile-sub-title v-html="data.item.time"></v-list-tile-sub-title>
+                                            </v-list-tile-content>
+                                        </template>
+                                    </template>
                                 </v-select>
                             </v-card>
                             {{-- /selection of dates --}}
@@ -323,10 +315,10 @@
                         <v-card-text class="text-xs-center pa-1">
                             <!-- @include("Theme::recursives.main-menu", ['items' => get_navmenus('social-menu')]) -->
                             <v-card-text class="text-xs-center pa-1">
-                                    <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
-                                    <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
-                                    <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-google</v-icon></v-btn>
-                                </v-card-text>
+                                <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
+                                <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
+                                <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-google</v-icon></v-btn>
+                            </v-card-text>
                         </v-card-text>
                     </v-card>
                     <v-card class="elevation-1 mb-3">
@@ -541,6 +533,10 @@
         iframe {
             width: 100%;
         }
+
+        .pick-sched ul li {
+            margin-top: 10px;
+        }
     </style>
 @endpush
 
@@ -555,26 +551,26 @@
         mixins.push({
             data () {
                 let srcs = {
-                  1: '{{ assets('frontier/images/placeholder/red2.jpg') }}',
-                  2: '{{ assets('frontier/images/placeholder/red2.jpg') }}',
-                  3: '{{ assets('frontier/images/placeholder/red2.jpg') }}',
-                  4: '{{ assets('frontier/images/placeholder/red2.jpg') }}',
-                  5: '{{ assets('frontier/images/placeholder/red2.jpg') }}'
+                    1: '{{ assets('frontier/images/placeholder/red2.jpg') }}',
+                    2: '{{ assets('frontier/images/placeholder/red2.jpg') }}',
+                    3: '{{ assets('frontier/images/placeholder/red2.jpg') }}',
+                    4: '{{ assets('frontier/images/placeholder/red2.jpg') }}',
+                    5: '{{ assets('frontier/images/placeholder/red2.jpg') }}'
                 }
                 return {
                     e11: [],
                     people: [
-                        { header: 'Group 1'},
-                        { name: 'Sandra Adams', group: 'Group 1', avatar: srcs[1] },
-                        { name: 'Ali Connors', group: 'Group 1', avatar: srcs[2] },
-                        { name: 'Trevor Hansen', group: 'Group 1', avatar: srcs[3] },
-                        { name: 'Tucker Smith', group: 'Group 1', avatar: srcs[2] },
+                        { header: 'January 2018'},
+                        { name: 'Jan 01 - Jan 04', time: '2:00pm - 5:00pm' },
+                        { name: 'Jan 05 - Jan 08', time: '2:00pm - 5:00pm' },
+                        { name: 'Jan 09 - Jan 12', time: '2:00pm - 5:00pm' },
+                        { name: 'Jan 13 - Jan 16', time: '2:00pm - 5:00pm' },
                         { divider: true },
-                        { header: 'Group 2'},
-                        { name: 'Britta Holt', group: 'Group 2', avatar: srcs[4] },
-                        { name: 'Jane Smith ', group: 'Group 2', avatar: srcs[5] },
-                        { name: 'John Smith', group: 'Group 2', avatar: srcs[1] },
-                        { name: 'Sandra Williams', group: 'Group 2', avatar: srcs[3] }
+                        { header: 'February 2018'},
+                        { name: 'Jan 01 2:00pm - Jan 04 5:00pm', time: '2:00pm - 5:00pm' },
+                        { name: 'Jan 05 2:00pm - Jan 08 5:00pm', time: '2:00pm - 5:00pm' },
+                        { name: 'Jan 09 2:00pm - Jan 12 5:00pm', time: '2:00pm - 5:00pm' },
+                        { name: 'Jan 13 2:00pm - Jan 16 5:00pm', time: '2:00pm - 5:00pm' },
                     ],
                     budgets: null,
                     budget: [
