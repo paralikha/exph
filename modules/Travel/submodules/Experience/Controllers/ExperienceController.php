@@ -71,6 +71,17 @@ class ExperienceController extends AdminController
         $experience->price = $request->input('price');
         $experience->feature = $request->input('feature');
         $experience->user()->associate(User::find($request->input('user')));
+<<<<<<< HEAD
+=======
+
+        $start_date = date('Y-m-d H:i:s', strtotime($request->input('availabilities')[0]['date_start']));
+        $end = $request->input('availabilities');
+        $end = end($end);
+        $end_date = date('Y-m-d H:i:s', strtotime($end['date_end']));
+        $experience->date_start = $start_date;
+        $experience->date_end = $end_date;
+
+>>>>>>> master
         $experience->save();
         $experience->amenities()->attach($request->input('amenities'));
 
@@ -119,8 +130,19 @@ class ExperienceController extends AdminController
         $experience->name = $request->input('name');
         $experience->code = $request->input('code');
         $experience->reference_number = $request->input('reference_number');
+<<<<<<< HEAD
         $experience->date_start = date('Y-m-d H:i:s', strtotime($request->input('date_start')));
         $experience->date_end = date('Y-m-d H:i:s', strtotime($request->input('date_end')));
+=======
+
+        $start_date = date('Y-m-d H:i:s', strtotime($request->input('availabilities')[0]['date_start']));
+        $end = $request->input('availabilities');
+        $end = end($end);
+        $end_date = date('Y-m-d H:i:s', strtotime($end['date_end']));
+        $experience->date_start = $start_date;
+        $experience->date_end = $end_date;
+
+>>>>>>> master
         $experience->body = $request->input('body');
         $experience->delta = $request->input('delta');
         $experience->map = $request->input('map');
@@ -221,7 +243,7 @@ class ExperienceController extends AdminController
         $review->rating = $request->input('rating');
         $review->approved = true;
 
-        $experience = Experience::findOrFail($id);
+        $experience = Experience::withoutGlobalScopes()->findOrFail($id);
         $experience->reviews()->save($review);
         $experience->rating = Review::compute($id, get_class(new Experience));
         $experience->save();

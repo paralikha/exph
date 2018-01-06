@@ -70,7 +70,7 @@ class BillingController extends ShopController
     public function payment(Request $request, $code)
     {
         $items = Cart::items();
-        $resource = Experience::whereCode($code)->first();
+        $resource = Experience::withoutGlobalScopes()->whereCode($code)->first();
         $item = $items[$resource->id];
         // $order = Order::find($order_id);
         $total = Cart::getTotal();

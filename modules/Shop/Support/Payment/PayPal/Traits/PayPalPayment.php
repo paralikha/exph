@@ -3,7 +3,9 @@
 namespace Shop\Support\Payment\PayPal\Traits;
 
 use Cashier\Requests\CashierRequest;
+use Experience\Mail\OrderReceived;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Order\Models\Order;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
@@ -147,7 +149,8 @@ trait PayPalPayment
             $order->save();
 
             // Email
-            // \Illuminate\Support\Facades\Mail::to()
+            Mail::to(settings('site_email', 'john.dionisio1@gmail.com'))
+                ->send(new OrderReceived($order));
 
             return redirect()->route('payment.paypal.success', ['order_id' => $order->id, 'payment_id' => $payment->id, 'payer_id' => $request->get('PayerID')]);
 
