@@ -8,8 +8,6 @@ use Experience\Models\Amenity;
 use Experience\Models\Availability;
 use Frontier\Controllers\AdminController;
 use Illuminate\Http\Request;
-use Review\Models\Review;
-use Review\Requests\ReviewRequest;
 use Roadtrip\Models\Roadtrip;
 use Roadtrip\Requests\RoadtripRequest;
 use User\Models\User;
@@ -60,7 +58,7 @@ class RoadtripController extends AdminController
     {
         $resource = Roadtrip::whereCode($slug)->first();
 
-        return view("Theme::roadtrips.show")->with(compact('resource'));
+        return view("Theme::experiences.show")->with(compact('resource'));
     }
 
     /**
@@ -253,30 +251,6 @@ class RoadtripController extends AdminController
         foreach ($roadtrips as $roadtrip) {
             $roadtrip->forceDelete();
         }
-
-        return back();
-    }
-
-    /**
-     * Review the specified resource from storage permanently.
-     *
-     * @param  \Experience\Requests\ExperienceRequest  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function review(ReviewRequest $request, $id)
-    {
-        $review = New Review();
-        $review->user()->associate(User::find($request->input('user_id')));
-        $review->body = $request->input('body');
-        $review->delta = $request->input('delta');
-        $review->rating = $request->input('rating');
-        $review->approved = true;
-
-        $experience = Roadtrip::withoutGlobalScopes()->findOrFail($id);
-        $experience->reviews()->save($review);
-        $experience->rating = Review::compute($id, get_class(new Roadtrip));
-        $experience->save();
 
         return back();
     }

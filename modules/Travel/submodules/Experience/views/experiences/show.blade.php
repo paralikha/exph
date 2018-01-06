@@ -245,22 +245,13 @@
                                     <div class="title pb-3 white--text"><strong>{{ $resource->name }}</strong></div>
                                     <div class="display-2 white--text"><span class="fw-500">{{ $resource->amount }}</span></div>
                                     <div class="body-2 white--text mb-2">{{ __('per person') }}</span></div>
-                                    <div>
-<<<<<<< HEAD
+                                    <div class="mt-4">
                                         @if (user())
                                             <span class="star-rating-system" data-rating="{{ $resource->rating }}"></span>
                                         @else
                                             <span class="star-rating-system--readonly" data-rating="{{ $resource->rating }}"></span>
                                         @endif
                                         <span class="caption">{{ $resource->rating }}</span>
-=======
-                                        {{-- @if (user()) --}}
-                                            {{-- <span class="star-rating-system" data-rating="{{ $resource->rate }}"></span> --}}
-                                        {{-- @else --}}
-                                            <span class="star-rating-system--readonly" data-rating="{{ $resource->rate }}"></span>
-                                        {{-- @endif --}}
-                                        <span class="caption">{{ $resource->rate }}</span>
->>>>>>> master
                                     </div>
                                 </v-card>
                             </v-card-text>
@@ -382,17 +373,12 @@
                                             <div class="display-2 white--text"><span class="fw-500">{{ $resource->amount }}</span></div>
                                             <div class="body-2 white--text mb-2">{{ __('per person') }}</span></div>
                                             <div>
-<<<<<<< HEAD
                                                 @if (user())
                                                     <span class="star-rating-system" data-rating="{{ $resource->rating }}"></span>
                                                 @else
                                                     <span class="star-rating-system--readonly" data-rating="{{ $resource->rating }}"></span>
                                                 @endif
                                                 <span class="caption">{{ $resource->rating }}</span>
-=======
-                                                <span class="star-rating-system" data-rating="{{ $resource->rate }}"></span>
-                                                <span class="caption">{{ $resource->rate }}</span>
->>>>>>> master
                                             </div>
                                         </v-card>
                                     </v-card-text>
@@ -519,7 +505,7 @@
 @endsection
 
 @push('css')
-    <link rel="stylesheet" href="{{ assets('experience/js/jquery.star-rating-svg.min.css') }}">
+<link rel="stylesheet" href="{{ assets('experience/js/jquery.star-rating-svg.min.css') }}">
     <style>
         .page-text h3 {
             font-size: 20px;
