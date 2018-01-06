@@ -253,64 +253,96 @@
                                         @endif
                                         <span class="caption">{{ $resource->rating }}</span>
                                     </div>
+
+                                    {{-- pick a schedule --}}
+                                    <v-dialog v-model="dialog.dates" width="500px" style="overflow-y: auto !important;" class="mt-4">
+                                        <v-btn primary large round class="elevation-1 px-4" dark slot="activator">Pick a schedule</v-btn>
+                                        <v-card class="elevation-1">
+                                            <v-toolbar class="elevation-0 transparent">
+                                                <v-toolbar-title>When do you want to go?</v-toolbar-title>
+                                                <v-spacer></v-spacer>
+                                                <v-btn icon @click.native="dialog.dates = false">
+                                                    <v-icon>close</v-icon>
+                                                </v-btn>
+                                            </v-toolbar>
+                                            <v-divider></v-divider>
+                                            <v-list two-line subheader>
+                                                <v-subheader>January 2018</v-subheader>
+                                                <v-list-tile>
+                                                    <v-list-tile-content>
+                                                        <v-list-tile-title>Jan 11 - Jan 14</v-list-tile-title>
+                                                        <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                                    </v-list-tile-content>
+                                                    <v-list-tile-action>
+                                                        <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                            {{ __('Choose') }}
+                                                        </v-btn>
+                                                    </v-list-tile-action>
+                                                </v-list-tile>
+                                                <v-list-tile>
+                                                    <v-list-tile-content>
+                                                        <v-list-tile-title>Jan 11 - Jan 14</v-list-tile-title>
+                                                        <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                                    </v-list-tile-content>
+                                                    <v-list-tile-action>
+                                                        <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                            {{ __('Choose') }}
+                                                        </v-btn>
+                                                    </v-list-tile-action>
+                                                </v-list-tile>
+                                                <v-list-tile>
+                                                    <v-list-tile-content>
+                                                        <v-list-tile-title>Jan 11 - Jan 14</v-list-tile-title>
+                                                        <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                                    </v-list-tile-content>
+                                                    <v-list-tile-action>
+                                                        <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                            {{ __('Choose') }}
+                                                        </v-btn>
+                                                    </v-list-tile-action>
+                                                </v-list-tile>
+                                                <v-divider></v-divider>
+                                                <v-subheader>February 2018</v-subheader>
+                                                <v-list-tile>
+                                                    <v-list-tile-content>
+                                                        <v-list-tile-title>Feb 11 - Feb 14</v-list-tile-title>
+                                                        <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                                    </v-list-tile-content>
+                                                    <v-list-tile-action>
+                                                        <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                            {{ __('Choose') }}
+                                                        </v-btn>
+                                                    </v-list-tile-action>
+                                                </v-list-tile>
+                                                <v-list-tile>
+                                                    <v-list-tile-content>
+                                                        <v-list-tile-title>Feb 11 - Feb 14</v-list-tile-title>
+                                                        <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                                    </v-list-tile-content>
+                                                    <v-list-tile-action>
+                                                        <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                            {{ __('Choose') }}
+                                                        </v-btn>
+                                                    </v-list-tile-action>
+                                                </v-list-tile>
+                                                <v-list-tile>
+                                                    <v-list-tile-content>
+                                                        <v-list-tile-title>Feb 11 - Feb 14</v-list-tile-title>
+                                                        <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                                    </v-list-tile-content>
+                                                    <v-list-tile-action>
+                                                        <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                            {{ __('Choose') }}
+                                                        </v-btn>
+                                                    </v-list-tile-action>
+                                                </v-list-tile>
+                                            </v-list>
+                                        </v-card>
+                                    </v-dialog>
+                                    {{-- /pick a schedule --}}
                                 </v-card>
                             </v-card-text>
                         </v-card-media>
-
-                        <v-card-text>
-                            {{-- selection of dates --}}
-                            <v-card class="elevation-1 mb-3 pick-sched">
-                                <v-select
-                                    label="Pick a schedule"
-                                    v-bind:items="people"
-                                    v-model="e11"
-                                    item-text="name"
-                                    append-icon="keyboard_arrow_down"
-                                    prepend-icon=""
-                                    item-value="name"
-                                    max-height="auto"
-                                    autocomplete
-                                    search-input
-                                    clearable
-                                    solo
-                                    >
-                                    <template slot="selection" scope="data">
-                                        <v-chip
-                                            close
-                                            @input="data.parent.selectItem(data.item)"
-                                            :selected="data.selected"
-                                            class="chip--select-multi"
-                                            :key="JSON.stringify(data.item)"
-                                            >
-                                            {{-- <v-avatar>
-                                                <img :src="data.item.avatar">
-                                            </v-avatar> --}}
-                                            @{{ data.item.name }}
-                                            @{{ data.item.time }}
-                                        </v-chip>
-                                    </template>
-                                    <template slot="item" scope="data">
-                                        <template v-if="typeof data.item !== 'object'">
-                                            <v-list-tile-content v-text="data.item"></v-list-tile-content>
-                                        </template>
-                                        <template v-else>
-                                            {{-- <v-list-tile-avatar>
-                                                <img v-bind:src="data.item.avatar"/>
-                                            </v-list-tile-avatar> --}}
-                                            <v-list-tile-content>
-                                                <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
-                                                <v-list-tile-sub-title v-html="data.item.time"></v-list-tile-sub-title>
-                                            </v-list-tile-content>
-                                        </template>
-                                    </template>
-                                </v-select>
-                            </v-card>
-                            {{-- /selection of dates --}}
-
-                            <div class="text-xs-center">
-                                <v-btn primary large round class="elevation-1 px-4" href="{{ route('experiences.details', $resource->code) }}">{{ __('Experience Now') }}</v-btn>
-                            </div>
-                        </v-card-text>
                         <v-divider></v-divider>
                         <v-card-text class="text-xs-center pa-1">
                             <!-- @include("Theme::recursives.main-menu", ['items' => get_navmenus('social-menu')]) -->
@@ -354,7 +386,7 @@
             <v-flex xs12>
                 <v-card-actions>
                     <v-card-text class="px-0 py-2">
-                        <div class="subheading pl-4"><strong>{{ $resource->amount }}</strong> <span class="body-1">per person</span></div>
+                        <div class="subheading pl-4"><strong>{{ $resource->amount }}</strong> </div>
                         <v-dialog class="hidden-md-and-up" v-model="dialog.book" fullscreen transition="dialog-bottom-transition" :overlay=false>
                             <v-btn flat small class="body-2 primary--text details-btn" slot="activator">See details</v-btn>
                             <v-card>
@@ -372,7 +404,7 @@
                                             <div class="title pb-3 white--text"><strong>{{ $resource->name }}</strong></div>
                                             <div class="display-2 white--text"><span class="fw-500">{{ $resource->amount }}</span></div>
                                             <div class="body-2 white--text mb-2">{{ __('per person') }}</span></div>
-                                            <div>
+                                            <div class="mt-4">
                                                 @if (user())
                                                     <span class="star-rating-system" data-rating="{{ $resource->rating }}"></span>
                                                 @else
@@ -380,64 +412,96 @@
                                                 @endif
                                                 <span class="caption">{{ $resource->rating }}</span>
                                             </div>
+
+                                            {{-- pick a schedule --}}
+                                            <v-dialog v-model="dialog.dates" width="500px" style="overflow-y: auto !important;" class="mt-4">
+                                                <v-btn primary large round class="elevation-1 px-4" dark slot="activator">Pick a schedule</v-btn>
+                                                <v-card class="elevation-1">
+                                                    <v-toolbar class="elevation-0 transparent">
+                                                        <v-toolbar-title>When do you want to go?</v-toolbar-title>
+                                                        <v-spacer></v-spacer>
+                                                        <v-btn icon @click.native="dialog.dates = false">
+                                                            <v-icon>close</v-icon>
+                                                        </v-btn>
+                                                    </v-toolbar>
+                                                    <v-divider></v-divider>
+                                                    <v-list two-line subheader>
+                                                        <v-subheader>January 2018</v-subheader>
+                                                        <v-list-tile>
+                                                            <v-list-tile-content>
+                                                                <v-list-tile-title>Jan 11 - Jan 14</v-list-tile-title>
+                                                                <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                                            </v-list-tile-content>
+                                                            <v-list-tile-action>
+                                                                <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                                    {{ __('Choose') }}
+                                                                </v-btn>
+                                                            </v-list-tile-action>
+                                                        </v-list-tile>
+                                                        <v-list-tile>
+                                                            <v-list-tile-content>
+                                                                <v-list-tile-title>Jan 11 - Jan 14</v-list-tile-title>
+                                                                <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                                            </v-list-tile-content>
+                                                            <v-list-tile-action>
+                                                                <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                                    {{ __('Choose') }}
+                                                                </v-btn>
+                                                            </v-list-tile-action>
+                                                        </v-list-tile>
+                                                        <v-list-tile>
+                                                            <v-list-tile-content>
+                                                                <v-list-tile-title>Jan 11 - Jan 14</v-list-tile-title>
+                                                                <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                                            </v-list-tile-content>
+                                                            <v-list-tile-action>
+                                                                <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                                    {{ __('Choose') }}
+                                                                </v-btn>
+                                                            </v-list-tile-action>
+                                                        </v-list-tile>
+                                                        <v-divider></v-divider>
+                                                        <v-subheader>February 2018</v-subheader>
+                                                        <v-list-tile>
+                                                            <v-list-tile-content>
+                                                                <v-list-tile-title>Feb 11 - Feb 14</v-list-tile-title>
+                                                                <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                                            </v-list-tile-content>
+                                                            <v-list-tile-action>
+                                                                <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                                    {{ __('Choose') }}
+                                                                </v-btn>
+                                                            </v-list-tile-action>
+                                                        </v-list-tile>
+                                                        <v-list-tile>
+                                                            <v-list-tile-content>
+                                                                <v-list-tile-title>Feb 11 - Feb 14</v-list-tile-title>
+                                                                <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                                            </v-list-tile-content>
+                                                            <v-list-tile-action>
+                                                                <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                                    {{ __('Choose') }}
+                                                                </v-btn>
+                                                            </v-list-tile-action>
+                                                        </v-list-tile>
+                                                        <v-list-tile>
+                                                            <v-list-tile-content>
+                                                                <v-list-tile-title>Feb 11 - Feb 14</v-list-tile-title>
+                                                                <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                                            </v-list-tile-content>
+                                                            <v-list-tile-action>
+                                                                <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                                    {{ __('Choose') }}
+                                                                </v-btn>
+                                                            </v-list-tile-action>
+                                                        </v-list-tile>
+                                                    </v-list>
+                                                </v-card>
+                                            </v-dialog>
+                                            {{-- /pick a schedule --}}
                                         </v-card>
                                     </v-card-text>
                                 </v-card-media>
-
-                                <v-card-text>
-                                    {{-- selection of dates --}}
-                                    <v-card class="elevation-1 mb-3 pick-sched">
-                                        <v-select
-                                            label="Pick a schedule"
-                                            v-bind:items="people"
-                                            v-model="e11"
-                                            item-text="name"
-                                            append-icon="keyboard_arrow_down"
-                                            prepend-icon=""
-                                            item-value="name"
-                                            max-height="auto"
-                                            autocomplete
-                                            search-input
-                                            clearable
-                                            solo
-                                            >
-                                            <template slot="selection" scope="data">
-                                                <v-chip
-                                                    close
-                                                    @input="data.parent.selectItem(data.item)"
-                                                    :selected="data.selected"
-                                                    class="chip--select-multi"
-                                                    :key="JSON.stringify(data.item)"
-                                                    >
-                                                    {{-- <v-avatar>
-                                                        <img :src="data.item.avatar">
-                                                    </v-avatar> --}}
-                                                    @{{ data.item.name }}
-                                                    @{{ data.item.time }}
-                                                </v-chip>
-                                            </template>
-                                            <template slot="item" scope="data">
-                                                <template v-if="typeof data.item !== 'object'">
-                                                    <v-list-tile-content v-text="data.item"></v-list-tile-content>
-                                                </template>
-                                                <template v-else>
-                                                    {{-- <v-list-tile-avatar>
-                                                        <img v-bind:src="data.item.avatar"/>
-                                                    </v-list-tile-avatar> --}}
-                                                    <v-list-tile-content>
-                                                        <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
-                                                        <v-list-tile-sub-title v-html="data.item.time"></v-list-tile-sub-title>
-                                                    </v-list-tile-content>
-                                                </template>
-                                            </template>
-                                        </v-select>
-                                    </v-card>
-                                    {{-- /selection of dates --}}
-
-                                    <div class="text-xs-center">
-                                        <v-btn primary large round class="elevation-1 px-4" href="{{ route('experiences.details', $resource->code) }}">{{ __('Experience Now') }}</v-btn>
-                                    </div>
-                                </v-card-text>
                                 <v-divider></v-divider>
                                 <v-card-text class="text-xs-center pa-1">
                                     <!-- @include("Theme::recursives.main-menu", ['items' => get_navmenus('social-menu')]) -->
@@ -494,7 +558,91 @@
                     </v-card-text>
                     <v-spacer></v-spacer>
                     <v-card-text class="px-0 py-2 text-xs-right">
-                        <v-btn large primary round class="elevation-1 px-2" href="{{ route('experiences.details', $resource->code) }}">Experience Now</v-btn>
+                        {{-- <v-btn large primary round class="elevation-1 px-2" href="{{ route('experiences.details', $resource->code) }}">Experience Now</v-btn> --}}
+                         <v-dialog v-model="dialog.dates" width="500px" style="overflow-y: auto !important;" class="mt-4">
+                            <v-btn primary large round class="elevation-1 px-4" dark slot="activator">Pick a schedule</v-btn>
+                            <v-card class="elevation-1">
+                                <v-toolbar class="elevation-0 transparent">
+                                    <v-toolbar-title>When do you want to go?</v-toolbar-title>
+                                    <v-spacer></v-spacer>
+                                    <v-btn icon @click.native="dialog.dates = false">
+                                        <v-icon>close</v-icon>
+                                    </v-btn>
+                                </v-toolbar>
+                                <v-divider></v-divider>
+                                <v-list two-line subheader>
+                                    <v-subheader>January 2018</v-subheader>
+                                    <v-list-tile>
+                                        <v-list-tile-content>
+                                            <v-list-tile-title>Jan 11 - Jan 14</v-list-tile-title>
+                                            <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                        </v-list-tile-content>
+                                        <v-list-tile-action>
+                                            <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                {{ __('Choose') }}
+                                            </v-btn>
+                                        </v-list-tile-action>
+                                    </v-list-tile>
+                                    <v-list-tile>
+                                        <v-list-tile-content>
+                                            <v-list-tile-title>Jan 11 - Jan 14</v-list-tile-title>
+                                            <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                        </v-list-tile-content>
+                                        <v-list-tile-action>
+                                            <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                {{ __('Choose') }}
+                                            </v-btn>
+                                        </v-list-tile-action>
+                                    </v-list-tile>
+                                    <v-list-tile>
+                                        <v-list-tile-content>
+                                            <v-list-tile-title>Jan 11 - Jan 14</v-list-tile-title>
+                                            <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                        </v-list-tile-content>
+                                        <v-list-tile-action>
+                                            <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                {{ __('Choose') }}
+                                            </v-btn>
+                                        </v-list-tile-action>
+                                    </v-list-tile>
+                                    <v-divider></v-divider>
+                                    <v-subheader>February 2018</v-subheader>
+                                    <v-list-tile>
+                                        <v-list-tile-content>
+                                            <v-list-tile-title>Feb 11 - Feb 14</v-list-tile-title>
+                                            <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                        </v-list-tile-content>
+                                        <v-list-tile-action>
+                                            <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                {{ __('Choose') }}
+                                            </v-btn>
+                                        </v-list-tile-action>
+                                    </v-list-tile>
+                                    <v-list-tile>
+                                        <v-list-tile-content>
+                                            <v-list-tile-title>Feb 11 - Feb 14</v-list-tile-title>
+                                            <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                        </v-list-tile-content>
+                                        <v-list-tile-action>
+                                            <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                {{ __('Choose') }}
+                                            </v-btn>
+                                        </v-list-tile-action>
+                                    </v-list-tile>
+                                    <v-list-tile>
+                                        <v-list-tile-content>
+                                            <v-list-tile-title>Feb 11 - Feb 14</v-list-tile-title>
+                                            <v-list-tile-sub-title>8:30 AM - 5:00 PM</v-list-tile-sub-title>
+                                        </v-list-tile-content>
+                                        <v-list-tile-action>
+                                            <v-btn ripple outline primary href="{{ route('experiences.details', $resource->code) }}">
+                                                {{ __('Choose') }}
+                                            </v-btn>
+                                        </v-list-tile-action>
+                                    </v-list-tile>
+                                </v-list>
+                            </v-card>
+                        </v-dialog>
                     </v-card-text>
                 </v-card-actions>
             </v-flex>
@@ -628,6 +776,9 @@
                     menu: false,
                     dialog: {
                         book: false
+                    },
+                    dialog: {
+                        dates: false
                     },
                     resource: {
                         rating: {

@@ -127,7 +127,7 @@
         </v-dialog>
     </div>
 
-    <div class="hidden-md-and-down main-nav">
+    <div class="hidden-md-and-down main-nav mr-0">
         @include("Theme::recursives.main-menu", ['items' => get_navmenus('main-menu')])
         <v-btn link flat class="success--text text--accent-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Sign up as a Host') }}'}">
             <span>{{ __('Host An Experience') }}</span>
