@@ -43,9 +43,10 @@ class ExperienceController extends AdminController
     public function create()
     {
         $catalogues = Catalogue::mediabox();
-        $categories = Category::type('experience')->pluck('name', 'id');
+        // $categories = Category::type('experience')->pluck('name', 'id');
         $managers = User::thatIs(['superadmin', 'travel-manager', 'manager'])->get();
         $amenities = Amenity::all();
+        $categories = Category::all();
 
         return view("Theme::experiences.create")->with(compact('catalogues', 'amenities', 'categories', 'managers'));
     }
@@ -70,6 +71,9 @@ class ExperienceController extends AdminController
         $experience->map_instructions = $request->input('map_instructions');
         $experience->price = $request->input('price');
         $experience->feature = $request->input('feature');
+
+        $experience->category()->associate(Category::find($request->input('category_id')));
+
         $experience->user()->associate(User::find($request->input('user')));
         $experience->save();
         $experience->amenities()->attach($request->input('amenities'));
@@ -99,9 +103,10 @@ class ExperienceController extends AdminController
     {
         $resource = Experience::findOrFail($id);
         $catalogues = Catalogue::mediabox();
-        $categories = Category::type('experience')->get(['name', 'id'])->toArray();
+        // $categories = Category::type('experience')->get(['name', 'id'])->toArray();
         $managers = User::thatIs(['superadmin', 'travel-manager', 'manager'])->get();
         $amenities = Amenity::all();
+        $categories = Category::all();
 
         return view("Theme::experiences.edit")->with(compact('resource', 'catalogues', 'categories', 'managers', 'amenities'));
     }
@@ -127,6 +132,8 @@ class ExperienceController extends AdminController
         $experience->map_instructions = $request->input('map_instructions');
         $experience->price = $request->input('price');
         $experience->feature = $request->input('feature');
+
+        $experience->category()->associate(Category::find($request->input('category_id')));
         $experience->user()->associate(User::find($request->input('user')));
         $experience->amenities()->sync($request->input('amenities'));
         $experience->save();
@@ -157,7 +164,8 @@ class ExperienceController extends AdminController
      */
     public function destroy(Request $request, $id)
     {
-        //
+        $experience = Experience::findOrFail($id);
+        $experience->delete();
 
         return redirect()->route('experiences.index');
     }
@@ -169,9 +177,9 @@ class ExperienceController extends AdminController
      */
     public function trash()
     {
-        //
+        $resources = Experience::onlyTrashed()->paginate();
 
-        return view("Theme::experiences.trash");
+        return view("Theme::experiences.trash")->with(compact('resources'));
     }
 
     /**
@@ -197,7 +205,8 @@ class ExperienceController extends AdminController
      */
     public function delete(ExperienceRequest $request, $id)
     {
-        //
+        $experience = Experience::withTrashed()->findOrFail($id);
+        $experience->forceDelete();
 
         return redirect()->route('experiences.trash');
     }

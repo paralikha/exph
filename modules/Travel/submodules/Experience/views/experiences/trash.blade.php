@@ -1,7 +1,7 @@
 @extends("Theme::layouts.admin")
 
 @section("head-title", __('Trashed Experiences'))
-@section("experience-title", __('Trashed Experiences'))
+@section("page-title", __('Trashed Experiences'))
 
 @push("utilitybar")
     {{--  --}}
@@ -117,8 +117,8 @@
                             </td>
                             <td>@{{ prop.item.id }}</td>
                             <td width="20%"><strong>@{{ prop.item.name }}</strong></td>
-                            <td width="20%"><strong>@{{ prop.item.code }}</strong></td>
-                            <td>@{{ prop.item.created }}</td>
+                            <td>@{{ prop.item.code }}</td>
+                            <td>@{{ prop.item.modified }}</td>
                             <td class="text-xs-center">
                                 <v-menu bottom left>
                                     <v-btn icon flat slot="activator" v-tooltip:bottom="{ html: 'More Actions' }"><v-icon>more_vert</v-icon></v-btn>
@@ -205,9 +205,9 @@
                         },
                         headers: [
                             { text: '{{ __("ID") }}', align: 'left', value: 'id' },
-                            { text: '{{ __("Name") }}', align: 'left', value: 'name' },
-                            { text: '{{ __("Code") }}', align: 'left', value: 'code' },
+                            { text: '{{ __("Title") }}', align: 'left', value: 'name' },
                             { text: '{{ __("Last Modified") }}', align: 'left', value: 'updated_at' },
+                            { text: '{{ __("Code") }}', align: 'left', value: 'code' },
                             { text: '{{ __("Actions") }}', align: 'center', sortable: false, value: 'updated_at' },
                         ],
                         items: [],
@@ -267,11 +267,11 @@
 
                 'dataset.searchform.query': function (filter) {
                     setTimeout(() => {
-                        const { sortBy, descending, experience, rowsPerPage, totalItems } = this.dataset.pagination;
+                        const { sortBy, descending, page, rowsPerPage, totalItems } = this.dataset.pagination;
 
                         let query = {
                             descending: descending,
-                            experience: experience,
+                            page: page,
                             q: filter,
                             sort: sortBy,
                             take: rowsPerPage,

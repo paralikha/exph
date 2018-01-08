@@ -70,6 +70,8 @@
 
                     @include("Experience::interactives.managers")
 
+                    @include("Category::cards.category")
+
                     {{-- @include("Category::cards.category") --}}
 
                 </v-flex>

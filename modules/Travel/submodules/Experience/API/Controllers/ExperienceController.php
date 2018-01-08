@@ -2,10 +2,9 @@
 
 namespace Experience\API\Controllers;
 
-use Experience\Models\Experience;
-use Experience\Models\Rating;
 use Illuminate\Http\Request;
 use Pluma\API\Controllers\APIController;
+use Experience\Models\Experience;
 
 class ExperienceController extends APIController
 {
@@ -74,19 +73,6 @@ class ExperienceController extends APIController
     }
 
     /**
-     * Gets the grants.
-     *
-     * @param  array $modules
-     * @return void
-     */
-    public function grants($modules = null)
-    {
-        $grants = Grant::pluck('name', 'id');
-
-        return response()->json($grants);
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -95,38 +81,19 @@ class ExperienceController extends APIController
      */
     public function destroy(Request $request, $id)
     {
-        $page = Experience::findOrFail($id);
+        $experience = Experience::findOrFail($id);
 
-        if (in_array($page->code, config('auth.rootpages', []))) {
+        if (in_array($experience->code, config('auth.rootexperiences', []))) {
             $this->errorResponse['text'] = "Deleting Root Experiences is not permitted";
 
             return response()->json($this->errorResponse);
         }
 
-        $this->successResponse['text'] = "{$page->name} moved to trash.";
-        $page->delete();
+        $this->successResponse['text'] = "{$experience->name} moved to trash.";
+        $experience->delete();
 
         return response()->json($this->successResponse);
-    }
-
-    /**
-     * Copy the resource as a new resource.
-     * @param  Request $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function clone(Request $request, $id)
-    {
-        $page = Experience::findOrFail($id);
-
-        $clone = new Experience();
-        $clone->name = $page->name;
-        $clone->code = "{$page->code}-clone-".rand((int) $id, (int) date('Y'));
-        $clone->description = $page->description;
-        $clone->save();
-        $clone->grants()->attach($page->grants->pluck('id')->toArray());
-
-        return response()->json($this->successResponse);
+        // return redirect()->route('experiences.index');
     }
 
     /**
@@ -138,8 +105,8 @@ class ExperienceController extends APIController
      */
     public function restore(Request $request, $id)
     {
-        $page = Experience::onlyTrashed()->findOrFail($id);
-        $page->restore();
+        $experience = Experience::onlyTrashed()->findOrFail($id);
+        $experience->restore();
 
         return response()->json($this->successResponse);
     }
@@ -152,23 +119,8 @@ class ExperienceController extends APIController
      */
     public function delete(Request $request, $id)
     {
-        $page = Experience::withTrashed()->findOrFail($id);
-        $page->forceDelete();
-
-        return response()->json($this->successResponse);
-    }
-
-    /**
-     * Rate.
-     * @param  Request $request
-     * @return            [description]
-     */
-    public function rate(Request $request, $id)
-    {
-        $experience = Experience::find($id);
-        $experience->ratings()->save(Rating::updateOrCreate(['user_id' => $request->input('user_id')], $request->except(['_token'])));
-        $experience->rating = Rating::compute($experience->id, get_class(new Experience));
-        $experience->save();
+        $experience = Experience::withTrashed()->findOrFail($id);
+        $experience->forceDelete();
 
         return response()->json($this->successResponse);
     }

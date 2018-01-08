@@ -92,13 +92,11 @@ TODO:
 experiences show with multiple dates / and on mobile view
 categories display for experiences and roadtrips
 
-☐ trash page for category
-☐ category display on experience
-☐ categories on create
+☐ trash page (permanently delete) for category and experience
+✔ category display on experience
+✔ categories on create
 ☐ forms for booking
-☐ categories and range of dates on experiences index
-
-
+☐ categories and range of dates on experiences index*
 
 Pluma:
 pluma (login and register form)

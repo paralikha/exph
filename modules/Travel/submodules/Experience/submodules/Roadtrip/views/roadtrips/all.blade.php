@@ -162,10 +162,9 @@
                                             <span v-if="card.categoryname" class="caption">@{{ card.categoryname }}</span>
                                             <div>
                                                 <span class="star-rating-system" :data-rating="card.rating">
-                                                    {{-- <v-icon v-for="i in 5" class="subheading primary--text pb-1">
+                                                    <v-icon v-for="i in 5" class="subheading primary--text pb-1">
                                                         <template v-if="i <= Math.round(card.rating)">star</template>
-                                                        <template v-else>star_border</template>
-                                                    </v-icon> --}}
+                                                    </v-icon>
                                                 </span>
                                                 <span class="caption" v-html="card.rating"></span>
                                             </div>
