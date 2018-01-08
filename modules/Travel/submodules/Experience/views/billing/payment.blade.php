@@ -74,6 +74,7 @@
                                         <input type="hidden" name="items[0][amount]" value="{{ $resource->price }}"><br>
                                         <input type="hidden" name="items[0][quantity]" value="{{ $item->quantity }}"><br>
                                         <input type="hidden" name="items[0][name]" value="{{ $resource->name }}"><br>
+                                        <input type="hidden" name="availability" value="{{ $item->availability }}"><br>
 
                                         <input type="hidden" name="total" value="{{ $total }}">
                                         <input type="hidden" name="name" value="{{ $item->name }}">
@@ -157,8 +158,8 @@
                                         <v-icon color="indigo">date_range</v-icon>
                                     </v-list-tile-action>
                                     <v-list-tile-content>
-                                        <v-list-tile-title>{{ $resource->date }}</v-list-tile-title>
-                                        <v-list-tile-sub-title>{{ $resource->days }}</v-list-tile-sub-title>
+                                        <v-list-tile-title>{{ $availability->date }}</v-list-tile-title>
+                                        {{-- <v-list-tile-sub-title>{{ $availability->days }}</v-list-tile-sub-title> --}}
                                     </v-list-tile-content>
                                 </v-list-tile>
                                 <v-list-tile>
@@ -166,15 +167,15 @@
                                         <v-icon color="indigo">schedule</v-icon>
                                     </v-list-tile-action>
                                     <v-list-tile-content>
-                                        <v-list-tile-title>{{ "$resource->time" }}</v-list-tile-title>
-                                        <v-list-tile-sub-title>{{ __($resource->day) }}</v-list-tile-sub-title>
+                                        <v-list-tile-title>{{ "$availability->time" }}</v-list-tile-title>
+                                        <v-list-tile-sub-title>{{ __($availability->days) }}</v-list-tile-sub-title>
                                     </v-list-tile-content>
                                 </v-list-tile>
                                 <v-divider></v-divider>
                             </v-list>
-                            <v-divider></v-divider>
+                            {{-- <v-divider></v-divider> --}}
                             <v-card class="elevation-0 mb-3">
-                                <v-toolbar class="transparent elevation-0">
+                                <v-toolbar card dense class="transparent elevation-0">
                                     <v-toolbar-title class="subheading">Reference Number: {{ $resource->refnum }} </v-toolbar-title>
                                 </v-toolbar>
                             </v-card>

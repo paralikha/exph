@@ -20,12 +20,9 @@
                                 <v-toolbar-title class="accent--text">{{ __('Add Guest Requirements') }}</v-toolbar-title>
                             </v-toolbar>
 
-                            {{-- <v-toolbar card class="transparent">
-                                <v-toolbar-title class="white--text">
-                                    <v-spacer></v-spacer>
-                                    <v-btn icon><v-icon>bookmark</v-icon></v-btn>
-                                </v-toolbar-title>
-                            </v-toolbar> --}}
+                            <v-card-text class="grey--text">
+                                <span>{{ __("You've choosen the date") }} <strong>{{ $availability->date }}</strong></span>
+                            </v-card-text>
 
                             <v-card-text>
                                 <v-toolbar class="elevation-0 transparent">
@@ -79,7 +76,7 @@
                                                 <v-list-tile-title v-html="'{{ user()->displayname }}'"></v-list-tile-title>
                                             </v-list-tile-content>
                                             <v-list-tile-action>
-                                                <v-list-tile-sub-title>primary</v-list-tile-sub-title>
+                                                <v-list-tile-sub-title>primary (you)</v-list-tile-sub-title>
                                             </v-list-tile-action>
                                         </v-list-tile>
 
@@ -134,6 +131,7 @@
                                     <input type="hidden" name="items[currency]" value="{{ $resource->currency }}">
                                     <input type="hidden" name="code" value="{{ $resource->code }}">
                                     <input type="hidden" name="currency" value="{{ $resource->currency }}">
+                                    <input type="hidden" name="items[availability]" value="{{ $availability->id }}">
                                     <input type="hidden" name="customer_id" value="{{ user()->id }}">
                                     <input type="hidden" name="experience_id" value="{{ $resource->id }}">
 
@@ -374,6 +372,7 @@
                             <input type="hidden" name="items[price]" value="{{ $resource->price }}">
                             <input type="hidden" name="items[quantity]" :value="(guests.length + 1)">
                             <input type="hidden" name="items[currency]" value="{{ $resource->currency }}">
+                            <input type="hidden" name="items[availability]" value="{{ $availability->id }}">
                             <input type="hidden" name="currency" value="{{ $resource->currency }}">
                             <input type="hidden" name="customer_id" value="{{ user()->id }}">
                             <input type="hidden" name="experience_id" value="{{ $resource->id }}">

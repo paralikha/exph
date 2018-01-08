@@ -2,6 +2,7 @@
 
 namespace Experience\Controllers;
 
+use Category\Models\Category;
 use Experience\Models\Experience;
 use Experience\Requests\ExperienceRequest;
 use Illuminate\Http\Request;
@@ -36,7 +37,7 @@ class ExperiencePublicController extends Controller
     {
         $resource = Experience::whereCode($slug)->first();
 
-        return view("Theme::experiences.show")->with(compact('resource'));
+        return view("Theme::experiences.show")->with(compact('resource', 'categories'));
     }
 
     /**

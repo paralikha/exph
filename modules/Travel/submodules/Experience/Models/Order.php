@@ -2,12 +2,13 @@
 
 namespace Experience\Models;
 
+use Experience\Support\Traits\BelongsToAvailability;
 use Experience\Support\Traits\BelongsToExperience;
 use Order\Models\Order as BaseOrder;
 
 class Order extends BaseOrder
 {
-    use BelongsToExperience;
+    use BelongsToExperience, BelongsToAvailability;
 
     public function getProductAttribute()
     {

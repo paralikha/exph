@@ -6,7 +6,7 @@ Route::get('experiences', 'Experience\Controllers\ExperiencePublicController@all
 Route::get('yolo', 'Experience\Controllers\ExperiencePublicController@yolo')->name('yolo');
 
 Route::get('mailable', function () {
-    $order = \Experience\Models\Order::find(2);
+    $order = \Experience\Models\Order::find(1);
 
     return new \Experience\Mail\OrderReceived($order);
     //

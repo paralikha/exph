@@ -1,6 +1,6 @@
 @extends("Theme::layouts.auth")
 
-@section("head-title", __("Successfully Booked {$order->experience->name}"))
+@section("head-title", __("Successfully Booked {$order->product->name}"))
 
 @section("content")
     <v-card class="elevation-1 sticky">
@@ -31,7 +31,7 @@
                                     <v-layout row wrap>
                                         <v-flex xs6>
                                             <div><strong>{{ __('Status') }}:</strong> {{ ucfirst($order->status) }}</div>
-                                            <div><strong>{{ __('Date') }}</strong>: Tue 19 December 2017</div>
+                                            <div><strong>{{ __('Purchased Date') }}</strong>: {{ date('D d M, Y', strtotime($order->purchased_at)) }}</div>
                                         </v-flex>
                                         <v-flex xs6>
                                             <div><strong>{{ __('PAYMENT ID') }}</strong>:</div>
@@ -52,7 +52,7 @@
                                             <div class="grey--text body-1"><strong>{{ __('Experience Name') }}</strong></div>
                                         </v-flex>
                                         <v-flex xs8>
-                                            <div class="body-1">{{ $order->experience->name }}</div>
+                                            <div class="body-1">{{ $order->product->name }}</div>
                                         </v-flex>
                                     </v-layout>
                                     <v-layout row wrap>
@@ -60,7 +60,7 @@
                                             <div class="grey--text body-1"><strong>{{ __('Booking Date') }}</strong></div>
                                         </v-flex>
                                         <v-flex xs8>
-                                            <div class="body-1">{{ $order->experience->date }}</div>
+                                            <div class="body-1">{{ date('D d M, Y', strtotime($order->availability->date)) }}</div>
                                         </v-flex>
                                     </v-layout>
                                     <v-layout row wrap>

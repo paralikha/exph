@@ -170,7 +170,7 @@
                                 @endif
 
                                 <tr>
-                                    <td style="color: #555555">Package Inclusions</td>
+                                    <td style="color: #555555"><strong>Package Inclusions</strong></td>
                                 </tr>
                                 <tr>
                                     <td style="color: #555555;">
@@ -179,6 +179,15 @@
                                                 <li>{{ $amenities->name }}</li>
                                             @endforeach
                                         </ul>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="color: #555555;padding: 0 0 5px 0;"><strong>Meetup Place</strong></td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #555555;">
+                                        <em>{!! nl2br($order->product->map_instructions) !!}</em>
                                     </td>
                                 </tr>
                             </table>
