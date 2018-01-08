@@ -4,6 +4,7 @@ namespace Experience\Controllers;
 
 use Anam\Phpcart\Cart as CartModel;
 use Anam\Phpcart\Facades\Cart;
+use Experience\Models\Availability;
 use Experience\Models\Experience;
 use Illuminate\Http\Request;
 use Order\Models\Order;
@@ -20,6 +21,7 @@ class BillingController extends ShopController
     public function detail(Request $request, $code)
     {
         $resource = Experience::withoutGlobalScopes()->whereCode($code)->first();
+        $availables = Availability::findOrFail($request->get('availability_id'));
         $cart = Cart::items();
         $guests = Cart::has($resource->id)
             ? Cart::get($resource->id)->guests
@@ -31,7 +33,9 @@ class BillingController extends ShopController
                             : [])
             );
 
-        return view("Experience::experiences.detail")->with(compact('resource', 'cart', 'guests'));
+        return view("Experience::experiences.detail")->with(
+                compact('resource', 'cart', 'guests', 'availables')
+            );
     }
 
     /**

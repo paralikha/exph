@@ -20,12 +20,12 @@
                                 <v-toolbar-title class="accent--text">{{ __('Add Guest Requirements') }}</v-toolbar-title>
                             </v-toolbar>
 
-                            <v-toolbar class="elevation-1 transparent">
+                            {{-- <v-toolbar card class="transparent">
                                 <v-toolbar-title class="white--text">
                                     <v-spacer></v-spacer>
                                     <v-btn icon><v-icon>bookmark</v-icon></v-btn>
                                 </v-toolbar-title>
-                            </v-toolbar>
+                            </v-toolbar> --}}
 
                             <v-card-text>
                                 <v-toolbar class="elevation-0 transparent">

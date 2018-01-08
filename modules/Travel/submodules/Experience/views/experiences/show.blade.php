@@ -255,7 +255,8 @@
                                     </div>
                                 </v-card>
                                     <div class="text-xs-center">
-                                        <v-btn primary large round class="elevation-1 px-4" href="{{ route('experiences.details', $resource->code) }}">{{ __('Experience Now') }}</v-btn>
+                                        @include("Experience::cards.pick-a-date")
+                                        {{-- <v-btn primary large round class="elevation-1 px-4" href="{{ route('experiences.details', $resource->code) }}">{{ __('Experience Now') }}</v-btn> --}}
                                     </div>
                             </v-card-text>
                         </v-card-media>
@@ -521,7 +522,8 @@
                     to: null,
                     menu: false,
                     dialog: {
-                        book: false
+                        book: false,
+                        dates: false,
                     },
                     resource: {
                         rating: {
