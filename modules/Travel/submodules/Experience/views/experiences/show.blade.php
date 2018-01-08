@@ -255,7 +255,7 @@
                                     </div>
 
                                     {{-- pick a schedule --}}
-                                    <v-dialog v-model="dialog.dates" width="500px" style="overflow-y: auto !important;" class="mt-4">
+                                    {{-- <v-dialog v-model="dialog.dates" width="500px" style="overflow-y: auto !important;" class="mt-4">
                                         <v-btn primary large round class="elevation-1 px-4" dark slot="activator">Pick a schedule</v-btn>
                                         <v-card class="elevation-1">
                                             <v-toolbar class="elevation-0 transparent">
@@ -338,16 +338,13 @@
                                                 </v-list-tile>
                                             </v-list>
                                         </v-card>
-                                    </v-dialog>
-                                    {{-- /pick a schedule --}}
-                                </v-card>
-<<<<<<< HEAD
-=======
+                                    </v-dialog> --}}
+
                                     <div class="text-xs-center">
                                         @include("Experience::cards.pick-a-date")
-                                        {{-- <v-btn primary large round class="elevation-1 px-4" href="{{ route('experiences.details', $resource->code) }}">{{ __('Experience Now') }}</v-btn> --}}
                                     </div>
->>>>>>> master
+                                    {{-- /pick a schedule --}}
+                                </v-card>
                             </v-card-text>
                         </v-card-media>
                         <v-divider></v-divider>
@@ -421,7 +418,7 @@
                                             </div>
 
                                             {{-- pick a schedule --}}
-                                            <v-dialog v-model="dialog.dates" width="500px" style="overflow-y: auto !important;" class="mt-4">
+                                            {{-- <v-dialog v-model="dialog.dates" width="500px" style="overflow-y: auto !important;" class="mt-4">
                                                 <v-btn primary large round class="elevation-1 px-4" dark slot="activator">Pick a schedule</v-btn>
                                                 <v-card class="elevation-1">
                                                     <v-toolbar class="elevation-0 transparent">
@@ -504,9 +501,12 @@
                                                         </v-list-tile>
                                                     </v-list>
                                                 </v-card>
-                                            </v-dialog>
+                                            </v-dialog> --}}
                                             {{-- /pick a schedule --}}
                                         </v-card>
+                                        <div class="text-xs-center">
+                                            @include("Experience::cards.pick-a-date")
+                                        </div>
                                     </v-card-text>
                                 </v-card-media>
                                 <v-divider></v-divider>
@@ -566,8 +566,8 @@
                     <v-spacer></v-spacer>
                     <v-card-text class="px-0 py-2 text-xs-right">
                         {{-- <v-btn large primary round class="elevation-1 px-2" href="{{ route('experiences.details', $resource->code) }}">Experience Now</v-btn> --}}
-                         <v-dialog v-model="dialog.dates" width="500px" style="overflow-y: auto !important;" class="mt-4">
-                            <v-btn primary large round class="elevation-1 px-4" dark slot="activator">Pick a schedule</v-btn>
+                        {{-- <v-dialog v-model="dialog.dates" width="500px" style="overflow-y: auto !important;" class="mt-4">
+                           <v-btn primary large round class="elevation-1 px-4" dark slot="activator">Pick a schedule</v-btn>
                             <v-card class="elevation-1">
                                 <v-toolbar class="elevation-0 transparent">
                                     <v-toolbar-title>When do you want to go?</v-toolbar-title>
@@ -649,7 +649,7 @@
                                     </v-list-tile>
                                 </v-list>
                             </v-card>
-                        </v-dialog>
+                        </v-dialog> --}}
                     </v-card-text>
                 </v-card-actions>
             </v-flex>
@@ -746,37 +746,27 @@
         mixins.push({
             data () {
                 let srcs = {
-                    1: '{{ assets('frontier/images/placeholder/red2.jpg') }}',
-                    2: '{{ assets('frontier/images/placeholder/red2.jpg') }}',
-                    3: '{{ assets('frontier/images/placeholder/red2.jpg') }}',
-                    4: '{{ assets('frontier/images/placeholder/red2.jpg') }}',
-                    5: '{{ assets('frontier/images/placeholder/red2.jpg') }}'
+                    // 1: '{{ assets('frontier/images/placeholder/car.jpg') }}',
+                    // 2: '{{ assets('frontier/images/placeholder/car.jpg') }}',
+                    // 3: '{{ assets('frontier/images/placeholder/car.jpg') }}',
+                    // 4: '{{ assets('frontier/images/placeholder/car.jpg') }}',
+                    // 5: '{{ assets('frontier/images/placeholder/car.jpg') }}'
                 }
                 return {
                     e11: [],
-                    people: [
-                        { header: 'January 2018'},
-                        { name: 'Jan 01 - Jan 04', time: '2:00pm - 5:00pm' },
-                        { name: 'Jan 05 - Jan 08', time: '2:00pm - 5:00pm' },
-                        { name: 'Jan 09 - Jan 12', time: '2:00pm - 5:00pm' },
-                        { name: 'Jan 13 - Jan 16', time: '2:00pm - 5:00pm' },
-                        { divider: true },
-                        { header: 'February 2018'},
-                        { name: 'Feb 01 - Feb 04', time: '2:00pm - 5:00pm' },
-                        { name: 'Feb 05 - Feb 08', time: '2:00pm - 5:00pm' },
-                        { name: 'Feb 09 - Feb 12', time: '2:00pm - 5:00pm' },
-                        { name: 'Feb 13 - Feb 16', time: '2:00pm - 5:00pm' },
-                    ],
-                    budgets: null,
-                    budget: [
-                        { text: 'Jan 01, 2018 2:00pm - Jan 04, 2018 5:00pm' },
-                        { text: 'Jan 05, 2018 2:00pm - Jan 08, 2018 5:00pm' },
-                        { text: 'Jan 09, 2018 2:00pm - Jan 11, 2018 5:00pm' },
-                        { text: 'Feb 01, 2018 2:00pm - Feb 04, 2018 5:00pm' },
-                        { text: 'Feb 05, 2018 2:00pm - Feb 08, 2018 5:00pm' },
-                        { text: 'Mar 01, 2018 2:00pm - Mar 04, 2018 5:00pm' },
-                        { text: 'Mar 09, 2018 2:00pm - Mar 11, 2018 5:00pm' }
-                    ],
+                    // people: [
+                    //     { header: 'January 2018'},
+                    //     { name: 'Jan 01 - Jan 04', time: '2:00pm - 5:00pm' },
+                    //     { name: 'Jan 05 - Jan 08', time: '2:00pm - 5:00pm' },
+                    //     { name: 'Jan 09 - Jan 12', time: '2:00pm - 5:00pm' },
+                    //     { name: 'Jan 13 - Jan 16', time: '2:00pm - 5:00pm' },
+                    //     { divider: true },
+                    //     { header: 'February 2018'},
+                    //     { name: 'Feb 01 - Feb 04', time: '2:00pm - 5:00pm' },
+                    //     { name: 'Feb 05 - Feb 08', time: '2:00pm - 5:00pm' },
+                    //     { name: 'Feb 09 - Feb 12', time: '2:00pm - 5:00pm' },
+                    //     { name: 'Feb 13 - Feb 16', time: '2:00pm - 5:00pm' },
+                    // ],
                     e1: 'recent',
                     from: null,
                     to: null,

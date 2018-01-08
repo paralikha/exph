@@ -20,12 +20,9 @@ class BillingController extends ShopController
      */
     public function detail(Request $request, $code)
     {
-<<<<<<< HEAD
         $resource = Experience::whereCode($code)->first();
-=======
         $resource = Experience::withoutGlobalScopes()->whereCode($code)->first();
         $availability = Availability::findOrFail($request->get('availability_id'));
->>>>>>> master
         $cart = Cart::items();
         $guests = Cart::has($resource->id)
             ? Cart::get($resource->id)->guests

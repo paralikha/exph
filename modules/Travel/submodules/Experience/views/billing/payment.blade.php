@@ -173,18 +173,7 @@
                                 </v-list-tile>
                                 <v-divider></v-divider>
                             </v-list>
-<<<<<<< HEAD
-                            <v-divider></v-divider>
-                            <v-card-text>
-                                <v-list class="elevation-1">
-                                    <v-list-tile>
 
-                                    </v-list-tile>
-                                </v-list>
-                            </v-card-text>
-=======
-                            {{-- <v-divider></v-divider> --}}
->>>>>>> master
                             <v-card class="elevation-0 mb-3">
                                 <v-toolbar card dense class="transparent elevation-0">
                                     <v-toolbar-title class="subheading">Reference Number: {{ $resource->refnum }} </v-toolbar-title>

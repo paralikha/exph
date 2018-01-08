@@ -2,18 +2,13 @@
 
 namespace Experience\Models;
 
-<<<<<<< HEAD
-=======
 use Experience\Support\Traits\BelongsToAvailability;
 use Experience\Support\Traits\BelongsToExperience;
->>>>>>> master
 use Order\Models\Order as BaseOrder;
 
 class Order extends BaseOrder
 {
-<<<<<<< HEAD
     //
-=======
     use BelongsToExperience, BelongsToAvailability;
 
     public function getProductAttribute()
@@ -31,5 +26,4 @@ class Order extends BaseOrder
 
         return $dates;
     }
->>>>>>> master
 }
