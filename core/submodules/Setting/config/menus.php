@@ -35,6 +35,18 @@ return [
                     'description' => __('Manage General site settings'),
                 ],
             ],
+
+            'social-settings' => [
+                'name' => 'social-settings',
+                'slug' => route('settings.social'),
+                'always_viewable' => false,
+                'order' => 3,
+                'icon' => 'fa-facebook',
+                'labels' => [
+                    'title' => __('Social Links'),
+                    'description' => __('Manage Social site settings'),
+                ],
+            ],
         ],
     ],
 ];

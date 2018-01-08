@@ -44,6 +44,6 @@ class OrderReceived extends Mailable
     public function build()
     {
         return $this->from(settings('site_email', env('MAIL_FROM_ADDRESS', 'john.dionisio1@gmail.com')))
-                    ->view('Experience::emails.order-received');
+                    ->view('Experience::emails.order-received.index');
     }
 }
