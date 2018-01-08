@@ -89,16 +89,17 @@ TODO:
 ☐ Display categories
 ☐ Bookings - forms
 
-experiences show with multiple dates / and on mobile view
-categories display for experiences and roadtrips
-
+☐ experiences show with multiple dates / and on mobile view
 ☐ trash page (permanently delete) for category and experience
 ✔ category display on experience
 ✔ categories on create
-☐ forms for booking
+
 ☐ categories and range of dates on experiences index*
+
+With dependencies:
+☐ forms for booking
+☐ forms for experiences
 
 Pluma:
 pluma (login and register form)
 template registration successful
-

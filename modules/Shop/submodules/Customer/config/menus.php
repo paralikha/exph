@@ -13,7 +13,7 @@ return [
         'order' => 51,
         'slug' => route('customers.index'),
         'always_viewable' => false,
-        'icon' => '',
+        'icon' => 'perm_identity',
         'labels' => [
             'title' => __('Customers'),
             'description' => __('Manage customers'),

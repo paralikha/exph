@@ -23,6 +23,7 @@ class ExperiencesViewComposer extends BaseViewComposer
     {
         $experiences = json_decode(json_encode([
             'items' => Experience::inRandomOrder()->take(10)->get(),
+            // 'categories' => Category::type('experience')->get(),
         ]));
 
         return $experiences;
