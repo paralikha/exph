@@ -341,6 +341,13 @@
                                     </v-dialog>
                                     {{-- /pick a schedule --}}
                                 </v-card>
+<<<<<<< HEAD
+=======
+                                    <div class="text-xs-center">
+                                        @include("Experience::cards.pick-a-date")
+                                        {{-- <v-btn primary large round class="elevation-1 px-4" href="{{ route('experiences.details', $resource->code) }}">{{ __('Experience Now') }}</v-btn> --}}
+                                    </div>
+>>>>>>> master
                             </v-card-text>
                         </v-card-media>
                         <v-divider></v-divider>
@@ -775,7 +782,8 @@
                     to: null,
                     menu: false,
                     dialog: {
-                        book: false
+                        book: false,
+                        dates: false,
                     },
                     dialog: {
                         dates: false

@@ -30,5 +30,7 @@ return [
         'Cart',
         'Billing',
         'Comment',
+        'Customer',
+        'Product',
     ],
 ];

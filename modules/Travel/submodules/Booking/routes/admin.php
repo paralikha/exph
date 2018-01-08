@@ -24,3 +24,5 @@ Route::post('bookings/{booking}/rate', 'Booking\API\Controllers\BookingControlle
 //Review
 Route::post('bookings/{booking}/review', 'Booking\Controllers\BookingController@review')->name('bookings.review');
 
+// History
+Route::get('bookings/history', '\Booking\Controllers\BookingController@history')->name('bookings.history');

@@ -6,4 +6,4 @@ Route::get('roadtrips/trashed', '\Roadtrip\Controllers\RoadtripController@trashe
 
 Route::patch('roadtrips/{roadtrip}/restore', '\Roadtrip\Controllers\RoadtripController@restore')->name('roadtrips.restore');
 
-Route::resource('roadtrips', '\Roadtrip\Controllers\RoadtripController');
+Route::resource('roadtrips', '\Roadtrip\Controllers\RoadtripController')->except(['show']);

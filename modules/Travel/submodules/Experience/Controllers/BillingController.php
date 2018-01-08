@@ -4,9 +4,10 @@ namespace Experience\Controllers;
 
 use Anam\Phpcart\Cart as CartModel;
 use Anam\Phpcart\Facades\Cart;
+use Experience\Models\Availability;
 use Experience\Models\Experience;
+use Experience\Models\Order;
 use Illuminate\Http\Request;
-use Order\Models\Order;
 use Shop\Controllers\ShopController;
 
 class BillingController extends ShopController
@@ -19,7 +20,12 @@ class BillingController extends ShopController
      */
     public function detail(Request $request, $code)
     {
+<<<<<<< HEAD
         $resource = Experience::whereCode($code)->first();
+=======
+        $resource = Experience::withoutGlobalScopes()->whereCode($code)->first();
+        $availability = Availability::findOrFail($request->get('availability_id'));
+>>>>>>> master
         $cart = Cart::items();
         $guests = Cart::has($resource->id)
             ? Cart::get($resource->id)->guests
@@ -31,7 +37,9 @@ class BillingController extends ShopController
                             : [])
             );
 
-        return view("Experience::experiences.detail")->with(compact('resource', 'cart', 'guests'));
+        return view("Experience::experiences.detail")->with(
+                compact('resource', 'cart', 'guests', 'availability')
+            );
     }
 
     /**
@@ -72,6 +80,7 @@ class BillingController extends ShopController
         $items = Cart::items();
         $resource = Experience::whereCode($code)->first();
         $item = $items[$resource->id];
+        $availability = Availability::find($item->availability);
         // $order = Order::find($order_id);
         $total = Cart::getTotal();
 
@@ -79,7 +88,9 @@ class BillingController extends ShopController
             return abort(404);
         }
 
-        return view("Experience::billing.payment")->with(compact('items', 'item', 'total', 'resource'));
+        return view("Experience::billing.payment")->with(
+            compact('items', 'item', 'total', 'resource', 'availability')
+        );
     }
 
     public function success(Request $request)

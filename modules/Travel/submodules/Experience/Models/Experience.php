@@ -9,6 +9,7 @@ use Experience\Models\Availability;
 use Experience\Support\Traits\BelongsToManyAmenities;
 use Experience\Support\Traits\MorphToManyRating;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Pluma\Models\Model;
 use User\Support\Traits\BelongsToUser;
 
@@ -108,5 +109,22 @@ class Experience extends Model
     public function reviews()
     {
         return $this->morphMany(\Review\Models\Review::class, 'reviewable');
+    }
+
+    public function getRateAttribute()
+    {
+        return round($this->rating, 2);
+    }
+
+    public function getAvailabilitiesListAttribute()
+    {
+        $availables = $this->availabilities()->select(['*', DB::raw('MONTH (date_start) as month')])->orderBy('month')->get();
+
+        $m = [];
+        foreach ($availables as $i => $available) {
+            $m[date('F Y', strtotime($available->date_start))][] = $available;
+        }
+
+        return $m;
     }
 }

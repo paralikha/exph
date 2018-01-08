@@ -129,8 +129,7 @@ trait PayPalPayment
         if ($result && $result->getState() == 'approved') {
             /** it's all right **/
             /** Here Write your database logic like that insert record or value in database if you want **/
-
-            $order = new \Order\Models\Order();
+            $order = new \Experience\Models\Order();
             $order->customer_id = $sessionRequest['customer_id'];
             $order->experience_id = $sessionRequest['experience_id'];
             $order->total = $sessionRequest['total'];
@@ -138,6 +137,7 @@ trait PayPalPayment
             $order->quantity = $sessionRequest['quantity'];
             $order->purchased_at = date('Y-m-d H:i:s');
             $order->metadata = $sessionRequest['metadata'];
+            $order->availability_id = $sessionRequest['availability'];
 
             $order->payment_id = $payment->id;
             $order->payer_id = $request->get('PayerID');
