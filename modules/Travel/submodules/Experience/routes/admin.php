@@ -15,7 +15,7 @@ Route::post('amenities/restore/many', 'Catalogue\Controllers\CatalogueManyContro
 
 //Addidtionals
 Route::delete('experiences/delete/{experience}', 'Experience\Controllers\ExperienceController@delete')->name('experiences.delete');
-Route::get('experiences/trash', 'Experience\Controllers\ExperienceController@trash')->name('experiences.trash');
+Route::get('experiences/trashed', 'Experience\Controllers\ExperienceController@trashed')->name('experiences.trashed');
 Route::post('experiences/{experience}/restore', 'Experience\Controllers\ExperienceController@restore')->name('experiences.restore');
 
 // Many

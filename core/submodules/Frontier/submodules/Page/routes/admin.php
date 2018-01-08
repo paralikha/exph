@@ -10,5 +10,6 @@ Route::delete('pages/delete/{page}', 'Page\Controllers\PageController@delete')->
 Route::get('pages/trash', 'Page\Controllers\PageController@trash')->name('pages.trash');
 Route::post('pages/{page}/restore', 'Page\Controllers\PageController@restore')->name('pages.restore');
 
+
 // Main
 Route::resource('pages', 'Page\Controllers\PageController');

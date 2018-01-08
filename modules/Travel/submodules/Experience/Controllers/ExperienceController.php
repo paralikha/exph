@@ -175,11 +175,11 @@ class ExperienceController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function trash()
+    public function trashed()
     {
         $resources = Experience::onlyTrashed()->paginate();
 
-        return view("Theme::experiences.trash")->with(compact('resources'));
+        return view("Theme::experiences.trashed")->with(compact('resources'));
     }
 
     /**
