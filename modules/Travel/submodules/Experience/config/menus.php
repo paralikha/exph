@@ -46,10 +46,10 @@ return [
                     'description' => __('Create a Experience'),
                 ],
             ],
-            'trashed-experience' => [
-                'name' => 'trashed-experience',
+            'trash-experience' => [
+                'name' => 'trash-experience',
                 'order' => 3,
-                'slug' => url(config('path.admin').'/experiences/trashed'),
+                'slug' => url(config('path.admin').'/experiences/trash'),
                 'always_viewable' => false,
                 'labels' => [
                     'title' => __('Trashed Experiences'),

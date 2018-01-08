@@ -13,6 +13,16 @@ Route::delete('amenities/delete/many', 'Catalogue\Controllers\CatalogueManyContr
 Route::delete('amenities/destroy/many', 'Catalogue\Controllers\CatalogueManyController@destroy')->name('amenities.many.destroy');
 Route::post('amenities/restore/many', 'Catalogue\Controllers\CatalogueManyController@restore')->name('amenities.many.restore');
 
+//Addidtionals
+Route::delete('experiences/delete/{experience}', 'Experience\Controllers\ExperienceController@delete')->name('experiences.delete');
+Route::get('experiences/trash', 'Experience\Controllers\ExperienceController@trash')->name('experiences.trash');
+Route::post('experiences/{experience}/restore', 'Experience\Controllers\ExperienceController@restore')->name('experiences.restore');
+
+// Many
+Route::delete('experiences/delete/many', 'Experience\Controllers\ExperienceManyController@delete')->name('experiences.many.delete');
+Route::delete('experiences/destroy/many', 'Experience\Controllers\ExperienceManyController@destroy')->name('experiences.many.destroy');
+Route::post('experiences/restore/many', 'Experience\Controllers\ExperienceManyController@restore')->name('experiences.many.restore');
+
 // Rate
 Route::post('experiences/{experience}/rate', 'Experience\API\Controllers\ExperienceController@rate')->name('experiences.rate');
 
