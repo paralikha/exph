@@ -103,4 +103,47 @@ class PageController extends Controller
 
         return back();
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+        $page = Page::findOrFail($id);
+        $page->delete();
+
+        return redirect()->route('pages.index');
+    }
+
+
+    /**
+     * Display a listing of the trashed resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function trash()
+    {
+        $resources = Page::onlyTrashed()->paginate();
+
+        return view("Theme::pages.trash")->with(compact('resources'));
+    }
+
+    /**
+     * Delete the specified resource from storage permanently.
+     *
+     * @param  \Page\Requests\PageRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Request $request, $id)
+    {
+        $page = Page::withTrashed()->findOrFail($id);
+        $page->forceDelete();
+
+        return redirect()->route('pages.trash');
+    }
 }

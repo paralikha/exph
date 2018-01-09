@@ -2,10 +2,10 @@
 
 namespace Category\API\Controllers;
 
+use Category\Models\Category;
+use Category\Models\Rating;
 use Illuminate\Http\Request;
 use Pluma\API\Controllers\APIController;
-use Category\Models\Grant;
-use Category\Models\Category;
 
 class CategoryController extends APIController
 {
@@ -74,6 +74,19 @@ class CategoryController extends APIController
     }
 
     /**
+     * Gets the grants.
+     *
+     * @param  array $modules
+     * @return void
+     */
+    public function grants($modules = null)
+    {
+        $grants = Grant::pluck('name', 'id');
+
+        return response()->json($grants);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -82,10 +95,16 @@ class CategoryController extends APIController
      */
     public function destroy(Request $request, $id)
     {
-        $category = Category::findOrFail($id);
+        $page = Category::findOrFail($id);
 
-        $this->successResponse['text'] = "{$category->name} moved to trash.";
-        $category->delete();
+        if (in_array($page->code, config('auth.rootpages', []))) {
+            $this->errorResponse['text'] = "Deleting Root Categorys is not permitted";
+
+            return response()->json($this->errorResponse);
+        }
+
+        $this->successResponse['text'] = "{$page->name} moved to trash.";
+        $page->delete();
 
         return response()->json($this->successResponse);
     }
@@ -98,15 +117,14 @@ class CategoryController extends APIController
      */
     public function clone(Request $request, $id)
     {
-        $category = Category::findOrFail($id);
+        $page = Category::findOrFail($id);
 
         $clone = new Category();
-        $clone->name = $category->name;
-        $clone->icon = $category->icon;
-        $clone->alias = $category->alias;
-        $clone->code = "{$category->code}-clone-".rand((int) $id, (int) date('Y'));
-        $clone->description = $category->description;
+        $clone->name = $page->name;
+        $clone->code = "{$page->code}-clone-".rand((int) $id, (int) date('Y'));
+        $clone->description = $page->description;
         $clone->save();
+        $clone->grants()->attach($page->grants->pluck('id')->toArray());
 
         return response()->json($this->successResponse);
     }
@@ -120,8 +138,8 @@ class CategoryController extends APIController
      */
     public function restore(Request $request, $id)
     {
-        $category = Category::onlyTrashed()->findOrFail($id);
-        $category->restore();
+        $page = Category::onlyTrashed()->findOrFail($id);
+        $page->restore();
 
         return response()->json($this->successResponse);
     }
@@ -134,8 +152,23 @@ class CategoryController extends APIController
      */
     public function delete(Request $request, $id)
     {
-        $category = Category::withTrashed()->findOrFail($id);
-        $category->forceDelete();
+        $page = Category::withTrashed()->findOrFail($id);
+        $page->forceDelete();
+
+        return response()->json($this->successResponse);
+    }
+
+    /**
+     * Rate.
+     * @param  Request $request
+     * @return            [description]
+     */
+    public function rate(Request $request, $id)
+    {
+        $category = Category::find($id);
+        $category->ratings()->save(Rating::updateOrCreate(['user_id' => $request->input('user_id')], $request->except(['_token'])));
+        $category->rating = Rating::compute($category->id, get_class(new Category));
+        $category->save();
 
         return response()->json($this->successResponse);
     }

@@ -51,7 +51,6 @@ class ReviewRequest extends FormRequest
 
         return [
             'body' => 'required|max:255',
-            'rating' => 'required',
         ];
     }
 
@@ -63,8 +62,7 @@ class ReviewRequest extends FormRequest
     public function messages()
     {
         return [
-            'body.required' => 'Please type a review.',
-            'rating.required' => 'Please rate us.',
+            'body.regex' => 'Please type a review.',
         ];
     }
 }

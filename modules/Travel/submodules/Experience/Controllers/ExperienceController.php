@@ -43,9 +43,10 @@ class ExperienceController extends AdminController
     public function create()
     {
         $catalogues = Catalogue::mediabox();
-        $categories = Category::type('experience')->pluck('name', 'id');
+        // $categories = Category::type('experience')->pluck('name', 'id');
         $managers = User::thatIs(['superadmin', 'travel-manager', 'manager'])->get();
         $amenities = Amenity::all();
+        $categories = Category::all();
 
         return view("Theme::experiences.create")->with(compact('catalogues', 'amenities', 'categories', 'managers'));
     }
@@ -62,27 +63,22 @@ class ExperienceController extends AdminController
         $experience->name = $request->input('name');
         $experience->code = $request->input('code');
         $experience->reference_number = $request->input('reference_number');
+        $experience->date_start = date('Y-m-d H:i:s', strtotime($request->input('date_start')));
+        $experience->date_end = date('Y-m-d H:i:s', strtotime($request->input('date_end')));
         $experience->body = $request->input('body');
         $experience->delta = $request->input('delta');
         $experience->map = $request->input('map');
         $experience->map_instructions = $request->input('map_instructions');
         $experience->price = $request->input('price');
         $experience->feature = $request->input('feature');
-        $experience->type = 'experience';
+
+        $experience->category()->associate(Category::find($request->input('category_id')));
+
         $experience->user()->associate(User::find($request->input('user')));
-
-        $start_date = date('Y-m-d H:i:s', strtotime($request->input('availabilities')[0]['date_start']));
-        $end = $request->input('availabilities');
-        $end = end($end);
-        $end_date = date('Y-m-d H:i:s', strtotime($end['date_end']));
-        $experience->date_start = $start_date;
-        $experience->date_end = $end_date;
-
         $experience->save();
         $experience->amenities()->attach($request->input('amenities'));
 
-        foreach ($request->input('availabilities') as $i => $availabilities) {
-
+        foreach ($request->input('availabilities') as $availabilities) {
             $availability = new Availability();
             $availability->name = $request->input('name');
             $availability->description = @$availabilities['description'];
@@ -107,9 +103,10 @@ class ExperienceController extends AdminController
     {
         $resource = Experience::findOrFail($id);
         $catalogues = Catalogue::mediabox();
-        $categories = Category::type('experience')->get(['name', 'id'])->toArray();
+        // $categories = Category::type('experience')->get(['name', 'id'])->toArray();
         $managers = User::thatIs(['superadmin', 'travel-manager', 'manager'])->get();
         $amenities = Amenity::all();
+        $categories = Category::all();
 
         return view("Theme::experiences.edit")->with(compact('resource', 'catalogues', 'categories', 'managers', 'amenities'));
     }
@@ -127,20 +124,16 @@ class ExperienceController extends AdminController
         $experience->name = $request->input('name');
         $experience->code = $request->input('code');
         $experience->reference_number = $request->input('reference_number');
-
-        $start_date = date('Y-m-d H:i:s', strtotime($request->input('availabilities')[0]['date_start']));
-        $end = $request->input('availabilities');
-        $end = end($end);
-        $end_date = date('Y-m-d H:i:s', strtotime($end['date_end']));
-        $experience->date_start = $start_date;
-        $experience->date_end = $end_date;
-
+        $experience->date_start = date('Y-m-d H:i:s', strtotime($request->input('date_start')));
+        $experience->date_end = date('Y-m-d H:i:s', strtotime($request->input('date_end')));
         $experience->body = $request->input('body');
         $experience->delta = $request->input('delta');
         $experience->map = $request->input('map');
         $experience->map_instructions = $request->input('map_instructions');
         $experience->price = $request->input('price');
         $experience->feature = $request->input('feature');
+
+        $experience->category()->associate(Category::find($request->input('category_id')));
         $experience->user()->associate(User::find($request->input('user')));
         $experience->amenities()->sync($request->input('amenities'));
         $experience->save();
@@ -169,25 +162,24 @@ class ExperienceController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id = null)
+    public function destroy(Request $request, $id)
     {
-        Experience::destroy($request->has('id') ? $request->input('id') : $id);
+        $experience = Experience::findOrFail($id);
+        $experience->delete();
 
-        return back();
+        return redirect()->route('experiences.index');
     }
 
     /**
      * Display a listing of the trashed resource.
      *
-     * @return Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function trashed(Request $request)
+    public function trashed()
     {
-        $resources = Experience::onlyTrashed()
-                         ->search($request->all())
-                         ->paginate();
+        $resources = Experience::onlyTrashed()->paginate();
 
-        return view("Experience::experiences.trashed")->with(compact('resources'));
+        return view("Theme::experiences.trashed")->with(compact('resources'));
     }
 
     /**
@@ -197,15 +189,9 @@ class ExperienceController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function restore(Request $request, $id = null)
+    public function restore(ExperienceRequest $request, $id)
     {
-        $experiences = Experience::onlyTrashed()
-                     ->whereIn('id', $request->has('id') ? $request->input('id') : [$id])
-                     ->get();
-
-        foreach ($experiences as $experience) {
-            $experience->restore();
-        }
+        //
 
         return back();
     }
@@ -217,17 +203,12 @@ class ExperienceController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request, $id)
+    public function delete(ExperienceRequest $request, $id)
     {
-        $experiences = Experience::onlyTrashed()
-                     ->whereIn('id', $request->has('id') ? $request->input('id') : [$id])
-                     ->get();
+        $experience = Experience::withTrashed()->findOrFail($id);
+        $experience->forceDelete();
 
-        foreach ($experiences as $experience) {
-            $experience->forceDelete();
-        }
-
-        return back();
+        return redirect()->route('experiences.trash');
     }
 
     /**
@@ -239,6 +220,9 @@ class ExperienceController extends AdminController
      */
     public function review(ReviewRequest $request, $id)
     {
+        // echo "<pre>";
+        //     var_dump( $request->all() ); die();
+        // echo "</pre>";
         $review = New Review();
         $review->user()->associate(User::find($request->input('user_id')));
         $review->body = $request->input('body');
@@ -246,7 +230,7 @@ class ExperienceController extends AdminController
         $review->rating = $request->input('rating');
         $review->approved = true;
 
-        $experience = Experience::withoutGlobalScopes()->findOrFail($id);
+        $experience = Experience::findOrFail($id);
         $experience->reviews()->save($review);
         $experience->rating = Review::compute($id, get_class(new Experience));
         $experience->save();

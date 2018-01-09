@@ -38,7 +38,7 @@ return [
                 'name' => 'trash-page',
                 'parent' => 'page',
                 'order' => 3,
-                'slug' => url(config('path.admin').'/pages/trashed'),
+                'slug' => url(config('path.admin').'/pages/trash'),
                 'always_viewable' => false,
                 'icon' => 'delete',
                 'labels' => [

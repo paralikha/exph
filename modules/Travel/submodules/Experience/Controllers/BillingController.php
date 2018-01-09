@@ -20,6 +20,7 @@ class BillingController extends ShopController
      */
     public function detail(Request $request, $code)
     {
+        $resource = Experience::whereCode($code)->first();
         $resource = Experience::withoutGlobalScopes()->whereCode($code)->first();
         $availability = Availability::findOrFail($request->get('availability_id'));
         $cart = Cart::items();
@@ -74,7 +75,7 @@ class BillingController extends ShopController
     public function payment(Request $request, $code)
     {
         $items = Cart::items();
-        $resource = Experience::withoutGlobalScopes()->whereCode($code)->first();
+        $resource = Experience::whereCode($code)->first();
         $item = $items[$resource->id];
         $availability = Availability::find($item->availability);
         // $order = Order::find($order_id);

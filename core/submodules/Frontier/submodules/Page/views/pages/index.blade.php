@@ -6,7 +6,7 @@
             <v-flex>
                 <v-card class="mb-3 elevation-1">
                     <v-toolbar class="transparent elevation-0">
-                        <v-toolbar-title class="accent--text">{{ __('Pages') }}</v-toolbar-title>
+                        <v-toolbar-title>{{ __('Pages') }}</v-toolbar-title>
                         <v-spacer></v-spacer>
 
                         {{-- Batch Commands --}}
@@ -62,10 +62,9 @@
                             href="{{ route('pages.trash') }}"
                             light
                             v-tooltip:left="{'html': `View trashed items`}"
-                        ><v-icon class="grey--after" v-badge:{{ $trashed }}.overlap>archive</v-icon></v-btn>
+                        ><v-icon class="primary--after" v-badge:{{ $trashed }}.overlap>archive</v-icon></v-btn>
                         {{-- /Trashed --}}
                     </v-toolbar>
-
                     <v-data-table
                         :loading="dataset.loading"
                         :total-items="dataset.totalItems"
@@ -118,8 +117,8 @@
                                                 </v-list-tile-title>
                                             </v-list-tile-content>
                                         </v-list-tile>
-                                        <v-list-tile
-                                            @click.native.stop="destroy(route(urls.pages.api.destroy, prop.item.id),
+                                        <v-list-tile ripple
+                                            @click="destroy(route(urls.pages.api.destroy, prop.item.id),
                                             {
                                                 '_token': '{{ csrf_token() }}'
                                             })">
@@ -158,9 +157,12 @@
                     },
                     urls: {
                         pages: {
+                            api: {
+                                destroy: '{{ route('api.pages.destroy', 'null') }}',
+                            },
                             edit: '{{ route('pages.edit', 'null') }}',
                             show: '{{ route('pages.show', 'null') }}',
-                            delete: '{{ route('pages.destroy', 'null') }}',
+                            destroy: '{{ route('pages.destroy', 'null') }}',
                         }
                     },
                     dataset: {
@@ -231,6 +233,16 @@
                             this.dataset.items = data.items.data ? data.items.data : data.items;
                             this.dataset.totalItems = data.items.total ? data.items.total : data.total;
                             this.dataset.loading = false;
+                        });
+                },
+
+                destroy (url, query) {
+                    var self = this;
+                    this.api().delete(url, query)
+                        .then((data) => {
+                            self.get('{{ route('api.pages.all') }}');
+                            self.snackbar = Object.assign(self.snackbar, data.response.body);
+                            self.snackbar.model = true;
                         });
                 },
             },

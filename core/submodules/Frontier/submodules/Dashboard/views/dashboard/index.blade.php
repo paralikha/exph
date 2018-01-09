@@ -6,9 +6,9 @@
     {{-- @include("Dashboard::widgets.stat") --}}
 
     <v-container fluid grid-list-lg>
-        <v-layout row wrap>
+        {{-- <v-layout row wrap>
             <v-flex xs12>
-                {{-- <v-layout row wrap>
+                <v-layout row wrap>
                     <v-flex md4 sm6 xs12>
                         <v-layout row wrap>
                             <v-flex xs12>
@@ -29,7 +29,7 @@
                                     </v-card>
 
                                     <v-card class="draggable-lesson elevation-0 transparent" v-for="(draggable, key) in draggables.items">
-                                       @include("Assignment::widgets.assignment")
+                                       @include("Dashboard::widgets.assignment")
                                     </v-card>
 
                                    <v-card class="draggable-lesson elevation-0 transparent" v-for="(draggable, key) in draggables.items">
@@ -83,9 +83,9 @@
                                 </v-card>
                        </draggable>
                     </v-flex>
-                </v-layout> --}}
+                </v-layout>
             </v-flex>
-        </v-layout>
+        </v-layout> --}}
     </v-container>
 @endsection
 

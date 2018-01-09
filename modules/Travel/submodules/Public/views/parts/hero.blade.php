@@ -3,7 +3,7 @@
         <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.3); position: absolute; width: 100%; height: 100%;"></div>
         <v-toolbar class="elevation-0 transparent" dark>
             <a href="">
-                <img class="pt-5" src="{{ assets('frontier/images/public/exph_logo.png') }}" alt="" width="320">
+                <img class="pt-5" src="{{ assets('frontier/images/public/exph_logo.png') }}" alt="" width="280">
             </a>
             @include("Public::parts.hero-nav")
         </v-toolbar>
@@ -12,6 +12,7 @@
             <v-card dark class="elevation-0 transparent">
                 <h2 class="mb-2 text-xs-center"><strong>{{ __("LET'S GO TRAVEL DIFFERENTLY") }}</strong></h2>
                 <h5 class="mb-3 text-xs-center fw-500">We are an experienced based company that lets you choose your own <br> bucketlist adventure in the Philippines.</h5>
+
                 <div class="hidden-sm-and-down">
                     <v-menu
                         offset-y
@@ -124,43 +125,28 @@
             <v-flex lg10 offset-lg1 md12 xs12>
                 <v-layout row wrap>
                     <v-flex sm4>
-                        <v-list two-line subheader>
-                            <v-list-tile avatar>
-                                <v-list-tile-avatar tile>
-                                    <img src="{{ $application->site->logo }}" alt="">
-                                </v-list-tile-avatar>
-                                <v-list-tile-content>
-                                    <v-list-tile-title>Try An Experience</v-list-tile-title>
-                                    <v-list-tile-sub-title>Discover over 150 new and exciting experiences around the 81 provinces in the Philippines.</v-list-tile-sub-title>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list>
+                        <v-card-actions class="px-3">
+                            <v-avatar size="60">
+                                <img src="{{ assets('frontier/images/public/hero-icon.png') }}" alt="" style="width: 60px !important;">
+                            </v-avatar>
+                            <span><strong>Try An Experience.</strong> Discover over 150 new and exciting experiences around the 81 provinces in the Philippines.</span>
+                        </v-card-actions>
                     </v-flex>
                     <v-flex sm4>
-                        <v-list two-line subheader>
-                            <v-list-tile avatar>
-                                <v-list-tile-avatar tile>
-                                    <img src="{{ assets('frontier/images/public/faq.png') }}" alt="">
-                                </v-list-tile-avatar>
-                                <v-list-tile-content>
-                                    <v-list-tile-title>Join A  Random Road Trip</v-list-tile-title>
-                                    <v-list-tile-sub-title>Experience a different way of travel where the destination is a secret and the activities a surprise.</v-list-tile-sub-title>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list>
+                        <v-card-actions class="px-3">
+                            <v-avatar tile size="40">
+                                <img src="{{ assets('frontier/images/public/faq.png') }}" alt="" style="width: 40px !important;">
+                            </v-avatar>
+                            <span><strong>Join A  Random Road Trip.</strong> Experience a different way of travel where the destination is a secret and the activities a surprise.</span>
+                        </v-card-actions>
                     </v-flex>
                     <v-flex sm4>
-                        <v-list two-line subheader>
-                            <v-list-tile avatar>
-                                <v-list-tile-avatar tile>
-                                    <img src="{{ assets('frontier/images/public/giftbox.png') }}" alt="">
-                                </v-list-tile-avatar>
-                                <v-list-tile-content>
-                                    <v-list-tile-title>Book A Surprise</v-list-tile-title>
-                                    <v-list-tile-sub-title>We plan your trip. The catch? We won't tell you where you are going. Receive a mystery package from us.</v-list-tile-sub-title>
-                                </v-list-tile-content>
-                            </v-list-tile>
-                        </v-list>
+                        <v-card-actions class="px-3">
+                            <v-avatar tile size="40">
+                                <img src="{{ assets('frontier/images/public/giftbox.png') }}" alt="" style="width: 40px !important;">
+                            </v-avatar>
+                            <span><strong>Book A Surprise.</strong> We plan your trip. The catch? We won't tell you where you are going. Receive a mystery package from us.</span>
+                        </v-card-actions>
                     </v-flex>
                 </v-layout>
             </v-flex>

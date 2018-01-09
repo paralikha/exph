@@ -8,6 +8,7 @@ use Order\Models\Order as BaseOrder;
 
 class Order extends BaseOrder
 {
+    //
     use BelongsToExperience, BelongsToAvailability;
 
     public function getProductAttribute()

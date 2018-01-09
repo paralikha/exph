@@ -52,7 +52,7 @@ return [
             'trash-user' => [
                 'name' => 'trash-user',
                 'order' => 3,
-                'slug' => url(config('path.admin').'/pages/trashed'),
+                'slug' => url(config('path.admin').'/users/trash'),
                 'always_viewable' => false,
                 'routes' => [
                     'name' => 'users.trash',

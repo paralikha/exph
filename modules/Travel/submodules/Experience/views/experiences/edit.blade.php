@@ -46,6 +46,8 @@
                                 :error-messages="errors.reference_number"
                                 label="{{ __('Reference Number') }}"
                                 v-model="resource.item.reference_number"
+                                persistent-hint
+                                hint="{{ __("Will be generated randomly if blank.") }}"
                             ></v-text-field>
 
                         </v-card-text>
@@ -72,8 +74,7 @@
 
                     @include("Experience::interactives.managers")
 
-                    {{-- @include("Category::cards.category") --}}
-
+                    @include("Category::cards.category")
                 </v-flex>
 
             </v-layout>

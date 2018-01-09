@@ -7,7 +7,7 @@
     <v-card-text class="pa-0">
         <v-card-text class="pa-0">
             <v-card class="elevation-0">
-                <form action="{{ $url ?? route('experiences.review', $resource->id) }}" method="POST">
+                <form action="{{ route('experiences.review', $resource->id) }}" method="POST">
                     {{ csrf_field() }}
                     <input type="hidden" name="user_id" value="{{ user()->id }}">
                     <input type="hidden" name="rating" :value="resource.rating.value">
@@ -23,7 +23,6 @@
                         @if(user())
                         <span class="star-rating-system" :data-rating="resource.rating.value"></span>
                         <span class="grey--text subheading" v-html="resource.rating.value"></span>
-                        <div v-if="resource.errors.rating" class="error--text caption" v-html="resource.errors.rating.join(',')"></div>
                         @endif
                         <v-spacer></v-spacer>
                         <v-btn  type="submit" flat class="primary--text">{{ __('Post review') }}</v-btn>

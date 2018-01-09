@@ -1,6 +1,6 @@
 <v-card class="elevation-1 mb-3">
     <v-toolbar card class="transparent">
-        <v-toolbar-title primary-title class="subheading">{{ __('Travel Manager') }}</v-toolbar-title>
+        <v-toolbar-title primary-title class="subheading">{{ __('Category') }}</v-toolbar-title>
         <v-spacer></v-spacer>
     </v-toolbar>
     <v-card-text>
@@ -11,7 +11,7 @@
             item-value="id"
             item-text="displayname"
             v-model="resource.item.user"
-            label="{{ __('Travel Manager') }}"
+            label="{{ __('Category') }}"
             search-input
         >
             <template slot="item" scope="data">

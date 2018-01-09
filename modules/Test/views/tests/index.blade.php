@@ -33,6 +33,28 @@
                     </form>
                 </v-card>
 
+                <v-card class="elevation-1">
+                        <v-card-text>
+                            <v-layout row wrap>
+                                <v-flex xs4>
+                                    <v-subheader>{{ __('Message') }}</v-subheader>
+                                </v-flex>
+                                <v-flex xs8>
+                                    <v-text-field>
+                                        @{{ Type a message }}
+                                    </v-text-field>
+                                </v-flex>
+                            </v-layout>
+                        </v-card-text>
+                        <v-divider></v-divider>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn type="submit" primary class="elevation-1">
+                                {{ __('Save') }}
+                            </v-btn>
+                        </v-card-actions>
+                </v-card>
+
                 <v-card class="elevation-1 mb-3">
                     <v-list two-line v-bind:pagination.sync="dataset.pagination" v-for="item in dataset.items" v-bind:key="item.id" @click="">
                         <v-list-tile avatar>

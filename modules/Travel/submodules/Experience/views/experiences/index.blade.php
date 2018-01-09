@@ -12,7 +12,7 @@
                         <v-toolbar-title primary-title class="subheading accent--text">{{ __($application->page->title) }}</v-toolbar-title>
                         <v-spacer></v-spacer>
 
-                        @include("Experience::toolbar.batch")
+                        @include("Travel::toolbar.batch")
 
                     </v-toolbar>
 
@@ -33,6 +33,7 @@
                             <td><img :src="prop.item.feature" height="30"></td>
                             <td><a :href="route(dataset.urls.edit, (prop.item.id))"><strong v-tooltip:bottom="{'html': prop.item.description ? prop.item.description : prop.item.name}" v-html="prop.item.name"></strong></a></td>
                             <td v-html="prop.item.code"></td>
+                            <td v-html="prop.item.type"></td>
                             <td v-html="prop.item.manager.displayname"></td>
                             <td v-html="prop.item.modified"></td>
                             <td class="text-xs-center">
@@ -59,18 +60,13 @@
                                                 </v-list-tile-title>
                                             </v-list-tile-content>
                                         </v-list-tile>
-                                        <v-list-tile ripple @click="$refs.destroy.submit()">
+                                        <v-list-tile ripple @click="destroy(route(dataset.urls.api.destroy, prop.item.id), {'_token': '{{ csrf_token() }}'})">
                                             <v-list-tile-action>
                                                 <v-icon warning>delete</v-icon>
                                             </v-list-tile-action>
                                             <v-list-tile-content>
                                                 <v-list-tile-title>
-                                                    <form ref="destroy" :action="route(dataset.urls.destroy, prop.item.id)" method="POST">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('DELETE') }}
-                                                        {{ __('Move to Trash') }}
-                                                        {{-- <v-btn type="submit">{{ __('Move to Trash') }}</v-btn> --}}
-                                                    </form>
+                                                    {{ __('Move to Trash') }}
                                                 </v-list-tile-title>
                                             </v-list-tile-content>
                                         </v-list-tile>
@@ -111,6 +107,7 @@
                             { text: '{{ __("Featured Image") }}', align: 'left', value: 'feature' },
                             { text: '{{ __("Name") }}', align: 'left', value: 'name' },
                             { text: '{{ __("Code") }}', align: 'left', value: 'code' },
+                            { text: '{{ __("Type") }}', align: 'left', value: 'type' },
                             { text: '{{ __("Travel Manager") }}', align: 'left', value: 'user_id' },
                             { text: '{{ __("Last Modified") }}', align: 'left', value: 'updated_at' },
                             { text: '{{ __("Actions") }}', align: 'center', sortable: false },
@@ -174,6 +171,16 @@
                             this.dataset.items = data.items.data ? data.items.data : data.items;
                             this.dataset.totalItems = data.items.total ? data.items.total : data.total;
                             this.dataset.loading = false;
+                        });
+                },
+
+                destroy (url, query) {
+                    var self = this;
+                    this.api().delete(url, query)
+                        .then((data) => {
+                            self.get('{{ route('api.experiences.all') }}');
+                            self.snackbar = Object.assign(self.snackbar, data.response.body);
+                            self.snackbar.model = true;
                         });
                 },
             },

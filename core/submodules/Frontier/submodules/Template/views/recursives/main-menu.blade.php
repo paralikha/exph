@@ -22,7 +22,7 @@
         @endif
     @elseif ($menu->children)
         <v-menu offset-y transition="slide-y-transition" bottom>
-            <v-btn slot="activator" link flat :class="{'btn--active primary--text': '{{ $menu->active }}'}">
+            <v-btn slot="activator" link flat :class="{'btn--active primary--text': '{{ $menu->active }}'}" class="ma-0">
                 <span>{{ $menu->title }}</span>
                 <v-icon right>keyboard_arrow_down</v-icon>
             </v-btn>
@@ -31,7 +31,7 @@
             </v-list>
         </v-menu>
     @else
-        <v-btn :class="{'btn--active primary--text': '{{ $menu->active }}'}" link flat href="{{ $menu->url }}">
+        <v-btn :class="{'btn--active primary--text': '{{ $menu->active }}'}" class="ma-0" link flat href="{{ $menu->url }}">
             <span>{{ $menu->title }}</span>
         </v-btn>
     @endif
