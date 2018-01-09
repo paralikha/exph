@@ -19,7 +19,7 @@ class Experience extends Model
 
     protected $with = [];
 
-    protected $appends = ['amount', 'date', 'categoryname', 'url', 'manager', 'created', 'modified'];
+    protected $appends = ['amount', 'rate', 'date', 'categoryname', 'url', 'manager', 'created', 'modified'];
 
     protected $searchables = ['created_at', 'updated_at'];
 

@@ -15,9 +15,7 @@
                 :close-on-content-click="false"
                 v-model="search.dateform.model"
             >
-                <v-btn flat class="grey--text text--darken-1" slot="activator">
-                    {{ __('Dates') }}
-                </v-btn>
+                <v-btn flat class="grey--text text--darken-1" slot="activator">{{ __('Dates') }}</v-btn>
                 <v-card class="elevation-0 hidden-sm-and-down">
                     <v-card-text class="hidden-sm-and-down">
                         <v-layout row wrap grid-list-lg>
@@ -83,7 +81,7 @@
                 :nudge-width="150"
                 >
                 <v-btn class="grey--text text--darken-1" flat slot="activator">Categories <v-icon>keyboard_arrow_down</v-icon></v-btn>
-                <v-list>
+                    <v-list>
                     <v-list-tile ripple avatar v-for="item in types" v-bind:key="item.title" @click="">
                         <v-list-tile-action>
                             <v-icon color="pink">check_box_outline_blank</v-icon>
@@ -93,6 +91,7 @@
                         </v-list-tile-content>
                     </v-list-tile>
                 </v-list>
+
             </v-menu>
         </v-card-text>
     </v-card>
@@ -157,15 +156,16 @@
                                         </v-toolbar>
                                         <v-card-text class="grey--text pt-4">
                                             {{-- <v-icon v-if="card.categoryname" class="subheading grey--text text--lighten-1 pb-1">whatshot</v-icon> --}}
-                                            <v-icon class="subheading">whatshot</v-icon>
+                                            <v-icon class="subheading">whatshot</v-icon> fgfgf
                                             <span v-if="card.categoryname" class="caption">@{{ card.categoryname }}</span>
                                             <div>
-                                                <span class="star-rating-system" :data-rating="card.rating">
-                                                    <v-icon v-for="i in 5" class="subheading primary--text pb-1">
+                                                <span class="star-rating-system" :data-rating="card.rate">
+                                                    {{-- <v-icon v-for="i in 5" class="subheading primary--text pb-1">
                                                         <template v-if="i <= Math.round(card.rating)">star</template>
-                                                    </v-icon>
+                                                        <template v-else>star_border</template>
+                                                    </v-icon> --}}
                                                 </span>
-                                                <span class="caption" v-html="card.rating"></span>
+                                                <span class="caption" v-html="card.rate"></span>
                                             </div>
                                         </v-card-text>
                                     </v-card>
