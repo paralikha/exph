@@ -11,7 +11,7 @@
 
     @include("Public::parts.hero")
     {{-- @include("Public::parts.top-light") --}}
-
+    {{ dd($page) }}
     <div class="py-5">
         @include("Public::parts.categories")
         @include("Public::parts.hotlist")

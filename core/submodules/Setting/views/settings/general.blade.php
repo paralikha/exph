@@ -37,6 +37,35 @@
                                 value="{{ old('site_email') ? old('site_email') : settings('site_email') }}"
                             ></v-text-field>
 
+                            <v-text-field
+                                label="{{ __('Business Mobile') }}"
+                                name="business_mobile"
+                                input-group
+                                hide-details
+                                value="{{ old('business_mobile') ? old('business_mobile') : settings('business_mobile') }}"
+                            ></v-text-field>
+                            <v-text-field
+                                label="{{ __('Business Landline') }}"
+                                name="business_landline"
+                                input-group
+                                hide-details
+                                value="{{ old('business_landline') ? old('business_landline') : settings('business_landline') }}"
+                            ></v-text-field>
+                            <v-text-field
+                                label="{{ __('Business Address') }}"
+                                name="business_address"
+                                input-group
+                                hide-details
+                                value="{{ old('business_address') ? old('business_address') : settings('business_address') }}"
+                            ></v-text-field>
+                            <v-text-field
+                                label="{{ __('Site Copyright') }}"
+                                name="site_copyright"
+                                input-group
+                                hide-details
+                                value="{{ old('site_copyright') ? old('site_copyright') : settings('site_copyright') }}"
+                            ></v-text-field>
+
                             <v-layout row wrap>
                                 <v-flex sm4>
                                     <v-subheader>{{ __('Membership') }}</v-subheader>

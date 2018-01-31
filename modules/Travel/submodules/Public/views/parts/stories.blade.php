@@ -3,8 +3,8 @@
         <v-layout row wrap align-center justify-center>
             <v-flex lg10 md12 sm12 xs12>
                 <v-card-text class="text-xs-center my-3">
-                    <h2 class="display-1">{{ __("STORIES FROM THE ROAD") }}</h2>
-                    <h2 class="subheading grey--text text--darken-1">A compilation of inspiring stories, adventures and news from the Experience Philippines community.</h2>
+                    <h2 class="display-1 uppercase">{!! settings('story_title') !!}</h2>
+                    <h2 class="subheading grey--text text--darken-1">{!! settings('story_subtitle') !!}</h2>
                 </v-card-text>
                 <v-layout row wrap>
                     <v-flex sm6 xs12>

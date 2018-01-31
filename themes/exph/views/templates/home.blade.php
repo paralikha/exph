@@ -18,6 +18,7 @@ Version: 1.0
 
     {{-- {{ settings('site_title', 'DS') }} --}}
 
+    {{-- {{ dd($page) }} --}}
     <div class="py-5">
         @include("Public::parts.categories")
         {{-- @include("Public::parts.hotlist") --}}

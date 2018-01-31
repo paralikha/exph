@@ -1,17 +1,16 @@
 <section id="hero">
-    <v-parallax height="650" class="hidden-md-and-down" src="{{ assets('frontier/images/public/car.jpg') }}">
+    <v-parallax height="650" class="hidden-md-and-down" src="{{ $page->feature }}">
         <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.3); position: absolute; width: 100%; height: 100%;"></div>
         <v-toolbar class="elevation-0 transparent" dark>
-            <a href="">
-                <img class="pt-5" src="{{ assets('frontier/images/public/exph_logo.png') }}" alt="" width="280">
-            </a>
+            <a href=""><img class="pt-5" src="{{ assets('frontier/images/public/exph_logo.png') }}" alt="" width="280"></a>
             @include("Public::parts.hero-nav")
         </v-toolbar>
 
+        {{-- {{ settings('site_title', 'home') }} --}}
         <v-layout column align-center justify-center class="white--text">
             <v-card dark class="elevation-0 transparent">
-                <h2 class="mb-2 text-xs-center"><strong>{{ __("LET'S GO TRAVEL DIFFERENTLY") }}</strong></h2>
-                <h5 class="mb-3 text-xs-center fw-500">We are an experienced based company that lets you choose your own <br> bucketlist adventure in the Philippines.</h5>
+                <h2 class="mb-2 text-xs-center uppercase"><strong>{!! settings('home_banner_title') !!}</strong></h2>
+                <h5 class="mb-3 text-xs-center fw-500">{!! settings('home_banner_subtitle') !!}</h5>
 
                 <div class="hidden-sm-and-down">
                     <v-menu
@@ -75,8 +74,8 @@
 
         <v-layout column align-center justify-center class="white--text">
             <v-card dark class="elevation-0 transparent">
-                <h2 class="mb-2 text-xs-center"><strong>{{ __("LET'S GO TRAVEL DIFFERENTLY") }}</strong></h2>
-                <h5 class="mb-3 text-xs-center fw-500">We are an experienced based company that lets you choose your own <br> bucketlist adventure in the Philippines.</h5>
+                <h2 class="mb-2 text-xs-center"><strong>{!! settings('home_banner_title') !!}</strong></h2>
+                <h5 class="mb-3 text-xs-center fw-500">{!! settings('home_banner_subtitle') !!}</h5>
                 <div class="hidden-sm-and-down">
                     <v-menu
                         offset-y
@@ -169,6 +168,9 @@
         }
         .hero-search .input-group.input-group--solo label {
             top: 12px !important;
+        }
+        .uppercase {
+            text-transform: uppercase;;
         }
     </style>
 @endpush

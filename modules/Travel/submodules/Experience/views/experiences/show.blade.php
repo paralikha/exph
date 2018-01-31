@@ -351,9 +351,9 @@
                         <v-card-text class="text-xs-center pa-1">
                             <!-- @include("Theme::recursives.main-menu", ['items' => get_navmenus('social-menu')]) -->
                             <v-card-text class="text-xs-center pa-1">
-                                <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
-                                <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
-                                <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-google</v-icon></v-btn>
+                                <v-btn href="{{ settings('social_links', '', 'facebook.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
+                            <v-btn href="{{ settings('social_links', '', 'twitter.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
+                            <v-btn href="{{ settings('social_links', '', 'instagram.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-instagram</v-icon></v-btn>
                             </v-card-text>
                         </v-card-text>
                     </v-card>
@@ -513,9 +513,9 @@
                                 <v-card-text class="text-xs-center pa-1">
                                     <!-- @include("Theme::recursives.main-menu", ['items' => get_navmenus('social-menu')]) -->
                                     <v-card-text class="text-xs-center pa-1">
-                                        <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
-                                        <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
-                                        <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-google</v-icon></v-btn>
+                                        <v-btn href="{{ settings('social_links', '', 'facebook.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
+                            <v-btn href="{{ settings('social_links', '', 'twitter.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
+                            <v-btn href="{{ settings('social_links', '', 'instagram.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-instagram</v-icon></v-btn>
                                     </v-card-text>
                                 </v-card-text>
                                 <v-divider></v-divider>
