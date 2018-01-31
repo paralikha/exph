@@ -15,7 +15,7 @@
 
                         {{-- {{ dd(settings('home_banner_title')) }} --}}
 
-                        <form action="{{ route('settings.home') }}" method="POST">
+                        <form action="{{ route('settings.store') }}" method="POST">
                             {{ csrf_field() }}
 
                             <v-subheader><v-icon left>home</v-icon>&nbsp;{{ __('Banner Section') }}</v-subheader>

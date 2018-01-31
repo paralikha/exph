@@ -3,7 +3,7 @@
         <v-flex xs12>
 
             <v-card class="elevation-0">
-                <v-card-media src="{!! settings('cta_bg') !!}" width="100%">
+                <v-card-media src="{{ assets('frontier/images/public/v1.jpg') }}" width="100%">
                     <div class="insert-overlay" style="background: rgba(0, 0, 0, .65); position: absolute; width: 100%; height: 100%;"></div>
                     <v-card-text class="pa-0 py-5">
                         <v-layout row wrap align-center justify-center>

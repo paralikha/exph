@@ -1,6 +1,6 @@
 <section id="review">
 <v-card class="elevation-0 transparent hidden-sm-and-down">
-    <v-parallax class="mb-4 mt-5 " height="450" src="{!! settings('review_bg') !!}">
+    <v-parallax class="mb-4 mt-5 " height="450" src="{{ assets('frontier/images/public/h10.jpg') }}">
         <v-layout
             column
             align-center
