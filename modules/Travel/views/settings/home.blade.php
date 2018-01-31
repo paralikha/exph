@@ -15,7 +15,7 @@
 
                         {{-- {{ dd(settings('home_banner_title')) }} --}}
 
-                        <form action="{{ route('settings.store') }}" method="POST">
+                        <form action="{{ route('settings.home') }}" method="POST">
                             {{ csrf_field() }}
 
                             <v-subheader><v-icon left>home</v-icon>&nbsp;{{ __('Banner Section') }}</v-subheader>
@@ -87,7 +87,11 @@
                             </v-card-text>
                             <v-card-text>
                                 {{-- value: video_bg --}}
-                                @include("Frontier::interactives.featured-image")
+                                {{-- @include("Travel::interactives.featured-image") --}}
+                                <input
+                                    name="video_bg"
+                                    type="file"
+                                    value="{{ old('video_bg') ? old('video_bg') : settings('video_bg') }}">
                             </v-card-text>
 
                             <v-subheader><v-icon left>home</v-icon>&nbsp;{{ __('Stories Section') }}</v-subheader>
@@ -131,7 +135,11 @@
                             </v-card-text>
                             <v-card-text>
                                 {{-- value: review_bg --}}
-                                {{-- @include("Theme::interactives.featured-image") --}}
+                                {{-- @include("Travel::interactives.featured-image") --}}
+                                <input
+                                    name="video_bg"
+                                    type="file"
+                                    value="{{ old('review_bg') ? old('review_bg') : settings('review_bg') }}">
                             </v-card-text>
 
                             <v-subheader><v-icon left>home</v-icon>&nbsp;{{ __('Partnerships and Media Section') }}</v-subheader>
@@ -175,7 +183,7 @@
                             </v-card-text>
                             <v-card-text>
                                 {{-- value: cta_bg --}}
-                                {{-- @include("Theme::interactives.featured-image") --}}
+                                {{-- @include("Travel::interactives.featured-image") --}}
                             </v-card-text>
 
                             {{-- Submit --}}
@@ -207,6 +215,7 @@
                     resource: {
                         //
                     },
+                    featuredImageValue: '',
                 };
             },
             methods: {
@@ -227,6 +236,9 @@
                 clearPreview () {
                     this.file = null
                     this.resource.item.site_logo = null;
+                },
+                getValue(vara, val) {
+                    vara = val;
                 }
             }
         });

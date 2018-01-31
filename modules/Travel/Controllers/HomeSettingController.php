@@ -2,12 +2,15 @@
 
 namespace Travel\Controllers;
 
+use Catalogue\Models\Catalogue;
 use Setting\Controllers\SettingController as BaseSettingController;
 
 class HomeSettingController extends BaseSettingController
 {
     public function getHomeForm()
     {
-        return view("Travel::settings.home");
+        $catalogues = Catalogue::mediabox();
+
+        return view("Travel::settings.home")->with(compact('catalogues'));
     }
 }
