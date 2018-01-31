@@ -17,12 +17,12 @@ Version: 1.0
     </v-card>
 
     <v-card class="elevation-1 hero">
-        <v-parallax src="{{ assets('frontier/images/placeholder/9.png') }}" height="450">
+        <v-parallax src="{{ $page->feature }}" height="450">
             <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.3); position: absolute; width: 100%; height: 100%;"></div>
             <v-layout column align-center justify-center class="white--text">
-                <v-card dark class="elevation-0 transparent">
-                    <h2 class="mb-2 text-xs-center"><strong>{{ __("CORPORATE PARTNERSHIPS") }}</strong></h2>
-                    <h5 class="mb-3 text-xs-center fw-500">{{__("Experience Philippines is all about collaboration and partnerships. ")}}</h5>
+                <v-card dark class="text-xs-center elevation-0 transparent">
+                    <h3 class="mb-3 fw-500">{!! $page->body !!}</h3>
+                </v-card>
             </v-layout>
         </v-parallax>
     </v-card>

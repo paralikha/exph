@@ -11,9 +11,9 @@
                                         <v-card dark class="elevation-0 transparent">
                                             <v-card-text class="grey--text pb-0">
                                                 <img src="{{ assets('frontier/images/public/footer.png') }}" alt="" width="120">
-                                                <div class="body-2 mb-1">About Experience Philippines</div>
+                                                <div class="body-2 mb-1">{!! settings('site_title') !!}</div>
                                                 <div class="caption mb-3">
-                                                    Experience Philippines is about UNIQUE ADVENTURES. We are a travel group that organizes RANDOM ROAD TRIPS where the destination is a SECRET and the activities are a SURPRISE.
+                                                    {!! settings('site_tagline') !!}
                                                 </div>
                                             </v-card-text>
                                         </v-card>
@@ -23,44 +23,47 @@
                                             <v-card-text class="body-1">
                                                 <v-layout row wrap>
                                                     <v-flex sm5 offset-sm1>
-                                                        <div class="body-2 mb-2 white--text">Experience Philippines</div>
+                                                        <div class="body-2 mb-2 white--text">{!! settings('site_title') !!}</div>
                                                         <div class="mb-1">
                                                         <a href="\about" class="td-n grey--text">
-                                                            Who We Are
+                                                            {{ __('Who We Are') }}
                                                         </a>
                                                         </div>
-                                                        <div class="mb-1"><a href="" class="td-n grey--text">
-                                                            Crowd Funding
+                                                        <div class="mb-1"><a href="\crowd-funding" class="td-n grey--text">
+                                                            {{ __('Crowd Funding') }}
                                                         </a></div>
                                                         <div class="mb-1"><a href="\stories" class="td-n grey--text">
-                                                            Stories From The Road
+                                                            {{ __('Stories From The Road') }}
                                                         </a></div>
                                                         <div class="mb-1"><a href="\privacy-policy" class="td-n grey--text">
-                                                            Privacy Policy
+                                                            {{ __('Privacy Policy') }}
                                                         </a></div>
-                                                        <div class="mb-1"><a href="" class="td-n grey--text">
-                                                            Sponsorships Opportunities
+                                                        <div class="mb-1"><a href="\partnership" class="td-n grey--text">
+                                                            {{ __('Sponsorships Opportunities') }}
+                                                        </a></div>
+                                                        <div class="mb-1"><a href="\meet-the-team" class="td-n grey--text">
+                                                            {{ __('Meet the Team') }}
                                                         </a></div>
                                                     </v-flex>
                                                     <v-flex sm5 offset-sm1>
-                                                        <div class="body-2 mb-2 white--text">Road Trips</div>
-                                                        <div class="mb-1"><a href="" class="td-n grey--text">
-                                                            Random Road Trips
+                                                        <div class="body-2 mb-2 white--text">{{ __('Road Trips') }}</div>
+                                                        <div class="mb-1"><a href="roadtrips" class="td-n grey--text">
+                                                            {{ __('Random Road Trips') }}
                                                         </a></div>
-                                                        <div class="mb-1"><a href="" class="td-n grey--text">
-                                                            Singles Road Trips
+                                                        <div class="mb-1"><a href="\experiences" class="td-n grey--text">
+                                                            {{ __('Singles Road Trips') }}
                                                         </a></div>
-                                                        <div class="mb-1"><a href="" class="td-n grey--text">
-                                                            Random OUTings
+                                                        <div class="mb-1"><a href="\experiences" class="td-n grey--text">
+                                                            {{ __('Random OUTings') }}
                                                         </a></div>
-                                                        <div class="mb-1"><a href="" class="td-n grey--text">
-                                                            Retro Road Trips
+                                                        <div class="mb-1"><a href="\experiences" class="td-n grey--text">
+                                                            {{ __('Retro Road Trips') }}
                                                         </a></div>
-                                                        <div class="mb-1"><a href="" class="td-n grey--text">
-                                                            Quick Getaway
+                                                        <div class="mb-1"><a href="\experiences" class="td-n grey--text">
+                                                            {{ __('Quick Getaway') }}
                                                         </a></div>
-                                                        <div class="mb-1"><a href="" class="td-n grey--text">
-                                                            Special Road Trips
+                                                        <div class="mb-1"><a href="\experiences" class="td-n grey--text">
+                                                            {{ __('Special Road Trips') }}
                                                         </a></div>
                                                     </v-flex>
                                                 </v-layout>
@@ -72,16 +75,16 @@
                                             <v-card-text>
                                                 <v-layout row justify-space-between>
                                                     <v-flex xs3>
-                                                        <a href="\home" class="td-n body-1 white--text">Home</a>
+                                                        <a href="\home" class="td-n body-1 white--text">{{ __('Home') }}</a>
                                                     </v-flex>
                                                     <v-flex xs3>
-                                                        <a href="about" class="td-n body-1 white--text">About Us</a>
+                                                        <a href="\about" class="td-n body-1 white--text">{{ __('About Us') }}</a>
                                                     </v-flex>
                                                     <v-flex xs3>
-                                                        <a href="\stories" class="td-n body-1 white--text">Stories</a>
+                                                        <a href="\stories" class="td-n body-1 white--text">{{ __('Stories') }}</a>
                                                     </v-flex>
                                                     <v-flex xs3>
-                                                        <a href="\privacy-policy" class="td-n body-1 white--text">Policies</a>
+                                                        <a href="\privacy-policy" class="td-n body-1 white--text">{{ __('Policies') }}</a>
                                                     </v-flex>
                                                 </v-layout>
                                             </v-card-text>
@@ -119,10 +122,10 @@
                                                         </v-card-actions>
                                                     </v-card>
                                                 </v-dialog>
-                                                <div>Mobile: +63 917 563 9692</div>
-                                                <div>Landline: +632 710 5641</div>
-                                                <div>Email: giancarlo@experience.ph</div>
-                                                <div>Unit 10G Le Grande Tower 2, Eastwood City, Bagumbayan, Quezon City, PHILIPPINES 1110.</div>
+                                                <div>Mobile: {!! settings('business_mobile') !!}</div>
+                                                <div>Landline: {!! settings('business_landline') !!}</div>
+                                                <div>Email: {!! settings('site_email') !!}</div>
+                                                <div>{!! settings('business_address') !!}</div>
                                             </v-card-text>
                                         </v-card>
                                     </v-flex>
@@ -136,13 +139,13 @@
                     <v-flex lg10 offset-lg1 md12 sm12>
                         <v-divider class="grey darken-3"></v-divider>
                         <v-card-actions>
-                            <div class="caption grey--text">© 2017 EXPERIENCE PHILIPPINES</div>
+                            <div class="caption grey--text">{!! settings('site_copyright') !!}</div>
                             <v-spacer></v-spacer>
-                            <v-btn href="https://www.facebook.com/experiencePH" icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
-                            <v-btn href="https://twitter.com/Experience_ph" icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
-                            <v-btn href="http://youtube.com/channel/UCbfAyDlVDG84jpQ_MdIAiNw" icon class="social"><v-icon class="subheading grey--text">fa fa-youtube</v-icon></v-btn>
-                            <v-btn href="https://www.instagram.com/experiencephilippines/" icon class="social"><v-icon class="subheading grey--text">fa fa-instagram</v-icon></v-btn>
-                            <v-btn href="https://www.pinterest.com/experiencephilippines/" icon class="social"><v-icon class="subheading grey--text">fa fa-pinterest</v-icon></v-btn>
+                            <v-btn href="{{ settings('social_links', '', 'facebook.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
+                            <v-btn href="{{ settings('social_links', '', 'twitter.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
+                            <v-btn href="{{ settings('social_links', '', 'youtube.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-youtube</v-icon></v-btn>
+                            <v-btn href="{{ settings('social_links', '', 'instagram.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-instagram</v-icon></v-btn>
+                            <v-btn href="{{ settings('social_links', '', 'pinterest.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-pinterest</v-icon></v-btn>
                         </v-card-actions>
                     </v-flex>
                 </v-layout>

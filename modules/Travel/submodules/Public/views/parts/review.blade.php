@@ -1,6 +1,6 @@
 <section id="review">
 <v-card class="elevation-0 transparent hidden-sm-and-down">
-    <v-parallax class="mb-4 mt-5 " height="450" src="{{ assets('frontier/images/public/v2.jpg') }}">
+    <v-parallax class="mb-4 mt-5 " height="450" src="{!! settings('review_bg') !!}">
         <v-layout
             column
             align-center
@@ -16,8 +16,8 @@
                 <v-flex lg10 sm12 xs12>
                     <v-layout row wrap align-top justify-top>
                         <v-flex md3 xs12>
-                            <h4><strong>Road Tripper Reviews</strong></h4>
-                            <h2 class="subheading">Some of the feedback of those who joined and experienced our road trips.</h2>
+                            <h4><strong>{!! settings('review_title') !!}</strong></h4>
+                            <h2 class="subheading">{!! settings('review_subtitle') !!}</h2>
                         </v-flex>
                         <v-flex md9 xs12>
                             <v-layout row wrap>
@@ -55,8 +55,8 @@
 <v-card class="elevation-0 transparent hidden-md-and-up">
     <v-container fluid grid-list-lg>
     <v-card-text class="text-xs-center my-3">
-        <h2 class="display-1">{{ __("HAPPY TRAVELLER") }}</h2>
-        <h2 class="subheading grey--text text--darken-1">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</h2>
+        <h2 class="display-1">{!! settings('review_title') !!}</h2>
+        <h2 class="subheading grey--text text--darken-1">{!! settings('review_subtitle') !!}</h2>
     </v-card-text>
 
     <v-layout row wrap>

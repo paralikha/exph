@@ -82,8 +82,8 @@
                     resource: {
                         item: {!! json_encode($resource) !!},
                         quill: {
-                            html: '{!! $resource->body !!}',
-                            delta: {!! $resource->delta !!}
+                            html: '{{ json_encode($resource->body) }}',
+                            delta: {!! $resource->delta !!},
                         },
                         template: '{{ $resource->template }}',
                         readonly: {
