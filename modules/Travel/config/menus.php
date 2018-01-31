@@ -26,4 +26,17 @@ return [
             'description' => __('Manage Account details'),
         ],
     ],
+
+    'home-settings' => [
+        'name' => 'home-settings',
+        'parent' => 'settings',
+        'icon' => 'home',
+        'slug' => route('settings.home'),
+        'always_viewable' => false,
+        'order' => 20,
+        'labels' => [
+            'title' => __('Home Page Management'),
+            'description' => __('Manage Home Settings')
+        ]
+    ]
 ];

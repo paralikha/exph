@@ -83,7 +83,7 @@
                         item: {!! json_encode($resource) !!},
                         quill: {
                             html: '{{ json_encode($resource->body) }}',
-                            delta: {!! $resource->delta !!}
+                            delta: {!! $resource->delta !!},
                         },
                         template: '{{ $resource->template }}',
                         readonly: {
