@@ -23,6 +23,7 @@
     19 => 'Pluma\\Providers\\FormRequestServiceProvider',
     20 => 'Pluma\\Support\\Installation\\Providers\\InstallationServiceProvider',
     21 => 'Blacksmith\\Providers\\ConsoleSupportServiceProvider',
+    22 => 'Barryvdh\\DomPDF\\ServiceProvider',
   ),
   'eager' => 
   array (
@@ -39,6 +40,7 @@
     10 => 'Pluma\\Providers\\RouteServiceProvider',
     11 => 'Pluma\\Providers\\FormRequestServiceProvider',
     12 => 'Pluma\\Support\\Installation\\Providers\\InstallationServiceProvider',
+    13 => 'Barryvdh\\DomPDF\\ServiceProvider',
   ),
   'deferred' => 
   array (

@@ -24,21 +24,21 @@
                                 <v-flex md4 xs12 v-for="item in reviews" :key="item.id">
                                     <v-card class="elevation-1">
                                         <v-card-media
-                                            height="120px"
+                                            height="80px"
                                             :src="item.src"
-                                            class="grey lighten-4">
+                                            class="primary lighten-4">
                                         </v-card-media>
                                         <v-toolbar class="elevation-0 transparent"></v-toolbar>
                                         <v-card class="elevation-0 transparent text-xs-center review--flex">
                                             <v-avatar size="80px" class="">
-                                                <img :src="item.avatar" alt="" style="border: 3px solid #fff;">
+                                                <img :src="item.user.avatar" alt="" style="border: 3px solid #fff;">
                                             </v-avatar>
                                         </v-card>
 
                                         <v-card-text class="text-xs-center">
-                                            <div class="body-2">@{{ item.fullname }}</div>
-                                            <div class="caption primary--text">@{{ item.trip }}</div>
-                                            <div class="mt-2"><v-icon class="caption mr-2 mb-2">fa fa-quote-left</v-icon> @{{ item.text }} <v-icon class="caption ml-2 mb-2">fa fa-quote-right</v-icon></div>
+                                            <div class="body-2">@{{ item.user.fullname }}</div>
+                                            <div class="caption primary--text">@{{ item.reviewable.name }}</div>
+                                            <div class="mt-2 grey--text"><v-icon class="caption mr-2 mb-2">fa-quote-left</v-icon> <div v-html="item.excerpt"></div> <v-icon class="caption ml-2 mb-2">fa-quote-right</v-icon></div>
                                         </v-card-text>
                                     </v-card>
                                 </v-flex>
@@ -105,31 +105,24 @@
         mixins.push({
             data () {
                 return {
-                    reviews: [
-                        {
-                            src: '{{ assets('frontier/images/placeholder/city.png') }}',
-                            avatar: '{{ assets('frontier/images/placeholder/man.jpg') }}',
-                            fullname: 'Cole Sprouse',
-                            trip: 'Random Road Trip #1',
-                            text: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonanti'
-                        },
-                        {
-                            src: '{{ assets('frontier/images/placeholder/8.jpg') }}',
-                            avatar: '{{ assets('frontier/images/placeholder/woman.jpg') }}',
-                            fullname: 'Jane Appleseed',
-                            trip: ' Luna Sea: Random Party',
-                            text: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonanti'
-                        },
-                        {
-                            src: '{{ assets('frontier/images/placeholder/city.jpg') }}',
-                            fullname: ' Mark',
-                            trip: 'Random Road Trip #22',
-                            avatar: '{{ assets('frontier/images/public/mark.jpg') }}',
-                            text: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonanti'
-                        }
-                    ]
+                    reviews: []
                 }
             },
+
+            mounted () {
+                let query = {
+                        descending: true,
+                        // page: 1,
+                        sort: 'created_at',
+                        take: 3,
+                        group_by: 'user_id',
+                    };
+                this.api().get('{{ route('api.reviews.all') }}', query)
+                    .then((data) => {
+                        this.reviews = data.items.data;
+                        console.log("REV", data.items);
+                    });
+            }
         });
     </script>
 @endpush

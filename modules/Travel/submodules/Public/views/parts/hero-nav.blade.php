@@ -78,41 +78,45 @@
         <span>{{ __('YOLO!') }}</span>
     </v-btn>
 
-    <v-menu open-on-hover offset-y>
-        <v-avatar size="35px" slot="activator" class="mr-4 ml-4 elevation-1">
-            <img src="{{ assets('frontier/images/placeholder/woman.jpg') }}" alt="">
-        </v-avatar>
-        <v-list>
-            <v-list-tile ripple href="\my-profile">
-                <v-list-tile-action>
-                    <v-icon>account_circle</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                    <v-list-tile-title> {{ __('My Profile') }} </v-list-title-title>
-                </v-list-tile-content>
-            </v-list-tile>
-        </v-list>
-        <v-list>
-            <v-list-tile ripple href="\notifications">
-                <v-list-tile-action>
-                    <v-icon>settings</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                    <v-list-tile-title> {{ __('Account Settings') }} </v-list-title-title>
-                </v-list-tile-content>
-            </v-list-tile>
-        </v-list>
-        <v-list>
-            <v-list-tile ripple href="\logout">
-                <v-list-tile-action>
-                    <v-icon>exit_to_app</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                    <v-list-tile-title> {{ __('Log out') }} </v-list-title-title>
-                </v-list-tile-content>
-            </v-list-tile>
-        </v-list>
-    </v-menu>
+    @if (user())
+        <v-menu open-on-hover offset-y>
+            <v-avatar size="35px" slot="activator" class="mr-4 ml-4 elevation-1">
+                <img src="{{ user()->avatar }}" alt="">
+            </v-avatar>
+            <v-list>
+                <v-list-tile ripple href="{{ route('profile.show') }}">
+                    <v-list-tile-action>
+                        <v-icon>account_circle</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title> {{ __('My Profile') }} </v-list-title-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
+            <v-list>
+                <v-list-tile ripple href="{{ route('profile.account', user()->handlename) }}">
+                    <v-list-tile-action>
+                        <v-icon>settings</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title> {{ __('Account Information') }} </v-list-title-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
+            <v-list>
+                <v-list-tile ripple href="{{ route('logout.logout') }}">
+                    <v-list-tile-action>
+                        <v-icon>exit_to_app</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title> {{ __('Log out') }} </v-list-title-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
+        </v-menu>
+    @else
+        <v-btn flat href="{{ route('login.show', ['redirect_to' => url('/')]) }}">{{ __('Login') }}</v-btn>
+    @endif
 </div>
 
 @push('css')

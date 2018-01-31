@@ -7,22 +7,23 @@
                     <h2 class="subheading grey--text text--darken-1">Here is a summary of what is currently hot and popular among the Experience Philippines community.</h2>
                 </v-card-text>
                 <v-layout row wrap align-center>
+                    <v-spacer></v-spacer>
                     <v-flex xs12
-                        v-bind="{ [`sm${card.flex}`]: true }"
-                        v-for="card in categories"
-                        :key="card.title"
+                        v-bind="{ [`sm4`]: true }"
+                        v-for="(card, i) in categories"
+                        :key="i"
                         >
                         <a href="experiences" ripple class="td-n">
                             <v-card class="elevation-1 c-lift">
                                 <v-card-media
-                                    :src="card.src"
+                                    :src="card.feature"
                                     height="300px"
                                     >
                                     <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.3); position: absolute; width: 100%; height: 100%;"></div>
                                     <v-container fill-height fluid class="pa-0 white--text">
                                         <v-layout row wrap align-center justify-center>
                                         <v-card class="elevation-0 transparent text-xs-center">
-                                            <h5 class="white--text text-xs-center"><strong>@{{ card.title }}</strong></h5>
+                                            <h5 class="white--text text-xs-center"><strong>@{{ card.name }}</strong></h5>
                                         </v-card>
                                         </v-layout>
                                     </v-container>
@@ -30,6 +31,7 @@
                             </v-card>
                         </a>
                     </v-flex>
+                    <v-spacer></v-spacer>
                 </v-layout>
             </v-flex>
         </v-layout>
@@ -43,15 +45,23 @@
         mixins.push({
             data () {
                 return {
-                    categories: [
-                        { title: '2017 SCHEDULE', src: '{{ assets('frontier/images/placeholder/9.png') }}', flex: 8, height: '100%' },
-                        { title: 'SPECIAL', src: '{{ assets('frontier/images/placeholder/14.jpg') }}', flex: 4 },
-                        { title: 'SINGLES', src: '{{ assets('frontier/images/placeholder/city.png') }}', flex: 3},
-                        { title: 'EAT AND EXPLORE', src: '{{ assets('frontier/images/placeholder/8.jpg') }}', flex: 6},
-                        { title: 'RANDOM', src: '{{ assets('frontier/images/placeholder/red2.jpg') }}', flex: 3},
-                    ],
+                    categories: [],
                 }
             },
+
+            mounted () {
+                let query = {
+                        descending: true,
+                        page: 1,
+                        sort: 'rating',
+                        take: 5,
+                    };
+                this.api().get('{{ route('api.experiences.all') }}', query)
+                    .then((data) => {
+                        this.categories = data.items.data;
+                        // console.log("GET", data)
+                    });
+            }
         });
     </script>
 @endpush

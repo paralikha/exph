@@ -92,32 +92,38 @@
                                             <v-card-text class="caption grey--text">
                                                 <v-dialog v-model="dialog.contact" persistent width="500px">
                                                     <v-btn outline class="mb-2 mx-0 grey--text" slot="activator">Ask Us</v-btn>
-                                                    <v-card>
-                                                        <v-toolbar dark class="blue elevation-0">
-                                                            <v-toolbar-title>Contact Us</v-toolbar-title>
-                                                        </v-toolbar>
-                                                        <v-card-text>
-                                                            <v-container grid-list-md>
-                                                                <v-layout wrap>
-                                                                    <v-flex xs12>
-                                                                        <v-text-field label="Full Name" required></v-text-field>
-                                                                    </v-flex>
-                                                                    <v-flex xs12>
-                                                                        <v-text-field label="Email" required></v-text-field>
-                                                                    </v-flex>
-                                                                    <v-flex xs12>
-                                                                        <v-text-field label="Mobile Number" required></v-text-field>
-                                                                    </v-flex>
-                                                                </v-layout>
-                                                            </v-container>
-                                                            <small>*indicates required field</small>
-                                                        </v-card-text>
-                                                        <v-card-actions>
-                                                            <v-btn color="blue darken-1" flat @click.native="dialog.contact = false">Cancel</v-btn>
-                                                            <v-spacer></v-spacer>
-                                                            <v-btn class="primary--text" flat @click.native="dialog.contact = false">Submit</v-btn>
-                                                        </v-card-actions>
-                                                    </v-card>
+                                                    <form action="{{ route('contactus.submit') }}" method="POST">
+                                                        {{ csrf_field() }}
+                                                        <v-card>
+                                                            <v-toolbar dark class="blue elevation-0">
+                                                                <v-toolbar-title>{{ __('Contact Us') }}</v-toolbar-title>
+                                                            </v-toolbar>
+                                                            <v-card-text>
+                                                                <v-container grid-list-md>
+                                                                    <v-layout wrap>
+                                                                        <v-flex xs12>
+                                                                            <v-text-field name="fullname" label="Full Name" required></v-text-field>
+                                                                        </v-flex>
+                                                                        <v-flex xs12>
+                                                                            <v-text-field type="email" name="email" label="Email" required></v-text-field>
+                                                                        </v-flex>
+                                                                        <v-flex xs12>
+                                                                            <v-text-field name="mobile_number" label="Mobile Number" required></v-text-field>
+
+                                                                            <v-text-field textarea name="message" label="Message" required></v-text-field>
+                                                                        </v-flex>
+                                                                    </v-layout>
+                                                                </v-container>
+                                                                <small>*indicates required field</small>
+                                                            </v-card-text>
+                                                            <v-card-actions>
+                                                                <v-btn color="blue darken-1" flat @click.native="dialog.contact = false">Cancel</v-btn>
+                                                                <v-spacer></v-spacer>
+                                                                {{-- @click="dialog.contact = false" --}}
+                                                                <v-btn type="submit" class="primary--text" flat>Submit</v-btn>
+                                                            </v-card-actions>
+                                                        </v-card>
+                                                    </form>
                                                 </v-dialog>
                                                 <div>Mobile: +63 917 563 9692</div>
                                                 <div>Landline: +632 710 5641</div>

@@ -129,7 +129,7 @@
                 <v-layout row wrap align-center justify-center>
                     <v-flex lg10 xs12>
                         <v-card-text class="text-xs-center my-3">
-                            <h2 class="display-1">{{ __("CHOOSE AN ROADTRIP") }}</h2>
+                            <h2 class="display-1">{{ __("CHOOSE A ROADTRIP") }}</h2>
                             <h2 class="subheading grey--text text--darken-1">
                                 {{ __("Discover more about yourself, about others and about the beautiful country called the Philippines. Book your Roadtrip with us now.") }}
                             </h2>
@@ -143,9 +143,18 @@
                                             :src="card.feature"
                                             class="grey lighten-4">
                                             <div class="text-xs-right" style="width: 100%;">
-                                                <v-btn large v-tooltip:left="{ html: '{{ __('Add to wishlist') }}' }" icon class="mr-3">
-                                                    @include("Experience::components.wishlist")
-                                                </v-btn>
+                                                <form v-if="!card.wishlisted" action="{{ route('wishlists.store') }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="experience_id" :value="card.id">
+                                                    <v-btn type="submit" large v-tooltip:left="{ html: '{{ __('Add to wishlist') }}' }" icon class="mr-3">
+                                                        @include("Experience::components.wishlist")
+                                                    </v-btn>
+                                                </form>
+                                                <template v-else>
+                                                    <v-btn type="submit" readonly large v-tooltip:left="{ html: '{{ __('You have this in your wishlist') }}' }" icon class="mr-3">
+                                                        @include("Experience::components.wishlisted")
+                                                    </v-btn>
+                                                </template>
                                                 <v-chip label class="ma-0 white--text green lighten-1" style="position: absolute; bottom: 15px; right: 0;"><span v-html="card.amount"></span></v-chip>
                                             </div>
                                         </v-card-media>
@@ -161,12 +170,13 @@
                                             <v-icon class="subheading">whatshot</v-icon>
                                             <span v-if="card.categoryname" class="caption">@{{ card.categoryname }}</span>
                                             <div>
-                                                <span class="star-rating-system" :data-rating="card.rating">
-                                                    <v-icon v-for="i in 5" class="subheading primary--text pb-1">
-                                                        <template v-if="i <= Math.round(card.rating)">star</template>
-                                                    </v-icon>
+                                                <span class="star-rating-system" :data-rating="card.rate">
+                                                {{-- <v-icon v-for="i in 5" class="subheading primary--text pb-1">
+                                                    <template v-if="i <= Math.round(card.rating)">star</template>
+                                                    <template v-else>star_border</template>
+                                                </v-icon> --}}
                                                 </span>
-                                                <span class="caption" v-html="card.rating"></span>
+                                                <span class="caption" v-html="card.rate"></span>
                                             </div>
                                         </v-card-text>
                                     </v-card>

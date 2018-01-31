@@ -18,7 +18,7 @@
                                     <v-flex md5 sm5 xs12>
                                         <v-card-text>
                                             <v-menu
-                                                :close-on-content-click="false"
+                                                :close-on-content-click="true"
                                                 v-model="menu"
                                                 transition="scale-transition"
                                                 right
@@ -32,10 +32,10 @@
                                                     append-icon="date_range"
                                                     light solo hide-details single-line
                                                     label="From"
-                                                    v-model="schedule"
+                                                    v-model="from"
                                                     readonly
                                                 ></v-text-field>
-                                                <v-date-picker v-model="to" no-title scrollable actions>
+                                                <v-date-picker v-model="from" no-title scrollable actions>
                                                 </v-date-picker>
                                             </v-menu>
                                         </v-card-text>
@@ -43,8 +43,8 @@
                                     <v-flex md5 sm5 xs12>
                                         <v-card-text>
                                             <v-menu
-                                                :close-on-content-click="false"
-                                                v-model="from"
+                                                :close-on-content-click="true"
+                                                {{-- v-model="from" --}}
                                                 transition="scale-transition"
                                                 right
                                                 bottom
@@ -57,17 +57,17 @@
                                                     append-icon="date_range"
                                                     light solo hide-details single-line
                                                     label="To"
-                                                    v-model="schedule"
+                                                    v-model="to"
                                                     readonly
                                                 ></v-text-field>
-                                                <v-date-picker v-model="from" no-title scrollable actions>
+                                                <v-date-picker v-model="to" no-title scrollable actions>
                                                 </v-date-picker>
                                             </v-menu>
                                         </v-card-text>
                                     </v-flex>
                                     <v-flex md2 sm2 xs12>
                                         <v-card-text class="text-xs-center">
-                                            <v-btn large round dark primary class="elevation-1 white--text px-2">Experience Now</v-btn>
+                                            <v-btn target="_blank" :href="`{{ route('experiences.all') }}?date_from=${from}&date_to=${to}`" large round dark primary class="elevation-1 white--text px-2">Experience Now</v-btn>
                                         </v-card-text>
                                     </v-flex>
                                 </v-layout>

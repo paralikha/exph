@@ -6,6 +6,8 @@ use Frontier\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Order\Models\Order;
 use Order\Requests\OrderRequest;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class OrderController extends AdminController
 {
@@ -141,5 +143,43 @@ class OrderController extends AdminController
         //
 
         return redirect()->route('orders.trash');
+    }
+
+    public function export(Request $request)
+    {
+        $orders = Order::all();
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue("A1", "Customer");
+        $sheet->setCellValue("B1", "Experience");
+        $sheet->setCellValue("C1", "Payment ID");
+        $sheet->setCellValue("D1", "Payer ID");
+        $sheet->setCellValue("E1", "Quantity");
+        $sheet->setCellValue("F1", "Price");
+        $sheet->setCellValue("G1", "Total");
+        $y = 2;
+        foreach ($orders as $order) {
+            $sheet->setCellValue("A{$y}", $order->customer->fullname);
+            $sheet->setCellValue("B{$y}", $order->experience->name);
+            $sheet->setCellValue("C{$y}", $order->payment_id);
+            $sheet->setCellValue("D{$y}", $order->payer_id);
+            $sheet->setCellValue("E{$y}", $order->quantity);
+            $sheet->setCellValue("F{$y}", $order->price);
+            $sheet->setCellValue("G{$y}", $order->total);
+            $y++;
+        }
+        $sheet->setCellValue("F".($y+1), "TOTAL");
+        $sheet->setCellValue("G".($y+1), "=SUM(G2:G{$y})");
+
+
+        $writer = new Xlsx($spreadsheet);
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="orders.xlsx"');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+
+        return back();
     }
 }

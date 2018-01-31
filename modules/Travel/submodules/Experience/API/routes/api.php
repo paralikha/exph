@@ -7,6 +7,7 @@ Route::get('experiences/trash/all', 'Experience\API\Controllers\ExperienceContro
 Route::post('experiences/{experience}/restore', 'Experience\API\Controllers\ExperienceController@restore')->name('experiences.restore');
 
 Route::get('experiences/all', 'Experience\API\Controllers\ExperienceController@all')->name('experiences.all');
+Route::get('experiences/hot', 'Experience\API\Controllers\ExperienceController@hot')->name('experiences.hot');
 
 // Amenities
 Route::delete('amenities/destroy/{amenity}', 'Experience\API\Controllers\AmenityController@destroy')->name('amenities.destroy');
