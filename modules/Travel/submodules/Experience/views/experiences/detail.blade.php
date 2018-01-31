@@ -80,9 +80,9 @@
                                             </v-list-tile-action>
                                         </v-list-tile>
 
-                                        <v-list-tile avatar v-for="(guest, i) in guests" :key="i">
-                                            <v-list-tile-avatar>
-                                                <v-btn icon disabled class="red"><span v-html="guest.icon ? guest.icon : guestInitial(guest.name)"></span></v-btn>
+                                        <v-list-tile avatar v-for="(guest, i) in guests" :key="i" class="px-0 py-3">
+                                            <v-list-tile-avatar class="px-0">
+                                                <v-btn icon disabled class="grey darken-1 white--text"><span v-html="guest.icon ? guest.icon : guestInitial(guest.name)"></span></v-btn>
                                             </v-list-tile-avatar>
                                             <v-list-tile-content>
                                                 <v-list-tile-title v-html="guest.name"></v-list-tile-title>
@@ -161,8 +161,8 @@
                                         <v-icon color="indigo">date_range</v-icon>
                                     </v-list-tile-action>
                                     <v-list-tile-content>
-                                        <v-list-tile-title>{{ $resource->date }}</v-list-tile-title>
-                                        <v-list-tile-sub-title>{{ $resource->days }}</v-list-tile-sub-title>
+                                        <v-list-tile-title>{{ $availability->date }}</v-list-tile-title>
+                                        {{-- <v-list-tile-sub-title>{{ $availability->days }}</v-list-tile-sub-title> --}}
                                     </v-list-tile-content>
                                 </v-list-tile>
                                 <v-list-tile>
@@ -170,8 +170,8 @@
                                         <v-icon color="indigo">schedule</v-icon>
                                     </v-list-tile-action>
                                     <v-list-tile-content>
-                                        <v-list-tile-title>{{ "$resource->time" }}</v-list-tile-title>
-                                        <v-list-tile-sub-title>{{ __($resource->day) }}</v-list-tile-sub-title>
+                                        <v-list-tile-title>{{ "$availability->time" }}</v-list-tile-title>
+                                        <v-list-tile-sub-title>{{ __($availability->days) }}</v-list-tile-sub-title>
                                     </v-list-tile-content>
                                 </v-list-tile>
                                 <v-divider></v-divider>
@@ -279,8 +279,8 @@
                                             <v-icon color="indigo">date_range</v-icon>
                                         </v-list-tile-action>
                                         <v-list-tile-content>
-                                            <v-list-tile-title>{{ $resource->date }}</v-list-tile-title>
-                                            <v-list-tile-sub-title>{{ $resource->days }}</v-list-tile-sub-title>
+                                            <v-list-tile-title>{{ $availability->date }}</v-list-tile-title>
+                                            {{-- <v-list-tile-sub-title>{{ $availability->days }}</v-list-tile-sub-title> --}}
                                         </v-list-tile-content>
                                     </v-list-tile>
                                     <v-list-tile>
@@ -288,8 +288,8 @@
                                             <v-icon color="indigo">schedule</v-icon>
                                         </v-list-tile-action>
                                         <v-list-tile-content>
-                                            <v-list-tile-title>{{ "$resource->time" }}</v-list-tile-title>
-                                            <v-list-tile-sub-title>{{ __($resource->day) }}</v-list-tile-sub-title>
+                                            <v-list-tile-title>{{ "$availability->time" }}</v-list-tile-title>
+                                            <v-list-tile-sub-title>{{ __($availability->days) }}</v-list-tile-sub-title>
                                         </v-list-tile-content>
                                     </v-list-tile>
                                     <v-divider></v-divider>

@@ -35,7 +35,7 @@
                                                         <div class="mb-1"><a href="\stories" class="td-n grey--text">
                                                             Stories From The Road
                                                         </a></div>
-                                                        <div class="mb-1"><a href="" class="td-n grey--text">
+                                                        <div class="mb-1"><a href="\privacy-policy" class="td-n grey--text">
                                                             Privacy Policy
                                                         </a></div>
                                                         <div class="mb-1"><a href="" class="td-n grey--text">

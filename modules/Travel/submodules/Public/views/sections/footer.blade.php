@@ -35,11 +35,8 @@
                                                         <div class="mb-1"><a href="\stories" class="td-n grey--text">
                                                             Stories From The Road
                                                         </a></div>
-                                                        <div class="mb-1"><a href="" class="td-n grey--text">
+                                                        <div class="mb-1"><a href="\privacy-policy" class="td-n grey--text">
                                                             Privacy Policy
-                                                        </a></div>
-                                                        <div class="mb-1"><a href="" class="td-n grey--text">
-                                                            Contact Us
                                                         </a></div>
                                                         <div class="mb-1"><a href="" class="td-n grey--text">
                                                             Sponsorships Opportunities
@@ -75,16 +72,16 @@
                                             <v-card-text>
                                                 <v-layout row justify-space-between>
                                                     <v-flex xs3>
-                                                        <a href="" class="td-n body-1 white--text">Home</a>
+                                                        <a href="\home" class="td-n body-1 white--text">Home</a>
                                                     </v-flex>
                                                     <v-flex xs3>
-                                                        <a href="" class="td-n body-1 white--text">About Us</a>
+                                                        <a href="about" class="td-n body-1 white--text">About Us</a>
                                                     </v-flex>
                                                     <v-flex xs3>
-                                                        <a href="" class="td-n body-1 white--text">Stories</a>
+                                                        <a href="\stories" class="td-n body-1 white--text">Stories</a>
                                                     </v-flex>
                                                     <v-flex xs3>
-                                                        <a href="" class="td-n body-1 white--text">Policies</a>
+                                                        <a href="\privacy-policy" class="td-n body-1 white--text">Policies</a>
                                                     </v-flex>
                                                 </v-layout>
                                             </v-card-text>
@@ -93,7 +90,6 @@
                                     <v-flex sm3 xs12>
                                         <v-card dark class="elevation-0 transparent">
                                             <v-card-text class="caption grey--text">
-                                                <div class="body-2 mb-2 white--text">Contact Us</div>
                                                 <v-dialog v-model="dialog.contact" persistent width="500px">
                                                     <v-btn outline class="mb-2 mx-0 grey--text" slot="activator">Ask Us</v-btn>
                                                     <v-card>

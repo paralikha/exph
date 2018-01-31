@@ -142,7 +142,7 @@
                     @if (user())
                     <v-flex md4 xs12 class="hidden-sm-and-down">
                         <v-card class="elevation-1 mb-3">
-                            <v-card-media src="{{ assets('frontier/images/placeholder/red2.jpg') }}">
+                            <v-card-media src="{{ $resource->feature }}">
                                 <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.3); position: absolute; width: 100%; height: 100%;"></div>
                                 <v-card-text class="text-xs-center">
                                     <v-card dark class="elevation-0 transparent py-5">
@@ -247,7 +247,7 @@
                                         <v-icon>close</v-icon>
                                     </v-btn>
                                 </v-toolbar>
-                                <v-card-media src="{{ assets('frontier/images/placeholder/red2.jpg') }}">
+                                <v-card-media src="{{ $resource->feature }}">
                                     <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.3); position: absolute; width: 100%; height: 100%;"></div>
                                     <v-card-text class="text-xs-center">
                                         <v-card dark class="elevation-0 transparent py-5">
@@ -263,8 +263,8 @@
                                             <v-icon color="indigo">date_range</v-icon>
                                         </v-list-tile-action>
                                         <v-list-tile-content>
-                                            <v-list-tile-title>November 24 to 26</v-list-tile-title>
-                                            <v-list-tile-sub-title>2017</v-list-tile-sub-title>
+                                            <v-list-tile-title>{{ $availability->date }}</v-list-tile-title>
+                                            {{-- <v-list-tile-sub-title>{{ $availability->days }}</v-list-tile-sub-title> --}}
                                         </v-list-tile-content>
                                     </v-list-tile>
                                     <v-list-tile>
@@ -272,36 +272,16 @@
                                             <v-icon color="indigo">schedule</v-icon>
                                         </v-list-tile-action>
                                         <v-list-tile-content>
-                                            <v-list-tile-title>8pm, Friday</v-list-tile-title>
-                                            <v-list-tile-sub-title>3 days</v-list-tile-sub-title>
+                                            <v-list-tile-title>{{ "$availability->time" }}</v-list-tile-title>
+                                            <v-list-tile-sub-title>{{ __($availability->days) }}</v-list-tile-sub-title>
                                         </v-list-tile-content>
                                     </v-list-tile>
                                     <v-divider></v-divider>
-                                    <v-list-tile>
-                                        <v-list-tile-action>
-                                            <v-icon color="indigo">face</v-icon>
-                                        </v-list-tile-action>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title class="grey--text text--darken-1">x 3</v-list-tile-title>
-                                        </v-list-tile-content>
-                                        <v-list-tile-action>
-                                            <v-list-tile-title>₱ 6,000</v-list-tile-title>
-                                        </v-list-tile-action>
-                                    </v-list-tile>
-                                    <v-divider></v-divider>
-                                    <v-list-tile>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title class="grey--text text--darken-1">Total ( PHP )</v-list-tile-title>
-                                        </v-list-tile-content>
-                                        <v-list-tile-action>
-                                            <v-list-tile-title class="title success--text">₱ <strong>18,000</strong></v-list-tile-title>
-                                        </v-list-tile-action>
-                                    </v-list-tile>
                                 </v-list>
-                                <v-divider></v-divider>
-                                <v-card class="elevation-0">
-                                    <v-toolbar class="transparent elevation-0">
-                                        <v-toolbar-title class="subheading">Reference Number: 500500266 </v-toolbar-title>
+
+                                <v-card class="elevation-0 mb-3">
+                                    <v-toolbar card dense class="transparent elevation-0">
+                                        <v-toolbar-title class="subheading">Reference Number: {{ $resource->refnum }} </v-toolbar-title>
                                     </v-toolbar>
                                 </v-card>
                                 <v-divider></v-divider>

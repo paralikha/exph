@@ -302,7 +302,7 @@
                     var self = this;
                     this.api().post(url, query)
                         .then((data) => {
-                            console.log(data);
+                            // console.log(data);
                             self.get('{{ route('api.experiences.all') }}');
                             self.snackbar = Object.assign(self.snackbar, data.items);
                             self.snackbar.model = true;

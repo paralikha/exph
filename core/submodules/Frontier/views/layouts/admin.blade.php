@@ -18,7 +18,8 @@
     <v-container fluid grid-list-lg class="pa-0">
         <v-layout row wrap>
             <v-flex xs6>
-                <small>{{ $application->site->copyright }}</small>
+                <small>ExPH © Copyright 2017 - 2018 to EXPH Travel Differently, Inc. © Copyright 2018-2010</small>
+                {{-- <small>{{ $application->site->copyright }}</small> --}}
             </v-flex>
             <v-flex xs6 class="text-xs-right">
                 <small>{{ $application->version }}</small>
