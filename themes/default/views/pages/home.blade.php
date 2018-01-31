@@ -6,7 +6,7 @@
 
 @section("content")
 
-    @include("Public::sections.header")
+    {{-- @include("Public::sections.header") --}}
 
 
     @include("Public::parts.hero")
