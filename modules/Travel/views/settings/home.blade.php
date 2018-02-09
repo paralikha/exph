@@ -10,15 +10,15 @@
                 <v-card class="mb-3 elevation-1">
                     <v-card-text>
                         <v-toolbar class="transparent elevation-0">
-                            <v-toolbar-title class="accent--text">{{ __('Home Settings') }}</v-toolbar-title>
+                            <v-toolbar-title class="accent--text"><v-icon left>home</v-icon>{{ __('Home Settings') }}</v-toolbar-title>
                         </v-toolbar>
 
                         {{-- {{ dd(settings('home_banner_title')) }} --}}
 
-                        <form action="{{ route('settings.home') }}" method="POST">
+                        <form action="{{ route('settings.store') }}" method="POST">
                             {{ csrf_field() }}
 
-                            <v-subheader><v-icon left>home</v-icon>&nbsp;{{ __('Banner Section') }}</v-subheader>
+                            <v-subheader>{{ __('Banner Section') }}</v-subheader>
                             <v-card-text>
                                 <v-text-field
                                     label="{{ __('Home Title') }}"
@@ -31,13 +31,14 @@
                             <v-card-text>
                                 <v-text-field
                                     label="{{ __('Home Subtitle') }}"
+                                    multi-line
                                     name="home_banner_subtitle"
                                     input-group
                                     hide-details
                                     value="{{ old('home_banner_subtitle') ? old('home_banner_subtitle') : settings('home_banner_subtitle') }}"
                                 ></v-text-field>
                             </v-card-text>
-                            <v-subheader><v-icon left>home</v-icon>&nbsp;{{ __('Categories Section') }}</v-subheader>
+                            <v-subheader>{{ __('Categories Section') }}</v-subheader>
                             <v-card-text>
                                 <v-text-field
                                     label="{{ __('Category Title') }}"
@@ -50,6 +51,7 @@
                             <v-card-text>
                                 <v-text-field
                                     label="{{ __('Category Subtitle') }}"
+                                    multi-line
                                     name="category_subtitle"
                                     input-group
                                     hide-details
@@ -57,7 +59,7 @@
                                 ></v-text-field>
                             </v-card-text>
 
-                            <v-subheader><v-icon left>home</v-icon>&nbsp;{{ __('Video Section') }}</v-subheader>
+                            <v-subheader>{{ __('Video Section') }}</v-subheader>
                             <v-card-text>
                                 <v-text-field
                                     label="{{ __('Video Title') }}"
@@ -70,6 +72,7 @@
                             <v-card-text>
                                 <v-text-field
                                     label="{{ __('Video Subtitle') }}"
+                                    multi-line
                                     name="video_subtitle"
                                     input-group
                                     hide-details
@@ -88,13 +91,23 @@
                             <v-card-text>
                                 {{-- value: video_bg --}}
                                 {{-- @include("Travel::interactives.featured-image") --}}
-                                <input
-                                    name="video_bg"
-                                    type="file"
-                                    value="{{ old('video_bg') ? old('video_bg') : settings('video_bg') }}">
+                                <v-card class="transparent elevation-0" role="button" @click="$refs.siteLogoFile.click()">
+                                        <v-toolbar dense card class="transparent">
+                                            <v-toolbar-title class="caption">{{ __('Video Background Image') }}</v-toolbar-title>
+                                            <v-spacer></v-spacer>
+                                            <v-btn icon ripple @click.stop="clearPreview"><v-icon>close</v-icon></v-btn>
+                                        </v-toolbar>
+                                        <v-avatar tile size="100%">
+                                            <img v-if="resource.item.video_bg" :src="resource.item.video_bg" role="button">
+                                            <div v-else class="pa-5 grey--text text-xs-center caption">
+                                                {{ __('Add a site logo') }}
+                                            </div>
+                                            <input ref="siteLogoFile" name="video_bg" type="file" class="hidden-sm-and-up" accept=".png,.jpg,image/jpeg,image/png" @change="loadFile">
+                                        </v-avatar>
+                                    </v-card>
                             </v-card-text>
 
-                            <v-subheader><v-icon left>home</v-icon>&nbsp;{{ __('Stories Section') }}</v-subheader>
+                            <v-subheader>{{ __('Stories Section') }}</v-subheader>
                             <v-card-text>
                                 <v-text-field
                                     label="{{ __('Story Title') }}"
@@ -107,6 +120,7 @@
                             <v-card-text>
                                 <v-text-field
                                     label="{{ __('Story Subtitle') }}"
+                                    multi-line
                                     name="story_subtitle"
                                     input-group
                                     hide-details
@@ -114,7 +128,7 @@
                                 ></v-text-field>
                             </v-card-text>
 
-                            <v-subheader><v-icon left>home</v-icon>&nbsp;{{ __('Road Tripper Review Section') }}</v-subheader>
+                            <v-subheader>{{ __('Road Tripper Review Section') }}</v-subheader>
                             <v-card-text>
                                 <v-text-field
                                     label="{{ __('Review Title') }}"
@@ -127,6 +141,7 @@
                             <v-card-text>
                                 <v-text-field
                                     label="{{ __('Review Subtitle') }}"
+                                    multi-line
                                     name="review_subtitle"
                                     input-group
                                     hide-details
@@ -136,13 +151,9 @@
                             <v-card-text>
                                 {{-- value: review_bg --}}
                                 {{-- @include("Travel::interactives.featured-image") --}}
-                                <input
-                                    name="video_bg"
-                                    type="file"
-                                    value="{{ old('review_bg') ? old('review_bg') : settings('review_bg') }}">
                             </v-card-text>
 
-                            <v-subheader><v-icon left>home</v-icon>&nbsp;{{ __('Partnerships and Media Section') }}</v-subheader>
+                            <v-subheader>{{ __('Partnerships and Media Section') }}</v-subheader>
                             <v-card-text>
                                 <v-text-field
                                     label="{{ __('Partnerships and Media Title') }}"
@@ -155,6 +166,7 @@
                             <v-card-text>
                                 <v-text-field
                                     label="{{ __('Partnerships and Media Subtitle') }}"
+                                    multi-line
                                     name="partnership_subtitle"
                                     input-group
                                     hide-details
@@ -162,7 +174,7 @@
                                 ></v-text-field>
                             </v-card-text>
 
-                            <v-subheader><v-icon left>home</v-icon>&nbsp;{{ __('Call to Action Section') }}</v-subheader>
+                            <v-subheader>{{ __('Call to Action Section') }}</v-subheader>
                             <v-card-text>
                                 <v-text-field
                                     label="{{ __('Title') }}"
@@ -175,6 +187,7 @@
                             <v-card-text>
                                 <v-text-field
                                     label="{{ __('Subtitle') }}"
+                                    multi-line
                                     name="cta_subtitle"
                                     input-group
                                     hide-details
@@ -213,11 +226,13 @@
             data () {
                 return {
                     resource: {
-                        //
+                        item: {
+                            video_bg: '{{ (old('video_bg') ? url(old('video_bg')) : null) ?? url(settings('video_bg', 'logo.png')) }}',
+                        },
                     },
-                    featuredImageValue: '',
                 };
             },
+
             methods: {
                 loadFile ($event) {
                     let self = this;
@@ -226,7 +241,7 @@
                     self.files = $event.target.files[0]; //this.$refs.siteLogoFile.file;
 
                     reader.onloadend = function () {
-                        self.resource.item.site_logo = reader.result;
+                        self.resource.item.video_bg = reader.result;
                     }
 
                     if (self.files) {
@@ -235,10 +250,7 @@
                 },
                 clearPreview () {
                     this.file = null
-                    this.resource.item.site_logo = null;
-                },
-                getValue(vara, val) {
-                    vara = val;
+                    this.resource.item.video_bg = null;
                 }
             }
         });

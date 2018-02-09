@@ -22,6 +22,28 @@
                                         name="body"
                                         value="{{ old('body') }}"
                                     ></v-text-field>
+
+                                    <v-text-field
+                                        :error-messages="resource.errors.meta"
+                                        label="{{ __('Type a Text') }}"
+                                        name="meta"
+                                        value="{{ old('meta') }}"
+                                    ></v-text-field>
+
+                                    <v-text-field
+                                        :error-messages="resource.errors.name"
+                                        label="{{ __('Type a Text') }}"
+                                        name="name"
+                                        value="{{ old('name') }}"
+                                    ></v-text-field>
+
+                                    <v-text-field
+                                        :error-messages="resource.error.name"
+                                        label="{{ __('Type') }}"
+                                        name="type"
+                                    >
+                                    </v-text-field>
+                                    <v-text >
                                 </v-flex>
                             </v-layout>
                         </v-card-text>

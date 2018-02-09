@@ -7,55 +7,57 @@
         </v-toolbar>
 
         {{-- {{ settings('site_title', 'home') }} --}}
-        <v-layout column align-center justify-center class="white--text">
-            <v-card dark class="elevation-0 transparent">
-                <h2 class="mb-2 text-xs-center uppercase"><strong>{!! settings('home_banner_title') !!}</strong></h2>
-                <h5 class="mb-3 text-xs-center fw-500">{!! settings('home_banner_subtitle') !!}</h5>
+        <v-layout row wrap align-center justify-center class="white--text">
+            <v-flex md6 xs12>
+                <v-card dark class="elevation-0 transparent">
+                    <h2 class="mb-2 text-xs-center uppercase"><strong>{!! settings('home_banner_title') !!}</strong></h2>
+                    <h5 class="mb-3 text-xs-center fw-500">{!! settings('home_banner_subtitle') !!}</h5>
 
-                <div class="hidden-sm-and-down">
-                    <v-menu
-                        offset-y
-                        :close-on-content-click="false"
-                        class="block px-3 pt-4 hero-search"
-                        v-model="hero.search"
-                        >
-                        <v-select
-                            autocomplete
-                            label="What do you want to experience?"
-                            slot="activator"
-                            append-icon=""
-                            prepend-icon="search"
-                            clearable
-                            search-input
-                             solo tags>
-                        </v-select>
-                        <v-card class="pa-3" style="max-width: 745px !important;">
-                            <v-container fluid grid-list-lg>
-                                <v-layout row wrap>
-                                    <v-flex xs6 sm3 v-for="card in ssrch">
-                                        <a href="" class="td-n">
-                                            <v-card class="elevation-1">
-                                                <v-card-media :src="card.src" width="100%" height="120">
-                                                    <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.4); position: absolute; width: 100%; height: 100%;"></div>
-                                                    <v-card-text>
-                                                        <v-container fill-height fluid class="pa-0 white--text">
-                                                            <v-layout row wrap align-center justify-center>
-                                                            <v-card class="elevation-0 transparent text-xs-center">
-                                                               <div class="caption white--text text-xs-center">@{{ card.title }}</div>
-                                                            </v-card>
-                                                            </v-layout>
-                                                        </v-container>
-                                                    </v-card-text>
-                                                </v-card-media>
-                                            </v-card>
-                                        </a>
-                                    </v-flex>
-                                </v-layout>
-                            </v-container>
-                        </v-card>
-                    </v-menu>
-                </div>
-            </v-card>
+                    <div class="hidden-sm-and-down">
+                        <v-menu
+                            offset-y
+                            :close-on-content-click="false"
+                            class="block px-3 pt-4 hero-search"
+                            v-model="hero.search"
+                            >
+                            <v-select
+                                autocomplete
+                                label="What do you want to experience?"
+                                slot="activator"
+                                append-icon=""
+                                prepend-icon="search"
+                                clearable
+                                search-input
+                                 solo tags>
+                            </v-select>
+                            <v-card class="pa-3" style="max-width: 745px !important;">
+                                <v-container fluid grid-list-lg>
+                                    <v-layout row wrap>
+                                        <v-flex xs6 sm3 v-for="card in ssrch">
+                                            <a href="" class="td-n">
+                                                <v-card class="elevation-1">
+                                                    <v-card-media :src="card.src" width="100%" height="120">
+                                                        <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.4); position: absolute; width: 100%; height: 100%;"></div>
+                                                        <v-card-text>
+                                                            <v-container fill-height fluid class="pa-0 white--text">
+                                                                <v-layout row wrap align-center justify-center>
+                                                                <v-card class="elevation-0 transparent text-xs-center">
+                                                                   <div class="caption white--text text-xs-center">@{{ card.title }}</div>
+                                                                </v-card>
+                                                                </v-layout>
+                                                            </v-container>
+                                                        </v-card-text>
+                                                    </v-card-media>
+                                                </v-card>
+                                            </a>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-container>
+                            </v-card>
+                        </v-menu>
+                    </div>
+                </v-card>
+            </v-flex>
         </v-layout>
     </v-parallax>
 
@@ -69,56 +71,59 @@
             {{-- @include("Theme::partials.navigation") --}}
         </v-toolbar>
 
-        <v-layout column align-center justify-center class="white--text">
-            <v-card dark class="elevation-0 transparent">
-                <h2 class="mb-2 text-xs-center"><strong>{!! settings('home_banner_title') !!}</strong></h2>
-                <h5 class="mb-3 text-xs-center fw-500">{!! settings('home_banner_subtitle') !!}</h5>
-                <div class="hidden-sm-and-down">
-                    <v-menu
-                        offset-y
-                        :close-on-content-click="false"
-                        class="block px-3 pt-4"
-                        v-model="search"
-                        >
-                        <v-select
-                            autocomplete
-                            label="What do you want to experience?"
-                            slot="activator"
-                            append-icon=""
-                            prepend-icon="search"
-                            clearable
-                            search-input
-                             solo tags>
-                        </v-select>
-                        <v-card class="pa-3" style="max-width: 745px !important;">
-                            <v-container fluid grid-list-lg>
-                                <v-layout row wrap>
-                                    <v-flex xs6 sm3 v-for="card in ssrch">
-                                        <a href="" class="td-n">
-                                            <v-card class="elevation-1">
-                                                <v-card-media :src="card.src" width="100%" height="120">
-                                                    <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.4); position: absolute; width: 100%; height: 100%;"></div>
-                                                    <v-card-text>
-                                                        <v-container fill-height fluid class="pa-0 white--text">
-                                                            <v-layout row wrap align-center justify-center>
-                                                            <v-card class="elevation-0 transparent text-xs-center">
-                                                               <div class="caption white--text text-xs-center">@{{ card.title }}</div>
-                                                            </v-card>
-                                                            </v-layout>
-                                                        </v-container>
-                                                    </v-card-text>
-                                                </v-card-media>
-                                            </v-card>
-                                        </a>
-                                    </v-flex>
-                                </v-layout>
-                            </v-container>
-                        </v-card>
-                    </v-menu>
-                </div>
-            </v-card>
+        <v-layout row wrap align-center justify-center class="white--text">
+            <v-flex md6 xs12>
+                <v-card dark class="elevation-0 transparent">
+                    <h2 class="mb-2 text-xs-center"><strong>{!! settings('home_banner_title') !!}</strong></h2>
+                    <h5 class="mb-3 text-xs-center fw-500">{!! settings('home_banner_subtitle') !!}</h5>
+                    <div class="hidden-sm-and-down">
+                        <v-menu
+                            offset-y
+                            :close-on-content-click="false"
+                            class="block px-3 pt-4"
+                            v-model="search"
+                            >
+                            <v-select
+                                autocomplete
+                                label="What do you want to experience?"
+                                slot="activator"
+                                append-icon=""
+                                prepend-icon="search"
+                                clearable
+                                search-input
+                                 solo tags>
+                            </v-select>
+                            <v-card class="pa-3" style="max-width: 745px !important;">
+                                <v-container fluid grid-list-lg>
+                                    <v-layout row wrap>
+                                        <v-flex xs6 sm3 v-for="card in ssrch">
+                                            <a href="" class="td-n">
+                                                <v-card class="elevation-1">
+                                                    <v-card-media :src="card.src" width="100%" height="120">
+                                                        <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.4); position: absolute; width: 100%; height: 100%;"></div>
+                                                        <v-card-text>
+                                                            <v-container fill-height fluid class="pa-0 white--text">
+                                                                <v-layout row wrap align-center justify-center>
+                                                                <v-card class="elevation-0 transparent text-xs-center">
+                                                                   <div class="caption white--text text-xs-center">@{{ card.title }}</div>
+                                                                </v-card>
+                                                                </v-layout>
+                                                            </v-container>
+                                                        </v-card-text>
+                                                    </v-card-media>
+                                                </v-card>
+                                            </a>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-container>
+                            </v-card>
+                        </v-menu>
+                    </div>
+                </v-card>
+            </v-flex>
         </v-layout>
     </v-parallax>
+
     <v-card-text class="white elevation-1 text-xs-center hidden-xs-only">
         <v-layout row wrap>
             <v-flex lg10 offset-lg1 md12 xs12>

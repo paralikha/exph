@@ -11,24 +11,16 @@ Version: 1.0
 
 @section("content")
     @include("Public::sections.header")
-    {{-- @include("Theme::partials.navigation") --}}
 
     @include("Public::parts.hero")
-    {{-- @include("Public::parts.top-light") --}}
 
-    {{-- {{ settings('site_title', 'DS') }} --}}
-
-    {{-- {{ dd($page) }} --}}
     <div class="py-5">
         @include("Public::parts.categories")
-        {{-- @include("Public::parts.hotlist") --}}
         @include("Public::parts.video")
         @include("Public::parts.stories")
         @include("Public::parts.review")
         @include("Public::parts.partners")
     </div>
-
-    {{-- @include("Public::parts.bottom-light") --}}
 
     @include("Public::parts.cta")
     @include("Public::sections.footer")
@@ -45,16 +37,12 @@ Version: 1.0
         .ssl-2 { /* _11iocrd2 */
             margin-left: -8px !important;
             margin-right: -8px !important;
-            /*overflow: hidden !important;*/
-            /*overflow-y: hidden !important;*/
         }
         .ssl-3 { /* _1ob6ca33 */
-            /*margin-bottom: 0px !important;*/
             padding: 0px !important;
             overflow: visible !important;
         }
         .ssl-4 { /* _1yttouf2 */
-            /*display: inline-block !important;*/
             vertical-align: top !important;
             white-space: normal !important;
         }
@@ -66,7 +54,6 @@ Version: 1.0
             height: 100%;
         }
         .slick-slide {
-            /*margin: 8px 16px 8px 0;*/
         }
         .slick-slide img {
             width: 100%;
