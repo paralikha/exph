@@ -98,7 +98,7 @@
                             </v-toolbar>
                         </v-card-media>
                     </div>
-                    <v-toolbar dark flat class="blue">
+                    <v-toolbar dark flat class="primary">
                         <v-toolbar-title>{{ $resource->name }}</v-toolbar-title>
                     </v-toolbar>
                     <div class="hidden-md-and-up">

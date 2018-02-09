@@ -9,7 +9,7 @@
                         <v-flex lg6 md10 sm10 xs12>
                             <v-card class="elevation-1">
                                 <v-layout row wrap>
-                                    <v-flex md5 xs12 class="blue lighten-1 hidden-sm-and-down">
+                                    <v-flex md5 xs12 class="primary hidden-sm-and-down">
                                             <v-layout row wrap justify-center align-center>
                                                 <v-flex xs12>
                                                     <v-card class="elevation-0 transparent white--text" height="100%">
@@ -27,7 +27,7 @@
                                                 </v-flex>
                                             </v-layout>
                                     </v-flex>
-                                    <v-flex md5 xs12 class="blue lighten-1 hidden-md-and-up">
+                                    <v-flex md5 xs12 class="primary hidden-md-and-up">
                                             <v-layout row wrap justify-center align-center>
                                                 <v-flex sm3 xs12>
                                                     <v-card-text class="px-4 pt-4">

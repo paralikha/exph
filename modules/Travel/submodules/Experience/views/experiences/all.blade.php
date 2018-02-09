@@ -148,7 +148,7 @@
                                             </div>
                                         </v-card-media>
                                         <v-divider class="grey lighten-3"></v-divider>
-                                        <v-toolbar card dense class="transparent pt-2">
+                                        <v-toolbar card class="transparent pt-2">
                                             <v-toolbar-title class="mr-3 subheading">
                                                 <span class="body-2">@{{ card.name }}</span><br>
                                                 <span class="caption">@{{ card.date }}</span><br>
