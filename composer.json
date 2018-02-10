@@ -38,7 +38,9 @@
         "illuminate/bus": "^5.5",
         "swiftmailer/swiftmailer": "^6.0",
         "chumper/zipper": "dev-master",
-        "wikimedia/composer-merge-plugin": "^1.4"
+        "wikimedia/composer-merge-plugin": "^1.4",
+        "barryvdh/laravel-dompdf": "^0.8.1",
+        "phpoffice/phpspreadsheet": "^1.1"
     },
     "autoload": {
         "classmap": [

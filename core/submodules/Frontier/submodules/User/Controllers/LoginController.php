@@ -113,6 +113,10 @@ class LoginController extends Controller
      */
     protected function attemptLogin(Request $request)
     {
+        if ($request->input('redirect_to')) {
+            $this->redirectPath = $request->input('redirect_to');
+        }
+
         if ($this->guard()->attempt(
             ['email' => $request->username, 'password' => $request->password], $request->has('remember')
         )) {

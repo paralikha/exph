@@ -14,7 +14,7 @@ class Story extends Model
 
     protected $with = [];
 
-    protected $appends = ['author', 'modified'];
+    protected $appends = ['author', 'modified', 'created'];
 
     protected $searchables = ['title', 'code', 'user_id', 'body', 'created_at', 'updated_at'];
 

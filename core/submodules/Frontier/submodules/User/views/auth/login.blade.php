@@ -19,6 +19,7 @@
                     <v-container fluid>
                         <form action="{{ route('login.login') }}" method="POST">
                             {{ csrf_field() }}
+                            <input type="hidden" name="redirect_to" value="{{ request()->get('redirect_to') }}">
                             <v-text-field
                                 :error-messages="resource.errors.username"
                                 class="input-group"

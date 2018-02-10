@@ -14,6 +14,19 @@ return [
         ],
     ],
 
+    'account-profile' => [
+        'name' => 'account-profile',
+        'parent' => 'avatar',
+        'icon' => 'vpn_key',
+        'slug' => route('profile.account', user()->handlename),
+        'always_viewable' => false,
+        'order' => 2,
+        'labels' => [
+            'title' => __('Account Information'),
+            'description' => __('Manage Account details'),
+        ],
+    ],
+
     'home-settings' => [
         'name' => 'home-settings',
         'parent' => 'settings',

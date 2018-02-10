@@ -2,7 +2,7 @@
     <v-toolbar class="elevation-1 white">
         {{-- @include("Public::sections.nav") --}}
         @include("Theme::partials.navigation")
-    </v-toolbar>
+</v-toolbar>
 </header>
 
 @push('css')

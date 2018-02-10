@@ -3,8 +3,12 @@
         <v-flex xs12>
             <v-layout row wrap align-center>
                 <v-flex xs12>
+<<<<<<< HEAD
                     {{-- <v-parallax class="mb-4 mt-5" height="450" src="{{ assets("frontier/images/placeholder/9.png") }}"> --}}
                     <v-parallax class="mb-4 mt-5" height="450" src="{{ settings('video_bg') }}">
+=======
+                    <v-parallax class="mb-4 mt-5" height="450" src="{{ assets('frontier/images/public/v1.jpg') }}">
+>>>>>>> 765e0737b3c2314bdda844db6250d0c379f8e322
                         <v-layout
                             column
                             align-center

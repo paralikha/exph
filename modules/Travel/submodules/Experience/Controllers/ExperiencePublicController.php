@@ -18,12 +18,14 @@ class ExperiencePublicController extends Controller
      */
     public function all(Request $request)
     {
-        $resources = Experience::paginate();
+        $resources = Experience::search($request->all())->paginate();
+        $categories = Category::type('experience')->select(['name', 'icon', 'id'])->get()->toArray();
         if (null !== $request->get('date_from') && null !== $request->get('date_to')) {
-            $resources = Experience::whereBetween('date_start', [$request->get('date_from'), $request->get('date_to')])->paginate();
+            $resources = Experience::whereBetween('date_start', [$request->get('date_from'), $request->get('date_to')]);
+            $resources = $resources->paginate();
         }
 
-        return view("Theme::experiences.all")->with(compact('resources'));
+        return view("Theme::experiences.all")->with(compact('resources', 'categories'));
     }
 
     /**
