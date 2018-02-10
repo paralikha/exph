@@ -9,13 +9,21 @@
         </v-toolbar>
     </v-card>
 
-    <v-card class="elevation-1 hidden-sm-and-down">
-        <v-card-media src="{{ @$resource->feature }}" height="450px">
-            <v-toolbar dark class="elevation-0 transparent">
-                <v-btn flat href="\experiences"><v-icon left>keyboard_backspace</v-icon>{{ __('Back') }}</v-btn>
-            </v-toolbar>
-        </v-card-media>
-    </v-card>
+    <v-parallax class="elevation-1 hidden-sm-and-down" src="{{ @$resource->feature }}" style="height: 450px !important;">
+        <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.3); position: absolute; width: 100%; height: 100%;"></div>
+        <v-toolbar dark class="elevation-0 transparent">
+            <v-btn flat href="\experiences"><v-icon left>keyboard_backspace</v-icon>{{ __('Back') }}</v-btn>
+        </v-toolbar>
+        <v-layout row wrap justify-center align-center>
+            <v-flex xs12>
+                <v-card class="transparent" flat>
+                    <v-card-text class="text-xs-center">
+                        <h2 class="display-2"> {{ $resource->name }} </h2>
+                    </v-card-text>
+                </v-card>
+            </v-flex>
+        </v-layout>
+    </v-parallax>
     <v-container fluid grid-list-lg>
         <v-layout row wrap>
             <v-flex md3 xs12 class="hidden-sm-and-down">
@@ -41,7 +49,7 @@
                     {{-- TRAVEL MANAGER CARD --}}
 
                     {{-- CANCEL CARD --}}
-                    <v-card class="elevation-1 mb-3">
+                    {{-- <v-card class="elevation-1 mb-3">
                         <v-list subheader class="py-3">
                             <v-list-tile avatar>
                                 <v-list-tile-avatar tile>
@@ -83,7 +91,7 @@
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list>
-                    </v-card>
+                    </v-card> --}}
                     {{-- CANCEL CARD --}}
 
                 </div>
@@ -348,14 +356,14 @@
                             </v-card-text>
                         </v-card-media>
                         <v-divider></v-divider>
-                        <v-card-text class="text-xs-center pa-1">
+                        {{-- <v-card-text class="text-xs-center pa-1">
                             <!-- @include("Theme::recursives.main-menu", ['items' => get_navmenus('social-menu')]) -->
                             <v-card-text class="text-xs-center pa-1">
                                 <v-btn href="{{ settings('social_links', '', 'facebook.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
-                            <v-btn href="{{ settings('social_links', '', 'twitter.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
-                            <v-btn href="{{ settings('social_links', '', 'instagram.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-instagram</v-icon></v-btn>
+                                <v-btn href="{{ settings('social_links', '', 'twitter.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
+                                <v-btn href="{{ settings('social_links', '', 'instagram.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-instagram</v-icon></v-btn>
                             </v-card-text>
-                        </v-card-text>
+                        </v-card-text> --}}
                     </v-card>
 
                     <v-card class="elevation-1 mb-3">
@@ -509,13 +517,13 @@
                                         </div>
                                     </v-card-text>
                                 </v-card-media>
-                                <v-divider></v-divider>
+                                {{-- <v-divider></v-divider>
                                 <v-card-text class="text-xs-center pa-1">
                                     <!-- @include("Theme::recursives.main-menu", ['items' => get_navmenus('social-menu')]) -->
                                     <v-card-text class="text-xs-center pa-1">
                                         <v-btn href="{{ settings('social_links', '', 'facebook.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
-                            <v-btn href="{{ settings('social_links', '', 'twitter.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
-                            <v-btn href="{{ settings('social_links', '', 'instagram.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-instagram</v-icon></v-btn>
+                                        <v-btn href="{{ settings('social_links', '', 'twitter.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
+                                        <v-btn href="{{ settings('social_links', '', 'instagram.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-instagram</v-icon></v-btn>
                                     </v-card-text>
                                 </v-card-text>
                                 <v-divider></v-divider>
@@ -559,7 +567,7 @@
                                             <v-list-tile-sub-title>Within or less than 5 days</v-list-tile-sub-title>
                                         </v-list-tile-content>
                                     </v-list-tile>
-                                </v-list>
+                                </v-list> --}}
                             </v-card>
                         </v-dialog>
                     </v-card-text>

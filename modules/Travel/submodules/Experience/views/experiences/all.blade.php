@@ -167,14 +167,14 @@
                                         </div>
                                     </v-card-media>
                                     <v-divider class="grey lighten-3"></v-divider>
-                                    <v-toolbar card dense class="transparent pt-2">
+                                    <div card dense class="toolbar_content transparent pt-2">
                                         <a :href="card.url" ripple class="td-n">
                                             <v-toolbar-title class="mr-3 subheading">
                                                 <span class="body-2">@{{ card.name }}</span><br>
                                                 <span class="caption">@{{ card.date }}</span><br>
                                             </v-toolbar-title>
                                         </a>
-                                    </v-toolbar>
+                                    </div>
                                     <v-card-text class="grey--text pt-4">
                                         {{-- <v-icon v-if="card.categoryname" class="subheading grey--text text--lighten-1 pb-1">whatshot</v-icon> --}}
                                         <v-icon class="subheading" v-if="card.category" v-html="card.category.icon">whatshot</v-icon>
@@ -323,6 +323,10 @@
 
         .fadeIn-top {
             top: 20%;
+        }
+        .td-n:hover,
+        .td-n:focus {
+            text-decoration: none !important;
         }
         /**/
     </style>

@@ -10,11 +10,24 @@ Version: 1.0
 @section("page-title", __($application->page->title))
 
 @section("content")
+    <v-dialog v-model="resource.dialog.model" persistent width="800">
+        <v-btn color="primary" dark slot="activator">Open Dialog</v-btn>
+        <v-card class="transparent" flat>
+            <v-toolbar class="transparent elevation-0">
+                <v-spacer></v-spacer>
+                <v-btn dark flat v-tooltip:bottom="{ html: 'Close' }" @click.native="resource.dialog.model=false" icon>
+                    <v-icon>close</v-icon>
+                </v-btn>
+            </v-toolbar>
+            <iframe width="100%" height="500" src="https://www.youtube.com/embed/6P15_uGoAcI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </v-card>
+    </v-dialog>
     <v-card class="elevation-1 sticky">
         <v-toolbar class="elevation-0 white">
             @include("Theme::partials.navigation")
         </v-toolbar>
     </v-card>
+    <v-card c;las>
 
     <v-card class="elevation-1">
         <v-card-media src="{{ $page->feature }}" height="300">
@@ -149,7 +162,11 @@ Version: 1.0
         mixins.push({
             data () {
                 return {
-
+                    resource: {
+                        dialog: {
+                            model: false,
+                        }
+                    }
                 }
             },
         });

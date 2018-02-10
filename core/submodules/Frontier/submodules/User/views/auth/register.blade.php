@@ -130,7 +130,7 @@
                                                 </form>
 
                                                 {{-- Template --}}
-                                                <template inline-template>
+                                                {{-- <template inline-template>
                                                     <div class="hr">
                                                         <strong class="hr-text grey--text text--lighten-2">or</strong>
                                                     </div>
@@ -149,7 +149,7 @@
                                                             </v-btn>
                                                         </v-flex>
                                                     </v-layout>
-                                                </template>
+                                                </template> --}}
                                                 {{-- /Template --}}
                                             </v-card-text>
                                         </v-card>
