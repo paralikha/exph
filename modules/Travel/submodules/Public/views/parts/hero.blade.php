@@ -13,7 +13,6 @@
                     <h2 class="mb-2 text-xs-center uppercase"><strong>{!! settings('home_banner_title') !!}</strong></h2>
                     <h5 class="mb-3 text-xs-center fw-500">{!! settings('home_banner_subtitle') !!}</h5>
 
-<<<<<<< HEAD
                     <div class="hidden-sm-and-down">
                         <v-menu
                             offset-y
@@ -21,29 +20,32 @@
                             class="block px-3 pt-4 hero-search"
                             v-model="hero.search"
                             >
-                            <v-select
-                                autocomplete
-                                label="What do you want to experience?"
-                                slot="activator"
+                            <v-text-field
                                 append-icon=""
-                                prepend-icon="search"
+                                autocomplete
                                 clearable
+                                label="What do you want to experience?"
+                                prepend-icon="search"
                                 search-input
-                                 solo tags>
-                            </v-select>
+                                slot="activator"
+                                solo tags
+                                v-model="hero.smartSearch.model"
+                                @input="smartSearch($event)"
+                                >
+                            </v-text-field>
                             <v-card class="pa-3" style="max-width: 745px !important;">
                                 <v-container fluid grid-list-lg>
                                     <v-layout row wrap>
-                                        <v-flex xs6 sm3 v-for="card in ssrch">
-                                            <a href="" class="td-n">
+                                        <v-flex xs6 sm3 v-for="(card, i) in ssrch" :key="i">
+                                            <a ripple :href="route(urls.experiences.show, card.code)" class="td-n">
                                                 <v-card class="elevation-1">
-                                                    <v-card-media :src="card.src" width="100%" height="120">
+                                                    <v-card-media :src="card.feature" width="100%" height="120">
                                                         <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.4); position: absolute; width: 100%; height: 100%;"></div>
                                                         <v-card-text>
                                                             <v-container fill-height fluid class="pa-0 white--text">
                                                                 <v-layout row wrap align-center justify-center>
                                                                 <v-card class="elevation-0 transparent text-xs-center">
-                                                                   <div class="caption white--text text-xs-center">@{{ card.title }}</div>
+                                                                   <div class="caption white--text text-xs-center">@{{ card.name }}</div>
                                                                 </v-card>
                                                                 </v-layout>
                                                             </v-container>
@@ -59,55 +61,6 @@
                     </div>
                 </v-card>
             </v-flex>
-=======
-                <div class="hidden-sm-and-down">
-                    <v-menu
-                        offset-y
-                        :close-on-content-click="false"
-                        class="block px-3 pt-4 hero-search"
-                        v-model="hero.search"
-                        >
-                        <v-text-field
-                            append-icon=""
-                            autocomplete
-                            clearable
-                            label="What do you want to experience?"
-                            prepend-icon="search"
-                            search-input
-                            slot="activator"
-                            solo tags
-                            v-model="hero.smartSearch.model"
-                            @input="smartSearch($event)"
-                            >
-                        </v-text-field>
-                        <v-card class="pa-3" style="max-width: 745px !important;">
-                            <v-container fluid grid-list-lg>
-                                <v-layout row wrap>
-                                    <v-flex xs6 sm3 v-for="(card, i) in ssrch" :key="i">
-                                        <a ripple :href="route(urls.experiences.show, card.code)" class="td-n">
-                                            <v-card class="elevation-1">
-                                                <v-card-media :src="card.feature" width="100%" height="120">
-                                                    <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.4); position: absolute; width: 100%; height: 100%;"></div>
-                                                    <v-card-text>
-                                                        <v-container fill-height fluid class="pa-0 white--text">
-                                                            <v-layout row wrap align-center justify-center>
-                                                            <v-card class="elevation-0 transparent text-xs-center">
-                                                               <div class="caption white--text text-xs-center">@{{ card.name }}</div>
-                                                            </v-card>
-                                                            </v-layout>
-                                                        </v-container>
-                                                    </v-card-text>
-                                                </v-card-media>
-                                            </v-card>
-                                        </a>
-                                    </v-flex>
-                                </v-layout>
-                            </v-container>
-                        </v-card>
-                    </v-menu>
-                </div>
-            </v-card>
->>>>>>> 765e0737b3c2314bdda844db6250d0c379f8e322
         </v-layout>
     </v-parallax>
 

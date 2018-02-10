@@ -52,7 +52,7 @@
 
     <div class="hidden-sm-and-down">
         <v-menu open-on-hover top offset-y full-width>
-            <v-btn flat slot="activator" class="grey--text text--darken-1"><v-icon left>search</v-icon>Search</v-btn>
+            <v-btn smalll flat slot="activator" class="grey--text text--darken-1"><v-icon left>search</v-icon></v-btn>
             <v-card id="search-hover" style="max-width: 600px !important;">
                 <v-select
                     autocomplete
