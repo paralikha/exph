@@ -60,6 +60,22 @@
                                                 <form method="POST" action="{{ route('register.register') }}">
                                                     {{ csrf_field() }}
                                                     <v-text-field
+                                                        :error-messages="resource.errors.firstname"
+                                                        class="input-group mb-3"
+                                                        label="First Name"
+                                                        name="firstname"
+                                                        hide-details
+                                                        value="{{ old('firstname') }}"
+                                                    ></v-text-field>
+                                                    <v-text-field
+                                                        :error-messages="resource.errors.lastname"
+                                                        class="input-group mb-3"
+                                                        label="Last Name"
+                                                        name="lastname"
+                                                        hide-details
+                                                        value="{{ old('lastname') }}"
+                                                    ></v-text-field>
+                                                    <v-text-field
                                                         :error-messages="resource.errors.email"
                                                         class="input-group mb-3"
                                                         label="Email"

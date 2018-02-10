@@ -51,7 +51,7 @@
                     {{-- headmenu --}}
                     <v-list-tile ripple slot="item">
                         <v-list-tile-avatar class="pt-0" v-tooltip:right="{html: '{{ user()->handlename }}'}">
-                            <img src="{{ user()->avatar }}" alt="{{ user()->handlename }}">
+                            <img src="{{ user()->displayavatar }}">
                         </v-list-tile-avatar>
                         <v-list-tile-content>
                             <strong><v-list-tile-title>{{ user()->displayname }}</v-list-tile-title></strong>

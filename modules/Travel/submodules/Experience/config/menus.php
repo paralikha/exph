@@ -32,6 +32,22 @@ return [
                     ]
                 ],
                 'labels' => [
+                    'title' => __('Manage Experiences'),
+                    'description' => __('View the list of all experiences'),
+                ],
+            ],
+            'all-experiences' => [
+                'name' => 'all-experiences',
+                'order' => 1,
+                'slug' => url('experiences'),
+                'always_viewable' => true,
+                'routes' => [
+                    'name' => 'experiences.all',
+                    'children' => [
+                        'experiences.single',
+                    ]
+                ],
+                'labels' => [
                     'title' => __('All Experiences'),
                     'description' => __('View the list of all experiences'),
                 ],

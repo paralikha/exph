@@ -14,6 +14,11 @@ trait UserMutator
      */
     protected $rolesnames;
 
+    public function getDisplayavatarAttribute()
+    {
+        return $this->avatar ?? assets('user/images/avatars/default.png');
+    }
+
     /**
      * Get the mutated handlename.
      *

@@ -52,7 +52,9 @@ class CreateActivationsTable extends Migration
             $table->boolean('activated')->default(false);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')
+                  ->onUpdate('CASCADE')
+                  ->onDelete('CASCADE');
         });
     }
 

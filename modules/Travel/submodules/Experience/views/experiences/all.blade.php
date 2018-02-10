@@ -113,13 +113,19 @@
                 <v-layout row wrap>
                     <v-flex xs12 sm6 offset-sm3>
                         <v-card class="elevation-0 transparent" height="400px">
-                            <v-card-text class="text-xs-center my-3">
-                                <img src="{{ assets('frontier/images/public/sad.png') }}" alt="" height="80" class="mb-3">
-                                <h2 class="subheading grey--text">
-                                    {{ __("No Experiences found with those parameters.") }}
-                                </h2>
-                                <v-btn large href="{{ route('experiences.create') }}" class="primary subheading">{{ __('Create New Experience') }}</v-btn>
-                            </v-card-text>
+                            @can('create-experience')
+                                <v-card-text class="text-xs-center my-3">
+                                    <img src="{{ assets('frontier/images/public/sad.png') }}" alt="" height="80" class="mb-3">
+                                    <h2 class="subheading grey--text">
+                                        {{ __("No Experiences found with those parameters.") }}
+                                    </h2>
+                                    <v-btn large href="{{ route('experiences.create') }}" class="primary subheading">{{ __('Create New Experience') }}</v-btn>
+                                </v-card-text>
+                            @else
+                                <v-card-text class="text-xs-center my-3">
+                                    {{ __('No Experiences available for the moment.') }}
+                                </v-card-text>
+                            @endcan
                         </v-card>
                     </v-flex>
                 </v-layout>

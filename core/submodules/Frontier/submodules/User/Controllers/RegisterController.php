@@ -4,12 +4,15 @@ namespace User\Controllers;
 
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Pluma\Controllers\Controller as Controller;
 use Pluma\Support\Auth\Traits\RegistersUsers;
+use Role\Models\Role;
 use User\Jobs\ActivateUser;
-use User\Jobs\SendVerificationEmail;
+use User\Jobs\SendVerifyEmailNotification;
+use User\Mail\EmailVerification;
 use User\Models\Activation;
 use User\Models\User;
 
@@ -61,6 +64,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'firstname' => 'required',
+            'lastname' => 'required',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'terms_and_conditions' => 'required',
@@ -77,9 +82,12 @@ class RegisterController extends Controller
     {
         $user = new User();
         $user->username = $data['email'];
+        $user->firstname = $data['firstname'];
+        $user->lastname = $data['lastname'];
         $user->email = $data['email'];
         $user->password = bcrypt($data['password']);
         $user->save();
+        $user->roles()->save(Role::whereCode('experiencer')->orWhere('code', 'guest')->first());
 
         $activation = new Activation();
         $activation->token = base64_encode($data['email']);
@@ -111,7 +119,9 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        // dispatch(new SendVerificationEmail($user));
+        $email = new EmailVerification($user);
+        Mail::to($user->email)->send($email);
+        // dispatch(new SendVerifyEmailNotification($user));
 
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
