@@ -1,0 +1,80 @@
+Homepage:
+
+Princess
+
+pages/home
+ ✔ Hero - banner ('LET'S GO TRAVEL DIFFERENTLY, We are an experienced based company that lets you choose your own <br> bucketlist adventure in the Philippines.) @done (18-01-31 11:12)
+ ✔ home settings - banner tagline @done (18-01-31 11:19)
+
+
+settings/home
+ ☐ mediabox / image uploader for background images -- ???
+ ✔ home settings - video tagline @done (18-01-31 12:08)
+ ✔ footer settings @done (18-01-31 17:18)
+     ✔ about us desc, @done (18-01-31 15:03)
+     ✔ address, @done (18-01-31 15:03)
+     ✔ landline, @done (18-01-31 15:03)
+     ✔ email, @done (18-01-31 15:03)
+     ✔ social media links @done (18-01-31 17:05)
+
+ John
+ ☐ smart search
+ ☐ categories
+ ☐ ask us submit form mailto:gian
+ ☐ feautured stories
+ ☐ reviews section
+ ☐ CTA btn - choose date get form new tab
+
+
+Princess
+About us::
+  ✔ banner bg @done (18-01-31 15:45)
+  ✔ banner text @done (18-01-31 16:34)
+  ☐ gallery management ----- pagiisipan pa
+
+ Meet the Team::
+   --static / kung abot(Module::make)
+    ☐ CRUD
+    ☐ module name: Staff
+
+John
+Profile:
+  ☐ Remove notifications
+  ☐ Add My Profile
+  ☐ Transactions
+    ☐ Export to PDF
+  ☐ Wishlist
+
+Gian
+Pending Req::
+    ☐ Host an Experience
+    ☐ partnership images
+
+John
+Experience:
+  display filter and date
+
+Princess
+show:
+  ☐ social media menus to pull from settings
+      ✔ experiences.show page @done (18-01-31 17:18)
+      ✔ roadtrips.show page @done (18-01-31 17:18)
+      ✔ footer @done (18-01-31 17:18)
+      ✔ roadtrips @done (18-01-31 17:18)
+      ✔ mobile viewport @done (18-01-31 17:18)
+
+John
+Login Menu:
+  ☐ Login Menu / Profile Main Menu
+  ☐ Email Verification for registration ---pagiisipan
+
+John
+Order:
+   Generate excel.
+
+
+
+   Need to loop:
+     Press
+     Partnerships
+     Meet the Team

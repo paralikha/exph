@@ -18,6 +18,10 @@ Route::delete('experiences/delete/{experience}', 'Experience\Controllers\Experie
 Route::get('experiences/trashed', 'Experience\Controllers\ExperienceController@trashed')->name('experiences.trashed');
 Route::post('experiences/{experience}/restore', 'Experience\Controllers\ExperienceController@restore')->name('experiences.restore');
 
+//API
+Route::delete('experiences/destroy/{experience}', 'Experience\API\Controllers\ExperienceController@destroy')->name('experiences.destroy');
+Route::delete('experiences/delete/{experience}', 'Experience\API\Controllers\ExperienceController@delete')->name('experiences.delete');
+
 // Many
 Route::delete('experiences/delete/many', 'Experience\Controllers\ExperienceManyController@delete')->name('experiences.many.delete');
 Route::delete('experiences/destroy/many', 'Experience\Controllers\ExperienceManyController@destroy')->name('experiences.many.destroy');

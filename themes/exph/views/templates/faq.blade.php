@@ -12,12 +12,12 @@ Version: 1.0
 @section("content")
     <v-card class="elevation-1 sticky">
         <v-toolbar class="elevation-0 white">
-            @include("Public::sections.nav")
+            @include("Theme::partials.navigation")
         </v-toolbar>
     </v-card>
 
     <v-card class="elevation-1">
-        <v-card-media src="{{ assets('frontier/images/placeholder/gradient.png') }}" height="300">
+        <v-card-media src="{{ $page->feature }}" height="300">
             <v-layout
                 column
                 align-center
@@ -26,8 +26,8 @@ Version: 1.0
                 >
                 <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.3); position: absolute; width: 100%; height: 100%; top: 0;"></div>
                 <v-card dark class="elevation-0 transparent text-xs-center">
-                    <v-card-text>
-                        <h3><strong>{{ __("Frequently Asked Questions") }}</strong></h3>
+                    <v-card-text class="text-xs-center">
+                        <h3><strong>{!! $page->body !!}</strong></h3>
                     </v-card-text>
                 </v-card>
             </v-layout>

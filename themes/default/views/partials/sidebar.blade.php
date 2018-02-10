@@ -200,11 +200,8 @@
                     </v-list-tile-title>
                 </v-list-tile-content>
             </v-list-tile>
-
         </template>
-
     </v-list>
-
 </v-navigation-drawer>
 
 @push('pre-scripts')

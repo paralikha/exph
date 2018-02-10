@@ -12,42 +12,42 @@ Version: 1.0
 @section("content")
     <v-card class="elevation-1 sticky">
         <v-toolbar class="elevation-0 white">
-            @include("Public::sections.nav")
+            @include("Theme::partials.navigation")
         </v-toolbar>
     </v-card>
 
     <v-card class="elevation-1 hero">
-        <v-parallax src="{{ assets('frontier/images/placeholder/9.png') }}" height="450">
+        <v-parallax src="{{ $page->feature }}" height="450">
             <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.3); position: absolute; width: 100%; height: 100%;"></div>
             <v-layout column align-center justify-center class="white--text">
-                <v-card dark class="elevation-0 transparent">
-                    <h2 class="mb-2 text-xs-center"><strong>{{ __("WHO WE ARE") }}</strong></h2>
-                    <h5 class="mb-3 text-xs-center fw-500">{{__("Let's Go Travel Differently")}}</h5>
+                <v-card dark class="text-xs-center elevation-0 transparent">
+                    <h3 class="mb-3 fw-500">{!! $page->body !!}</h3>
+                </v-card>
             </v-layout>
         </v-parallax>
         <v-card-text class="pa-2 white hidden-xs-only">
             <v-layout wrap justify-space-around align-center>
                 <v-list class="text-xs-center">
                     <div class="headline primary--text text--darken-2">465</div>
-                    <div class="mt-2 caption">Happy Travellers</div>
+                    <div class="mt-2 caption">{{ __('Happy Travellers') }}</div>
                 </v-list>
                 <v-list class="text-xs-center">
                     <div class="headline primary--text text--darken-2">125</div>
-                    <div class="mt-2 caption">Amazing Experiences</div>
+                    <div class="mt-2 caption">{{ __('Amazing Experiences') }}</div>
                 </v-list>
                 <v-list class="text-xs-center">
                     <div class="headline primary--text text--darken-2">19, 172</div>
-                    <div class="mt-2 caption">Die Hard Fans</div>
+                    <div class="mt-2 caption">{{ __('Die Hard Fans') }}</div>
                 </v-list>
                 <v-list class="text-xs-center">
                     <div class="headline primary--text text--darken-2">130</div>
-                    <div class="mt-2 caption">Destinations Explored</div>
+                    <div class="mt-2 caption">{{ __('Destinations Explored') }}</div>
                 </v-list>
             </v-layout>
         </v-card-text>
     </v-card>
 
-    <section id="gallery" class="my-5">
+    {{-- <section id="gallery" class="my-5">
         <v-container fluid>
             <v-layout row wrap justify-center align-center>
                 <v-flex lg10 xs12>
@@ -70,7 +70,7 @@ Version: 1.0
                 </v-flex>
             </v-layout>
         </v-container>
-    </section>
+    </section> --}}
 
     <section id="ms" class="white py-5">
         <v-container fluid>
@@ -145,7 +145,7 @@ Version: 1.0
         </v-container>
     </section>
 
-    <section id="gallery" class="my-5">
+   {{--  <section id="gallery" class="my-5">
         <v-container fluid>
             <v-layout row wrap justify-center align-center>
                 <v-flex lg10 xs12>
@@ -168,15 +168,18 @@ Version: 1.0
                 </v-flex>
             </v-layout>
         </v-container>
-    </section>
+    </section> --}}
 
-    <section id="services" class="white mt-5 py-5">
+    <section id="services" class=" mt-5 py-5">
         <v-container fluid grid-list-lg>
             <v-layout row wrap justify-center align-top>
                 <v-flex md8 xs12>
+                    <div class="text-xs-center">
+                        <h2 class="display-1">{{ __('Services') }}</h1>
+                    </div>
                     <v-layout row wrap>
                         <v-flex md4 sm4 xs12>
-                            <v-card class="elevation-0">
+                            <v-card class="transparent elevation-0">
                                 <v-card-text class="text-xs-center">
                                     <p class="mb-4">
                                         <v-avatar tile size="60px">
@@ -189,7 +192,7 @@ Version: 1.0
                             </v-card>
                         </v-flex>
                         <v-flex md4 sm4 xs12>
-                            <v-card class="elevation-0">
+                            <v-card class="transparent elevation-0">
                                 <v-card-text class="text-xs-center">
                                     <p class="mb-4">
                                         <v-avatar tile size="60px">
@@ -202,7 +205,7 @@ Version: 1.0
                             </v-card>
                         </v-flex>
                         <v-flex md4 sm4 xs12>
-                            <v-card class="elevation-0">
+                            <v-card class="transparent elevation-0">
                                 <v-card-text class="text-xs-center">
                                     <p class="mb-4">
                                         <v-avatar tile size="60px">

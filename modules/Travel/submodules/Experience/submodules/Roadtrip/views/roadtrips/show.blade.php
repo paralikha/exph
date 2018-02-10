@@ -23,7 +23,7 @@
                     {{-- TRAVEL MANAGER CARD --}}
                     <v-card class="elevation-1 mb-3">
                         <v-toolbar class="elevation-0 transparent">
-                            <v-toolbar-title>{{ __('Travel Manager') }}</v-toolbar-title>
+                            <v-toolbar-title>{{ __('Experience Manager') }}</v-toolbar-title>
                         </v-toolbar>
                         <v-divider></v-divider>
                         <v-card-text class="text-xs-center">
@@ -34,7 +34,7 @@
                             </div>
                             <span class="body-2 block pb-2">{{ $resource->user->fullname }}</span>
                             <div class="grey--text">
-                                {{ __("The Travel Manager is the one who will make sure your road trip will be full of adventures, excitement, tales to tell your grandchildren, epic memories and unforgettable experiences.") }}
+                                {{ __("The Experience Manager is the one who will make sure your road trip will be full of adventures, excitement, tales to tell your grandchildren, epic memories and unforgettable experiences.") }}
                             </div>
                         </v-card-text>
                     </v-card>
@@ -98,13 +98,13 @@
                             </v-toolbar>
                         </v-card-media>
                     </div>
-                    <v-toolbar dark flat class="blue">
+                    <v-toolbar dark flat class="primary">
                         <v-toolbar-title>{{ $resource->name }}</v-toolbar-title>
                     </v-toolbar>
                     <div class="hidden-md-and-up">
                         <v-card-text>
                             <v-toolbar class="elevation-0 transparent">
-                                <v-toolbar-title>{{ __('Travel Manager') }}</v-toolbar-title>
+                                <v-toolbar-title>{{ __('Experience Manager') }}</v-toolbar-title>
                             </v-toolbar>
                             <v-card-text class="grey--text text--darken-2 subheading">
                                 <p class="text-xs-center">
@@ -113,7 +113,7 @@
                                     </v-avatar>
                                 </p>
                                 <p class="text-xs-center"><strong>{{ $resource->user->displayname }}</strong></p>
-                                <p class="text-xs-center">{{ __('The Travel Manager is the guy who will make sure your road trip will be full of adventures, excitement, tales to tell your grandchildren, epic memories and unforgettable experiences.') }}</p>
+                                <p class="text-xs-center">{{ __('The Experience Manager is the guy who will make sure your road trip will be full of adventures, excitement, tales to tell your grandchildren, epic memories and unforgettable experiences.') }}</p>
                             </v-card-text>
                         </v-card-text>
                     </div>
@@ -282,9 +282,9 @@
                             <v-card-text class="text-xs-center pa-1">
                                 <!-- @include("Theme::recursives.main-menu", ['items' => get_navmenus('social-menu')]) -->
                                 <v-card-text class="text-xs-center pa-1">
-                                        <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
-                                        <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
-                                        <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-google</v-icon></v-btn>
+                                        <v-btn href="{{ settings('social_links', '', 'facebook.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
+                            <v-btn href="{{ settings('social_links', '', 'twitter.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
+                            <v-btn href="{{ settings('social_links', '', 'instagram.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-instagram</v-icon></v-btn>
                                     </v-card-text>
                             </v-card-text>
                         </v-list>
@@ -371,9 +371,9 @@
                                     </v-list-tile>
                                     <v-divider></v-divider>
                                     <v-card-text class="text-xs-center pa-1">
-                                        <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
-                                        <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
-                                        <v-btn icon class="social"><v-icon class="subheading grey--text">fa fa-google</v-icon></v-btn>
+                                        <v-btn href="{{ settings('social_links', '', 'facebook.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-facebook</v-icon></v-btn>
+                            <v-btn href="{{ settings('social_links', '', 'twitter.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-twitter</v-icon></v-btn>
+                            <v-btn href="{{ settings('social_links', '', 'instagram.url') }}" icon class="social"><v-icon class="subheading grey--text">fa fa-instagram</v-icon></v-btn>
                                     </v-card-text>
                                 </v-list>
                                 <v-divider></v-divider>

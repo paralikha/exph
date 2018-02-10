@@ -10,17 +10,17 @@ Version: 1.0
 @section("content")
     <v-card class="elevation-1 sticky">
         <v-toolbar class="elevation-0 white">
-            @include("Public::sections.nav")
+            @include("Theme::partials.navigation")
         </v-toolbar>
     </v-card>
 
     <v-card class="banner elevation-1">
-        <v-parallax class="elevation-0" height="450" src="{{ assets('frontier/images/public/sierra.jpg') }}">
+        <v-parallax class="elevation-0" height="450" src="{{ $page->feature }}">
             <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.4); position: absolute; width: 100%; height: 100%;"></div>
             <v-layout column align-center justify-center class="white--text">
-                <v-card dark class="elevation-0 transparent">
-                    <h2 class="mb-2 text-xs-center"><strong>{{ __("MEET THE TEAM") }}</strong></h2>
-                    <h5 class="mb-3 text-xs-center fw-500">{{__("Lorem Ipsum Dolor Cit Amet")}}</h5>
+                <v-card dark class="text-xs-center elevation-0 transparent">
+                    <h3 class="mb-3 fw-500">{!! $page->body !!}</h3>
+                </v-card>
             </v-layout>
         </v-parallax>
     </v-card>

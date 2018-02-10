@@ -148,7 +148,7 @@
                                             </div>
                                         </v-card-media>
                                         <v-divider class="grey lighten-3"></v-divider>
-                                        <v-toolbar card dense class="transparent pt-2">
+                                        <v-toolbar card class="transparent pt-2">
                                             <v-toolbar-title class="mr-3 subheading">
                                                 <span class="body-2">@{{ card.name }}</span><br>
                                                 <span class="caption">@{{ card.date }}</span><br>
@@ -156,7 +156,7 @@
                                         </v-toolbar>
                                         <v-card-text class="grey--text pt-4">
                                             {{-- <v-icon v-if="card.categoryname" class="subheading grey--text text--lighten-1 pb-1">whatshot</v-icon> --}}
-                                            <v-icon class="subheading">whatshot</v-icon> fgfgf
+                                            <v-icon class="subheading">whatshot</v-icon>
                                             <span v-if="card.categoryname" class="caption">@{{ card.categoryname }}</span>
                                             <div>
                                                 <span class="star-rating-system" :data-rating="card.rate">

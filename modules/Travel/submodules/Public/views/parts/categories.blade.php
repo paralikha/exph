@@ -3,8 +3,8 @@
         <v-layout row wrap align-center justify-center>
             <v-flex lg10 md12 sm12 xs12>
                 <v-card-text class="text-xs-center my-3">
-                    <h2 class="display-1">{{ __("POPULAR EXPERIENCES AND ROAD TRIPS") }}</h2>
-                    <h2 class="subheading grey--text text--darken-1">Here is a summary of what is currently hot and popular among the Experience Philippines community.</h2>
+                    <h2 class="display-1 uppercase">{!! settings('category_title') !!}</h2>
+                    <h2 class="subheading grey--text text--darken-1">{!! settings('category_subtitle') !!}</h2>
                 </v-card-text>
                 <v-layout row wrap align-center>
                     <v-flex xs12

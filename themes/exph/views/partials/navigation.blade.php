@@ -132,7 +132,7 @@
         <v-btn link flat class="success--text text--accent-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Sign up as a Host') }}'}">
             <span>{{ __('Host An Experience') }}</span>
         </v-btn>
-        <v-btn link flat class="red--text text--darken-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Go to a random Experience') }}'}">
+        <v-btn link flat class="red--text text--darken-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Go to a Random Experience') }}'}">
             <v-icon left>fa-magic</v-icon>
             <span>{{ __('YOLO!') }}</span>
         </v-btn>

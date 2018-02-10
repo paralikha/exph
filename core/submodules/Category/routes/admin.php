@@ -10,4 +10,9 @@ Route::delete('categories/delete/{category}', 'Category\Controllers\CategoryCont
 Route::get('experiences/categories/trash', 'Category\Controllers\CategoryController@trash')->name('categories.trash');
 Route::post('categories/{category}/restore', 'Category\Controllers\CategoryController@restore')->name('categories.restore');
 
+
+//API
+Route::delete('categories/destroy/{category}', 'Category\API\Controllers\CategoryController@destroy')->name('categories.destroy');
+Route::delete('categories/delete/{category}', 'Category\API\Controllers\CategoryController@delete')->name('categories.delete');
+
 Route::resource('categories', 'Category\Controllers\CategoryController');
