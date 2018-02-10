@@ -1,0 +1,58 @@
+Homepage:
+
+ Princess
+ ☐ Hero - banner
+ ☐ home settings - banner tagline
+ ☐ partnership images
+ ☐ video background
+ ☐ home settings - video tagline
+ ☐ footer settings - aout us desc, address, landline, email
+
+ John
+ ✔ ask us submit form mailto:gian @done (18-01-31 11:08)
+ ✔ categories @done (18-01-31 09:53)
+ ✔ CTA btn - choose date get form new tab @done (18-01-31 10:29)
+ ✔ feautured stories @done (18-01-31 10:10)
+ ✔ reviews section @done (18-01-31 10:22)
+ ✔ smart search @done (18-01-31 09:32)
+
+
+Princess
+About us::
+  ☐ banner bg
+  ☐ banner text
+  ☐ gallery management ----- pagiisipan pa
+
+ ☐ Meet the Team  - -static / kung abot(Module::make)
+  ☐ CRUD
+  ☐ module name: Staff
+
+John
+Profile:
+  ✔ Remove notifications @done (18-01-31 12:18)
+  ✔ Add My Profile @done (18-01-31 12:18)
+  ✔ Transactions @done (18-01-31 12:18)
+    ✔ Export to PDF @done (18-01-31 15:50)
+  ✔ Wishlist @done (18-01-31 15:50)
+
+John
+Login Menu:
+  ✔ Login Menu / Profile Main Menu @done (18-01-31 16:23)
+  ☐ Email Verification for registration ---pagiisipan
+
+Gian
+Pending Req::
+    Host an Experience
+
+John
+Experience:
+  ✔ display filter and date @done (18-01-31 19:11)
+
+Princess
+show:
+  ☐ social media menus to pull from settings
+
+
+John
+Order:
+   ✔ Generate excel. @done (18-01-31 17:11)

@@ -44,8 +44,12 @@ class ReviewController extends APIController
         $search = $request->get('q') !== 'null' && $request->get('q') ? $request->get('q'): '';
         $sort = $request->get('sort') && $request->get('sort') !== 'null' ? $request->get('sort') : 'id';
         $take = $request->get('take') && $request->get('take') > 0 ? $request->get('take') : 0;
+        $groupBy = $request->get('group_by') ? $request->get('group_by') : false;
 
         $resources = Review::search($search)->orderBy($sort, $order);
+        if ($groupBy) {
+            $resources->groupBy($groupBy, 'reviewable_id');
+        }
         if ($onlyTrashed) {
             $resources->onlyTrashed();
         }

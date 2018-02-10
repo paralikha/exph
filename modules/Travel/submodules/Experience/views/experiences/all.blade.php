@@ -79,18 +79,23 @@
                 offset-y center
                 class="elevation-0"
                 :nudge-width="150"
-                >
+                :close-on-content-click="false"
+            >
                 <v-btn class="grey--text text--darken-1" flat slot="activator">Categories <v-icon>keyboard_arrow_down</v-icon></v-btn>
+                <v-card flat>
                     <v-list>
-                    <v-list-tile ripple avatar v-for="item in types" v-bind:key="item.title" @click="">
-                        <v-list-tile-action>
-                            <v-icon color="pink">check_box_outline_blank</v-icon>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                            <v-list-tile-title v-text="item.title"></v-list-tile-title>
-                        </v-list-tile-content>
-                    </v-list-tile>
-                </v-list>
+                        <v-list-tile ripple avatar v-for="(item, i) in types" v-bind:key="i" :href="`{{ route('experiences.all') }}?category_id=${item.id}`">
+                            <v-list-tile-action>
+                                <v-icon v-html="item.icon"></v-icon>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title>
+                                    <span v-text="item.name"></span>
+                                </v-list-tile-title>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </v-list>
+                </v-card>
 
             </v-menu>
         </v-card-text>
@@ -134,42 +139,59 @@
                         </v-card-text>
                         <v-layout row wrap align-center>
                             <v-flex xs12 sm4 md3 v-for="(card, key) in experiences.data" :key="key">
-                                <a :href="card.url" ripple class="td-n">
-                                    <v-card class="elevation-1 c-lift">
-                                        <v-card-media
-                                            height="180px"
-                                            :src="card.feature"
-                                            class="grey lighten-4">
-                                            <div class="text-xs-right" style="width: 100%;">
-                                                <v-btn large v-tooltip:left="{ html: '{{ __('Add to wishlist') }}' }" icon class="mr-3">
+                                <v-card class="elevation-1 c-lift">
+                                    <v-card-media
+                                        height="180px"
+                                        :src="card.feature"
+                                        class="grey lighten-4">
+                                        <div class="text-xs-right" style="width: 100%;">
+                                            <form v-if="!card.wishlisted" action="{{ route('wishlists.store') }}" method="POST">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="experience_id" :value="card.id">
+                                                <v-btn type="submit" large v-tooltip:left="{ html: '{{ __('Add to wishlist') }}' }" icon class="mr-3">
                                                     @include("Experience::components.wishlist")
                                                 </v-btn>
+<<<<<<< HEAD
                                                 <v-chip label class="ma-0 white--text green lighten-1" style="position: absolute; bottom: 15px; right: 0;"><span v-html="card.amount"></span></v-chip>
                                             </div>
                                         </v-card-media>
                                         <v-divider class="grey lighten-3"></v-divider>
                                         <v-toolbar card class="transparent pt-2">
+=======
+                                            </form>
+                                            <template v-else>
+                                                <v-btn type="submit" readonly large v-tooltip:left="{ html: '{{ __('You have this in your wishlist') }}' }" icon class="mr-3">
+                                                    @include("Experience::components.wishlisted")
+                                                </v-btn>
+                                            </template>
+                                            <v-chip label class="ma-0 white--text green lighten-1" style="position: absolute; bottom: 15px; right: 0;"><span v-html="card.amount"></span></v-chip>
+                                        </div>
+                                    </v-card-media>
+                                    <v-divider class="grey lighten-3"></v-divider>
+                                    <v-toolbar card dense class="transparent pt-2">
+                                        <a :href="card.url" ripple class="td-n">
+>>>>>>> 765e0737b3c2314bdda844db6250d0c379f8e322
                                             <v-toolbar-title class="mr-3 subheading">
                                                 <span class="body-2">@{{ card.name }}</span><br>
                                                 <span class="caption">@{{ card.date }}</span><br>
                                             </v-toolbar-title>
-                                        </v-toolbar>
-                                        <v-card-text class="grey--text pt-4">
-                                            {{-- <v-icon v-if="card.categoryname" class="subheading grey--text text--lighten-1 pb-1">whatshot</v-icon> --}}
-                                            <v-icon class="subheading">whatshot</v-icon>
-                                            <span v-if="card.categoryname" class="caption">@{{ card.categoryname }}</span>
-                                            <div>
-                                                <span class="star-rating-system" :data-rating="card.rate">
-                                                    {{-- <v-icon v-for="i in 5" class="subheading primary--text pb-1">
-                                                        <template v-if="i <= Math.round(card.rating)">star</template>
-                                                        <template v-else>star_border</template>
-                                                    </v-icon> --}}
-                                                </span>
-                                                <span class="caption" v-html="card.rate"></span>
-                                            </div>
-                                        </v-card-text>
-                                    </v-card>
-                                </a>
+                                        </a>
+                                    </v-toolbar>
+                                    <v-card-text class="grey--text pt-4">
+                                        {{-- <v-icon v-if="card.categoryname" class="subheading grey--text text--lighten-1 pb-1">whatshot</v-icon> --}}
+                                        <v-icon class="subheading" v-if="card.category" v-html="card.category.icon">whatshot</v-icon>
+                                        <span v-if="card.categoryname" class="caption">@{{ card.categoryname }}</span>
+                                        <div>
+                                            <span class="star-rating-system" :data-rating="card.rate">
+                                                {{-- <v-icon v-for="i in 5" class="subheading primary--text pb-1">
+                                                    <template v-if="i <= Math.round(card.rating)">star</template>
+                                                    <template v-else>star_border</template>
+                                                </v-icon> --}}
+                                            </span>
+                                            <span class="caption" v-html="card.rate"></span>
+                                        </div>
+                                    </v-card-text>
+                                </v-card>
                             </v-flex>
                         </v-layout>
                         <v-card-text>
@@ -184,7 +206,8 @@
         </v-container>
     </section>
 
-    @include("Theme::public.footer")
+    {{-- @include("Theme::public.footer") --}}
+    @include("Public::sections.footer")
 @endsection
 
 @section("footer", "")
@@ -335,17 +358,9 @@
                         { title: 'Quick Getaway' },
                         { title: 'Special' },
                     ],
-                    types: [
-                        { title: 'Nature' },
-                        { title: 'Adventure' },
-                        { title: 'Sports' },
-                        { title: 'Heritage' },
-                        { title: 'Business' },
-                        { title: 'Entertainment' },
-                        { title: 'Skills' },
-                        { title: 'Food' },
-                        { title: 'Outreach' }
-                    ],
+                    categories: [],
+                    categoriesSelected: '',
+                    types: {!! json_encode($categories ?? []) !!},
                     from: null,
                     to: null,
                     dialog: {
@@ -354,6 +369,22 @@
                     menu: false,
                     page: 1,
                     experiences: {!! json_encode($resources->toArray()) !!},
+                }
+            },
+            methods: {
+                add(s, i) {
+                    s.push(i);
+                    this.categoriesSelected = this.ifIn(s, i);
+                },
+                ifIn(s, i) {
+                    for (var i = s.length - 1; i >= 0; i--) {
+                        var cur = s[i];
+                        if (cur == i) {
+                            return 'check_box';
+                        }
+                    }
+
+                    return 'check_box_outline_blank';
                 }
             },
             mounted () {
@@ -369,7 +400,9 @@
                         useGradient: false,
                         disableAfterRate: true,
                     });
-                })
+                });
+
+                this.api().get('')
             }
         });
     </script>

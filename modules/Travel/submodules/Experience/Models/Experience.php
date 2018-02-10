@@ -11,17 +11,19 @@ use Experience\Support\Traits\MorphToManyRating;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Pluma\Models\Model;
+use Travel\Models\User;
+use Travel\Models\Wishlist;
 use User\Support\Traits\BelongsToUser;
 
 class Experience extends Model
 {
     use SoftDeletes, BelongsToCategory, BelongsToUser, BelongsToManyAmenities, MorphToManyRating;
 
-    protected $with = [];
+    protected $with = ['category'];
 
-    protected $appends = ['amount', 'rate', 'date', 'categoryname', 'url', 'manager', 'created', 'modified'];
+    protected $appends = ['wishlisted', 'amount', 'rate', 'date', 'categoryname', 'url', 'manager', 'created', 'modified'];
 
-    protected $searchables = ['created_at', 'updated_at'];
+    protected $searchables = ['name', 'feature', 'code', 'reference_number', 'category_id', 'type', 'body', 'created_at', 'updated_at'];
 
     public function availabilities()
     {
@@ -126,5 +128,26 @@ class Experience extends Model
         }
 
         return $m;
+    }
+
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
+    public function getWishlistedAttribute()
+    {
+        if (! user()) {
+            return false;
+        }
+
+        $wishlists = User::find(user()->id)->wishlists ?? [];
+        foreach ($wishlists as $wishlist) {
+            if ($wishlist->experience_id === $this->id) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

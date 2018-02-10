@@ -5,12 +5,14 @@ namespace Order\Models;
 use Experience\Support\Traits\BelongsToExperience;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Pluma\Models\Model;
+use Travel\Models\User;
+use User\Support\Traits\BelongsToUser;
 
 class Order extends Model
 {
     use SoftDeletes, BelongsToExperience;
 
-    protected $with = [];
+    protected $with = ['customer', 'experience'];
 
     protected $fillable = ['customer_id', 'experience_id', 'price', 'payment_id', 'metadata'];
 
@@ -29,5 +31,10 @@ class Order extends Model
     public function getMetaAttribute()
     {
         return unserialize($this->metadata);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(User::class, 'customer_id');
     }
 }

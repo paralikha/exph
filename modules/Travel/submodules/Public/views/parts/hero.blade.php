@@ -13,6 +13,7 @@
                     <h2 class="mb-2 text-xs-center uppercase"><strong>{!! settings('home_banner_title') !!}</strong></h2>
                     <h5 class="mb-3 text-xs-center fw-500">{!! settings('home_banner_subtitle') !!}</h5>
 
+<<<<<<< HEAD
                     <div class="hidden-sm-and-down">
                         <v-menu
                             offset-y
@@ -58,6 +59,55 @@
                     </div>
                 </v-card>
             </v-flex>
+=======
+                <div class="hidden-sm-and-down">
+                    <v-menu
+                        offset-y
+                        :close-on-content-click="false"
+                        class="block px-3 pt-4 hero-search"
+                        v-model="hero.search"
+                        >
+                        <v-text-field
+                            append-icon=""
+                            autocomplete
+                            clearable
+                            label="What do you want to experience?"
+                            prepend-icon="search"
+                            search-input
+                            slot="activator"
+                            solo tags
+                            v-model="hero.smartSearch.model"
+                            @input="smartSearch($event)"
+                            >
+                        </v-text-field>
+                        <v-card class="pa-3" style="max-width: 745px !important;">
+                            <v-container fluid grid-list-lg>
+                                <v-layout row wrap>
+                                    <v-flex xs6 sm3 v-for="(card, i) in ssrch" :key="i">
+                                        <a ripple :href="route(urls.experiences.show, card.code)" class="td-n">
+                                            <v-card class="elevation-1">
+                                                <v-card-media :src="card.feature" width="100%" height="120">
+                                                    <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.4); position: absolute; width: 100%; height: 100%;"></div>
+                                                    <v-card-text>
+                                                        <v-container fill-height fluid class="pa-0 white--text">
+                                                            <v-layout row wrap align-center justify-center>
+                                                            <v-card class="elevation-0 transparent text-xs-center">
+                                                               <div class="caption white--text text-xs-center">@{{ card.name }}</div>
+                                                            </v-card>
+                                                            </v-layout>
+                                                        </v-container>
+                                                    </v-card-text>
+                                                </v-card-media>
+                                            </v-card>
+                                        </a>
+                                    </v-flex>
+                                </v-layout>
+                            </v-container>
+                        </v-card>
+                    </v-menu>
+                </div>
+            </v-card>
+>>>>>>> 765e0737b3c2314bdda844db6250d0c379f8e322
         </v-layout>
     </v-parallax>
 
@@ -184,69 +234,50 @@
         mixins.push({
             data () {
                 return {
-                    ssrch: [
-                        {
-                            title: 'FULL MOON PARTY Luna Sea: A Random Full Moon Party #4',
-                            price: '₱ 6,000',
-                            category: 'Retro Road Trip',
-                            date: 'Oct 21-22',
-                            src: '{{ assets('frontier/images/placeholder/windmill.jpg') }}'
-                        },
-                        {
-                            title: 'Retro Road Trip #2',
-                            price: '₱ 10,000',
-                            category: 'Singles Road Trip',
-                            date: 'Sep 11-13',
-                            src: '{{ assets('frontier/images/placeholder/red2.jpg') }}'
-                        },
-                        {
-                            title: 'Super Mega Awesome Random Road Trip #3',
-                            price: '₱ 13,000',
-                            category: 'Random Road Trip',
-                            date: 'Aug 21-22',
-                            src: '{{ assets('frontier/images/placeholder/city.png') }}'
-                        },
-                        {
-                            title: 'Super Mega Awesome Random Road Trip #3',
-                            price: '₱ 4,000',
-                            category: 'Special Road Trip',
-                            date: 'July 11-13',
-                            src: '{{ assets('frontier/images/placeholder/9.png') }}'
-                        },
-                        {
-                            title: 'FULL MOON PARTY Luna Sea: A Random Full Moon Party #4',
-                            price: '₱ 6,000',
-                            category: 'Retro Road Trip',
-                            date: 'Oct 21-22',
-                            src: '{{ assets('frontier/images/placeholder/9.jpg') }}'
-                        },
-                        {
-                            title: 'Retro Road Trip #2',
-                            price: '₱ 10,000',
-                            category: 'Singles Road Trip',
-                            date: 'Sep 11-13',
-                            src: '{{ assets('frontier/images/placeholder/13.jpg') }}'
-                        },
-                        {
-                            title: 'Super Mega Awesome Random Road Trip #3',
-                            price: '₱ 13,000',
-                            category: 'Random Road Trip',
-                            date: 'Aug 21-22',
-                            src: '{{ assets('frontier/images/placeholder/red.jpg') }}'
-                        },
-                        {
-                            title: 'Super Mega Awesome Random Road Trip #3',
-                            price: '₱ 4,000',
-                            category: 'Special Road Trip',
-                            date: 'July 11-13',
-                            src: '{{ assets('frontier/images/placeholder/8.jpg') }}'
-                        },
-                    ],
+                    ssrch: [],
+                    urls: {
+                        experiences: {
+                            show: '{{ route('experiences.show', 'null') }}',
+                        }
+                    },
                     hero: {
                         search: false,
+                        smartSearch: {
+                            model: '',
+                        }
                     }
                 }
             },
+
+            methods: {
+                smartSearch(e) {
+                    let query = {
+                            descending: 'false',
+                            page: 1,
+                            q: this.hero.smartSearch.model,
+                            sort: 'id',
+                            take: 8,
+                        };
+
+                    this.api().search('{{ route('api.experiences.search') }}', query)
+                        .then((data) => {
+                            this.ssrch = data.items.data;
+                        });
+                }
+            },
+            mounted () {
+                let query = {
+                        descending: 'false',
+                        page: 1,
+                        sort: 'id',
+                        take: 8,
+                    };
+                this.api().get('{{ route('api.experiences.all') }}', query)
+                    .then((data) => {
+                        this.ssrch = data.items.data;
+                        // console.log("GET",data)
+                    });
+            }
         });
     </script>
 @endpush

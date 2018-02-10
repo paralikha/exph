@@ -64,6 +64,30 @@ class CategoryController extends APIController
      * @param  Illuminate\Http\Request $request [description]
      * @return Illuminate\Http\Response
      */
+    public function hot(Request $request)
+    {
+        $onlyTrashed = $request->get('trashedOnly') !== 'null' && $request->get('trashedOnly') ? $request->get('trashedOnly'): false;
+        $order = $request->get('descending') === 'true' && $request->get('descending') !== 'null' ? 'DESC' : 'ASC';
+        $search = $request->get('q') !== 'null' && $request->get('q') ? $request->get('q'): '';
+        $sort = $request->get('sort') && $request->get('sort') !== 'null' ? $request->get('sort') : 'id';
+        $take = $request->get('take') && $request->get('take') > 0 ? $request->get('take') : 0;
+
+        $resources = Category::type($this->keyword)->search($search)->orderBy($sort, $order);
+
+        if ($onlyTrashed) {
+            $resources->onlyTrashed();
+        }
+        $resources = $resources->paginate($take);
+
+        return response()->json($resources);
+    }
+
+    /**
+     * Get all resources.
+     *
+     * @param  Illuminate\Http\Request $request [description]
+     * @return Illuminate\Http\Response
+     */
     public function getTrash(Request $request)
     {
         $search = $request->get('q') !== 'null' && $request->get('q') ? $request->get('q'): '';

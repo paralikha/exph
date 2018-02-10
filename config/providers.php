@@ -32,6 +32,8 @@ return [
         Pluma\Providers\FormRequestServiceProvider::class,
         Pluma\Support\Installation\Providers\InstallationServiceProvider::class,
         Blacksmith\Providers\ConsoleSupportServiceProvider::class,
+
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     'aliases' => [

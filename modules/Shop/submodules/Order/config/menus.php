@@ -13,7 +13,7 @@ return [
         'order' => 51,
         'slug' => route('orders.index'),
         'always_viewable' => false,
-        'icon' => '',
+        'icon' => 'shopping_cart',
         'labels' => [
             'title' => __('Orders'),
             'description' => __('Manage orders'),
