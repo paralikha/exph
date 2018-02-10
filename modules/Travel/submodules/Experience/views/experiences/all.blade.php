@@ -157,13 +157,7 @@
                                                 <v-btn type="submit" large v-tooltip:left="{ html: '{{ __('Add to wishlist') }}' }" icon class="mr-3">
                                                     @include("Experience::components.wishlist")
                                                 </v-btn>
-<<<<<<< HEAD
-                                                <v-chip label class="ma-0 white--text green lighten-1" style="position: absolute; bottom: 15px; right: 0;"><span v-html="card.amount"></span></v-chip>
-                                            </div>
-                                        </v-card-media>
-                                        <v-divider class="grey lighten-3"></v-divider>
-                                        <v-toolbar card class="transparent pt-2">
-=======
+
                                             </form>
                                             <template v-else>
                                                 <v-btn type="submit" readonly large v-tooltip:left="{ html: '{{ __('You have this in your wishlist') }}' }" icon class="mr-3">
@@ -176,7 +170,6 @@
                                     <v-divider class="grey lighten-3"></v-divider>
                                     <v-toolbar card dense class="transparent pt-2">
                                         <a :href="card.url" ripple class="td-n">
->>>>>>> 765e0737b3c2314bdda844db6250d0c379f8e322
                                             <v-toolbar-title class="mr-3 subheading">
                                                 <span class="body-2">@{{ card.name }}</span><br>
                                                 <span class="caption">@{{ card.date }}</span><br>

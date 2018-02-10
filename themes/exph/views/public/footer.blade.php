@@ -47,6 +47,7 @@
                                                     </v-flex>
                                                     <v-flex sm5 offset-sm1>
                                                         <div class="body-2 mb-2 white--text">{{ __('Road Trips') }}</div>
+
                                                         <div class="mb-1"><a href="roadtrips" class="td-n grey--text">
                                                             {{ __('Random Road Trips') }}
                                                         </a></div>

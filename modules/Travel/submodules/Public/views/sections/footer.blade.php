@@ -46,10 +46,13 @@
                                                         </a></div>
                                                     </v-flex>
                                                     <v-flex sm5 offset-sm1>
-                                                        <div class="body-2 mb-2 white--text">{{ __('Road Trips') }}</div>
-                                                        <div class="mb-1"><a href="roadtrips" class="td-n grey--text">
-                                                            {{ __('Random Road Trips') }}
-                                                        </a></div>
+                                                        <div class="body-2 mb-2 white--text">{{ __('Site Map') }}</div>
+                                                        @foreach (get_navmenus('main-menu') as $menu)
+                                                            <div class="mb-1"><a href="{{ $menu->url }}" class="td-n grey--text">
+                                                                {{ __($menu->title) }}
+                                                            </a></div>
+                                                        @endforeach
+                                                        {{--
                                                         <div class="mb-1"><a href="\experiences" class="td-n grey--text">
                                                             {{ __('Singles Road Trips') }}
                                                         </a></div>
@@ -64,7 +67,7 @@
                                                         </a></div>
                                                         <div class="mb-1"><a href="\experiences" class="td-n grey--text">
                                                             {{ __('Special Road Trips') }}
-                                                        </a></div>
+                                                        </a></div> --}}
                                                     </v-flex>
                                                 </v-layout>
                                             </v-card-text>
