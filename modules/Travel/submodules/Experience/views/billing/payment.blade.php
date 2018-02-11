@@ -130,7 +130,8 @@
                             <v-divider></v-divider>
                             <v-card-text>
                                 <div class="subheading grey--text text--darken-2">
-                                    You have been booked. You have 42 hours to pay from the time of booking to pay for this reservation through PayPal/BPI. You will receive a confirmation email <strong>({{ user()->email }})</strong> once payment is made.
+                                    {{-- You have been booked. You have 48 hours to pay from the time of booking to pay for this reservation through PayPal/BPI. You will receive a confirmation email <strong>({{ user()->email }})</strong> once payment is made. --}}
+                                    {!! settings('reminder') !!}
                                 </div>
                             </v-card-text>
                         </v-card>
@@ -174,11 +175,11 @@
                                 <v-divider></v-divider>
                             </v-list>
 
-                            <v-card class="elevation-0 mb-3">
+                            {{-- <v-card class="elevation-0 mb-3">
                                 <v-toolbar card dense class="transparent elevation-0">
                                     <v-toolbar-title class="subheading">Reference Number: {{ $resource->refnum }} </v-toolbar-title>
                                 </v-toolbar>
-                            </v-card>
+                            </v-card> --}}
                         </v-card>
 
                         <v-card class="elevation-1 mb-3">
@@ -194,7 +195,7 @@
                                 </v-list-tile>
                             </v-list>
                             <v-divider></v-divider>
-                            <v-list two-line subheader>
+                            {{-- <v-list two-line subheader>
                                 <v-list-tile avatar>
                                     <v-list-tile-action>
                                         <v-icon warning>warning</v-icon>
@@ -222,7 +223,7 @@
                                         <v-list-tile-sub-title>Within or less than 5 days</v-list-tile-sub-title>
                                     </v-list-tile-content>
                                 </v-list-tile>
-                            </v-list>
+                            </v-list> --}}
                         </v-card>
                     </v-flex>
                     @endif

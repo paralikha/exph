@@ -16,7 +16,10 @@
                                                         <v-card-text class="text-xs-center">
                                                             <v-layout row wrap justify-center align-center>
                                                                 <v-flex xs12>
-                                                                    <p><img src="{{ assets('frontier/images/placeholder/registration_bg.svg') }}" alt="" width="150"></p>
+                                                                    {{-- <p><img src="{{ assets('frontier/images/placeholder/registration_bg.svg') }}" alt="" width="150"></p> --}}
+                                                                    <p>
+                                                                        <img src="{{ assets('frontier/images/public/footer.png') }}" alt="">
+                                                                    </p>
                                                                     {{-- <h4>{{ $application->page->title }}</h4> --}}
                                                                     <h4>Welcome, brave traveler!</h4>
                                                                     <p>Remember, life is a journey. You are an explorer of the world. Be open to new culture, new experience, new people. Embrace spontaneity and appreciate life's little surprises. Rise up. Be yourself. Live awesome. Be curious and let's go travel differently.</p>

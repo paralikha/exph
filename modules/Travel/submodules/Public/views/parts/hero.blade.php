@@ -2,7 +2,7 @@
     <v-parallax height="650" class="hidden-md-and-down" src="{{ $page->feature }}">
         <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.3); position: absolute; width: 100%; height: 100%;"></div>
         <v-toolbar class="elevation-0 transparent" dark>
-            <a href=""><img class="pt-5" src="{{ assets('frontier/images/public/exph_logo.png') }}" alt="" width="280"></a>
+            <a href=""><img class="pt-5" src="{{ assets('frontier/images/public/footer.png') }}" alt="" width="120"></a>
             @include("Public::parts.hero-nav")
         </v-toolbar>
 
@@ -67,8 +67,8 @@
     <v-parallax height="400" class="hidden-lg-and-up" src="{{ assets('frontier/images/public/car.jpg') }}">
         <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.3); position: absolute; width: 100%; height: 100%;"></div>
         <v-toolbar class="elevation-0 transparent" dark>
-            <a href="">
-                <img class="pt-3" src="{{ assets('frontier/images/public/exph_logo.png') }}" alt="" width="200">
+            <a class="pt-4" href="">
+                <img class="pt-3" src="{{ assets('frontier/images/public/footer.png') }}" alt="" width="100">
             </a>
             @include("Public::parts.hero-nav")
             {{-- @include("Theme::partials.navigation") --}}
