@@ -3,7 +3,7 @@
         <v-flex xs12>
             <v-layout row wrap align-center>
                 <v-flex xs12>
-                    <v-parallax class="mb-4 mt-5" height="450" src="{{ assets('frontier/images/public/v1.jpg') }}">
+                    <v-parallax class="mb-4 mt-5" height="450" src="{{ assets('frontier/images/public/roadtrip/7.jpg') }}">
                         <v-layout
                             column
                             align-center
