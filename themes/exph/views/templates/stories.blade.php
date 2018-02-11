@@ -52,7 +52,7 @@ Version: 1.0
                                             <span class="grey--text">{{ $resource->created }}</span>
                                         </span>
                                     </div>
-                                    <div class="subheading">{!! $resource->excerpt !!}</div>
+                                    <div class="subheading page-content">{!! $resource->excerpt !!}</div>
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn flat primary href="{{ route('stories.show', $resource->code) }}">{{ __('Read More') }}</v-btn>
@@ -114,15 +114,18 @@ Version: 1.0
                                         <div class="subheading mb-2 text-xs-center grey--text">
                                             {!! $application->site->lead !!}
                                         </div>
-                                        <div class="text-xs-center">
+                                        <div class="subheading grey--text">
+                                            {{ __('Experience Philippines is about UNIQUE ADVENTURES. We are a travel group that organizes RANDOM ROAD TRIPS where the destination is a SECRET and the activities are a SURPRISE.') }}
+                                        </div>
+                                        {{-- <div class="text-xs-center">
                                             <v-btn icon><v-icon>fa fa-facebook-official</v-icon></v-btn>
                                             <v-btn icon><v-icon>fa fa-instagram</v-icon></v-btn>
                                             <v-btn icon><v-icon>fa fa-twitter</v-icon></v-btn>
                                             <v-btn icon><v-icon>fa fa-pinterest</v-icon></v-btn>
-                                        </div>
+                                        </div> --}}
                                     </v-card-text>
                                 </v-card>
-
+{{-- 
                                 <v-divider></v-divider>
                                <v-card class="elevation-0 my-3">
                                     <v-card-text class="py-0">
@@ -154,7 +157,7 @@ Version: 1.0
                                         <v-btn block primary flat class="elevation-1">View on Instagram</v-btn>
                                     </v-card-text>
                                 <v-divider></v-divider>
-                                </v-card>
+                                </v-card> --}}
 
 
                                 @if (isset($popular) && $popular)
@@ -262,6 +265,9 @@ Version: 1.0
             .content {
                 margin-right: 30px;
             }
+        }
+        .page-content h1, h2, h3, h4, h5, h6 {
+            font-size: 25px !important;
         }
     </style>
 @endpush

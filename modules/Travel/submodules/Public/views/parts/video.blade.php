@@ -3,12 +3,7 @@
         <v-flex xs12>
             <v-layout row wrap align-center>
                 <v-flex xs12>
-<<<<<<< HEAD
-                    {{-- <v-parallax class="mb-4 mt-5" height="450" src="{{ assets("frontier/images/placeholder/9.png") }}"> --}}
-                    <v-parallax class="mb-4 mt-5" height="450" src="{{ settings('video_bg') }}">
-=======
                     <v-parallax class="mb-4 mt-5" height="450" src="{{ assets('frontier/images/public/v1.jpg') }}">
->>>>>>> 765e0737b3c2314bdda844db6250d0c379f8e322
                         <v-layout
                             column
                             align-center
@@ -32,8 +27,8 @@
                                             <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
                                             <v-card-actions>
                                                 <v-spacer></v-spacer>
-                                                <v-btn color="green darken-1" flat @click.native="dialog = false">Disagree</v-btn>
-                                                <v-btn color="green darken-1" flat @click.native="dialog = false">Agree</v-btn>
+                                                <v-btn color="green darken-1" flat @click.native="resource.dialog.model=false">Disagree</v-btn>
+                                                <v-btn color="green darken-1" flat @click.native="resource.dialog.model=false">Agree</v-btn>
                                             </v-card-actions>
                                         </v-card>
                                     </v-dialog>
@@ -63,10 +58,10 @@
                 };
             },
 
-            mounted () {
-                this.get();
-                // console.log("dataset.pagination", this.dataset.pagination);
-            },
+            // mounted () {
+            //     this.get();
+            //     // console.log("dataset.pagination", this.dataset.pagination);
+            // },
         });
     </script>
 @endpush

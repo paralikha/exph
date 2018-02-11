@@ -104,6 +104,11 @@ Version: 1.0
             transform: translateY(-6px);
             box-shadow: 0 1px 8px rgba(0,0,0,.2),0 3px 4px rgba(0,0,0,.14),0 3px 3px -2px rgba(0,0,0,.12) !important;
         }
+
+        .td-n:hover,
+        .td-n:focus {
+            text-decoration: none !important;
+        }
     </style>
 @endpush
 

@@ -47,24 +47,17 @@
                                                     </v-flex>
                                                     <v-flex sm5 offset-sm1>
                                                         <div class="body-2 mb-2 white--text">{{ __('Road Trips') }}</div>
-
+                                                        <div class="mb-1"><a href="experiences" class="td-n grey--text">
+                                                            {{ __('Try An Experience') }}
+                                                        </a></div>
                                                         <div class="mb-1"><a href="roadtrips" class="td-n grey--text">
-                                                            {{ __('Random Road Trips') }}
+                                                            {{ __('Join A Road Trip') }}
                                                         </a></div>
-                                                        <div class="mb-1"><a href="\experiences" class="td-n grey--text">
-                                                            {{ __('Singles Road Trips') }}
+                                                        <div class="mb-1"><a href="book-a-surprise" class="td-n grey--text">
+                                                            {{ __('Book A Surprise') }}
                                                         </a></div>
-                                                        <div class="mb-1"><a href="\experiences" class="td-n grey--text">
-                                                            {{ __('Random OUTings') }}
-                                                        </a></div>
-                                                        <div class="mb-1"><a href="\experiences" class="td-n grey--text">
-                                                            {{ __('Retro Road Trips') }}
-                                                        </a></div>
-                                                        <div class="mb-1"><a href="\experiences" class="td-n grey--text">
-                                                            {{ __('Quick Getaway') }}
-                                                        </a></div>
-                                                        <div class="mb-1"><a href="\experiences" class="td-n grey--text">
-                                                            {{ __('Special Road Trips') }}
+                                                        <div class="mb-1"><a href="stories" class="td-n grey--text">
+                                                            {{ __('Stories From The Road') }}
                                                         </a></div>
                                                     </v-flex>
                                                 </v-layout>
