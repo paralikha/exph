@@ -199,7 +199,7 @@
                             </v-list>
                         </v-card>
 
-                        <v-card class="elevation-1 mb-3">
+                        {{-- <v-card class="elevation-1 mb-3">
                             <v-list subheader class="py-3">
                                 <v-list-tile avatar>
                                     <v-list-tile-avatar tile>
@@ -241,7 +241,7 @@
                                     </v-list-tile-content>
                                 </v-list-tile>
                             </v-list>
-                        </v-card>
+                        </v-card> --}}
                     </v-flex>
                 </v-layout>
             </v-flex>
@@ -315,7 +315,7 @@
                                     </v-list-tile-action>
                                     </v-list-tile>
                                 </v-list>
-                                <v-divider></v-divider>
+                                {{-- <v-divider></v-divider>
                                 <v-list subheader class="py-3">
                                     <v-list-tile avatar>
                                         <v-list-tile-avatar tile>
@@ -355,7 +355,7 @@
                                             <v-list-tile-sub-title>Within or less than 5 days</v-list-tile-sub-title>
                                         </v-list-tile-content>
                                     </v-list-tile>
-                                </v-list>
+                                </v-list> --}}
                             </v-card>
                         </v-dialog>
                     </v-card-text>

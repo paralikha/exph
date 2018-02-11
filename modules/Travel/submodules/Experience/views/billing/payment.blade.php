@@ -172,8 +172,8 @@
                                         <v-list-tile-sub-title>{{ __($availability->days) }}</v-list-tile-sub-title>
                                     </v-list-tile-content>
                                 </v-list-tile>
-                                <v-divider></v-divider>
                             </v-list>
+                                {{-- <v-divider></v-divider> --}}
 
                             {{-- <v-card class="elevation-0 mb-3">
                                 <v-toolbar card dense class="transparent elevation-0">
@@ -182,7 +182,7 @@
                             </v-card> --}}
                         </v-card>
 
-                        <v-card class="elevation-1 mb-3">
+                        {{-- <v-card class="elevation-1 mb-3">
                             <v-list subheader class="py-3">
                                 <v-list-tile avatar>
                                     <v-list-tile-avatar tile>
@@ -195,7 +195,7 @@
                                 </v-list-tile>
                             </v-list>
                             <v-divider></v-divider>
-                            {{-- <v-list two-line subheader>
+                            <v-list two-line subheader>
                                 <v-list-tile avatar>
                                     <v-list-tile-action>
                                         <v-icon warning>warning</v-icon>
@@ -223,8 +223,8 @@
                                         <v-list-tile-sub-title>Within or less than 5 days</v-list-tile-sub-title>
                                     </v-list-tile-content>
                                 </v-list-tile>
-                            </v-list> --}}
-                        </v-card>
+                            </v-list>
+                        </v-card> --}}
                     </v-flex>
                     @endif
                 </v-layout>
