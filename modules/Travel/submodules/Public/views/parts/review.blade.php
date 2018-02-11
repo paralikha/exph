@@ -117,11 +117,11 @@
                         take: 3,
                         group_by: 'user_id',
                     };
-                // this.api().get('{{ route('api.reviews.all') }}', query)
-                //     .then((data) => {
-                //         this.reviews = data.items.data;
-                //         console.log("REV", data.items);
-                //     });
+                this.api().get('{{ route('api.reviews.all') }}', query)
+                    .then((data) => {
+                        this.reviews = data.items.data;
+                        console.log("REV", data.items);
+                    });
             }
         });
     </script>
