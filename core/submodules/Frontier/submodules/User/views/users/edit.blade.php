@@ -8,7 +8,7 @@
 
         @include("Theme::partials.banner")
 
-        <form action="{{ route('users.update', $resource->id) }}" method="POST">
+        <form action="{{ route('users.update', $resource->id) }}" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
             {{ method_field('PUT') }}
             <v-layout row wrap>

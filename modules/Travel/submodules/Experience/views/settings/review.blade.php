@@ -82,6 +82,36 @@
                     },
                 };
             },
+            methods: {
+                mountSuppliments () {
+                    let items = {!! json_encode($reviews->toArray()) !!};
+                    let g = [];
+                    for (var i in items) {
+                        g.push({
+                            id: i,
+                            name: items[i],
+                        });
+                    }
+                    this.resource.selections.reviews = g;
+
+                    let selected = {!! json_encode(old('homepage_reviews', unserialize(settings('homepage_reviews', [])))) !!};
+                    let s = [];
+                    // console.log("dataset.pagination", selected);
+                    if (selected) {
+                        for (var i in selected) {
+                            let instance = JSON.parse(selected[i]);
+                            s.push({
+                                id: instance.id,
+                                name: instance.name,
+                            });
+                        }
+                    }
+                    this.resource.item.reviews = s ? s : [];
+                },
+            },
+            mounted () {
+                this.mountSuppliments();
+            }
         });
     </script>
 @endpush

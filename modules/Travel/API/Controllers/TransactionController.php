@@ -22,7 +22,7 @@ class TransactionController extends APIController
         $sort = $request->get('sort') && $request->get('sort') !== 'null' ? $request->get('sort') : 'id';
         $take = $request->get('take') && $request->get('take') > 0 ? $request->get('take') : 0;
 
-        $resources = Transaction::search($search)->orderBy($sort, $order);
+        $resources = Transaction::search($search)->where('customer_id', user()->id ?? $request->get('user_id'))->orderBy($sort, $order);
         if ($onlyTrashed) {
             $resources->onlyTrashed();
         }
@@ -46,7 +46,7 @@ class TransactionController extends APIController
         $take = $request->get('take') && $request->get('take') > 0 ? $request->get('take') : 0;
         $groupBy = $request->get('group_by') ? $request->get('group_by') : false;
 
-        $resources = Transaction::search($search)->orderBy($sort, $order);
+        $resources = Transaction::search($search)->where('customer_id', user()->id ?? $request->get('user_id'))->orderBy($sort, $order);
         if ($groupBy) {
             $resources->groupBy($groupBy);
         }
@@ -71,7 +71,7 @@ class TransactionController extends APIController
         $sort = $request->get('sort') && $request->get('sort') !== 'null' ? $request->get('sort') : 'id';
         $order = $request->get('descending') === 'true' && $request->get('descending') !== 'null' ? 'DESC' : 'ASC';
 
-        $transaction = Transaction::search($search)->orderBy($sort, $order)->onlyTrashed()->paginate($take);
+        $transaction = Transaction::where('customer_id', user()->id ?? $request->get('user_id'))->search($search)->orderBy($sort, $order)->onlyTrashed()->paginate($take);
 
         return response()->json($transaction);
     }

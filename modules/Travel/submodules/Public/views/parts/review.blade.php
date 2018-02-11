@@ -31,7 +31,7 @@
                                         <v-toolbar class="elevation-0 transparent"></v-toolbar>
                                         <v-card class="elevation-0 transparent text-xs-center review--flex">
                                             <v-avatar size="80px" class="">
-                                                <img :src="item.user.avatar" alt="" style="border: 3px solid #fff;">
+                                                <img :src="item.useravatar" alt="" style="border: 3px solid #fff;">
                                             </v-avatar>
                                         </v-card>
 
@@ -60,7 +60,7 @@
     </v-card-text>
 
     <v-layout row wrap>
-        <v-flex sm4 xs12 v-for="item in reviews">
+        <v-flex sm4 xs12 v-for="(item, i) in reviews" :key="i">
             <v-card class="elevation-1">
                 <v-card-media
                     height="150px"
@@ -70,7 +70,7 @@
                 <v-toolbar class="elevation-0 transparent"></v-toolbar>
                 <v-card class="elevation-0 transparent text-xs-center review--flex">
                     <v-avatar size="80px" class="">
-                        <img :src="item.avatar" alt="" style="border: 3px solid #fff;">
+                        <img :src="item.useravatar" alt="" style="border: 3px solid #fff;">
                     </v-avatar>
                 </v-card>
 
@@ -117,11 +117,13 @@
                         take: 3,
                         group_by: 'user_id',
                     };
-                this.api().get('{{ route('api.reviews.all') }}', query)
-                    .then((data) => {
-                        this.reviews = data.items.data;
-                        console.log("REV", data.items);
-                    });
+
+                this.reviews = {!! json_encode(\Review\Models\Review::whereIn('id', unserialize(settings('homepage_reviews', [])) )->get()->toArray()) !!};
+                // this.api().get('{{ route('api.reviews.all') }}', query)
+                    // .then((data) => {
+                        // this.reviews = data.items.data;
+                        // console.log("REV", data.items);
+                    // });
             }
         });
     </script>

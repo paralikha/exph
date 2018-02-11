@@ -2,6 +2,7 @@
   WHEN UPLOADING UPDATES:
     -- update activations table
     -- remove error reporting
+    -- TABLE detail - migrate latest detail table
 
   Home:
     ✔ review is limited to 3, featureable. @done (18-02-11 11:01)
@@ -21,29 +22,28 @@
 
   Experience:
     ☐ Allow for toggle featured option (used in homepage, search, etc)
-    ☐ @high Review paypal integration
-    ☐ @high Manual Banking > button > details > manual management backend
-    ☐ @low (create/edit).blade - add province card + CRUD
-    ☐ @low all.blade - add province filter
+    ✔ @high Review paypal integration @done (18-02-11 16:10)
+    ✔ @high Manual Banking > button > details > manual management backend @done (18-02-11 13:57)
+    -- @low (create/edit).blade - add province card + CRUD
+    -- @low all.blade - add province filter
 
   Profile / User:
-    ☐ avatar.blade - Upload avatar (gif)
-    ☐ TABLE detail - migrate latest detail table
+    ✔ avatar.blade - Upload avatar (gif) @done (18-02-11 16:10)
 
   Stories:
-    ☐ migrate stories from wordpress
+    # ☐ migrate stories from wordpress
 
 
   Editor:
-    ☐ @low embed video on editor
+     # ☐ @low embed video on editor
 
 --- ✄ ----------------------- --- ✄ ----------------------- --- ✄ -----------------------
 
   _?:
-    ☐ Host an Experience - process
+    -- Host an Experience - process
 
     Tag:
-      ☐ @low CRUD
+      -- @low CRUD
 
   noted, pro next:
-    ☐ Create card "Refund Policy" for each experience, roadtrip, book a surprise
+    -- Create card "Refund Policy" for each experience, roadtrip, book a surprise

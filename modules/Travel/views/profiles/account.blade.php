@@ -33,7 +33,7 @@
                     </v-card>
                 </v-flex>
                 <v-flex md9 sm8 xs12>
-                    <v-toolbar dark class="blue elevation-1 sticky">
+                    <v-toolbar dark class="blue elevation-1">
                         <v-toolbar-title >{{ __($application->page->title) }}</v-toolbar-title>
                         <v-spacer></v-spacer>
 
@@ -139,6 +139,9 @@
                                                 ></v-checkbox>
                                             </td>
                                             <td>@{{ prop.item.id }}</td>
+                                            <td>
+                                                <v-chip label class="orange white--text" v-html="prop.item.status"></v-chip>
+                                            </td>
                                             <td v-html="prop.item.experience.name"></td>
                                             <td v-html="prop.item.booked"></td>
                                             <td v-html="prop.item.payment_id"></td>
@@ -217,6 +220,7 @@
                         },
                         headers: [
                             { text: '{{ __("ID") }}', align: 'left', value: 'id' },
+                            { text: '{{ __("Status") }}', align: 'left', value: 'status' },
                             { text: '{{ __("Experience") }}', align: 'left', value: 'id' },
                             { text: '{{ __("Date Booked") }}', align: 'left', value: 'purchased_at' },
                             { text: '{{ __("Payment ID") }}', align: 'left', value: 'payment_id' },
@@ -305,6 +309,7 @@
                         page: page,
                         sort: sortBy,
                         take: rowsPerPage,
+                        user_id: '{{ user()->id }}'
                     };
 
                     this.api().get('{{ route('api.transactions.all') }}', query)

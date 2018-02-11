@@ -59,6 +59,43 @@
                                 ></v-text-field>
                             </v-card-text>
 
+                            <v-subheader>{{ __('Featured Experiences') }}</v-subheader>
+                            <v-card-text>
+                                <input type="hidden" name="featured_experiences[]" :value="e" :key="i" v-for="(e, i) in resource.item.experiences">
+                                <v-select multiple v-model="resource.item.experiences" autocomplete :items="resource.selections.experiences" item-value="id" item-text="body">
+                                    <template slot="selection" scope="data">
+                                        <v-chip
+                                          close
+                                          @input="data.parent.selectItem(data.item)"
+                                          :selected="data.selected"
+                                          class="chip--select-multi"
+                                          :key="JSON.stringify(data.item)"
+                                        >
+                                            <v-avatar>
+                                                <img :src="data.item.featured">
+                                            </v-avatar>
+                                            <span v-html="data.item.name"></span>
+                                        </v-chip>
+                                    </template>
+                                    <template slot="item" scope="data">
+                                        <template v-if="typeof data.item !== 'object'">
+                                            <v-list-tile-content v-text="data.item"></v-list-tile-content>
+                                        </template>
+                                        <template v-else>
+                                            <v-list-tile-avatar>
+                                                <img v-bind:src="data.item.featured">
+                                            </v-list-tile-avatar>
+                                            <v-list-tile-content>
+                                                <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
+                                                <v-list-tile-sub-title>
+                                                    <v-icon v-for="(s,i) in parseInt(data.item.rating)" :key="i">star</v-icon>
+                                                </v-list-tile-sub-title>
+                                            </v-list-tile-content>
+                                        </template>
+                                    </template>
+                                </v-select>
+                            </v-card-text>
+
                             <v-subheader>{{ __('Video Section') }}</v-subheader>
                             <v-card-text>
                                 <v-text-field
@@ -227,7 +264,16 @@
                 return {
                     resource: {
                         item: {
-                            video_bg: '{{ (old('video_bg') ? url(old('video_bg')) : null) ?? url(settings('video_bg', 'logo.png')) }}',
+                            video_bg: '{{ (old('video_bg') ? url(old('video_bg', settings('video_bg', 'logo.png'))) : null) }}',
+                            experiences: {!! json_encode(
+                                old(
+                                    'featured_experiences',
+                                    unserialize(settings('featured_experiences', []))
+                                )
+                            ) !!}
+                        },
+                        selections: {
+                            experiences: {!! json_encode($experiencesSelect->toArray() ?? []) !!}
                         },
                     },
                 };

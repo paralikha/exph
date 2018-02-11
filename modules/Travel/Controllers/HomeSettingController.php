@@ -2,6 +2,7 @@
 
 namespace Travel\Controllers;
 
+use Experience\Models\Experience;
 use Setting\Controllers\SettingController as BaseSettingController;
 use Setting\Models\Setting;
 use Setting\Requests\SettingRequest;
@@ -23,6 +24,8 @@ class HomeSettingController extends BaseSettingController
             Setting::updateOrCreate(['key' => $key], ['value' => is_array($value) ? serialize($value) : $value]);
         }
 
-        return view("Travel::settings.home");
+        $experiencesSelect = Experience::get();
+
+        return view("Travel::settings.home")->with(compact('experiencesSelect'));
     }
 }

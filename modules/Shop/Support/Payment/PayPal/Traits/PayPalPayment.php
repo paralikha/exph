@@ -124,12 +124,15 @@ trait PayPalPayment
             echo "</pre>";
         }
 
-
         /** dd($result);exit; /** DEBUG RESULT, remove it later **/
         if ($result && $result->getState() == 'approved') {
             /** it's all right **/
             /** Here Write your database logic like that insert record or value in database if you want **/
-            $order = new \Experience\Models\Order();
+            $order = Order::firstOrNew([
+                'customer_id' => $sessionRequest['customer_id'],
+                'experience_id' => $sessionRequest['experience_id'],
+                'availability_id' => $sessionRequest['availability'],
+            ]);
             $order->customer_id = $sessionRequest['customer_id'];
             $order->experience_id = $sessionRequest['experience_id'];
             $order->total = $sessionRequest['total'];
