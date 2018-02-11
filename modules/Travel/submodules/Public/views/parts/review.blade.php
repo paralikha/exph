@@ -1,3 +1,4 @@
+{{ dd(settings('homepage_reviews', [])) }}
 <section id="review">
 <v-card class="elevation-0 transparent hidden-sm-and-down">
     <v-parallax class="mb-4 mt-5 " height="450" src="{{ assets('frontier/images/public/h10.jpg') }}">
@@ -105,7 +106,7 @@
         mixins.push({
             data () {
                 return {
-                    reviews: []
+                    reviews: {!! json_encode(settings('homepage_reviews', [])) !!}
                 }
             },
 
@@ -117,11 +118,11 @@
                         take: 3,
                         group_by: 'user_id',
                     };
-                this.api().get('{{ route('api.reviews.all') }}', query)
-                    .then((data) => {
-                        this.reviews = data.items.data;
-                        console.log("REV", data.items);
-                    });
+                // this.api().get('{{ route('api.reviews.all') }}', query)
+                //     .then((data) => {
+                //         this.reviews = data.items.data;
+                //         console.log("REV", data.items);
+                //     });
             }
         });
     </script>

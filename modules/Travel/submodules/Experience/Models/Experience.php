@@ -150,4 +150,11 @@ class Experience extends Model
 
         return false;
     }
+
+    public function haveReviewedBy($user)
+    {
+        return $this->whereHas('reviews', function ($query) use ($user) {
+            return $query->where('user_id', $user->id);
+        })->count();
+    }
 }

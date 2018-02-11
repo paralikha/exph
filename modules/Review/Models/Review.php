@@ -12,7 +12,7 @@ class Review extends Model
 
     protected $with = ['user', 'reviewable'];
 
-    protected $appends = ['excerpt'];
+    protected $appends = ['excerpt', 'useravatar'];
 
     // protected $fillable = ['user_id'];
     protected $ratings = ['5', '4.5', '4', '3.5', '3', '2.5', '2', '1.5', '1'];
@@ -41,5 +41,10 @@ class Review extends Model
         }
 
         return (array_sum($sum)) / $count;
+    }
+
+    public function getUseravatarAttribute()
+    {
+        return $this->user->displayavatar;
     }
 }

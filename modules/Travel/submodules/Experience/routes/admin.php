@@ -33,6 +33,8 @@ Route::post('experiences/{experience}/rate', 'Experience\API\Controllers\Experie
 //Review
 Route::post('experiences/{experience}/review', 'Experience\Controllers\ExperienceController@review')->name('experiences.review');
 
+Route::get('settings/reviews', '\Experience\Controllers\ReviewSettingController@index')->name('settings.review');
+
 // Normal
 Route::resource('experiences', 'Experience\Controllers\ExperienceController')->except(['show']);
 
