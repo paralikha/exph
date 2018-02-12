@@ -404,7 +404,7 @@
                             <v-card>
                                 <v-toolbar light class="white elevation-0">
                                     <v-spacer></v-spacer>
-                                    <v-btn icon @click.native="dialog.book = false">
+                                    <v-btn icon v-tooltip:left="{ html: 'Close' }" @click="dialog.book = false">
                                         <v-icon>close</v-icon>
                                     </v-btn>
                                 </v-toolbar>
@@ -748,9 +748,9 @@
 @endpush
 
 @push('pre-scripts')
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> --}}
     <script src="{{ assets('experience/js/jquery.star-rating-svg.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script> --}}
     <script src="{{ assets('frontier/vendors/vue/resource/vue-resource.min.js') }}"></script>
     <script>
         Vue.use(VueResource);

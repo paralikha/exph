@@ -75,7 +75,7 @@
         </v-toolbar>
 
         <v-layout row wrap align-center justify-center class="white--text">
-            <v-flex md6 xs12>
+            <v-flex md7 xs12>
                 <v-card dark class="elevation-0 transparent">
                     <h2 class="mb-2 text-xs-center"><strong>{!! settings('home_banner_title') !!}</strong></h2>
                     <h5 class="mb-3 text-xs-center fw-500">{!! settings('home_banner_subtitle') !!}</h5>
@@ -83,7 +83,7 @@
                         <v-menu
                             offset-y
                             :close-on-content-click="false"
-                            class="block px-3 pt-4"
+                            class="block px-3 py-4"
                             v-model="search"
                             >
                             <v-select

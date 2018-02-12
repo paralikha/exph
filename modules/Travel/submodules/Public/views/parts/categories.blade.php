@@ -40,7 +40,7 @@
 
 @push('pre-scripts')
     <script>
-        Vue.use(VueResource);
+        // Vue.use(VueResource);
 
         mixins.push({
             data () {

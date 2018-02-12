@@ -58,7 +58,7 @@
 
                         @if (user())
                         <v-card class="elevation-1 mb-3">
-                            <v-toolbar dark class="transparent elevation-1 blue">
+                            <v-toolbar dark class="elevation-1 primary">
                                 <v-toolbar-title>{{ __('Payment Method') }}</v-toolbar-title>
                             </v-toolbar>
                             <v-divider></v-divider>

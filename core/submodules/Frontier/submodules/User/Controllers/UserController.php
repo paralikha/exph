@@ -70,9 +70,10 @@ class UserController extends AdminController
         $detail = new Detail();
         $detail->birthday = date('Y-m-d', strtotime($request->input('birthday')));
         $detail->phone = $request->input('phone');
-        $detail->sex = $request->input('sex');
         $detail->gender = $request->input('gender');
         $detail->address = $request->input('address');
+        $detail->mobile = $request->input('mobile');
+        $detail->shirt_size = $request->input('shirt_size');
         $user->detail()->save($detail);
 
         return back();
@@ -140,9 +141,10 @@ class UserController extends AdminController
         $detail = Detail::firstOrCreate(['user_id' => $user->id]);
         $detail->birthday = date('Y-m-d', strtotime($request->input('birthday')));
         $detail->phone = $request->input('phone');
-        $detail->sex = $request->input('sex');
         $detail->gender = $request->input('gender');
         $detail->address = $request->input('address');
+        $detail->mobile = $request->input('mobile');
+        $detail->shirt_size = $request->input('shirt_size');
         $user->detail()->save($detail);
 
         return back();

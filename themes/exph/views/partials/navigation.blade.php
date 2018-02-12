@@ -129,7 +129,7 @@
 
     <div class="hidden-md-and-down main-nav mr-0">
         @include("Theme::recursives.main-menu", ['items' => get_navmenus('main-menu')])
-        <v-btn link flat class="success--text text--accent-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Sign up as a Host') }}'}">
+        <v-btn link flat class="success--text text--accent-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Sign Up as a Host') }}'}">
             <span>{{ __('Host An Experience') }}</span>
         </v-btn>
         <v-btn link flat class="red--text text--darken-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Go to a Random Experience') }}'}">

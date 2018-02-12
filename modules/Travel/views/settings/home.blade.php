@@ -206,6 +206,7 @@
                                     name="reminder"
                                     input-group
                                     hide-details
+                                    multi-line
                                     value="{{ old('reminder') ? old('reminder') : settings('reminder') }}"
                                 ></v-text-field>
                             </v-card-text>
