@@ -9,7 +9,7 @@
         </v-toolbar>
     </v-card>
 
-    <v-parallax class="elevation-1 hidden-sm-and-down" src="{{ @$resource->feature }}" style="height: 450px !important;">
+    <v-parallax class="header elevation-1 hidden-sm-and-down" src="{{ @$resource->feature }}" style="height: 450px !important;">
         <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.3); position: absolute; width: 100%; height: 100%;"></div>
         <v-toolbar dark class="elevation-0 transparent">
             <v-btn flat href="\experiences"><v-icon left>keyboard_backspace</v-icon>{{ __('Back') }}</v-btn>
@@ -18,7 +18,7 @@
             <v-flex xs12>
                 <v-card class="transparent" flat>
                     <v-card-text class="text-xs-center">
-                        <h2 class="display-2"> {{ $resource->name }} </h2>
+                        <h2 class="display-2 white--text"> <strong>{{ $resource->name }}</strong> </h2>
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -739,6 +739,10 @@
 
         .pick-sched ul li {
             margin-top: 10px;
+        }
+        .header .parallax__content {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
         }
     </style>
 @endpush

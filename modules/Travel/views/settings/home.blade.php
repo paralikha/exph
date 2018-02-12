@@ -125,24 +125,24 @@
                                     value="{{ old('video_link') ? old('video_link') : settings('video_link') }}"
                                 ></v-text-field>
                             </v-card-text>
-                            <v-card-text>
+                            {{-- <v-card-text> --}}
                                 {{-- value: video_bg --}}
                                 {{-- @include("Travel::interactives.featured-image") --}}
-                                <v-card class="transparent elevation-0" role="button" @click="$refs.siteLogoFile.click()">
-                                        <v-toolbar dense card class="transparent">
-                                            <v-toolbar-title class="caption">{{ __('Video Background Image') }}</v-toolbar-title>
-                                            <v-spacer></v-spacer>
-                                            <v-btn icon ripple @click.stop="clearPreview"><v-icon>close</v-icon></v-btn>
-                                        </v-toolbar>
-                                        <v-avatar tile size="100%">
-                                            <img v-if="resource.item.video_bg" :src="resource.item.video_bg" role="button">
-                                            <div v-else class="pa-5 grey--text text-xs-center caption">
-                                                {{ __('Add a site logo') }}
-                                            </div>
-                                            <input ref="siteLogoFile" name="video_bg" type="file" class="hidden-sm-and-up" accept=".png,.jpg,image/jpeg,image/png" @change="loadFile">
-                                        </v-avatar>
-                                    </v-card>
-                            </v-card-text>
+                               {{--  <v-card class="transparent elevation-0" role="button" @click="$refs.siteLogoFile.click()">
+                                    <v-toolbar dense card class="transparent">
+                                        <v-toolbar-title class="caption">{{ __('Video Background Image') }}</v-toolbar-title>
+                                        <v-spacer></v-spacer>
+                                        <v-btn icon ripple @click.stop="clearPreview"><v-icon>close</v-icon></v-btn>
+                                    </v-toolbar>
+                                    <v-avatar tile size="100%">
+                                        <img v-if="resource.item.video_bg" :src="resource.item.video_bg" role="button">
+                                        <div v-else class="pa-5 grey--text text-xs-center caption">
+                                            {{ __('Add a site logo') }}
+                                        </div>
+                                        <input ref="siteLogoFile" name="video_bg" type="file" class="hidden-sm-and-up" accept=".png,.jpg,image/jpeg,image/png" @change="loadFile">
+                                    </v-avatar>
+                                </v-card> --}}
+                            {{-- </v-card-text> --}}
 
                             <v-subheader>{{ __('Stories Section') }}</v-subheader>
                             <v-card-text>
@@ -234,6 +234,17 @@
                             <v-card-text>
                                 {{-- value: cta_bg --}}
                                 {{-- @include("Travel::interactives.featured-image") --}}
+                            </v-card-text>
+
+                            <v-subheader>{{ __('Payment Reminder') }}</v-subheader>
+                            <v-card-text>
+                                <v-text-field
+                                    label="{{ __('Type a Message') }}"
+                                    name="reminder"
+                                    input-group
+                                    hide-details
+                                    value="{{ old('reminder') ? old('reminder') : settings('reminder') }}"
+                                ></v-text-field>
                             </v-card-text>
 
                             {{-- Submit --}}
