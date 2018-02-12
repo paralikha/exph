@@ -8,5 +8,6 @@ storage/compiled/sessions/
 storage/compiled/views/
 storage/framework/cache/
 storage/public
+storage/users
 vendor/
 exph.todo
