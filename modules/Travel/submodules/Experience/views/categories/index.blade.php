@@ -405,18 +405,16 @@
 
                 mountSuppliments () {
                     this.resource.icons.items = [
-                        { name: 'account_balance' },
-                        { name: 'account_box' },
-                        { name: 'attach_file' },
-                        { name: 'book' },
-                        { name: 'bookmark_border' },
-                        { name: 'cloud' },
-                        { name: 'collections' },
-                        { name: 'fa-calendar-o' },
-                        { name: 'fa-clock-o' },
-                        { name: 'folder_open' },
-                        { name: 'insert_drive_file' },
-                        { name: 'verified_user' },
+                        { name: 'fa-leaf' },
+                        { name: 'fa-image' },
+                        { name: 'fa-tennis-ball' },
+                        { name: 'fa-fort-awesome' },
+                        { name: 'fa-black-tie' },
+                        { name: 'fa-gamepad' },
+                        { name: 'fa-motorcycle' },
+                        { name: 'fa-heart' },
+                        { name: 'restaurant' },
+                        { name: 'fa-handshake' },
                     ];
                 }
             },
