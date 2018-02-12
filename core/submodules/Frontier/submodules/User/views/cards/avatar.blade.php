@@ -1,4 +1,18 @@
-<v-card class="mb-3 elevation-1">
+<v-card class="elevation-1 mb-3" role="button" @click="$refs.avatarFile.click()">
+    <v-toolbar dense card class="transparent">
+        <v-toolbar-title class="caption">{{ __('Upload Avatar') }}</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn icon ripple @click.stop="clearPreview"><v-icon>close</v-icon></v-btn>
+    </v-toolbar>
+    <v-avatar tile size="100%">
+        <img v-if="resource.item.avatar" :src="resource.item.avatar" role="button">
+        <div v-else class="pa-5 grey--text text-xs-center caption">
+            {{ __('Upload avatar') }}
+        </div>
+        <input ref="avatarFile" name="avatar" type="file" class="hidden-sm-and-up" accept=".png,.jpg,image/jpeg,image/png,image/gif" @change="loadFile">
+    </v-avatar>
+</v-card>
+{{-- <v-card class="mb-3 elevation-1">
     <v-toolbar card class="transparent">
         <v-toolbar-title class="accent--text">{{ __('Avatar') }}</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -50,8 +64,7 @@
             </template>
         </v-select>
     </v-card-text>
-</v-card>
-
+</v-card> --}}
 
 @push('pre-scripts')
     <script>
@@ -59,12 +72,35 @@
             data () {
                 return {
                     resource: {
+                        item: {
+                            avatar: '{{ old('avatar') ? old('avatar') : (isset($resource) ? $resource->avatar : '') }}',
+                        },
                         avatars: {
                             model: '{{ old('avatar') ? old('avatar') : (isset($resource) ? $resource->avatar : '') }}',
                             items: {!! json_encode($avatars) !!},
                         },
                     }
                 };
+            },
+            methods: {
+                loadFile ($event) {
+                    let self = this;
+                    let reader = new FileReader();
+
+                    self.files = $event.target.files[0]; //this.$refs.siteLogoFile.file;
+
+                    reader.onloadend = function () {
+                        self.resource.item.avatar = reader.result;
+                    }
+
+                    if (self.files) {
+                        reader.readAsDataURL(self.files);
+                    }
+                },
+                clearPreview () {
+                    this.file = null
+                    this.resource.item.avatar = null;
+                }
             }
         });
     </script>

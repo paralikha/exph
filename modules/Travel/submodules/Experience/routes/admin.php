@@ -33,12 +33,16 @@ Route::post('experiences/{experience}/rate', 'Experience\API\Controllers\Experie
 //Review
 Route::post('experiences/{experience}/review', 'Experience\Controllers\ExperienceController@review')->name('experiences.review');
 
+Route::get('settings/reviews', '\Experience\Controllers\ReviewSettingController@index')->name('settings.review');
+
+// Feature
+Route::post('experiences/feature/{experience}', '\Experience\Controllers\ExperienceController@feature')->name('experiences.feature');
+
 // Normal
 Route::resource('experiences', 'Experience\Controllers\ExperienceController')->except(['show']);
 
 // Category
 Route::resource('experiences/amenities', 'Experience\Controllers\AmenityController');
-
 
 Route::get('experiences/categories', 'Experience\Controllers\CategoryController@index')->name('experiences.categories.index');
 Route::post('experiences/categories', 'Experience\Controllers\CategoryController@store')->name('experiences.categories.store');

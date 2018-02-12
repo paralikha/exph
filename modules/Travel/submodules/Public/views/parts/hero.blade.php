@@ -33,7 +33,7 @@
                                 @input="smartSearch($event)"
                                 >
                             </v-text-field>
-                            <v-card class="pa-3" style="max-width: 745px !important;">
+                            <v-card class="pa-3 mt-1" style--x="max-width: 745px !important;">
                                 <v-container fluid grid-list-lg>
                                     <v-layout row wrap>
                                         <v-flex xs6 sm3 v-for="(card, i) in ssrch" :key="i">
@@ -99,7 +99,7 @@
                             <v-card class="pa-3" style="max-width: 745px !important;">
                                 <v-container fluid grid-list-lg>
                                     <v-layout row wrap>
-                                        <v-flex xs6 sm3 v-for="card in ssrch">
+                                        <v-flex xs6 sm3 v-for="(card, i) in ssrch" :key="i">
                                             <a href="" class="td-n">
                                                 <v-card class="elevation-1">
                                                     <v-card-media :src="card.src" width="100%" height="120">
@@ -212,10 +212,12 @@
                             take: 8,
                         };
 
-                    this.api().search('{{ route('api.experiences.search') }}', query)
-                        .then((data) => {
-                            this.ssrch = data.items.data;
-                        });
+                    if (this.hero.smartSearch.model !== "") {
+                        this.api().search('{{ route('api.experiences.search') }}', query)
+                            .then((data) => {
+                                this.ssrch = data.items.data;
+                            });
+                    }
                 }
             },
             mounted () {
@@ -225,10 +227,10 @@
                         sort: 'id',
                         take: 8,
                     };
-                this.api().get('{{ route('api.experiences.all') }}', query)
+                this.api().post('{{ route('api.experiences.featured') }}', query)
                     .then((data) => {
-                        this.ssrch = data.items.data;
-                        // console.log("GET",data)
+                        this.ssrch = data.items;
+                        // console.log("POSTSTSTSTS",data)
                     });
 
             }

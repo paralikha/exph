@@ -126,4 +126,17 @@ return [
             ],
         ],
     ],
+
+    'review-settings' => [
+        'name' => 'review-settings',
+        'order' => 8,
+        'slug' => route('settings.review'),
+        'always_viewable' => false,
+        'icon' => 'fa-paperclip',
+        'parent' => 'settings',
+        'labels' => [
+            'title' => __('Reviews'),
+            'description' => __("Manage all reviews"),
+        ],
+    ],
 ];

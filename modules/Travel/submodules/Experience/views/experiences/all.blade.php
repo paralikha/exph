@@ -157,6 +157,7 @@
                                                 <v-btn type="submit" large v-tooltip:left="{ html: '{{ __('Add to wishlist') }}' }" icon class="mr-3">
                                                     @include("Experience::components.wishlist")
                                                 </v-btn>
+
                                             </form>
                                             <template v-else>
                                                 <v-btn type="submit" readonly large v-tooltip:left="{ html: '{{ __('You have this in your wishlist') }}' }" icon class="mr-3">

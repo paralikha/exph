@@ -60,8 +60,17 @@ class UserController extends AdminController
         $user->username = $request->input('username');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
-        $user->avatar = $request->input('avatar');
         $user->save();
+
+        // Avatar
+        if ($request->has('avatar')) {
+            $file = $request->file('avatar');
+            $filePath = storage_path("users/$user->id");
+            $originalName = $file->getClientOriginalName();
+            $file->move($filePath, $originalName);
+            $user->avatar = url("storage/users/$user->id/$originalName");
+            $user->save();
+        }
 
         // Role
         $user->roles()->attach($request->input('roles'));
@@ -131,8 +140,17 @@ class UserController extends AdminController
         $user->lastname = $request->input('lastname');
         $user->username = $request->input('username');
         $user->email = $request->input('email');
-        $user->avatar = $request->input('avatar');
         $user->save();
+
+        // Avatar
+        if ($request->has('avatar')) {
+            $file = $request->file('avatar');
+            $filePath = storage_path("users/$user->id");
+            $originalName = $file->getClientOriginalName();
+            $file->move($filePath, $originalName);
+            $user->avatar = url("storage/users/$user->id/$originalName");
+            $user->save();
+        }
 
         // Role
         $user->roles()->sync($request->input('roles'));

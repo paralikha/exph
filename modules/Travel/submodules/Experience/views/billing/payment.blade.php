@@ -111,6 +111,11 @@
                                             <div class="subheading">{{ settings('bpi_account_name', 'EXPH Travel Differently Inc.') }}</div>
                                         </v-flex>
                                     </v-layout>
+                                    <v-layout row wrap>
+                                        <v-spacer></v-spacer>
+                                        <v-btn href="{{ route('profile.account', user()->handlename ?? 'notfound') }}" round info class="elevation-1 px-4">{{ __('View Your Payment Status') }}</v-btn>
+                                        <v-spacer></v-spacer>
+                                    </v-layout>
                                 </v-card-text>
                                 {{-- <v-card-actions class="gery--text">
                                     <v-spacer></v-spacer>

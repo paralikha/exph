@@ -7,28 +7,34 @@
     <v-card-text class="pa-0">
         <v-card-text class="pa-0">
             <v-card class="elevation-0">
-                <form action="{{ route('experiences.review', $resource->id) }}" method="POST">
-                    {{ csrf_field() }}
-                    <input type="hidden" name="user_id" value="{{ user()->id }}">
-                    <input type="hidden" name="rating" :value="resource.rating.value">
+                @if(! $resource->haveReviewedBy(user()))
+                    <form action="{{ route('experiences.review', $resource->id) }}" method="POST">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="user_id" value="{{ user()->id }}">
+                        <input type="hidden" name="rating" :value="resource.rating.value">
 
-                    {{-- editor --}}
-                    @include("Review::widgets.editor")
-                    <v-card-text v-if="resource.errors.body">
-                        <span class="error--text caption" v-html="resource.errors.body.join(',')"></span>
-                    </v-card-text>
-                    {{-- editor --}}
+                        {{-- editor --}}
+                        @include("Review::widgets.editor")
+                        <v-card-text v-if="resource.errors.body">
+                            <span class="error--text caption" v-html="resource.errors.body.join(',')"></span>
+                        </v-card-text>
+                        {{-- editor --}}
+                        <v-divider></v-divider>
+                        <v-card-actions class="text-xs-right">
+                            @if(user())
+                            <span class="star-rating-system" :data-rating="resource.rating.value"></span>
+                            <span class="grey--text subheading" v-html="resource.rating.value"></span>
+                            @endif
+                            <v-spacer></v-spacer>
+                            <v-btn  type="submit" flat class="primary--text">{{ __('Post review') }}</v-btn>
+                        </v-card-actions>
+                    </form>
                     <v-divider></v-divider>
-                    <v-card-actions class="text-xs-right">
-                        @if(user())
-                        <span class="star-rating-system" :data-rating="resource.rating.value"></span>
-                        <span class="grey--text subheading" v-html="resource.rating.value"></span>
-                        @endif
-                        <v-spacer></v-spacer>
-                        <v-btn  type="submit" flat class="primary--text">{{ __('Post review') }}</v-btn>
-                    </v-card-actions>
-                </form>
-                <v-divider></v-divider>
+                @else
+                    <v-card-text class="body-1 grey--text">
+                        {{ __("Thanks for reviewing this experience.") }}
+                    </v-card-text>
+                @endif
             </v-card>
         </v-card-text>
 

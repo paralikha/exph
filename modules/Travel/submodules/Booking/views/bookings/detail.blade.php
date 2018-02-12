@@ -73,7 +73,7 @@
                                     <v-list>
                                         <v-list-tile avatar>
                                             <v-list-tile-avatar>
-                                                <img src="{{ user()->avatar }}">
+                                                <img src="{{ user()->displayavatar }}">
                                             </v-list-tile-avatar>
                                             <v-list-tile-content>
                                                 <v-list-tile-title v-html="'{{ user()->displayname }}'"></v-list-tile-title>

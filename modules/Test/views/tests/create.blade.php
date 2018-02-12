@@ -9,6 +9,11 @@
         </v-flex>
         <v-divider class="mb-4"></v-divider>
 
+        <form action="{{ route('tests.store') }}" method="POST">
+            {{ csrf_field() }}
+            <input type="text" name="details[birthday]">
+            <v-btn primary type="submit">{{ __('Submit') }}</v-btn>
+        </form>
         <pluma-packages
             title="{{ __('Packages') }}"
             catalogue="package"

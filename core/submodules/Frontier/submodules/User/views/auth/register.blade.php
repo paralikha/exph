@@ -78,6 +78,40 @@
                                                         hide-details
                                                         value="{{ old('lastname') }}"
                                                     ></v-text-field>
+
+                                                    <v-text-field
+                                                        :error-messages="resource.errors.birthday"
+                                                        class="input-group mb-3"
+                                                        label="Birthday"
+                                                        name="details[birthday]"
+                                                        hide-details
+                                                        value="{{ old('birthday') }}"
+                                                    ></v-text-field>
+                                                    <v-text-field
+                                                        :error-messages="resource.errors.mobile_number"
+                                                        class="input-group mb-3"
+                                                        label="Mobile Number"
+                                                        name="details[mobile_number]"
+                                                        hide-details
+                                                        value="{{ old('mobile_number') }}"
+                                                    ></v-text-field>
+                                                    <v-text-field
+                                                        :error-messages="resource.errors.home_address"
+                                                        class="input-group mb-3"
+                                                        label="Home Address"
+                                                        name="details[home_address]"
+                                                        hide-details
+                                                        value="{{ old('home_address') }}"
+                                                    ></v-text-field>
+                                                    <v-text-field
+                                                        :error-messages="resource.errors.shirt_size"
+                                                        class="input-group mb-3"
+                                                        label="Shirt Size"
+                                                        name="details[shirt_size]"
+                                                        hide-details
+                                                        value="{{ old('shirt_size') }}"
+                                                    ></v-text-field>
+
                                                     <v-text-field
                                                         :error-messages="resource.errors.email"
                                                         class="input-group mb-3"

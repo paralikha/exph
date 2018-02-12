@@ -23,6 +23,7 @@ class CreateDetailsTable extends Migration
     {
         $this->schema->create($this->tablename, function (Blueprint $table) {
             $table->increments('id');
+            $table->text('value')->nullable();
             $table->integer('user_id')->unsigned();
             $table->date('birthday')->nullable();
             $table->string('phone')->nullable();
@@ -32,7 +33,9 @@ class CreateDetailsTable extends Migration
             $table->text('shirt_size')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')
+                  ->onUpdate('CASCADE')
+                  ->onDelete('CASCADE');
         });
     }
 

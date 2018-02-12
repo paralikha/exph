@@ -4,7 +4,7 @@
 
     <v-container fluid grid-list-lg>
         @include("Theme::partials.banner")
-        <form action="{{ route('users.store') }}" method="POST">
+        <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
             <v-layout row wrap>
                 <v-flex sm9>

@@ -19,7 +19,7 @@ return [
         'parent' => 'avatar',
         'icon' => 'vpn_key',
         'slug' => route('profile.account', user()->handlename),
-        'always_viewable' => false,
+        'always_viewable' => true,
         'order' => 2,
         'labels' => [
             'title' => __('Account Information'),

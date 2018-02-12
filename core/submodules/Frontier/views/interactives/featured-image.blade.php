@@ -88,8 +88,12 @@
                     featuredImage: {
                         categories: {!! json_encode($catalogues) !!},
                         current: null,
-                        new: null,
-                        old: [],
+                        new: {
+                            thumbnail: '{{ old('feature') ?? @$resource->feature }}',
+                        },
+                        old: [{
+                            thumbnail: '{{ old('feature') ?? @$resource->feature }}',
+                        }],
                         category: {
                             current: {},
                         },

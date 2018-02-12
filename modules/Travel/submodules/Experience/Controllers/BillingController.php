@@ -34,6 +34,24 @@ class BillingController extends ShopController
                             : [])
             );
 
+        $order = new Order();
+        $order->customer_id = user()->id;
+        $order->experience_id = $resource->id;
+        $order->total = $resource->price * Cart::get($resource->id)->quantity;
+        $order->price = $resource->price;
+        $order->quantity = Cart::get($resource->id)->quantity;
+        $order->purchased_at = null;
+        $order->metadata = serialize(Cart::get($resource->id)->guests);
+        $order->availability_id = $availability->id;
+
+        $order->payment_id = NULL;
+        $order->payer_id = NULL;
+        $order->token = NULL;
+        $order->status = 'pending';
+        $order->save();
+
+        // Send Registration email
+
         return view("Experience::experiences.detail")->with(
                 compact('resource', 'cart', 'guests', 'availability')
             );

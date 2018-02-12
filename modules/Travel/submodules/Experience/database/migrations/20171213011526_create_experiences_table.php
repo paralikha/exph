@@ -34,6 +34,7 @@ class CreateExperiencesTable extends Migration
             $table->datetime('date_start')->nullable();
             $table->datetime('date_end')->nullable();
             $table->text('feature')->nullable();
+            $table->boolean('featured_content')->default(false)->nullable();
             $table->text('cover')->nullable();
             $table->text('body')->nullable();
             $table->text('delta')->nullable();

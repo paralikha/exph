@@ -4,6 +4,7 @@ namespace Test\Controllers;
 
 use Frontier\Controllers\AdminController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Test\Models\Test;
 use Test\Requests\TestRequest;
 
@@ -46,7 +47,23 @@ class TestController extends AdminController
      */
     public function create()
     {
-        //
+
+        // $posts = DB::table('kdg_posts')->get();
+        // foreach ($posts as $post) {
+        //     $story = \Story\Models\Story::firstOrNew(['code' => $post->post_name]);
+        //     if (! $story->exists) {
+        //         $story->title = $post->post_title;
+        //         $story->code = $post->post_name;
+        //         $story->feature = $post->guid;
+        //         $story->body = $post->post_content;
+        //         $story->delta = '';
+        //         $story->template = 'generic';
+        //         $story->user_id = user()->id;
+        //         $story->category_id = null;
+        //         $story->rating = 5;
+        //         $story->save();
+        //     }
+        // }
 
         return view("Theme::tests.create");
     }
@@ -59,6 +76,7 @@ class TestController extends AdminController
      */
     public function store(TestRequest $request)
     {
+        dd($request);
         $test = new Test();
         // $test->user()->associate(User::find($request->input('user')));
         $test->body = $request->input('body');

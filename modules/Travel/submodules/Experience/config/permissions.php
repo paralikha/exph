@@ -181,4 +181,12 @@ return [
         'description' => 'Ability to restore many amenities',
         'group' => 'amenity',
     ],
+
+    // Review
+    'review-experience' => [
+        'name' => 'experiences.review',
+        'code' => 'review-experience',
+        'description' => 'Ability to review experiences',
+        'group' => ['experience', 'public-experience'],
+    ],
 ];

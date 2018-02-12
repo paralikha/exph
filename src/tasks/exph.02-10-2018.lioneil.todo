@@ -1,0 +1,57 @@
+@Lioneil
+  WHEN UPLOADING UPDATES:
+    -- update activations table
+    -- remove error reporting
+    -- TABLE detail - migrate latest detail table
+    -- migrate TABLE stories from local to live
+
+    --- ✄ -----------------------
+
+  Email:
+    ☐ Template
+    ☐ Registration page
+    ✔ stories migration @done (18-02-12 12:33)
+
+  Home:
+    ✔ review is limited to 3, featureable. @done (18-02-11 11:01)
+
+  Review:
+    ✔ review is limited to 1 review per user. @done (18-02-10 16:25)
+
+  Menu:
+    ✔ @high Msenu location @done (18-02-10 15:39)
+
+  Register Page:
+    ✔ Add first and last name to form @done (18-02-10 15:00)
+    ✔ Add role_id default to experience. @done (18-02-10 15:00)
+
+  Page:
+    ✔ create - fix featured image, missing thumbnail @done (18-02-10 16:25)
+
+  Experience:
+    ✔ Allow for toggle featured option (used in homepage, search, etc) @done (18-02-12 12:29)
+    ✔ @high Review paypal integration @done (18-02-11 16:10)
+    ✔ @high Manual Banking > button > details > manual management backend @done (18-02-11 13:57)
+    -- @low (create/edit).blade - add province card + CRUD
+    -- @low all.blade - add province filter
+
+  Profile / User:
+    ✔ avatar.blade - Upload avatar (gif) @done (18-02-11 16:10)
+
+  Stories:
+    ✔ migrate stories from wordpress @done (18-02-12 11:50)
+
+
+  Editor:
+     # ☐ @low embed video on editor
+
+--- ✄ ----------------------- --- ✄ ----------------------- --- ✄ -----------------------
+
+  _?:
+    -- Host an Experience - process
+
+    Tag:
+      -- @low CRUD
+
+  noted, pro next:
+    -- Create card "Refund Policy" for each experience, roadtrip, book a surprise

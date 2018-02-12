@@ -43,31 +43,38 @@ class Experience extends Model
 
     public function getDateAttribute()
     {
-        if (date('m-d-Y', strtotime($this->date_start)) == date('m-d-Y', strtotime($this->date_end))) {
-            return date('m-d-Y', strtotime($this->date_start));
+        $date = $this->availabilities->first();
+
+        if (date('m-d-Y', strtotime($date->date_start)) == date('m-d-Y', strtotime($date->date_end))) {
+            return date('m-d-Y', strtotime($date->date_start));
         }
 
-        $m = date('m-Y', strtotime($this->date_start)) == date('m-Y', strtotime($this->date_end))
-            ? date('M d', strtotime($this->date_start)) . " - " . date('d, Y', strtotime($this->date_end))
-            : date('M d, Y', strtotime($this->date_start)) . " - " . date('M d, Y', strtotime($this->date_end));
+        $m = date('m-Y', strtotime($date->date_start)) == date('m-Y', strtotime($date->date_end))
+            ? date('M d', strtotime($date->date_start)) . " - " . date('d, Y', strtotime($date->date_end))
+            : date('M d, Y', strtotime($date->date_start)) . " - " . date('M d, Y', strtotime($date->date_end));
 
         return $m;
     }
 
     public function getTimeAttribute()
     {
-        return date('h:ia', strtotime($this->date_start));
+        $date = $this->availabilities->first();
+
+        return date('h:ia', strtotime($date->date_start));
     }
 
     public function getDayAttribute()
     {
-        return date('l', strtotime($this->date_start));
+        $date = $this->availabilities->first();
+        return date('l', strtotime($date->date_start));
     }
 
     public function getDaysAttribute()
     {
-        $start = Carbon::parse($this->date_start);
-        $end = Carbon::parse($this->date_end);
+        $date = $this->availabilities->first();
+        $date2 = $this->availabilities->last();
+        $start = Carbon::parse($date->date_start);
+        $end = Carbon::parse($date2->date_end);
         $total = $end->diffInDays($start);
         return "$total " . ($total == 1 ? "day" : "days");
     }
@@ -84,7 +91,8 @@ class Experience extends Model
 
     public function getStartDateAttribute()
     {
-        return date('M d, Y', strtotime($this->date_start));
+        $date = $this->availabilities->first();
+        return date('M d, Y', strtotime($date->date_start));
     }
 
     public function getCurrencyAttribute()
@@ -149,5 +157,12 @@ class Experience extends Model
         }
 
         return false;
+    }
+
+    public function haveReviewedBy($user)
+    {
+        return $this->whereHas('reviews', function ($query) use ($user) {
+            return $query->where('user_id', $user->id);
+        })->count();
     }
 }

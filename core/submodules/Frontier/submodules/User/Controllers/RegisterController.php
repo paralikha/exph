@@ -14,6 +14,7 @@ use User\Jobs\ActivateUser;
 use User\Jobs\SendVerifyEmailNotification;
 use User\Mail\EmailVerification;
 use User\Models\Activation;
+use User\Models\Detail;
 use User\Models\User;
 
 class RegisterController extends Controller
@@ -88,6 +89,13 @@ class RegisterController extends Controller
         $user->password = bcrypt($data['password']);
         $user->save();
         $user->roles()->save(Role::whereCode('experiencer')->orWhere('code', 'guest')->first());
+
+        foreach (($request->input('details') ?? []) as $key => $value) {
+            $detail = new Detail();
+            $detail->key = $key;
+            $detail->value = $value;
+            $user->details()->save($detail);
+        }
 
         $activation = new Activation();
         $activation->token = base64_encode($data['email']);

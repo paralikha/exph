@@ -6,6 +6,8 @@ Route::get('experiences/search', 'Experience\API\Controllers\ExperienceControlle
 Route::get('experiences/trash/all', 'Experience\API\Controllers\ExperienceController@getTrash')->name('experiences.trash.all');
 Route::post('experiences/{experience}/restore', 'Experience\API\Controllers\ExperienceController@restore')->name('experiences.restore');
 
+Route::post('experiences/featured', 'Experience\API\Controllers\ExperienceController@featured')->name('experiences.featured');
+
 Route::get('experiences/all', 'Experience\API\Controllers\ExperienceController@all')->name('experiences.all');
 Route::get('experiences/hot', 'Experience\API\Controllers\ExperienceController@hot')->name('experiences.hot');
 

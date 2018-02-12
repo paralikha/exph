@@ -30,6 +30,7 @@
                         <template slot="items" scope="prop">
                             <td v-show="dataset.bulk.destroy.model"><v-checkbox hide-details class="pa-0 primary--text" v-model="prop.selected"></v-checkbox></td>
                             <td v-html="prop.item.id"></td>
+                            <td><v-icon v-if="prop.item.featured_content" class="orange--text" v-html="prop.item.featured_content ? 'star' : 'star_outline'"></v-icon></td>
                             <td><img :src="prop.item.feature" height="30"></td>
                             <td><a :href="route(dataset.urls.edit, (prop.item.id))"><strong v-tooltip:bottom="{'html': prop.item.description ? prop.item.description : prop.item.name}" v-html="prop.item.name"></strong></a></td>
                             <td v-html="prop.item.code"></td>
@@ -70,6 +71,19 @@
                                                 </v-list-tile-title>
                                             </v-list-tile-content>
                                         </v-list-tile>
+                                        <v-list-tile ripple @click="$refs[`featured_content_${prop.item.id}`].submit()">
+                                            <v-list-tile-action>
+                                                <v-icon warning>star</v-icon>
+                                            </v-list-tile-action>
+                                            <v-list-tile-content>
+                                                <v-list-tile-title>
+                                                    <form :ref="`featured_content_${prop.item.id}`" :action="route(dataset.urls.feature, prop.item.id)" method="POST">
+                                                        {{ csrf_field() }}
+                                                        {{ __('Toggle Featured Content') }}
+                                                    </form>
+                                                </v-list-tile-title>
+                                            </v-list-tile-content>
+                                        </v-list-tile>
                                     </v-list>
                                 </v-menu>
                             </td>
@@ -95,6 +109,7 @@
                             edit: '{{ route('experiences.edit', 'null') }}',
                             show: '{{ route('experiences.show', 'null') }}',
                             destroy: '{{ route('experiences.destroy', 'null') }}',
+                            feature: '{{ route('experiences.feature', 'null') }}',
                             api: {
                                 destroy: '{{ route('api.experiences.destroy', 'null') }}',
                             },
@@ -104,6 +119,7 @@
                         },
                         headers: [
                             { text: '{{ __("ID") }}', align: 'left', value: 'id' },
+                            { text: '{{ __("Featured Content") }}', align: 'center', value: 'featured_content' },
                             { text: '{{ __("Featured Image") }}', align: 'left', value: 'feature' },
                             { text: '{{ __("Name") }}', align: 'left', value: 'name' },
                             { text: '{{ __("Code") }}', align: 'left', value: 'code' },

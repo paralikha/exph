@@ -46,19 +46,14 @@
                                                         </a></div>
                                                     </v-flex>
                                                     <v-flex sm5 offset-sm1>
-                                                        <div class="body-2 mb-2 white--text">{{ __('Road Trips') }}</div>
-                                                        <div class="mb-1"><a href="experiences" class="td-n grey--text">
-                                                            {{ __('Try An Experience') }}
-                                                        </a></div>
-                                                        <div class="mb-1"><a href="roadtrips" class="td-n grey--text">
-                                                            {{ __('Join A Road Trip') }}
-                                                        </a></div>
-                                                        <div class="mb-1"><a href="book-a-surprise" class="td-n grey--text">
-                                                            {{ __('Book A Surprise') }}
-                                                        </a></div>
-                                                        <div class="mb-1"><a href="stories" class="td-n grey--text">
-                                                            {{ __('Stories From The Road') }}
-                                                        </a></div>
+
+                                                        <div class="body-2 mb-2 white--text">{{ __('Site Map') }}</div>
+                                                        @foreach (get_navmenus('main-menu') as $menu)
+                                                            <div class="mb-1"><a href="{{ $menu->url }}" class="td-n grey--text">
+                                                                {{ __($menu->title) }}
+                                                            </a></div>
+                                                        @endforeach
+
                                                     </v-flex>
                                                 </v-layout>
                                             </v-card-text>
