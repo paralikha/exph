@@ -19,7 +19,7 @@
                             <p class="body-1 grey--text">{{ __('Featured reviews will be displayed at the homepage.') }}</p>
 
                             <input type="hidden" name="homepage_reviews[]" v-for="(r,i) in resource.item.reviews" :key="i" :value="r">
-                            <v-select multiple v-model="resource.item.reviews" autocomplete :items="resource.selections.reviews" item-value="id" item-text="body">
+                            <v-select v-if="resource.selections.reviews.length" multiple v-model="resource.item.reviews" autocomplete :items="resource.selections.reviews" item-value="id" item-text="body">
                                 <template slot="selection" scope="data">
                                     <v-chip
                                       close
@@ -51,7 +51,7 @@
                                     </template>
                                 </template>
                             </v-select>
-
+                            <p v-else>{{ __('No reviews found') }}</p>
                         </v-card-text>
 
                         <v-card-actions>
@@ -74,7 +74,7 @@
                 return {
                     resource: {
                         item: {
-                            reviews: {!! json_encode(old('homepage_reviews', unserialize(settings('homepage_reviews', [])))) !!}
+                            reviews: {!! json_encode(old('homepage_reviews', settings('homepage_reviews', []) ? unserialize(settings('homepage_reviews', [])) : [])) !!},
                         },
                         selections: {
                             reviews: {!! json_encode($reviews->toArray()) !!},
@@ -94,7 +94,7 @@
                     }
                     this.resource.selections.reviews = g;
 
-                    let selected = {!! json_encode(old('homepage_reviews', unserialize(settings('homepage_reviews', [])))) !!};
+                    let selected = {!! json_encode(old('homepage_reviews', settings('homepage_reviews', []) ? unserialize(settings('homepage_reviews', [])) : [])) !!};
                     let s = [];
                     // console.log("dataset.pagination", selected);
                     if (selected) {

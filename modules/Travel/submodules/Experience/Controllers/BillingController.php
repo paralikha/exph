@@ -50,6 +50,8 @@ class BillingController extends ShopController
         $order->status = 'pending';
         $order->save();
 
+        // Send Registration email
+
         return view("Experience::experiences.detail")->with(
                 compact('resource', 'cart', 'guests', 'availability')
             );

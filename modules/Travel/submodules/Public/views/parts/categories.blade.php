@@ -56,10 +56,10 @@
                         sort: 'rating',
                         take: 5,
                     };
-                this.api().get('{{ route('api.experiences.all') }}', query)
+                this.api().post('{{ route('api.experiences.featured') }}', query)
                     .then((data) => {
-                        this.categories = data.items.data;
-                        // console.log("GET", data)
+                        this.categories = data.items;
+                        console.log("CATEGORIES", data)
                     });
             }
         });

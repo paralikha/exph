@@ -237,4 +237,13 @@ class ExperienceController extends AdminController
 
         return back();
     }
+
+    public function feature(Request $request, $id)
+    {
+        $experience = Experience::findOrFail($id);
+        $experience->featured_content = ! $experience->featured_content;
+        $experience->save();
+
+        return back();
+    }
 }

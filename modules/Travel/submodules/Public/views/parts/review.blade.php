@@ -118,7 +118,8 @@
                         group_by: 'user_id',
                     };
 
-                this.reviews = {!! json_encode(\Review\Models\Review::whereIn('id', unserialize(settings('homepage_reviews', [])) )->get()->toArray()) !!};
+                this.reviews = {!! json_encode(\Review\Models\Review::whereIn('id', settings('homepage_reviews', []) ? unserialize(settings('homepage_reviews', [])) : [])->get()->toArray()) !!};
+
                 // this.api().get('{{ route('api.reviews.all') }}', query)
                     // .then((data) => {
                         // this.reviews = data.items.data;

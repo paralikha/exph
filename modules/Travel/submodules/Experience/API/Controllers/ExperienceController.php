@@ -124,4 +124,11 @@ class ExperienceController extends APIController
 
         return response()->json($this->successResponse);
     }
+
+    public function featured(Request $request)
+    {
+        $experiences = Experience::where('featured_content', 1)->get();
+
+        return response()->json($experiences);
+    }
 }
