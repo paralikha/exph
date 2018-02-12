@@ -8,7 +8,6 @@
             class="white--text"
             >
             <div class="insert-overlay" style="background: rgba(0, 0, 0, 0.5); position: absolute; width: 100%; height: 100%; top: 0;"></div>
-<<<<<<< HEAD
             <v-card dark class="elevation-0 transparent card--flex">
                 <v-container fluid grid-list-lg>
                     <v-layout row wrap align-center justify-center>
@@ -30,37 +29,9 @@
                                                 <v-toolbar class="elevation-0 transparent"></v-toolbar>
                                                 <v-card class="elevation-0 transparent text-xs-center review--flex">
                                                     <v-avatar size="80px" class="">
-                                                        <img :src="item.user.avatar" alt="" style="border: 3px solid #fff;">
+                                                        <img :src="item.useravatar" alt="" style="border: 3px solid #fff;">
                                                     </v-avatar>
                                                 </v-card>
-=======
-        </v-layout>
-    </v-parallax>
-    <v-card dark class="elevation-0 transparent card--flex">
-        <v-container fluid grid-list-lg>
-            <v-layout row wrap align-center justify-center>
-                <v-flex lg10 sm12 xs12>
-                    <v-layout row wrap align-top justify-top>
-                        <v-flex md3 xs12>
-                            <h4><strong>{!! settings('review_title') !!}</strong></h4>
-                            <h2 class="subheading">{!! settings('review_subtitle') !!}</h2>
-                        </v-flex>
-                        <v-flex md9 xs12>
-                            <v-layout row wrap>
-                                <v-flex md4 xs12 v-for="item in reviews" :key="item.id">
-                                    <v-card class="elevation-1">
-                                        <v-card-media
-                                            height="80px"
-                                            :src="item.src"
-                                            class="primary lighten-4">
-                                        </v-card-media>
-                                        <v-toolbar class="elevation-0 transparent"></v-toolbar>
-                                        <v-card class="elevation-0 transparent text-xs-center review--flex">
-                                            <v-avatar size="80px" class="">
-                                                <img :src="item.useravatar" alt="" style="border: 3px solid #fff;">
-                                            </v-avatar>
-                                        </v-card>
->>>>>>> master
 
                                                 <v-card-text class="text-xs-center">
                                                     <div class="body-2">@{{ item.user.fullname }}</div>
@@ -78,7 +49,6 @@
             </v-card>
         </v-layout>
     </v-parallax>
-
 </v-card>
 
 {{-- Small viewport --}}
@@ -103,7 +73,6 @@
                             <img :src="item.useravatar" alt="" style="border: 3px solid #fff;">
                         </v-avatar>
                     </v-card>
-
 
                     <v-card-text class="text-xs-center">
                         <div class="body-2">@{{ item.fullname }}</div>
