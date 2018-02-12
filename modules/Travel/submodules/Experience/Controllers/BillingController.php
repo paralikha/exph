@@ -20,8 +20,8 @@ class BillingController extends ShopController
      */
     public function detail(Request $request, $code)
     {
-        $resource = Experience::whereCode($code)->first();
-        $resource = Experience::withoutGlobalScopes()->whereCode($code)->first();
+        $resource = Experience::whereCode($code)->firstOrFail();
+        $resource = Experience::withoutGlobalScopes()->whereCode($code)->firstOrFail();
         $availability = Availability::findOrFail($request->get('availability_id'));
         $cart = Cart::items();
         $guests = Cart::has($resource->id)
@@ -37,11 +37,11 @@ class BillingController extends ShopController
         $order = new Order();
         $order->customer_id = user()->id;
         $order->experience_id = $resource->id;
-        $order->total = $resource->price * Cart::get($resource->id)->quantity;
+        $order->total = $resource->price * (Cart::get($resource->id)->quantity ?? 1);
         $order->price = $resource->price;
-        $order->quantity = Cart::get($resource->id)->quantity;
+        $order->quantity = (Cart::get($resource->id)->quantity ?? 1);
         $order->purchased_at = null;
-        $order->metadata = serialize(Cart::get($resource->id)->guests);
+        $order->metadata = serialize(Cart::get($resource->id)->guests ?? []);
         $order->availability_id = $availability->id;
 
         $order->payment_id = NULL;
