@@ -4,10 +4,12 @@ namespace Experience\Controllers;
 
 use Anam\Phpcart\Cart as CartModel;
 use Anam\Phpcart\Facades\Cart;
+use Experience\Mail\OrderReceived;
 use Experience\Models\Availability;
 use Experience\Models\Experience;
 use Experience\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Shop\Controllers\ShopController;
 
 class BillingController extends ShopController
@@ -33,24 +35,6 @@ class BillingController extends ShopController
                             ->first()->metadata
                             : [])
             );
-
-        $order = new Order();
-        $order->customer_id = user()->id;
-        $order->experience_id = $resource->id;
-        $order->total = $resource->price * Cart::get($resource->id)->quantity;
-        $order->price = $resource->price;
-        $order->quantity = Cart::get($resource->id)->quantity;
-        $order->purchased_at = null;
-        $order->metadata = serialize(Cart::get($resource->id)->guests);
-        $order->availability_id = $availability->id;
-
-        $order->payment_id = NULL;
-        $order->payer_id = NULL;
-        $order->token = NULL;
-        $order->status = 'pending';
-        $order->save();
-
-        // Send Registration email
 
         return view("Experience::experiences.detail")->with(
                 compact('resource', 'cart', 'guests', 'availability')
@@ -101,6 +85,36 @@ class BillingController extends ShopController
 
         if (is_null(user())) {
             return abort(404);
+        }
+
+        // Order
+        $order = Order::firstOrNew([
+            'customer_id' => user()->id,
+            'experience_id' => $resource->id,
+            'purchased_at' => null,
+        ]);
+        $order->customer_id = user()->id;
+        $order->experience_id = $resource->id;
+        $order->total = $resource->price * Cart::get($resource->id)->quantity;
+        $order->price = $resource->price;
+        $order->quantity = Cart::get($resource->id)->quantity;
+        $order->purchased_at = null;
+        $order->metadata = serialize(Cart::get($resource->id)->guests);
+        $order->availability_id = $availability->id;
+
+        $order->payment_id = NULL;
+        $order->payer_id = NULL;
+        $order->token = NULL;
+        $order->status = 'pending';
+        $order->save();
+
+        // Send Registration email
+        try {
+            Mail::to(user()->email)->send(new OrderReceived($order, user()));
+        } catch (\Exception $e) {
+            return view("Experience::billing.payment")->with(
+                compact('items', 'item', 'total', 'resource', 'availability')
+            );
         }
 
         return view("Experience::billing.payment")->with(
