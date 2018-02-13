@@ -239,7 +239,7 @@
                                         v-show="!suppliments.required_fields.model"
                                         :error-messages="resource.errors.address"
                                         label="{{ _('Address') }}"
-                                        prepend-icon="map"
+                                        prepend-icon="place"
                                         name="address"
                                         value="{{ old('address') ? old('address') : @$resource->detail->address }}"
                                         input-group
@@ -251,6 +251,24 @@
                                         prepend-icon="phone"
                                         name="phone"
                                         value="{{ old('phone') ? old('phone') : @$resource->detail->phone }}"
+                                        input-group
+                                    ></v-text-field>
+                                    <v-text-field
+                                        v-show="!suppliments.required_fields.model"
+                                        :error-messages="resource.errors.mobile"
+                                        label="{{ _('Mobile') }}"
+                                        prepend-icon="phone_iphone"
+                                        name="mobile"
+                                        value="{{ old('mobile') ? old('mobile') : @$resource->detail->mobile }}"
+                                        input-group
+                                    ></v-text-field>
+                                    <v-text-field
+                                        v-show="!suppliments.required_fields.model"
+                                        :error-messages="resource.errors.shirt_size"
+                                        label="{{ _('Tee Shirt Size') }}"
+                                        prepend-icon="accessibility"
+                                        name="shirt_size"
+                                        value="{{ old('shirt_size') ? old('shirt_size') : @$resource->detail->shirt_size }}"
                                         input-group
                                     ></v-text-field>
                                 </v-flex>

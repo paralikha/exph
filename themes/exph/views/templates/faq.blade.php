@@ -16,6 +16,35 @@ Version: 1.0
         </v-toolbar>
     </v-card>
 
+    {{-- <v-dialog v-model="home.video.dialog" width="800">
+        <v-btn primary dark class="elevation-1" slot="activator">
+            Watch Video
+        </v-btn>
+        <v-card  class="black">
+            <v-toolbar dark class="black">
+                <v-spacer></v-spacer>
+                <v-btn dark flat v-tooltip:bottom="{ html: 'Close' }" icon
+                @click.native="dialog = false">
+                    <v-icon>close</v-icon>
+                </v-btn>
+            </v-toolbar>
+            <iframe width="100%" height="500" src="https://www.youtube.com/embed/6P15_uGoAcI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </v-card>
+    </v-dialog> --}}
+
+    {{-- <v-dialog v-model="home.video.dialog" persistent max-width="290">
+          <v-btn color="primary" dark slot="activator">Open Dialog</v-btn>
+          <v-card>
+            <v-card-title class="headline">Use Google's location service?</v-card-title>
+            <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" flat @click.native="home.video.dialog = false">Disagree</v-btn>
+              <v-btn color="green darken-1" flat @click.native="home.video.dialog = false">Agree</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+ --}}
     <v-card class="elevation-1">
         <v-card-media src="{{ $page->feature }}" height="300">
             <v-layout
@@ -142,14 +171,18 @@ Version: 1.0
 @endpush
 
 @push('pre-scripts')
-    <script src="{{ assets('frontier/vendors/vue/resource/vue-resource.min.js') }}"></script>
+    {{-- <script src="{{ assets('frontier/vendors/vue/resource/vue-resource.min.js') }}"></script> --}}
     <script>
         Vue.use(VueResource);
 
         mixins.push({
             data () {
                 return {
-
+                    home: {
+                        video: {
+                            dialog: false,
+                        }
+                    }
                 }
             },
         });

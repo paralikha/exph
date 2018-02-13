@@ -23,9 +23,14 @@ class CreateDetailsTable extends Migration
     {
         $this->schema->create($this->tablename, function (Blueprint $table) {
             $table->increments('id');
-            $table->string('key');
             $table->text('value')->nullable();
             $table->integer('user_id')->unsigned();
+            $table->date('birthday')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('gender')->nullable();
+            $table->text('address')->nullable();
+            $table->text('shirt_size')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')

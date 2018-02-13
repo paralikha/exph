@@ -43,7 +43,7 @@
                         </v-card-text>
                     </v-flex>
                 </v-layout>
-                
+
                 {{-- 2nd row --}}
 
                 <v-layout row wrap align-center justify-center>

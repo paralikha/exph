@@ -8,13 +8,12 @@ use Pluma\Models\User as Authenticatable;
 use Role\Support\Traits\BelongsToManyPermissionsThroughRoles;
 use Role\Support\Traits\BelongsToManyRoles;
 use User\Scopes\Avatar;
-use User\Support\Traits\BelongsToManyDetails;
 use User\Support\Traits\HasOneActivation;
 use User\Support\Traits\HasOneDetail;
 
 class User extends Authenticatable
 {
-    use HasOneActivation, BelongsToManyRoles, BelongsToManyDetails, Avatar;
+    use HasOneActivation, BelongsToManyRoles, HasOneDetail, Avatar;
 
     protected $with = ['roles'];
 

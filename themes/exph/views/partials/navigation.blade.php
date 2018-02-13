@@ -19,7 +19,7 @@
                     <v-list-tile-title>Join A Road Trip</v-list-tile-title>
                 </v-list-tile>
                 <v-list-tile ripple href="\book-a-surprise">
-                    <v-list-tile-title>Book A Surprise</v-list-tile-title>
+                    <v-list-tile-title>Book A Suprise</v-list-tile-title>
                 </v-list-tile>
                 <v-list-tile ripple href="\stories">
                     <v-list-tile-title>Stories</v-list-tile-title>
@@ -129,7 +129,7 @@
 
     <div class="hidden-md-and-down main-nav mr-0">
         @include("Theme::recursives.main-menu", ['items' => get_navmenus('main-menu')])
-        <v-btn link flat class="success--text text--accent-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Sign up as a Host') }}'}">
+        <v-btn link flat class="success--text text--accent-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Sign Up as a Host') }}'}">
             <span>{{ __('Host An Experience') }}</span>
         </v-btn>
         <v-btn link flat class="red--text text--darken-2" href="{{ route('yolo') }}" v-tooltip:left="{'html':'{{ __('Go to a Random Experience') }}'}">

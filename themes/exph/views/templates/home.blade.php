@@ -177,4 +177,3 @@ Version: 1.0
         });
     </script>
 @endpush
-

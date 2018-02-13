@@ -237,7 +237,7 @@
                                         v-show="!suppliments.required_fields.model"
                                         :error-messages="resource.errors.address"
                                         label="{{ _('Address') }}"
-                                        prepend-icon="map"
+                                        prepend-icon="place"
                                         name="address"
                                         value="{{ old('address') }}"
                                         input-group
@@ -251,6 +251,24 @@
                                         value="{{ old('phone') }}"
                                         input-group
                                     ></v-text-field>
+                                    <v-text-field
+                                        v-show="!suppliments.required_fields.model"
+                                        :error-messages="resource.errors.mobile"
+                                        label="{{ __('Mobile') }}"
+                                        prepend-icon="phone_iphone"
+                                        name="mobile"
+                                        value="{{ old('mobile') }}"
+                                        input-group
+                                    ></v-text-field>
+                                    <v-text-field
+                                        v-show="!suppliments.required_fields.model"
+                                        :error-messages="resource.errors.shirt_size"
+                                        label="{{ __('Tee Shirt Size') }}"
+                                        prepend-icon="accessibility"
+                                        name="shirt_size"
+                                        value="{{ old('shirt_size') }}"
+                                        input-group
+                                    >
                                 </v-flex>
                             </v-layout>
                         </v-card-text>

@@ -243,6 +243,7 @@
                                     name="reminder"
                                     input-group
                                     hide-details
+                                    multi-line
                                     value="{{ old('reminder') ? old('reminder') : settings('reminder') }}"
                                 ></v-text-field>
                             </v-card-text>
@@ -275,13 +276,6 @@
                 return {
                     resource: {
                         item: {
-                            video_bg: '{{ (old('video_bg') ? url(old('video_bg', settings('video_bg', 'logo.png'))) : null) }}',
-                            experiences: {!! json_encode(
-                                old(
-                                    'featured_experiences',
-                                    unserialize(settings('featured_experiences', []))
-                                )
-                            ) !!}
                         },
                         selections: {
                             experiences: {!! json_encode($experiencesSelect->toArray() ?? []) !!}
@@ -291,24 +285,24 @@
             },
 
             methods: {
-                loadFile ($event) {
-                    let self = this;
-                    let reader = new FileReader();
+                // loadFile ($event) {
+                //     let self = this;
+                //     let reader = new FileReader();
 
-                    self.files = $event.target.files[0]; //this.$refs.siteLogoFile.file;
+                //     self.files = $event.target.files[0]; //this.$refs.siteLogoFile.file;
 
-                    reader.onloadend = function () {
-                        self.resource.item.video_bg = reader.result;
-                    }
+                //     reader.onloadend = function () {
+                //         self.resource.item.video_bg = reader.result;
+                //     }
 
-                    if (self.files) {
-                        reader.readAsDataURL(self.files);
-                    }
-                },
-                clearPreview () {
-                    this.file = null
-                    this.resource.item.video_bg = null;
-                }
+                //     if (self.files) {
+                //         reader.readAsDataURL(self.files);
+                //     }
+                // },
+                // clearPreview () {
+                //     this.file = null
+                //     this.resource.item.video_bg = null;
+                // }
             }
         });
     </script>

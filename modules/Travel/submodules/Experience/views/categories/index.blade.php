@@ -249,6 +249,7 @@
 
 @push('pre-scripts')
     <script src="{{ assets('frontier/vendors/vue/resource/vue-resource.min.js') }}"></script>
+
     <script>
         Vue.use(VueResource);
 
@@ -407,7 +408,7 @@
                     this.resource.icons.items = [
                         { name: 'fa-leaf' },
                         { name: 'fa-image' },
-                        { name: 'fa-tennis-ball' },
+                        { name: 'golf_course' },
                         { name: 'fa-fort-awesome' },
                         { name: 'fa-black-tie' },
                         { name: 'fa-gamepad' },
