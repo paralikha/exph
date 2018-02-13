@@ -276,12 +276,6 @@
                 return {
                     resource: {
                         item: {
-                            experiences: {!! json_encode(
-                                old(
-                                    'featured_experiences',
-                                    unserialize(settings('featured_experiences', []))
-                                )
-                            ) !!}
                         },
                         selections: {
                             experiences: {!! json_encode($experiencesSelect->toArray() ?? []) !!}

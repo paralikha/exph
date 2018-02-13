@@ -19,7 +19,7 @@
                     <v-list-tile-title>Join A Road Trip</v-list-tile-title>
                 </v-list-tile>
                 <v-list-tile ripple href="\book-a-surprise">
-                    <v-list-tile-title>Book A Surprise</v-list-tile-title>
+                    <v-list-tile-title>Book A Suprise</v-list-tile-title>
                 </v-list-tile>
                 <v-list-tile ripple href="\stories">
                     <v-list-tile-title>Stories</v-list-tile-title>
