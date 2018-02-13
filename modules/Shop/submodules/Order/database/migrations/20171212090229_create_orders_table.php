@@ -38,7 +38,7 @@ class CreateOrdersTable extends Migration
             $table->text('payer_id')->nullable();
             $table->text('token')->nullable();
             $table->text('metadata')->nullable();
-            $table->timestamp('purchased_at');
+            $table->timestamp('purchased_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

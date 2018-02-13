@@ -27,7 +27,7 @@ class BillingController extends ShopController
         $availability = Availability::findOrFail($request->get('availability_id'));
         $cart = Cart::items();
         $guests = Cart::has($resource->id)
-            ? Cart::get($resource->id)->guests
+            ? (Cart::get($resource->id)->guests ?? [])
             : @(unserialize(Order::where('experience_id', $resource->id)
                             ->where('customer_id', (is_null(user()) ?: user()->id))
                             ->exists() ? Order::where('experience_id', $resource->id)
