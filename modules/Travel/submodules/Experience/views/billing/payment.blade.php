@@ -83,7 +83,7 @@
                                         <input type="hidden" name="quantity" value="{{ $item->quantity }}">
                                         <input type="hidden" name="experience_id" value="{{ $resource->id }}">
                                         <input type="hidden" name="currency" value="{{ settings('site_currency.code', 'PHP') }}">
-                                        <input type="hidden" name="metadata" value="{{ serialize($item->guests) }}">
+                                        <input type="hidden" name="metadata" value="{{ serialize($item->guests ?? []) }}">
 
                                         <v-btn type="submit" round info ref="uop"  class="elevation-1 px-4"><v-icon left>fa-paypal</v-icon>{{ __('Checkout') }}</v-btn>
                                     </form>
