@@ -31,7 +31,7 @@
             </v-list>
         </v-menu>
     @else
-        <v-btn v-tooltip:left="{html: '{{ $menu->title }}'}" :class="{'btn--active primary--text': '{{ $menu->active }}'}" class="ma-0" link flat href="{{ $menu->url }}">
+        <v-btn v-tooltip:left="{html: '{{ $menu->body }}'}" :class="{'btn--active primary--text': '{{ $menu->active }}'}" class="ma-0" link flat href="{{ $menu->url }}">
             <span>{{ $menu->title }}</span>
         </v-btn>
     @endif
