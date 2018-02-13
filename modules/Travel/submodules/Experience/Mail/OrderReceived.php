@@ -31,9 +31,10 @@ class OrderReceived extends Mailable
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(Order $order, $user)
     {
         $this->order = $order;
+        $this->user = $user;
     }
 
     /**
@@ -43,7 +44,8 @@ class OrderReceived extends Mailable
      */
     public function build()
     {
-        return $this->from(settings('site_email', env('MAIL_FROM_ADDRESS', 'john.dionisio1@gmail.com')))
-                    ->view('Experience::emails.order-received.index');
+        // ->from(settings('site_email', config('MAIL_FROM_ADDRESS', 'john.dionisio1@gmail.com')))
+        return $this->view('Experience::emails.order-received.index')
+                    ->with(['order' => $this->order, 'user' => $this->user]);
     }
 }
