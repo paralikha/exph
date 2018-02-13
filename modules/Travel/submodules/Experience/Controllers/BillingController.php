@@ -97,9 +97,9 @@ class BillingController extends ShopController
         $order->experience_id = $resource->id;
         $order->total = $resource->price * Cart::get($resource->id)->quantity;
         $order->price = $resource->price;
-        $order->quantity = Cart::get($resource->id)->quantity;
+        $order->quantity = Cart::get($resource->id)->quantity ?? 1;
         $order->purchased_at = null;
-        $order->metadata = serialize(Cart::get($resource->id)->guests);
+        $order->metadata = serialize(Cart::get($resource->id)->guests ?? []);
         $order->availability_id = $availability->id;
 
         $order->payment_id = NULL;
