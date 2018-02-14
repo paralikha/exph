@@ -82,6 +82,13 @@
                             </a>
                         </v-card-text>
                     </v-flex>
+                    <v-flex sm2 xs12>
+                        <v-card-text class="text-xs-center">
+                            <a href="https://beta.getgo.com.ph/get-points/experienceph">
+                                <img src="{{ assets('frontier/images/partners/getgo.png') }}" width="100%" alt="" style="max-width: 120px !important;">
+                            </a>
+                        </v-card-text>
+                    </v-flex>
                 </v-layout>
             </v-flex>
         </v-layout>
